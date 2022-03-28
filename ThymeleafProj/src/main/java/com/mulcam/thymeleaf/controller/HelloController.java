@@ -15,6 +15,6 @@ public class HelloController {
     }
     @GetMapping("/gitTest")
     public String gitTest() {
-    	return "test"; 
+    	return "gitTest"; 
     }
 }
