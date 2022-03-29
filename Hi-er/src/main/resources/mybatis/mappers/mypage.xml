@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.hier.dao.MypageDAO">
+	<select id="queryOrders" resultType="Orders" parameterType="int">
+	<![CDATA[
+		select * from Orders where buyer_id=#{id}
+		order by createdAt desc limit 5
+	]]>	
+	
+	</select>
+</mapper>
