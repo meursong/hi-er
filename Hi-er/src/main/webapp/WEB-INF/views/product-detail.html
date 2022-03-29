@@ -4,7 +4,6 @@
 	layout:decorate="~{common/layout}">
 
 <section layout:fragment="contents">
-	<div>
 		<div class="third-menu border-top">
 			<div class="container">
 				<div class="row d-flex align-items-center justify-content-between">
@@ -55,7 +54,7 @@
 							class="seller-overview d-flex align-items-center">
 							<div class="user-profile-image d-flex">
 								<label class="profile-pict" for="profile_image"> <img
-									src="images/user/s2.png" class="profile-pict-img img-fluid"
+									th:src="@{/images/user/s2.png}" class="profile-pict-img img-fluid"
 									alt="">
 								</label>
 								<div class="profile-name">
@@ -78,44 +77,39 @@
 						<div class="slider mt-4">
 							<div id="aniimated-thumbnials"
 								class="slider-for slick-slider-single">
-								<a href="images/list/v1.png"> <img class="img-fluid"
-									src="images/list/v1.png" />
-								</a> <a href="images/list/v2.png"> <img class="img-fluid"
-									src="images/list/v2.png" />
-								</a> <a href="images/list/v3.png"> <img class="img-fluid"
-									src="images/list/v3.png" />
-								</a> <a href="images/list/v4.png"> <img class="img-fluid"
-									src="images/list/v4.png" />
-								</a> <a href="images/list/v5.png"> <img class="img-fluid"
-									src="images/list/v5.png" />
+								<a href="images/list/v1.png}"> <img class="img-fluid"
+									th:src="@{/images/list/v1.png}" />
+								</a> <a href="images/list/v2.png}"> <img class="img-fluid"
+									th:src="@{/images/list/v2.png}" />
+								</a> <a href="images/list/v3.png}"> <img class="img-fluid"
+									th:src="@{/images/list/v3.png}" />
+								</a> <a href="images/list/v4.png}"> <img class="img-fluid"
+									th:src="@{/images/list/v4.png}" />
+								</a> <a href="images/list/v5.png}"> <img class="img-fluid"
+									th:src="@{/images/list/v5.png}" />
 								</a>
 							</div>
 							<div class="slider-nav slick-slider-single">
 								<div class="item-slick">
-									<img class="img-fluid" src="images/list/v1.png" alt="Alt">
+									<img class="img-fluid" th:src="@{/images/list/v1.png}" alt="Alt">
 								</div>
 								<div class="item-slick">
-									<img class="img-fluid" src="images/list/v2.png" alt="Alt">
+									<img class="img-fluid" th:src="@{/images/list/v2.png}" alt="Alt">
 								</div>
 								<div class="item-slick">
-									<img class="img-fluid" src="images/list/v3.png" alt="Alt">
+									<img class="img-fluid" th:src="@{/images/list/v3.png}" alt="Alt">
 								</div>
 								<div class="item-slick">
-									<img class="img-fluid" src="images/list/v4.png" alt="Alt">
+									<img class="img-fluid" th:src="@{/images/list/v4.png}" alt="Alt">
 								</div>
 								<div class="item-slick">
-									<img class="img-fluid" src="images/list/v5.png" alt="Alt">
+									<img class="img-fluid" th:src="@{/images/list/v5.png}" alt="Alt">
 								</div>
 							</div>
 						</div>
 						<div id="description" class="description">
 							<h3>서비스 설명</h3>
-							<p>로고깎는 남자는 언제나 브랜딩을 향한 새로운 방향성을 제시합니다.</p>
-							<p>아름답고 보기 좋은 것 만이 아닌, 소비자와 브랜드의 연결고리를 더욱 강력하게 만들어 줄 커뮤니케이션적인
-								디자인을 추구합니다.</p>
-							<p>클라이언트은 기대에 맞는 합리적인 디자인 서비스를 원하며, 특별한 브랜딩 경험을 원합니다. 그리고,
-								'디자이노'는 그 욕구들을 채우는 최고의 제공자입니다.</p>
-							<p>그리고, 로고깎는남자는 당신의 브랜드를 조각하는 최고의 도구입니다.</p>
+							${서비스 내용}
 						</div>
 						<!-- <ul class="metadata">
                      <li class="metadata-attribute">
@@ -138,7 +132,7 @@
 						<div class="profile-card">
 							<div class="user-profile-image d-flex">
 								<label class="profile-pict" for="profile_image"> <img
-									src="images/user/s2.png" class="profile-pict-img img-fluid"
+									th:src="@{/images/user/s2.png}" class="profile-pict-img img-fluid"
 									alt="프리랜서 사진-(클릭시 판매자정보 페이지로 이동)">
 								</label>
 								<div class="right">
@@ -539,7 +533,7 @@
 									<li>
 										<div class="d-flex">
 											<div class="left">
-												<span> <img src="images/user/s5.png"
+												<span> <img th:src="@{/images/user/s5.png}"
 													class="profile-pict-img img-fluid" alt="">
 												</span>
 											</div>
@@ -556,7 +550,7 @@
 												</h4>
 												<div class="country d-flex align-items-center">
 													<span> <img class="country-flag img-fluid"
-														src="images/flag/india.png">
+														th:src="@{/images/flag/india.png}">
 													</span>
 													<div class="country-name font-accent">India</div>
 												</div>
@@ -591,7 +585,7 @@
 												</div>
 												<div class="response-item mt-4 d-flex">
 													<div class="left">
-														<span> <img src="images/user/s1.png"
+														<span> <img th:src="@{/images/user/s1.png}"
 															class="profile-pict-img img-fluid" alt="">
 														</span>
 													</div>
@@ -609,7 +603,7 @@
 														</h4>
 														<div class="country d-flex align-items-center">
 															<span> <img class="country-flag img-fluid"
-																src="images/flag/india.png">
+																th:src="@{/images/flag/india.png}">
 															</span>
 															<div class="country-name font-accent">India</div>
 														</div>
@@ -730,6 +724,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </section>
 </html>
