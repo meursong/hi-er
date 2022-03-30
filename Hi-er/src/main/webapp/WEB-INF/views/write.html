@@ -29,29 +29,34 @@
 							name="file1" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep2" name="img2"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img> <input
-							type="file" id="file2" name="file2" accept="image/*"
-							style="display: none;" class="file"></td>
+							width="270px" height="270px"></img><input type="file" id="file2"
+							name="file2" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep3" name="img3"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img></td>
+							width="270px" height="270px"></img><input type="file" id="file3"
+							name="file3" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep4" name="img4"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img></td>
+							width="270px" height="270px"></img><input type="file" id="file4"
+							name="file4" accept="image/*" style="display: none;" class="file"></td>
 					</tr>
 					<tr>
 						<td><img id="rep5" name="img5"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img></td>
+							width="270px" height="270px"></img><input type="file" id="file5"
+							name="file5" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep6" name="img6"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img></td>
+							width="270px" height="270px"></img><input type="file" id="file6"
+							name="file6" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep7" name="img7"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img></td>
+							width="270px" height="270px"></img><input type="file" id="file7"
+							name="file7" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep8" name="img8"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img></td>
+							width="270px" height="270px"></img><input type="file" id="file8"
+							name="file8" accept="image/*" style="display: none;" class="file"></td>
 					</tr>
 
 				</table>
@@ -269,9 +274,7 @@
     });
 	$(function() {
 		$('.imgUpload').click(function() {
-			console.log($(this).attr('id'));
-			console.log($(this).next().attr('id'));  /* NEXT는 다음 형제 - 다른 태그 넣으면 안됨 */
-			$(this).next().click();
+			$(this).next().click(); /* NEXT는 다음 형제 - img와 input태그 사이 다른 태그 넣으면 안됨 */
 			
 		});
 		$(".file").change(function(event) {
