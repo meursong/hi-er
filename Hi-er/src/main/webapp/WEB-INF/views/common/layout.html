@@ -36,7 +36,7 @@
 		<div class="container">
 			<!-- Sidebar Toggle (Topbar) -->
 			<a class="navbar-brand" href="/"><img
-				src="images/logo.svg" alt=""></a>
+				th:src="@{/images/logo.svg}" alt=""></a>
 			<!-- Topbar Search -->
 			<form
 				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
@@ -210,7 +210,7 @@
 						</h6>
 						<a class="dropdown-item dropdown-notifications-item" href="#!">
 							<img class="dropdown-notifications-item-img"
-							src="images/user/s7.png">
+							th:src="@{/images/user/s7.png}">
 							<div class="dropdown-notifications-item-content">
 								<div class="dropdown-notifications-item-content-text">Lorem
 									ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -226,7 +226,7 @@
 							</div>
 						</a> <a class="dropdown-item dropdown-notifications-item" href="#!">
 							<img class="dropdown-notifications-item-img"
-							src="images/user/s8.png">
+							th:src="@{/images/user/s8.png}">
 							<div class="dropdown-notifications-item-content">
 								<div class="dropdown-notifications-item-content-text">Lorem
 									ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -249,12 +249,12 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						src="images/user/s4.png"></a>
+						th:src="@{/images/user/s4.png}"></a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
 						aria-labelledby="navbarDropdownUserImage">
 						<h6 class="dropdown-header d-flex align-items-center">
-							<img class="dropdown-user-img" src="images/user/s4.png">
+							<img class="dropdown-user-img" th:src="@{/images/user/s4.png}">
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">Askbootstrap</div>
 								<div class="dropdown-user-details-email">iamosahan@gmail.com</div>
@@ -349,7 +349,7 @@
 					href="become-a-seller.html"> <i class="fa fa-fw fa-trophy"></i>
 						<span>Become A Seller</span></a></li>
 				<li class="nav-item"><a class="nav-link"> <img
-						class="country-flag img-fluid" src="images/flag/india.png">
+						class="country-flag img-fluid" th:src="@{/images/flag/india.png}">
 						<span>English</span>
 				</a></li>
 			</ul>

@@ -9,4 +9,31 @@
 	]]>	
 	
 	</select>
+	
+	<select id="queryOrderss" resultType="Map" parameterType="int">
+	<![CDATA[
+		select * from Orders where buyer_id=#{id}
+		order by createdAt desc limit 5
+	]]>	
+	</select>
+	
+	<select id="queryOrdersss" resultType="Map" parameterType="int">
+	<![CDATA[
+		select o.createdAt, u.nickname,p.title,us.nickname as nickname2
+		from user u join user us join product p join orders o
+		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+		order by o.createdAt desc limit 5
+	]]>	
+	
+	</select>
+	
+	<select id="queryLikepost" resultType="Map" parameterType="int">
+	<![CDATA[
+		select l.clicked_date, u.nickname,p.title,us.nickname as nickname2
+		from user u join user us join product p join likepost l
+		on p.product_id=l.product_id and u.user_id=#{id} and us.user_id=l.clicked_user
+		order by l.clicked_date desc limit 5
+	]]>	
+	
+	</select>
 </mapper>

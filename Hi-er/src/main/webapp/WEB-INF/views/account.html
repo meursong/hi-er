@@ -11,7 +11,7 @@
                <aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
                   <div class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
                      <div class="py-4 px-3 border-bottom">
-                        <img src="images/user/s4.png" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+                        <img th:src="@{/images/user/s4.png}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
                         <h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep Osahan</h5>
                         <p class="mb-0 text-muted">UI / UX Designer</p>
                      </div>
@@ -44,7 +44,7 @@
                      <div class="box-body">
                         <div class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/l4.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/l4.png}" alt="">
                            </div>
                            <div class="font-weight-bold">
                               <div class="text-truncate">Character Concept <span class="badge badge-dark ml-1">1</span></div>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/l8.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/l8.png}" alt="">
                            </div>
                            <div class="font-weight-bold">
                               <div class="text-truncate">Digital Painting <span class="badge badge-danger ml-1">6</span></div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="d-flex align-items-center osahan-post-header p-3 people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/l5.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/l5.png}" alt="">
                            </div>
                            <div class="font-weight-bold">
                               <div class="text-truncate">Adobe Photoshop <span class="badge badge-info ml-1">3</span></div>
@@ -75,7 +75,7 @@
                      </div>
                   </div>
                   <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
-                     <img src="images/job1.png" class="img-fluid" alt="Responsive image">
+                     <img th:src="@{/images/job1.png}" class="img-fluid" alt="Responsive image">
                      <div class="p-3 border-bottom">
                         <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
                         <p class="mb-0 text-muted">Looking for talent?</p>
@@ -85,13 +85,19 @@
                      </div>
                   </div>
                </aside>
-               <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+               
+               
+               
+               
+               <!-- ================================================================================================================================== -->
+             
+               <main th:if="${page}=='0'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="d-flex box-title border-bottom p-3">
                         <h6 class="m-0 col-6">거래내역</h6>
                         
-                        <button type="button" class="btn btn-light btn-sm col-6">자세히보기</button>
-                       
+                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/1}'|">자세히보기</button> 
+                        <!-- <button type="button" class="btn btn-light btn-sm col-6" >자세히보기</button>  -->
                       <!--   <h6 class="m-0 col-6 text-right">자세히보기</h6> -->
                      </div>
                      <!-- <div class="box-title border-bottom p-3">
@@ -103,18 +109,18 @@
                         		<thead>                       		                       		
                         		<tr>                       			
                         			<th>시간</th>
-                        			<th>구매유저아이디</th>
-                        			<th>상품아이디</th>
-                        			<th>판매자아이디</th>
+                        			<th>구매유저닉네임</th>
+                        			<th>상품제목</th>
+                        			<th>판매자닉네임</th>
                         		</tr>
                         		
                         		</thead>
                         		<tbody>
                         		<tr th:each="order: ${orders}">
                         			<td th:text="${order.createdAt}"></td>
-                        			<td th:text="${order.buyer_id}"></td>
-                        			<td th:text="${order.product_id}"></td>
-                        			<td th:text="${order.seller_id}"></td>
+                        			<td th:text="${order.nickname}"></td>
+                        			<td th:text="${order.title}"></td>
+                        			<td th:text="${order.nickname2}"></td>
                         		</tr>
                         		</tbody>
                         	
@@ -126,7 +132,9 @@
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="d-flex box-title border-bottom p-3">
                         <h6 class="m-0 col-6">찜한 게시물</h6>
-                         <button type="button" class="btn btn-light btn-sm col-6">자세히보기</button>
+                       
+                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/2}'|">자세히보기</button>
+                       
                      </div>
                      <div class="box-body p-3">
                         <div>
@@ -134,17 +142,17 @@
                         		<thead>                       		                       		
                         		<tr>                      			
                         			<th>시간</th>
-                        			<th>찜누른사람아아디</th>
-                        			<th>찜당한</th>
-                        			<th>판매자아이디</th>
+                        			<th>찜누른닉네임</th>
+                        			<th>찜당한포스트제목</th>
+                        			<th>판매자닉네임</th>
                         		</tr>                       		
                         		</thead>
                         		<tbody>
-                        		<tr th:each="order: ${orders}">
-                        			<td th:text="${order.createdAt}"></td>
-                        			<td th:text="${order.buyer_id}"></td>
-                        			<td th:text="${order.product_id}"></td>
-                        			<td th:text="${order.seller_id}"></td>
+                        		<tr th:each="likepost: ${likeposts}">
+                        			<td th:text="${likepost.clicked_date}"></td>
+                        			<td th:text="${likepost.nickname}"></td>
+                        			<td th:text="${likepost.title}"></td>
+                        			<td th:text="${likepost.nickname2}"></td>
                         		</tr>
                         		</tbody>                      	
                         	</table>
@@ -154,7 +162,7 @@
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="d-flex box-title border-bottom p-3">
                         <h6 class="m-0 col-6">쪽지</h6>
-                        <button type="button" class="btn btn-light btn-sm col-6">자세히보기</button>
+                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/3}'|">자세히보기</button>
                      </div>
                      <div class="box-body p-3">
                         <div>
@@ -162,17 +170,17 @@
                         		<thead>
                         		<tr>                       			
                         			<th>시간</th>
-                        			<th>구매유저아이디</th>
-                        			<th>상품아이디</th>
-                        			<th>판매자아이디</th>
+                        			<th>보낸사람닉네임</th>
+                        			<th>관련포스트제목</th>
+                        			<th>받은사람닉넹미</th>
                         		</tr>                       		
                         		</thead>
                         		<tbody>
                         		<tr th:each="order: ${orders}">
                         			<td th:text="${order.createdAt}"></td>
-                        			<td th:text="${order.buyer_id}"></td>
-                        			<td th:text="${order.product_id}"></td>
-                        			<td th:text="${order.seller_id}"></td>
+                        			<td th:text="${order.nickname}"></td>
+                        			<td th:text="${order.title}"></td>
+                        			<td th:text="${order.nickname2}"></td>
                         		</tr>
                         		</tbody>
                         	
@@ -230,7 +238,7 @@
                               <div class="text-truncate text-primary">Master’s programmes</div>
                               <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
                            </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/e1.png" alt="">
+                           <img class="img-fluid ml-auto mb-auto" th:src="@{/images/e1.png}" alt="">
                         </div>
                         <p class="mb-0">Find the most qualified people in the most unexpected places. Information for applicants to consider when applying for local positions.</p>
                      </div>
@@ -241,12 +249,95 @@
                               <div class="text-truncate text-primary">Maths and science education</div>
                               <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
                            </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/e2.png" alt="">
+                           <img class="img-fluid ml-auto mb-auto" th:src="@{/images/e2.png}" alt="">
                         </div>
                         <p class="mb-0">Wualified people in the most unexpected places. Information for applicants to consider when applying for local positions.</p>
                      </div>
                   </div>
                </main>
+               
+                <main th:if="${page}=='1'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+                거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역
+                <div class="box shadow-sm rounded bg-white mb-3">
+                     <div class="d-flex box-title border-bottom p-3">
+                        <h6 class="m-0 col-6">거래내역</h6>
+                        
+                        
+                     </div>
+                     <!-- <div class="box-title border-bottom p-3">
+                        <h6 class="m-0">자세히보기</h6>
+                     </div> -->
+                     <div class="box-body p-3">
+                        <div>
+                        	<table class="table table-striped">
+                        		<thead>                       		                       		
+                        		<tr>                       			
+                        			<th>시간</th>
+                        			<th>구매유저닉네임</th>
+                        			<th>상품제목</th>
+                        			<th>판매자닉네임</th>
+                        		</tr>
+                        		
+                        		</thead>
+                        		<tbody>
+                        		<tr th:each="order: ${orders}">
+                        			<td th:text="${order.createdAt}"></td>
+                        			<td th:text="${order.nickname}"></td>
+                        			<td th:text="${order.title}"></td>
+                        			<td th:text="${order.nickname2}"></td>
+                        		</tr>
+                        		</tbody>
+                        	
+                        	</table>
+                        </div>
+                        
+                     </div>
+                  </div>
+                </main>
+                
+                 <main th:if="${page}=='2'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+               	찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물
+               	<div class="box shadow-sm rounded bg-white mb-3">
+                     <div class="d-flex box-title border-bottom p-3">
+                        <h6 class="m-0 col-6">찜한 게시물</h6>
+                     </div>
+                     <div class="box-body p-3">
+                        <div>
+                        	<table class="table table-striped">
+                        		<thead>                       		                       		
+                        		<tr>                      			
+                        			<th>시간</th>
+                        			<th>찜누른닉네임</th>
+                        			<th>찜당한포스트제목</th>
+                        			<th>판매자닉네임</th>
+                        		</tr>                       		
+                        		</thead>
+                        		<tbody>
+                        		<tr th:each="likepost: ${likeposts}">
+                        			<td th:text="${likepost.clicked_date}"></td>
+                        			<td th:text="${likepost.nickname}"></td>
+                        			<td th:text="${likepost.title}"></td>
+                        			<td th:text="${likepost.nickname2}"></td>
+                        		</tr>
+                        		</tbody>                      	
+                        	</table>
+                        </div>
+                     </div>
+                  </div>
+                </main>
+                
+                 <main th:if="${page}=='3'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+                쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지
+                </main>
+               
+                
+              <!--  ==================================================================================== -->
+              
+              
+              
+              
+              
+              
                <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="box-title border-bottom p-3">
@@ -255,7 +346,7 @@
                      <div class="box-body p-3">
                         <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/user/s1.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/user/s1.png}" alt="">
                               <div class="status-indicator bg-success"></div>
                            </div>
                            <div class="font-weight-bold mr-2">
@@ -268,7 +359,7 @@
                         </div>
                         <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/user/s2.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/user/s2.png}" alt="">
                               <div class="status-indicator bg-success"></div>
                            </div>
                            <div class="font-weight-bold mr-2">
@@ -281,7 +372,7 @@
                         </div>
                         <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/user/s3.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/user/s3.png}" alt="">
                               <div class="status-indicator bg-success"></div>
                            </div>
                            <div class="font-weight-bold mr-2">
@@ -294,7 +385,7 @@
                         </div>
                         <div class="d-flex align-items-center osahan-post-header mb-3 people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/user/s4.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/user/s4.png}" alt="">
                               <div class="status-indicator bg-success"></div>
                            </div>
                            <div class="font-weight-bold mr-2">
@@ -307,7 +398,7 @@
                         </div>
                         <div class="d-flex align-items-center osahan-post-header people-list">
                            <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" src="images/user/s5.png" alt="">
+                              <img class="rounded-circle" th:src="@{/images/user/s5.png}" alt="">
                               <div class="status-indicator bg-success"></div>
                            </div>
                            <div class="font-weight-bold mr-2">
@@ -321,7 +412,7 @@
                      </div>
                   </div>
                   <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
-                     <img src="images/ads1.png" class="img-fluid" alt="Responsive image">
+                     <img th:src="@{/images/ads1.png}" class="img-fluid" alt="Responsive image">
                      <div class="p-3 border-bottom">
                         <h6 class="font-weight-bold text-gold">Maer Premium</h6>
                         <p class="mb-0 text-muted">Grow &amp; nurture your network</p>
@@ -330,7 +421,7 @@
                         <button type="button" class="btn btn-outline-gold pl-4 pr-4"> ACTIVATE </button>
                      </div>
                   </div>
-                  <a href="job-profile.html">
+                  <a th:href="job-profile.html">
                      <div class="shadow-sm rounded bg-white job-item mb-3">
                         <div class="d-flex align-items-center p-3 job-item-header">
                            <div class="overflow-hidden mr-2">
@@ -338,16 +429,16 @@
                               <div class="text-truncate text-primary">Spotify Inc.</div>
                               <div class="small text-gray-500"><i class="fa fa-map"></i> India, Punjab</div>
                            </div>
-                           <img class="img-fluid ml-auto" src="images/l3.png" alt="">
+                           <img class="img-fluid ml-auto" th:src="@{/images/l3.png}" alt="">
                         </div>
                         <div class="d-flex align-items-center p-3 border-top border-bottom job-item-body">
                            <div class="overlap-rounded-circle">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s5.png" alt="" data-original-title="Sophia Lee">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s6.png" alt="" data-original-title="John Doe">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s7.png" alt="" data-original-title="Julia Cox">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s8.png" alt="" data-original-title="John Doe">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s9.png" alt="" data-original-title="Julia Cox">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s10.png" alt="" data-original-title="Robert Cook">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s5.png}" alt="" data-original-title="Sophia Lee">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s6.png}" alt="" data-original-title="John Doe">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s7.png}" alt="" data-original-title="Julia Cox">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s8.png}" alt="" data-original-title="John Doe">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s9.png}" alt="" data-original-title="Julia Cox">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s10.png}" alt="" data-original-title="Robert Cook">
                            </div>
                            <span class="font-weight-bold text-muted">18 connections</span>
                         </div>
@@ -365,14 +456,14 @@
                               <div class="small text-gray-500"><i class="fa fa-map"></i> London, UK
                               </div>
                            </div>
-                           <img class="img-fluid ml-auto" src="images/l4.png" alt="">
+                           <img class="img-fluid ml-auto" th:src="@{/images/l4.png}" alt="">
                         </div>
                         <div class="d-flex align-items-center p-3 border-top border-bottom job-item-body">
                            <div class="overlap-rounded-circle">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s1.png" alt="" data-original-title="Sophia Lee">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s2.png" alt="" data-original-title="John Doe">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s3.png" alt="" data-original-title="Julia Cox">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s4.png" alt="" data-original-title="Robert Cook">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s1.png}" alt="" data-original-title="Sophia Lee">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s2.png}" alt="" data-original-title="John Doe">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s3.png}" alt="" data-original-title="Julia Cox">
+                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" th:src="@{/images/user/s4.png}" alt="" data-original-title="Robert Cook">
                            </div>
                            <span class="font-weight-bold text-muted">18 connections</span>
                         </div>
