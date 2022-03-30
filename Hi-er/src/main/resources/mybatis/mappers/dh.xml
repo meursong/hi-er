@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.hier.dao.UserDAO">
+
+	<select id="selectUser" resultType="User" parameterType="int">
+		<![CDATA[
+			select * from user where user_id=#{user_id}
+		]]>
+	</select>
+	
+	<select id="select_info_f" resultType="FreelancerUser" parameterType="int">
+		<![CDATA[
+			select * from f_info where f_id=#{user_id}
+		]]>
+	</select>
+
+	<insert id="insert_info_f" parameterType="FreelancerUser">
+		<![CDATA[
+			insert into f_info (f_id, address, address2, introduction) value(#{f_id}, #{address}, #{address2}, #{introduction});
+		]]>
+	</insert>
+
+	<update id="update_type_f" parameterType="User">
+		<![CDATA[
+			update user set type=2 where user_id=#{user_id}
+		]]>
+	</update>
+
+</mapper>
