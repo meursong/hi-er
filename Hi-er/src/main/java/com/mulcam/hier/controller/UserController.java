@@ -27,7 +27,7 @@ public class UserController {
 		return "freelancerForm";
 	}
 
-	@PostMapping("/freelancer/form")
+	@PostMapping("freelancerForm")
 	public String joinFreelancer(FreelancerUser form) throws Exception {
 		FreelancerUser freelancer = new FreelancerUser(user_id, form.getAddress(), form.getAddress2(), form.getIntroduction());
 		userService.insert_info(freelancer);
@@ -37,10 +37,10 @@ public class UserController {
 	
 	@GetMapping("freelancerInfo")
 	public String freelancerInfo(Model model) throws Exception {
-//		User user = userService.userInfo(user_id);
-//		FreelancerUser freelancer = userService.freelancerInfo(user_id);
-//		model.addAttribute("user", user);
-//		model.addAttribute("freelancer", freelancer);
+		User user = userService.userInfo(user_id);
+		FreelancerUser freelancer = userService.freelancerInfo(user_id);
+		model.addAttribute("user", user);
+		model.addAttribute("freelancer", freelancer);
 		return "freelancerInfo";
 		
 	}

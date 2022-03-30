@@ -13,8 +13,8 @@
                   <div class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
                      <div class="py-4 px-3 border-bottom">
                         <img src="images/user/s4.png" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-                        <h5 class="font-weight-bold text-dark mb-1 mt-4">닉네임</h5>
-                        <p class="mb-0 text-muted">직업</p>
+                        <h5 th:text="${user.nickname}" class="font-weight-bold text-dark mb-1 mt-4"></h5>
+                        <p th:text="${user.job}"class="mb-0 text-muted"></p>
                      </div>
                      <div class="d-flex">
                         <div class="col-6 border-right p-3">
@@ -26,113 +26,44 @@
                            <p class="mb-0 text-black-50 small">거래수?</p>
                         </div>
                      </div>
-                     
                   </div>
-                
-               </aside>
-               <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
-                  <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">About You</h6>
-                     </div>
-                     <div class="box-body p-3">
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                        </p>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for applicants to consider when applying for local positions. The largest community on the web to find and list jobs that aren't restricted by commutes or a specific location.
-                        </p>
-                     </div>
-                  </div>
-                  <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">Experience</h6>
-                     </div>
-                     <div class="box-body p-3 border-bottom">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">Web designer</h6>
-                              <div class="text-truncate text-primary">Spotify Inc.</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/l3.png" alt="">
-                        </div>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for applicants to consider when applying for local positions. </p>
-                     </div>
-                     <div class="box-body p-3 border-bottom">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">Cloud Software Engineer</h6>
-                              <div class="text-truncate text-primary">Spotify Inc.</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/l6.png" alt="">
-                        </div>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for.. </p>
-                     </div>
-                     <div class="box-body p-3">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">UI/UX designer</h6>
-                              <div class="text-truncate text-primary">Behance</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/l2.png" alt="">
-                        </div>
-                        <p class="mb-0">Wualified people in the most unexpected places. Information for applicants to consider when applying for local positions. The largest community on the web to find and list jobs that aren't restricted by commutes or a specific location.
-                        </p>
-                     </div>
-                  </div>
-                
-               </main>
-               <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
-                  <div class="box shadow-sm rounded bg-white mb-3">
-                     
-                     <div class="box-body p-3">
-                      
-                     
-                     
                   
+                     <div class="box shadow-sm rounded bg-white mb-3">
+                     <div class="box-body p-3">
                         <div class="d-flex align-items-center osahan-post-header people-list">
                            <div class="dropdown-list-image mr-3">
                               <img class="rounded-circle" src="images/user/s5.png" alt="">
                               <div class="status-indicator bg-success"></div>
                            </div>
                            <div class="font-weight-bold mr-2">
-                              <div class="text-truncate">Richard Bell</div>
-                              <div class="small text-gray-500">@Envato
-                              </div>
+                              <div th:text="${user.nickname}" class="text-truncate"></div>
+                              <div th:text="${user.job}" class="small text-gray-500"></div>
                            </div>
-                           <span class="ml-auto"><button type="button" class="btn btn-light btn-sm">Connent</button>
-                           </span>
+                           <span class="ml-auto"><button type="button" class="btn btn-light btn-sm">쪽지보내기</button></span>
                         </div>
                      </div>
                   </div>
                 
-           
-                  <a href="job-profile.html">
-                     <div class="shadow-sm rounded bg-white job-item mb-3">
-                        <div class="d-flex align-items-center p-3 job-item-header">
-                           <div class="overflow-hidden mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0 text-truncate">.NET Developer</h6>
-                              <div class="text-truncate text-primary">Invision</div>
-                              <div class="small text-gray-500"><i class="fa fa-map"></i> London, UK
-                              </div>
-                           </div>
-                           <img class="img-fluid ml-auto" src="images/l4.png" alt="">
-                        </div>
-                        <div class="d-flex align-items-center p-3 border-top border-bottom job-item-body">
-                           <div class="overlap-rounded-circle">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s1.png" alt="" data-original-title="Sophia Lee">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s2.png" alt="" data-original-title="John Doe">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s3.png" alt="" data-original-title="Julia Cox">
-                              <img class="rounded-circle shadow-sm" data-toggle="tooltip" data-placement="top" title="" src="images/user/s4.png" alt="" data-original-title="Robert Cook">
-                           </div>
-                           <span class="font-weight-bold text-muted">18 connections</span>
-                        </div>
-                        <div class="p-3 job-item-footer">
-                           <small class="text-gray-500"><i class="fa fa-clock-o"></i> Posted 3 Days ago</small>
-                        </div>
+               </aside>
+               <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+                  <div class="box shadow-sm rounded bg-white mb-3">
+                     <div class="box-title border-bottom p-3">
+                        <h6 class="m-0">소개글</h6>
                      </div>
-                  </a>
+                     <div class="box-body p-3" style="height: 365px">
+                        <pre th:text="${freelancer.introduction}"></pre>
+                     </div>
+                  </div>
+               </main>
+               <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
+                <div class="box shadow-sm rounded bg-white mb-3">
+                     <div class="box-title border-bottom p-3">
+                        <h6 class="m-0">게시물 리스트</h6>
+                     </div>
+                     <div class="box-body p-3" style="height: 365px">
+                        <pre th:text="${freelancer.introduction}"></pre>
+                     </div>
+                  </div>
                </aside>
             </div>
          </div>
