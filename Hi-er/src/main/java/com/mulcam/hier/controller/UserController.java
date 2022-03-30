@@ -15,7 +15,7 @@ import com.mulcam.hier.service.UserService;
 @Controller
 public class UserController {
 	
-	int user_id = 1;
+	int user_id = 2;
 	
 	@Autowired
 	UserService userService;
