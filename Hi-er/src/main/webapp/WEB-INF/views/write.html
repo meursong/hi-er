@@ -4,6 +4,7 @@
 	layout:decorate="~{common/layout}">
 
 
+
 <section layout:fragment="contents">
 	<div class="container">
 		<h1>글쓰기</h1>
@@ -12,11 +13,40 @@
 				<label for="title">글 제목</label> <input type="text" name="title"
 					class="form-control" placeholder="제목을 입력하세요">
 			</div>
-			<!-- <div class="form-group">
-				<label for="title">사진 업로드</label> 
-				<img id="rep" th:src="" width="100px" height="100px"></img><br></br>
-				
-			</div> -->
+			<div class="form-group">
+				<label for="title">사진 업로드</label>
+				<table>
+					<tr>
+						<td><img id="rep1" name="img1"
+							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
+							width="270px" height="270px"
+							style="border: 4px solid grey; border-radius: 7px;"></img></td>
+						<td><img id="rep2" name="img2"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="270px" height="270px"
+							style="border: 4px solid grey; border-radius: 7px;"></img></td>
+					</tr>
+					<tr>
+						<td><img id="rep5" name="img5"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="270px" height="270px"
+							style="border: 4px solid grey; border-radius: 7px;"></img></td>
+						<td><img id="rep6" name="img6"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="270px" height="270px"
+							style="border: 4px solid grey; border-radius: 7px;"></img></td>
+						<td><img id="rep7" name="img7"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="270px" height="270px"
+							style="border: 4px solid grey; border-radius: 7px;"></img></td>
+						<td><img id="rep8" name="img8"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="270px" height="270px"
+							style="border: 4px solid grey; border-radius: 7px;"></img></td>
+					</tr>
+
+				</table>
+			</div>
 			<div class="form-group">
 				<label for="content">글 내용</label>
 				<textarea id="editor" name="content" class="form-control"
@@ -46,16 +76,13 @@
 							<th></th>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
 									class="desc1" placeholder="서비스에 대한 설명을 적어주세요(50자 이내)"></textarea>
-									<div id="test_cnt1">(0 / 30)</div>
-									</td>
+								<div id="test_cnt1">(0 / 30)</div></td>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
 									class="desc2" placeholder="서비스에 대한 설명을 적어주세요(50자 이내)"></textarea>
-									<div id="test_cnt2">(0 / 30)</div>
-									</td>
+								<div id="test_cnt2">(0 / 30)</div></td>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
 									class="desc3" placeholder="서비스에 대한 설명을 적어주세요(50자 이내)"></textarea>
-									<div id="test_cnt3">(0 / 30)</div>
-									</td>
+								<div id="test_cnt3">(0 / 30)</div></td>
 						</tr>
 						<tr>
 							<th>
@@ -205,10 +232,6 @@
 	        .catch( error => {
 	            console.error(error);
 	        } );
-	    
-	   
-	    
-	    
 	</script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
@@ -234,9 +257,8 @@
                 $('#test_cnt3').html("(50 / 50)");
             }
        });
-        
-    });</script>
-	<!-- //CK editor 호출 -->
+    });
+	</script>
 </section>
 </html>
 
