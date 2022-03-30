@@ -1,5 +1,22 @@
 package com.mulcam.hier.dto;
 
-public class User {
+import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+public class User {
+	private String email;
+	private String password;
+	private String job;
+	private MultipartFile profile_image;
+	private int type;
+	private Date updateAt;
+	
+	public User() {}
 }
+
+

@@ -29,4 +29,8 @@ public class MainController {
 		}
 		return mav;
 	}
+	@GetMapping({"/freelancerForm"})
+	public String freelancer() {
+		return "freelancerForm";
+	}
 }
