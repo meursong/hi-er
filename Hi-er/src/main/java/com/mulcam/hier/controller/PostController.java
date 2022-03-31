@@ -37,10 +37,7 @@ public class PostController {
 	@PostMapping("/write")
 	public String write(Product product) {
 		System.out.println("글쓰기경로!!!!!!!!!!");
-		
 		System.out.println(product);
-		
-		
 		return "/product-detail";
 	}
 

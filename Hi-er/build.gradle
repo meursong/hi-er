@@ -21,6 +21,9 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
