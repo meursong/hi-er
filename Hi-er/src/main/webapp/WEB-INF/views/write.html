@@ -8,6 +8,14 @@
 	border: 4px solid grey;
 	border-radius: 7px;
 }
+
+.ck.ck-editor {
+	max-width: 100%;
+}
+
+.ck-editor__editable {
+	min-height: 400px;
+}
 </style>
 </head>
 
@@ -17,7 +25,7 @@
 		<form name="board_write" method="post" action="/post/write">
 			<div class="form-group">
 				<label for="title">글 제목</label> <input type="text" name="title"
-					class="form-control" placeholder="제목을 입력하세요">
+					class="form-control" placeholder="제목을 입력하세요 ">
 			</div>
 			<div class="form-group">
 				<label for="title">사진 업로드</label>
@@ -63,8 +71,14 @@
 			</div>
 			<div class="form-group">
 				<label for="content">글 내용</label>
-				<textarea id="editor" name="content" class="form-control" 
-					placeholder="내용을 입력하세요 줄바꿈"></textarea>
+				<textarea id="editor" name="content" class="form-control">
+					<b>서비스 설명을 작성해주세요</b>
+					<br>
+					<i>&lt; 예 &gt;</i>
+					<p>내 서비스 최고</p>
+					
+					<p>그냥 최고</p>
+				</textarea>
 			</div>
 			<label>가격 정보</label>
 			<div id="packagesTable" class="table-package">
@@ -79,12 +93,10 @@
 					<tbody>
 						<tr class="package-type">
 							<th>패키지</th>
-							<td><input class="price" placeholder="가격(₩)"></input>> <b
-								class="type">Basic</b><b class="title">패키지 설명</b> </sup></td>
-							<td><input class="price" placeholder="가격(₩)"></input> <b
-								class="type">Standard</b><b class="title">패키지 설명</b> </sup></td>
-							<td><input class="price" placeholder="가격(₩)"></input> <b
-								class="type">Premium</b><b class="title">패키지 설명 </b> </sup></td>
+							<td><b class="type">Basic</b><b class="title">패키지 설명</b></td>
+							<td><b class="type">Standard</b><b class="title">패키지 설명</b></td>
+							<td><b class="type">Premium</b><b class="title">패키지 설명 </b>
+							</td>
 						</tr>
 						<tr class="description">
 							<th></th>
@@ -138,9 +150,19 @@
 									<span class="fit-popover-content">시안 개수</span>
 								</div>
 							</th>
-							<td><input type="number" class="draftNumber" name="basicDraftNumber" placeholder="개수"></td>
-							<td><input type="number" class="draftNumber" name="standardDraftNumber" placeholder="개수"></td>
-							<td><input type="number" class="draftNumber" name="premiumDraftNumber" placeholder="개수"></td>
+
+							<td><div class="fake-radio-wrapper">
+									<input type="number" class="form-control"
+										name="basicDraftNumber" placeholder="개수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" class="form-control"
+										name="standardDraftNumber" placeholder="개수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" class="form-control"
+										name="premiumDraftNumber" placeholder="개수">
+								</div></td>
 						</tr>
 						<tr>
 							<th>
@@ -149,12 +171,47 @@
 									<span class="fit-popover-content">수정 횟수</span>
 								</div>
 							</th>
-							<td><input type="number" class="revisionNumber" name="basicRevisionNumber" placeholder="횟수"></td>
-							<td><input type="number" class="revisionNumber" name="standardRevisionNumber" placeholder="횟수"></td>
-							<td><input type="number" class="revisionNumber" name="premiumRevisionNumber" placeholder="횟수"></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" class="form-control"
+										name="basicRevisionNumber" placeholder="횟수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" class="form-control"
+										name="standardRevisionNumber" placeholder="횟수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" class="form-control"
+										name="premiumRevisionNumber" placeholder="횟수">
+								</div></td>
 						</tr>
 						<tr class="delivery-time">
-							<th>작업일</th>
+							<th>기본 작업일</th>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"><input type="number"
+										class="form-control" name="basicDefaultDeliveryDate"
+										id="basicDefaultDeliveryDate" placeholder="기본 작업일"> </label>
+								</div>
+							</td>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"><input type="number"
+										class="form-control" name="standardDefaultDeliveryDate"
+										id="standardDefaultDeliveryDate" placeholder="기본 작업일">
+									</label>
+								</div>
+							</td>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"><input type="number"
+										class="form-control" name="premiumDefaultDeliveryDate"
+										id="premiumDefaultDeliveryDate" placeholder="기본 작업일">
+									</label>
+								</div>
+							</td>
+						</tr>
+						<tr class="delivery-time">
+							<th>최소 작업일(추가요금)</th>
 							<td>
 								<div class="fake-radio-wrapper">
 									<div>
@@ -163,12 +220,36 @@
 											value="117210558"><input type="hidden"
 											name="gig_items[1][4694800919471][quantity]" value="0">
 									</div>
-									<label class="fake-radio"><input type="radio" name="1"
-										value="0" checked=""><span class="radio-img"></span><span>3
-											days</span></label> <label class="fake-radio"> <input type="radio"
-										name="1" value="1"><span class="radio-img"></span><span>2
-											days</span>
-										<p class="faster-price">(+$2,008)</p>
+									<label class="fake-radio"> <label class="fake-radio">
+											<p>최소 작업 소요일</p> <input type="number" class="form-control"
+											name="basicCostomizedDeliveryDate"
+											id="basicCostomizedDeliveryDate" placeholder="일(days)">
+											<br>
+											<p>작업단축 하루 당 추가요금</p> <input type="number"
+											class="form-control" name="basicCostomizedDeliveryDate"
+											id="basicCostomizedDeliveryDate" placeholder="추가요금(₩)">
+											</p>
+									</label>
+								</div>
+							</td>
+
+							<td>
+								<div class="fake-radio-wrapper">
+									<div>
+										<input type="hidden"
+											name="gig_items[1][4694800919471][gig_item_id]"
+											value="117210558"><input type="hidden"
+											name="gig_items[1][4694800919471][quantity]" value="0">
+									</div>
+									<label class="fake-radio"> <label class="fake-radio">
+											<p>최소 작업 소요일</p> <input type="number" class="form-control"
+											name="standardCostomizedDeliveryDate"
+											id="standardCostomizedDeliveryDate" placeholder="일(days)">
+											<br>
+											<p>작업단축 하루 당 추가요금</p> <input type="number"
+											class="form-control" name="standardCostomizedDeliveryDate"
+											id="standardCostomizedDeliveryDate" placeholder="추가요금(₩)">
+											</p>
 									</label>
 								</div>
 							</td>
@@ -176,50 +257,42 @@
 								<div class="fake-radio-wrapper">
 									<div>
 										<input type="hidden"
-											name="gig_items[2][0007284419489][gig_item_id]"
+											name="gig_items[1][4694800919471][gig_item_id]"
 											value="117210558"><input type="hidden"
-											name="gig_items[2][0007284419489][quantity]" value="0">
+											name="gig_items[1][4694800919471][quantity]" value="0">
 									</div>
-									<label class="fake-radio"><input type="radio" name="2"
-										value="0" checked=""><span class="radio-img"></span><span>4
-											days</span></label> <label class="fake-radio"> <input type="radio"
-										name="2" value="1"><span class="radio-img"></span><span>3
-											days</span>
-										<p class="faster-price">(+$4,818)</p>
-									</label>
-								</div>
-							</td>
-							<td>
-								<div class="fake-radio-wrapper">
-									<div>
-										<input type="hidden"
-											name="gig_items[3][1724678919506][gig_item_id]"
-											value="117210558"><input type="hidden"
-											name="gig_items[3][1724678919506][quantity]" value="0">
-									</div>
-									<label class="fake-radio"><input type="radio" name="3"
-										value="0" checked=""><span class="radio-img"></span><span>7
-											days</span></label> <label class="fake-radio"> <input type="radio"
-										name="3" value="1"><span class="radio-img"></span><span>5
-											days</span>
-										<p class="faster-price">(+$8,029)</p>
+									<label class="fake-radio"> <label class="fake-radio">
+											<p>최소 작업 소요일</p> <input type="number" class="form-control"
+											name="premiumCostomizedDeliveryDate"
+											id="premiumCostomizedDeliveryDate" placeholder="일(days)">
+											<br>
+											<p>작업단축 하루 당 추가요금</p> <input type="number"
+											class="form-control" name="premiumCostomizedDeliveryDate"
+											id="premiumCostomizedDeliveryDate" placeholder="추가요금(₩)">
+											</p>
 									</label>
 								</div>
 							</td>
 						</tr>
 						<tr class="select-package">
-							<th>총 금액</th>
+							<th>기본 금액</th>
 							<td>
-								<p class="price-label">$8,029</p>
-								<button type="submit">${금액}</button>
+								<p class="price-label">
+									<input type="number" class="form-control" name="baicPrice"
+										id="baicPrice" placeholder="기본요금(₩)">
+								</p>
 							</td>
 							<td>
-								<p class="price-label">$11,240</p>
-								<button type="submit">${금액}</button>
+								<p class="price-label">
+									<input type="number" class="form-control" name="standardPrice"
+										id="standardPrice" placeholder="기본요금(₩)">
+								</p>
 							</td>
 							<td>
-								<p class="price-label">$16,057</p>
-								<button type="submit">${금액}</button>
+								<p class="price-label">
+									<input type="number" class="form-control" name="premiumPrice"
+										id="premiumPrice" placeholder="기본요금(₩)">
+								</p>
 							</td>
 						</tr>
 					</tbody>
@@ -306,6 +379,13 @@
 	});
 	
 	</script>
+	<!-- <script
+		src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+	<script>
+	var ta = document.querySelector('textarea');
+	ta.style.display = 'none';
+	autosize(ta);
+	</script> -->
 </section>
 </html>
 
