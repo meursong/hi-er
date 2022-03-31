@@ -33,9 +33,12 @@ public class PostController {
 	}
 
 	@PostMapping("/write")
-	public String a(HttpServletRequest request) {
+	public String write(HttpServletRequest request) {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		
+
+		
 		System.out.println(title);
 		System.out.println(content);
 		return "/product-detail";

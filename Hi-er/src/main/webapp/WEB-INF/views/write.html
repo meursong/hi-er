@@ -16,13 +16,21 @@
 .ck-editor__editable {
 	min-height: 400px;
 }
+.policyTable {
+	height: 200px;
+}
+.policyTableTA {
+	height: 150px;
+	width: 90%;
+	text-align: left;
+}
 </style>
 </head>
 
 <section layout:fragment="contents">
 	<div class="container">
 		<h1>글쓰기</h1>
-		<form name="board_write" method="post" action="/post/write">
+		<form id="from" name="board_write" method="post" enctype="multipart/form-data" action="/post/write">
 			<div class="form-group">
 				<label for="title">글 제목</label> <input type="text" name="title"
 					class="form-control" placeholder="제목을 입력하세요 ">
@@ -101,13 +109,13 @@
 						<tr class="description">
 							<th></th>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
-									class="desc1" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+									class="desc1" name="basicPkgDescription" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
 								<div id="test_cnt1">(0 / 50)</div></td>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
-									class="desc2" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+									class="desc2" name="standardPkgDescription" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
 								<div id="test_cnt2">(0 / 50)</div></td>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
-									class="desc3" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+									class="desc3" name="premiumPkgDescription" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
 								<div id="test_cnt3">(0 / 50)</div></td>
 						</tr>
 						<tr>
@@ -193,15 +201,15 @@
 							</th>
 
 							<td><div class="fake-radio-wrapper">
-									<input type="number" class="form-control"
+									<input type="number" min="1" class="form-control"
 										name="basicDraftNumber" placeholder="개수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
-									<input type="number" class="form-control"
+									<input type="number" min="1" class="form-control"
 										name="standardDraftNumber" placeholder="개수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
-									<input type="number" class="form-control"
+									<input type="number" min="1" class="form-control"
 										name="premiumDraftNumber" placeholder="개수">
 								</div></td>
 						</tr>
@@ -213,15 +221,15 @@
 								</div>
 							</th>
 							<td><div class="fake-radio-wrapper">
-									<input type="number" class="form-control"
+									<input type="number" min="1" class="form-control"
 										name="basicRevisionNumber" placeholder="횟수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
-									<input type="number" class="form-control"
+									<input type="number" min="1" class="form-control"
 										name="standardRevisionNumber" placeholder="횟수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
-									<input type="number" class="form-control"
+									<input type="number" min="1" class="form-control"
 										name="premiumRevisionNumber" placeholder="횟수">
 								</div></td>
 						</tr>
@@ -229,14 +237,14 @@
 							<th>기본 작업일</th>
 							<td>
 								<div class="fake-radio-wrapper">
-									<label class="fake-radio"><input type="number"
+									<label class="fake-radio"><input type="number" min="1"
 										class="form-control" name="basicDefaultDeliveryDate"
 										id="basicDefaultDeliveryDate" placeholder="기본 작업일"> </label>
 								</div>
 							</td>
 							<td>
 								<div class="fake-radio-wrapper">
-									<label class="fake-radio"><input type="number"
+									<label class="fake-radio"><input type="number" min="1"
 										class="form-control" name="standardDefaultDeliveryDate"
 										id="standardDefaultDeliveryDate" placeholder="기본 작업일">
 									</label>
@@ -244,7 +252,7 @@
 							</td>
 							<td>
 								<div class="fake-radio-wrapper">
-									<label class="fake-radio"><input type="number"
+									<label class="fake-radio"><input type="number" min="1"
 										class="form-control" name="premiumDefaultDeliveryDate"
 										id="premiumDefaultDeliveryDate" placeholder="기본 작업일">
 									</label>
@@ -262,11 +270,11 @@
 											name="gig_items[1][4694800919471][quantity]" value="0">
 									</div>
 									<label class="fake-radio"> <label class="fake-radio">
-											<p>최소 작업 소요일</p> <input type="number" class="form-control"
+											<p>최소 작업 소요일</p> <input type="number" min="1" class="form-control"
 											name="basicCostomizedDeliveryDate"
 											id="basicCostomizedDeliveryDate" placeholder="일(days)">
 											<br>
-											<p>작업단축 하루 당 추가요금</p> <input type="number"
+											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
 											class="form-control" name="basicCostomizedDeliveryDate"
 											id="basicCostomizedDeliveryDate" placeholder="추가요금(₩)">
 											</p>
@@ -283,11 +291,11 @@
 											name="gig_items[1][4694800919471][quantity]" value="0">
 									</div>
 									<label class="fake-radio"> <label class="fake-radio">
-											<p>최소 작업 소요일</p> <input type="number" class="form-control"
+											<p>최소 작업 소요일</p> <input type="number" min="1" class="form-control"
 											name="standardCostomizedDeliveryDate"
 											id="standardCostomizedDeliveryDate" placeholder="일(days)">
 											<br>
-											<p>작업단축 하루 당 추가요금</p> <input type="number"
+											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
 											class="form-control" name="standardCostomizedDeliveryDate"
 											id="standardCostomizedDeliveryDate" placeholder="추가요금(₩)">
 											</p>
@@ -303,11 +311,11 @@
 											name="gig_items[1][4694800919471][quantity]" value="0">
 									</div>
 									<label class="fake-radio"> <label class="fake-radio">
-											<p>최소 작업 소요일</p> <input type="number" class="form-control"
+											<p>최소 작업 소요일</p> <input type="number" min="1" class="form-control"
 											name="premiumCostomizedDeliveryDate"
 											id="premiumCostomizedDeliveryDate" placeholder="일(days)">
 											<br>
-											<p>작업단축 하루 당 추가요금</p> <input type="number"
+											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
 											class="form-control" name="premiumCostomizedDeliveryDate"
 											id="premiumCostomizedDeliveryDate" placeholder="추가요금(₩)">
 											</p>
@@ -319,19 +327,19 @@
 							<th>기본 금액</th>
 							<td>
 								<p class="price-label">
-									<input type="number" class="form-control" name="baicPrice"
+									<input type="number" min="1" class="form-control" name="baicPrice"
 										id="baicPrice" placeholder="기본요금(₩)">
 								</p>
 							</td>
 							<td>
 								<p class="price-label">
-									<input type="number" class="form-control" name="standardPrice"
+									<input type="number" min="1" class="form-control" name="standardPrice"
 										id="standardPrice" placeholder="기본요금(₩)">
 								</p>
 							</td>
 							<td>
 								<p class="price-label">
-									<input type="number" class="form-control" name="premiumPrice"
+									<input type="number" min="1" class="form-control" name="premiumPrice"
 										id="premiumPrice" placeholder="기본요금(₩)">
 								</p>
 							</td>
@@ -339,30 +347,22 @@
 					</tbody>
 				</table>
 				<table>
-					<tr>
-
+					<tr class="policyTable">
+						<th style="text-align:center">수정 및 재진행</th>
+						<td><textarea class="policyTableTA" name="revisionPolicy">수정 및 재진행 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;수정 안 해줄 거야&#13;재진행 안 해줄 거야
+						</textarea></td>
+					</tr>
+					<tr class="policyTable">
+						<th style="text-align:center">취소 및 환불</th>
+						<td><textarea class="policyTableTA"  name="refundPolicy">취소 및 환불 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;취소 안 해줄 거야&#13;환불 안 해줄 거야</textarea></td>
+					</tr>
+					<tr class="policyTable">
+						<th style="text-align:center">기타 안내 사항</th>
+						<td><textarea class="policyTableTA" name="otherInformation">기타안내사항을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;갑질ㄴㄴ</textarea></td>
 					</tr>
 				</table>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text">수정 및 재진행</span>
-					</div>
-					<textarea class="form-control"></textarea>
-				</div>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text">취소 및 환불 </span>
-					</div>
-					<textarea class="form-control"></textarea>
-				</div>
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text">기타 안내 사항</span>
-					</div>
-					<textarea class="form-control"></textarea>
-				</div>
 			</div>
-			<input type="submit" value="작성 완료" class="btn btn-primary">
+			<input id="submitBtn" type="submit" value="작성 완료" class="btn btn-primary">
 		</form>
 	</div>
 
