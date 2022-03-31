@@ -6,8 +6,10 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Product;
+import com.mulcam.hier.service.PostService;
 
 @RequestMapping("/post")
 @Controller
 public class PostController {
+	
+	@Autowired
+	PostService postService;
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
@@ -35,9 +41,13 @@ public class PostController {
 	}
 	
 	@PostMapping("/write")
-	public String write(Product product) {
+	public String write(@ModelAttribute Product product) {
 		System.out.println("글쓰기경로!!!!!!!!!!");
-		System.out.println(product);
+		try {
+			postService.writePost(product);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
 		return "/product-detail";
 	}
 
