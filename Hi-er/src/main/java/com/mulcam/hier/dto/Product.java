@@ -2,11 +2,13 @@ package com.mulcam.hier.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class Product {
 
 	// 제목
@@ -84,67 +86,56 @@ public class Product {
 	// 기타 안내 사항
 	String otherInformation;
 
-	public Product() {
-	}
-
-	public Product(String title, MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4,
-			MultipartFile file5, MultipartFile file6, MultipartFile file7, MultipartFile file8, String content,
-			String basicPkgDescription, String standardPkgDescription, String premiumPkgDescription,
-			String basicOriginalImageProvide, String standardOriginalImageProvide, String premiumOriginalImageProvide,
-			String basicCommercializeAvailable, String standardCommercializeAvailable,
-			String premiumCommercializeAvailable, String basicSNSKitProvide, String standardSNSKitProvide,
-			String premiumSNSKitProvide, int basicDraftNumber, int standardDraftNumber, int premiumDraftNumber,
-			int basicRevisionNumber, int standardRevisionNumber, int premiumRevisionNumber,
-			int basicDefaultDeliveryDate, int standardDefaultDeliveryDate, int premiumDefaultDeliveryDate,
-			int basicCostomizedDeliveryDate, int standardCostomizedDeliveryDate, int premiumCostomizedDeliveryDate,
-			int basicCostomizedDeliveryPrice, int standardCostomizedDeliveryPrice, int premiumCostomizedDeliveryPrice,
-			int baicPrice, int standardPrice, int premiumPrice, String revisionPolicy, String refundPolicy,
-			String otherInformation
-	) {
-		this.title = title;
-		this.file1 = file1;
-		this.file2 = file2;
-		this.file3 = file3;
-		this.file4 = file4;
-		this.file5 = file5;
-		this.file6 = file6;
-		this.file7 = file7;
-		this.file8 = file8;
-		this.content = content;
-		this.basicPkgDescription = basicPkgDescription;
-		this.standardPkgDescription = standardPkgDescription;
-		this.premiumPkgDescription = premiumPkgDescription;
-		this.basicOriginalImageProvide = basicOriginalImageProvide;
-		this.standardOriginalImageProvide = standardOriginalImageProvide;
-		this.premiumOriginalImageProvide = premiumOriginalImageProvide;
-		this.basicCommercializeAvailable = basicCommercializeAvailable;
-		this.standardCommercializeAvailable = standardCommercializeAvailable;
-		this.premiumCommercializeAvailable = premiumCommercializeAvailable;
-		this.basicSNSKitProvide = basicSNSKitProvide;
-		this.standardSNSKitProvide = standardSNSKitProvide;
-		this.premiumSNSKitProvide = premiumSNSKitProvide;
-		this.basicDraftNumber = basicDraftNumber;
-		this.standardDraftNumber = standardDraftNumber;
-		this.premiumDraftNumber = premiumDraftNumber;
-		this.basicRevisionNumber = basicRevisionNumber;
-		this.standardRevisionNumber = standardRevisionNumber;
-		this.premiumRevisionNumber = premiumRevisionNumber;
-		this.basicDefaultDeliveryDate = basicDefaultDeliveryDate;
-		this.standardDefaultDeliveryDate = standardDefaultDeliveryDate;
-		this.premiumDefaultDeliveryDate = premiumDefaultDeliveryDate;
-		this.basicCostomizedDeliveryDate = basicCostomizedDeliveryDate;
-		this.standardCostomizedDeliveryDate = standardCostomizedDeliveryDate;
-		this.premiumCostomizedDeliveryDate = premiumCostomizedDeliveryDate;
-		this.basicCostomizedDeliveryPrice = basicCostomizedDeliveryPrice;
-		this.standardCostomizedDeliveryPrice = standardCostomizedDeliveryPrice;
-		this.premiumCostomizedDeliveryPrice = premiumCostomizedDeliveryPrice;
-		this.baicPrice = baicPrice;
-		this.standardPrice = standardPrice;
-		this.premiumPrice = premiumPrice;
-		this.revisionPolicy = revisionPolicy;
-		this.refundPolicy = refundPolicy;
-		this.otherInformation = otherInformation;
-	}
+	/*
+	 * public Product() { }
+	 * 
+	 * public Product(String title, MultipartFile file1, MultipartFile file2,
+	 * MultipartFile file3, MultipartFile file4, MultipartFile file5, MultipartFile
+	 * file6, MultipartFile file7, MultipartFile file8, String content, String
+	 * basicPkgDescription, String standardPkgDescription, String
+	 * premiumPkgDescription, String basicOriginalImageProvide, String
+	 * standardOriginalImageProvide, String premiumOriginalImageProvide, String
+	 * basicCommercializeAvailable, String standardCommercializeAvailable, String
+	 * premiumCommercializeAvailable, String basicSNSKitProvide, String
+	 * standardSNSKitProvide, String premiumSNSKitProvide, int basicDraftNumber, int
+	 * standardDraftNumber, int premiumDraftNumber, int basicRevisionNumber, int
+	 * standardRevisionNumber, int premiumRevisionNumber, int
+	 * basicDefaultDeliveryDate, int standardDefaultDeliveryDate, int
+	 * premiumDefaultDeliveryDate, int basicCostomizedDeliveryDate, int
+	 * standardCostomizedDeliveryDate, int premiumCostomizedDeliveryDate, int
+	 * basicCostomizedDeliveryPrice, int standardCostomizedDeliveryPrice, int
+	 * premiumCostomizedDeliveryPrice, int baicPrice, int standardPrice, int
+	 * premiumPrice, String revisionPolicy, String refundPolicy, String
+	 * otherInformation ) { this.title = title; this.file1 = file1; this.file2 =
+	 * file2; this.file3 = file3; this.file4 = file4; this.file5 = file5; this.file6
+	 * = file6; this.file7 = file7; this.file8 = file8; this.content = content;
+	 * this.basicPkgDescription = basicPkgDescription; this.standardPkgDescription =
+	 * standardPkgDescription; this.premiumPkgDescription = premiumPkgDescription;
+	 * this.basicOriginalImageProvide = basicOriginalImageProvide;
+	 * this.standardOriginalImageProvide = standardOriginalImageProvide;
+	 * this.premiumOriginalImageProvide = premiumOriginalImageProvide;
+	 * this.basicCommercializeAvailable = basicCommercializeAvailable;
+	 * this.standardCommercializeAvailable = standardCommercializeAvailable;
+	 * this.premiumCommercializeAvailable = premiumCommercializeAvailable;
+	 * this.basicSNSKitProvide = basicSNSKitProvide; this.standardSNSKitProvide =
+	 * standardSNSKitProvide; this.premiumSNSKitProvide = premiumSNSKitProvide;
+	 * this.basicDraftNumber = basicDraftNumber; this.standardDraftNumber =
+	 * standardDraftNumber; this.premiumDraftNumber = premiumDraftNumber;
+	 * this.basicRevisionNumber = basicRevisionNumber; this.standardRevisionNumber =
+	 * standardRevisionNumber; this.premiumRevisionNumber = premiumRevisionNumber;
+	 * this.basicDefaultDeliveryDate = basicDefaultDeliveryDate;
+	 * this.standardDefaultDeliveryDate = standardDefaultDeliveryDate;
+	 * this.premiumDefaultDeliveryDate = premiumDefaultDeliveryDate;
+	 * this.basicCostomizedDeliveryDate = basicCostomizedDeliveryDate;
+	 * this.standardCostomizedDeliveryDate = standardCostomizedDeliveryDate;
+	 * this.premiumCostomizedDeliveryDate = premiumCostomizedDeliveryDate;
+	 * this.basicCostomizedDeliveryPrice = basicCostomizedDeliveryPrice;
+	 * this.standardCostomizedDeliveryPrice = standardCostomizedDeliveryPrice;
+	 * this.premiumCostomizedDeliveryPrice = premiumCostomizedDeliveryPrice;
+	 * this.baicPrice = baicPrice; this.standardPrice = standardPrice;
+	 * this.premiumPrice = premiumPrice; this.revisionPolicy = revisionPolicy;
+	 * this.refundPolicy = refundPolicy; this.otherInformation = otherInformation; }
+	 */
 
 	public String getTitle() {
 		return title;
