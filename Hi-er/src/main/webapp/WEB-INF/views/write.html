@@ -63,8 +63,8 @@
 			</div>
 			<div class="form-group">
 				<label for="content">글 내용</label>
-				<textarea id="editor" name="content" class="form-control"
-					placeholder="내용을 입력하세요 &#13;&#10; 줄바꿈"></textarea>
+				<textarea id="editor" name="content" class="form-control" 
+					placeholder="내용을 입력하세요 줄바꿈"></textarea>
 			</div>
 			<label>가격 정보</label>
 			<div id="packagesTable" class="table-package">
@@ -102,7 +102,7 @@
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content">Source File</span>
+									<span class="fit-popover-content">원본 이미지 제공</span>
 								</div>
 							</th>
 							<td class="boolean-pricing-factor included"></td>
@@ -113,7 +113,7 @@
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content">Commercial Use</span>
+									<span class="fit-popover-content">상업적 이용 가능</span>
 								</div>
 							</th>
 							<td class="boolean-pricing-factor included"></td>
@@ -124,7 +124,7 @@
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content">Interactive Mockup</span>
+									<span class="fit-popover-content">SNS 이미지 키트 제공</span>
 								</div>
 							</th>
 							<td class="boolean-pricing-factor"></td>
@@ -135,26 +135,26 @@
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content"># of Pages / Screens</span>
+									<span class="fit-popover-content">시안 개수</span>
 								</div>
 							</th>
-							<td>10</td>
-							<td>15</td>
-							<td>25</td>
+							<td><input type="number" class="draftNumber" name="basicDraftNumber" placeholder="개수"></td>
+							<td><input type="number" class="draftNumber" name="standardDraftNumber" placeholder="개수"></td>
+							<td><input type="number" class="draftNumber" name="premiumDraftNumber" placeholder="개수"></td>
 						</tr>
 						<tr>
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content">Revisions</span>
+									<span class="fit-popover-content">수정 횟수</span>
 								</div>
 							</th>
-							<td>0</td>
-							<td>1</td>
-							<td>2</td>
+							<td><input type="number" class="revisionNumber" name="basicRevisionNumber" placeholder="횟수"></td>
+							<td><input type="number" class="revisionNumber" name="standardRevisionNumber" placeholder="횟수"></td>
+							<td><input type="number" class="revisionNumber" name="premiumRevisionNumber" placeholder="횟수"></td>
 						</tr>
 						<tr class="delivery-time">
-							<th>Delivery Time</th>
+							<th>작업일</th>
 							<td>
 								<div class="fake-radio-wrapper">
 									<div>
@@ -208,18 +208,18 @@
 							</td>
 						</tr>
 						<tr class="select-package">
-							<th>Total</th>
+							<th>총 금액</th>
 							<td>
 								<p class="price-label">$8,029</p>
-								<button type="submit">Select</button>
+								<button type="submit">${금액}</button>
 							</td>
 							<td>
 								<p class="price-label">$11,240</p>
-								<button type="submit">Select</button>
+								<button type="submit">${금액}</button>
 							</td>
 							<td>
 								<p class="price-label">$16,057</p>
-								<button type="submit">Select</button>
+								<button type="submit">${금액}</button>
 							</td>
 						</tr>
 					</tbody>
