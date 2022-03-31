@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.hier.dto.Product;
+
 @RequestMapping("/post")
 @Controller
 public class PostController {
@@ -33,17 +35,10 @@ public class PostController {
 	}
 	
 	@PostMapping("/write")
-	public String write(HttpServletRequest request) {
+	public String write(Product product) {
 		System.out.println("글쓰기경로!!!!!!!!!!");
-		System.out.println(request);
-		System.out.println(request.getParameter("file1"));
-		System.out.println(request.getParameter("basicPkgDescription"));
 		
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		
-		System.out.println(title);
-		System.out.println(content);
+		System.out.println(product);
 		
 		
 		return "/product-detail";
