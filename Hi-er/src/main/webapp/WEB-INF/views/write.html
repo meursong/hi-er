@@ -117,9 +117,23 @@
 									<span class="fit-popover-content">원본 이미지 제공</span>
 								</div>
 							</th>
-							<td class="boolean-pricing-factor included"></td>
-							<td class="boolean-pricing-factor included"></td>
-							<td class="boolean-pricing-factor included"></td>
+							<td><input type="radio" id="basicOriginalImageProvide"
+								name="basicOriginalImageProvide" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio"
+								id="basicOriginalImageProvide" name="basicOriginalImageProvide"
+								value="false"><label> &nbsp;미제공</label></td>
+							<td><input type="radio" id="standardOriginalImageProvide"
+								name="standardOriginalImageProvide" value="true"
+								checked="checked"><label> &nbsp;제공</label><br> <input
+								type="radio" id="standardOriginalImageProvide"
+								name="standardOriginalImageProvide" value="false"><label>
+									&nbsp;미제공</label></td>
+							<td><input type="radio" id="premiumOriginalImageProvide"
+								name="premiumOriginalImageProvide" value="true"
+								checked="checked"><label> &nbsp;제공</label><br> <input
+								type="radio" id="premiumOriginalImageProvide"
+								name="premiumOriginalImageProvide" value="false"><label>
+									&nbsp;미제공</label></td>
 						</tr>
 						<tr>
 							<th>
@@ -128,9 +142,24 @@
 									<span class="fit-popover-content">상업적 이용 가능</span>
 								</div>
 							</th>
-							<td class="boolean-pricing-factor included"></td>
-							<td class="boolean-pricing-factor included"></td>
-							<td class="boolean-pricing-factor included"></td>
+							<td><input type="radio" id="basicCommercializeAvailable"
+								name="basicCommercializeAvailable" value="true"
+								checked="checked"><label> &nbsp;가능</label><br> <input
+								type="radio" id="basicCommercializeAvailable"
+								name="basicCommercializeAvailable" value="false"><label>
+									&nbsp;불가능</label></td>
+							<td><input type="radio" id="standardCommercializeAvailable"
+								name="standardCommercializeAvailable" value="true"
+								checked="checked"><label> &nbsp;가능</label><br> <input
+								type="radio" id="standardCommercializeAvailable"
+								name="standardCommercializeAvailable" value="false"><label>
+									&nbsp;불가능</label></td>
+							<td><input type="radio" id="premiumCommercializeAvailable"
+								name="premiumCommercializeAvailable" value="true"
+								checked="checked"><label> &nbsp;가능</label><br> <input
+								type="radio" id="premiumCommercializeAvailable"
+								name="premiumCommercializeAvailable" value="false"><label>
+									&nbsp;불가능</label></td>
 						</tr>
 						<tr>
 							<th>
@@ -139,9 +168,21 @@
 									<span class="fit-popover-content">SNS 이미지 키트 제공</span>
 								</div>
 							</th>
-							<td class="boolean-pricing-factor"></td>
-							<td class="boolean-pricing-factor included"></td>
-							<td class="boolean-pricing-factor included"></td>
+							<td><input type="radio" id="basicSNSKitProvide"
+								name="basicSNSKitProvide" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="basicSNSKitProvide"
+								name="basicSNSKitProvide" value="false"><label>
+									&nbsp;미제공</label></td>
+							<td><input type="radio" id="standardSNSKitProvide"
+								name="standardSNSKitProvide" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio"
+								id="standardSNSKitProvide" name="standardSNSKitProvide"
+								value="false"><label> &nbsp;미제공</label></td>
+							<td><input type="radio" id="premiumSNSKitProvide"
+								name="premiumSNSKitProvide" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="premiumSNSKitProvide"
+								name="premiumSNSKitProvide" value="false"><label>
+									&nbsp;미제공</label></td>
 						</tr>
 						<tr>
 							<th>
@@ -211,7 +252,7 @@
 							</td>
 						</tr>
 						<tr class="delivery-time">
-							<th>최소 작업일(추가요금)</th>
+							<th>최소 작업일(+추가요금)</th>
 							<td>
 								<div class="fake-radio-wrapper">
 									<div>
@@ -297,6 +338,29 @@
 						</tr>
 					</tbody>
 				</table>
+				<table>
+					<tr>
+
+					</tr>
+				</table>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">수정 및 재진행</span>
+					</div>
+					<textarea class="form-control"></textarea>
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">취소 및 환불 </span>
+					</div>
+					<textarea class="form-control"></textarea>
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">기타 안내 사항</span>
+					</div>
+					<textarea class="form-control"></textarea>
+				</div>
 			</div>
 			<input type="submit" value="작성 완료" class="btn btn-primary">
 		</form>
