@@ -47,12 +47,12 @@ public class UserController {
 	public String freelancerInfo(Model model) throws Exception {
 		User user = userService.userInfo(user_id);
 		List<Review> reviews = reviewService.reviewList(seller_id);
-		int sum = 0;
+		double sum = 0;
 		
 		for(Review review : reviews) {
 			sum += review.getStar_point();
 		}
-		int avr = sum/reviews.size();
+		double avr = sum/reviews.size();
 		
 		FreelancerUser freelancer = userService.freelancerInfo(user_id);
 		String address[] = freelancer.getAddress().split(" ");
