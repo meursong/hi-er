@@ -30,7 +30,7 @@
 <section layout:fragment="contents">
 	<div class="container">
 		<h1>글쓰기</h1>
-		<form id="from" name="board_write" method="post" enctype="multipart/form-data" action="/post/write">
+		<form action="/post/write" method="post" enctype="multipart/form-data" id="form" name="board_write" >
 			<div class="form-group">
 				<label for="title">글 제목</label> <input type="text" name="title"
 					class="form-control" placeholder="제목을 입력하세요 ">
@@ -88,8 +88,8 @@
 					<p>그냥 최고</p>
 				</textarea>
 			</div>
-			<label>가격 정보</label>
 			<div id="packagesTable" class="table-package">
+			<label>가격 정보</label>
 				<!-- 가격 정보 -->
 				<table>
 					<colgroup>
@@ -275,8 +275,8 @@
 											id="basicCostomizedDeliveryDate" placeholder="일(days)">
 											<br>
 											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
-											class="form-control" name="basicCostomizedDeliveryDate"
-											id="basicCostomizedDeliveryDate" placeholder="추가요금(₩)">
+											class="form-control" name="basicCostomizedDeliveryPrice"
+											id="basicCostomizedDeliveryPrice" placeholder="추가요금(₩)">
 											</p>
 									</label>
 								</div>
@@ -296,8 +296,8 @@
 											id="standardCostomizedDeliveryDate" placeholder="일(days)">
 											<br>
 											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
-											class="form-control" name="standardCostomizedDeliveryDate"
-											id="standardCostomizedDeliveryDate" placeholder="추가요금(₩)">
+											class="form-control" name="standardCostomizedDeliveryPrice"
+											id="standardCostomizedDeliveryPrice" placeholder="추가요금(₩)">
 											</p>
 									</label>
 								</div>
@@ -316,8 +316,8 @@
 											id="premiumCostomizedDeliveryDate" placeholder="일(days)">
 											<br>
 											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
-											class="form-control" name="premiumCostomizedDeliveryDate"
-											id="premiumCostomizedDeliveryDate" placeholder="추가요금(₩)">
+											class="form-control" name="premiumCostomizedDeliveryPrice"
+											id="premiumCostomizedDeliveryPrice" placeholder="추가요금(₩)">
 											</p>
 									</label>
 								</div>
@@ -362,7 +362,8 @@
 					</tr>
 				</table>
 			</div>
-			<input id="submitBtn" type="submit" value="작성 완료" class="btn btn-primary">
+			<input type="submit" value="작성 완료" class="btn btn-primary">
+			<button id="submitBtn">작성완료</button>
 		</form>
 	</div>
 
@@ -426,6 +427,7 @@
 		$("#submitBtn").click(function () {
 			var formData = new FormData( $("#form"));
 		    $.ajax({
+		    	url: "/post/write",
 		    	method: "POST",
 		        data: formData,
 		        dataType: 'json',
@@ -438,7 +440,7 @@
 		        	alert("failed! ")
 		        }
 		    });
-		});		
+		});	
 		
 	});
 	

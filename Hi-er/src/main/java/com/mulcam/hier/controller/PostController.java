@@ -31,16 +31,21 @@ public class PostController {
 		ModelAndView mav = new ModelAndView("write");
 		return mav;
 	}
-
+	
 	@PostMapping("/write")
 	public String write(HttpServletRequest request) {
+		System.out.println("글쓰기경로!!!!!!!!!!");
+		System.out.println(request);
+		System.out.println(request.getParameter("file1"));
+		System.out.println(request.getParameter("basicPkgDescription"));
+		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
-
-		
 		System.out.println(title);
 		System.out.println(content);
+		
+		
 		return "/product-detail";
 	}
 
