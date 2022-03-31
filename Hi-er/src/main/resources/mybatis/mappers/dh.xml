@@ -8,10 +8,17 @@
 			select * from user where user_id=#{user_id}
 		]]>
 	</select>
-	
-	<select id="select_info_f" resultType="FreelancerUser" parameterType="int">
+
+	<select id="select_info_f" resultType="FreelancerUser"
+		parameterType="int">
 		<![CDATA[
 			select * from f_info where f_id=#{user_id}
+		]]>
+	</select>
+
+	<select id="selectReview" resultType="Review" parameterType="int">
+		<![CDATA[
+			select * from review where seller_id=#{seller_id}
 		]]>
 	</select>
 

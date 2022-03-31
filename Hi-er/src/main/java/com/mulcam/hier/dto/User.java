@@ -15,9 +15,8 @@ public class User {
 	private String nickname;
 	private MultipartFile profile_image;
 	private int type;
-	private Date updateAt;
-	
-	public User() {}
+	private Date createdAt;
+	private User() {}
 }
 
 
