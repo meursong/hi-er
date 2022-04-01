@@ -19,8 +19,8 @@ import com.mulcam.hier.service.UserService;
 @Controller
 public class UserController {
 	
-	int user_id = 2;
-	int seller_id = 2;
+	int user_id = 4;
+	int seller_id = 4;
 	
 	@Autowired
 	UserService userService;
@@ -45,19 +45,22 @@ public class UserController {
 	
 	@GetMapping("freelancerInfo")
 	public String freelancerInfo(Model model) throws Exception {
-		User user = userService.userInfo(user_id);
+		User user = userService.userInfo(seller_id);
 		List<Review> reviews = reviewService.reviewList(seller_id);
-		double sum = 0;
+		float sum = 0;
 		
 		for(Review review : reviews) {
 			sum += review.getStar_point();
 		}
-		double avr = sum/reviews.size();
+		String avr = String.format("%.1f",sum/reviews.size());
+		double pageNum = Math.ceil(reviews.size()/5);
 		
-		FreelancerUser freelancer = userService.freelancerInfo(user_id);
+		
+		FreelancerUser freelancer = userService.freelancerInfo(seller_id);
 		String address[] = freelancer.getAddress().split(" ");
 		
-		model.addAttribute("avr", avr);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("avg", avr);
 		model.addAttribute("user", user);
 		model.addAttribute("freelancer", freelancer);
 		model.addAttribute("address", address);

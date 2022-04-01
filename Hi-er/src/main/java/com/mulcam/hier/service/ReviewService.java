@@ -6,5 +6,6 @@ import com.mulcam.hier.dto.Review;
 
 public interface ReviewService {
 	List<Review> reviewList(int seller_id) throws Exception;
+	
 
 }
