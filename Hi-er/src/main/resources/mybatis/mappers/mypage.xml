@@ -17,16 +17,20 @@
 	]]>	
 	</select>
 	
+	<!--거래관리 5개 출력-->
 	<select id="queryOrdersss" resultType="Map" parameterType="int">
 	<![CDATA[
-		select o.createdAt, u.nickname,p.title,us.nickname as nickname2
+		
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2
 		from user u join user us join product p join orders o
 		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+		, (SELECT @rownum:=0) TMP
 		order by o.createdAt desc limit 5
 	]]>	
 	
 	</select>
 	
+	<!--찜한게시물 5개 출력-->
 	<select id="queryLikepost" resultType="Map" parameterType="int">
 	<![CDATA[
 		select l.clicked_date, u.nickname,p.title,us.nickname as nickname2
@@ -34,6 +38,59 @@
 		on p.product_id=l.product_id and u.user_id=#{id} and us.user_id=l.clicked_user
 		order by l.clicked_date desc limit 5
 	]]>	
-	
 	</select>
+	
+	<!--총 거래관리 게시글 갯수 출력-->
+	<select id="countBoard" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from user u join user us join product p join orders o
+		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+	]]>	
+	</select>
+	
+	<select id="countBoard2" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from user u join user us join product p join likepost l
+		on p.product_id=l.product_id and u.user_id=1 and us.user_id=l.clicked_user
+	]]>	
+	</select>
+
+	<select id="selectBoardList111" resultType="Map" parameterType="int">
+	<![CDATA[
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2
+		from user u join user us join product p join orders o
+		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+		, (SELECT @rownum:=0) TMP
+		where @ROWNUM between #{startrow} and #{startrow}+4
+		order by o.createdAt desc limit 5
+	]]>	
+	</select>
+	
+	<!--거래내역 자세히 눌렀을때 리스트 가져옴-->
+	<select id="selectBoardList" resultType="Map" parameterType="int">
+	<![CDATA[
+		select *
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2
+				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2
+					from user u join user us join product p join orders o 
+		on p.product_id=o.product_id and u.user_id=1 and us.user_id=o.seller_id order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
+		where ROWNUM between #{startrow} and #{startrow}+4;    
+	]]>	
+	</select>
+	
+	
+	<!--찜 자세히 눌렀을때 리스트 가져옴-->
+	<select id="selectBoardList2" resultType="Map" parameterType="int">
+	<![CDATA[
+		select *
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.clicked_date,t.nickname,t.title,t.nickname2
+				from((select l.clicked_date, u.nickname,p.title,us.nickname as nickname2
+					from user u join user us join product p join likepost l
+		on p.product_id=l.product_id and u.user_id=1 and us.user_id=l.clicked_user order by l.clicked_date desc)t,(SELECT @rownum:=0) TMP))t
+		where ROWNUM between #{startrow} and #{startrow}+4;    
+	]]>	
+	</select>
+	
 </mapper>

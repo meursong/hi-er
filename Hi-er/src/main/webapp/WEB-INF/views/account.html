@@ -31,7 +31,7 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a class="font-weight-bold p-2 d-block" th:href="@{/memmodify}">
+								<a class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 							</div>
 						</div>
@@ -96,13 +96,10 @@
                      <div class="d-flex box-title border-bottom p-3">
                         <h6 class="m-0 col-6">거래내역</h6>
                         
-                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/1}'|">자세히보기</button> 
-                        <!-- <button type="button" class="btn btn-light btn-sm col-6" >자세히보기</button>  -->
-                      <!--   <h6 class="m-0 col-6 text-right">자세히보기</h6> -->
+                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/1/1}'|">자세히보기</button> 
+                       
                      </div>
-                     <!-- <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">자세히보기</h6>
-                     </div> -->
+                    
                      <div class="box-body p-3">
                         <div>
                         	<table class="table table-striped">
@@ -133,7 +130,7 @@
                      <div class="d-flex box-title border-bottom p-3">
                         <h6 class="m-0 col-6">찜한 게시물</h6>
                        
-                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/2}'|">자세히보기</button>
+                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/2/1}'|">자세히보기</button>
                        
                      </div>
                      <div class="box-body p-3">
@@ -188,45 +185,7 @@
                         </div>
                      </div>
                   </div>
-                  <!-- <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">찜한 게시물</h6>
-                     </div>
-                     <div class="box-body p-3 border-bottom">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">Web designer</h6>
-                              <div class="text-truncate text-primary">Spotify Inc.</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/l3.png" alt="">
-                        </div>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for applicants to consider when applying for local positions. </p>
-                     </div>
-                     <div class="box-body p-3 border-bottom">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">Cloud Software Engineer</h6>
-                              <div class="text-truncate text-primary">Spotify Inc.</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/l6.png" alt="">
-                        </div>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for.. </p>
-                     </div>
-                     <div class="box-body p-3">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">UI/UX designer</h6>
-                              <div class="text-truncate text-primary">Behance</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" src="images/l2.png" alt="">
-                        </div>
-                        <p class="mb-0">Wualified people in the most unexpected places. Information for applicants to consider when applying for local positions. The largest community on the web to find and list jobs that aren't restricted by commutes or a specific location.
-                        </p>
-                     </div>
-                  </div> -->
+                  
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Education</h6>
@@ -264,9 +223,7 @@
                         
                         
                      </div>
-                     <!-- <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">자세히보기</h6>
-                     </div> -->
+                
                      <div class="box-body p-3">
                         <div>
                         	<table class="table table-striped">
@@ -293,6 +250,40 @@
                         
                      </div>
                   </div>
+                  <div class="footer-pagination text-center">
+            <nav aria-label="Page navigation example">
+               <ul class="pagination">
+               		
+                  <li  class="page-item">
+                     <a th:if="${pageInfo.nowPage}>='2'" class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage-1}" aria-label="Previous">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                     </a>
+                     <th:block th:unless="${pageInfo.nowPage}=='1'" class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage-1}" aria-label="Previous">
+                        <span aria-hidden="true"></span>
+                     </th:block>   
+                  </li>
+                 
+                   <th:block th:each="num: ${#numbers.sequence({pageInfo.startPage},{pageInfo.endPage})}">
+       				<li class="page-item">
+       					
+                  		<a class="page-link" th:href="@{/mypage/1/}+${num}" th:text="${num}"></a>
+                  	</li>
+   				   </th:block> 
+                 <th:block th:text="${pageInfo.nowPage}"></th:block>
+                 
+          
+                  <li class="page-item">
+                     <a th:if="${pageInfo.nowPage}<${pageInfo.lastPage}" class="page-link" th:href="@{/mypage/1/}+(${pageInfo.nowPage+1})" aria-label="Next">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                 
+                     </a>
+                      <th:block th:unless="${pageInfo.nowPage}==${pageInfo.lastPage}" class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage+1}" aria-label="Next">
+                        <span aria-hidden="true"></span>
+                     </th:block>   
+                  </li>
+               </ul>
+            </nav>
+         </div>
                 </main>
                 
                  <main th:if="${page}=='2'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
@@ -324,10 +315,173 @@
                         </div>
                      </div>
                   </div>
+                  <div class="footer-pagination text-center">
+            <nav aria-label="Page navigation example">
+               <ul class="pagination">
+               
+               <li  class="page-item">
+                     <a th:if="${pageInfo2.nowPage}>='2'" class="page-link" th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}" aria-label="Previous">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                     </a>
+                     <th:block th:unless="${pageInfo2.nowPage}=='1'" class="page-link" th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}" aria-label="Previous">
+                        <span aria-hidden="true"></span>
+                     </th:block>   
+                  </li>
+                 
+                   <th:block th:each="num: ${#numbers.sequence({pageInfo2.startPage},{pageInfo2.endPage})}">
+       				<li class="page-item">
+       					
+                  		<a class="page-link" th:href="@{/mypage/2/}+${num}" th:text="${num}"></a>
+                  	</li>
+   				   </th:block> 
+                 <th:block th:text="${pageInfo2.nowPage}"></th:block>
+                 
+          
+                  <li class="page-item">
+                     <a th:if="${pageInfo2.nowPage}<${pageInfo2.lastPage}" class="page-link" th:href="@{/mypage/2/}+(${pageInfo2.nowPage+1})" aria-label="Next">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                 
+                     </a>
+                      <th:block th:unless="${pageInfo2.nowPage}==${pageInfo2.lastPage}" class="page-link" th:href="@{/mypage/1/}+${pageInfo2.nowPage+1}" aria-label="Next">
+                        <span aria-hidden="true"></span>
+                     </th:block>   
+                  </li>
+               
+               
+               
+               
+               
+               <!-- 
+                  <li class="page-item">
+                     <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                                           <span class="sr-only"></span>
+                     </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                     <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                                           <span class="sr-only"></span>
+                     </a>
+                  </li> -->
+               </ul>
+            </nav>
+         </div>
                 </main>
                 
                  <main th:if="${page}=='3'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
                 쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지
+                </main>
+                
+                <!-- =============================================개인정보수정================= -->
+                <main th:if="${page}=='4'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+              
+                
+                <div class="box shadow-sm rounded bg-white mb-3">
+                     <div class="d-flex box-title border-bottom p-3">
+                        <h6 class="m-0 col-6">개인정보수정</h6>
+                       
+                     </div>
+                    
+                     <div class="box-body p-3">
+                        <div class="py-4 px-3 border-bottom d-flex">
+                        	
+                        	<div class="box mb-3 rounded bg-white profile-box text-center border-right">
+                     			<div class="py-4 px-3">
+                        			<img th:src="@{/images/user/s4.png}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+                        			
+                     			</div>
+                     			<div class="p-4">
+                        			<label data-toggle="tooltip" data-placement="top" data-original-title="Upload New Picture" class="btn btn-info m-0" for="fileAttachmentBtn">
+                        			<i class="mdi mdi-image"></i> Upload
+                        			<input id="fileAttachmentBtn" name="file-attachment" type="file" class="d-none">
+                        			</label>
+                        			<button data-toggle="tooltip" data-placement="top" data-original-title="Delete" type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i> Delete</button>
+                     			</div>
+                  			</div>
+                        	<div class="col-6 p-3">
+                        		<h5 class="font-weight-bold text-dark mb-1 mt-4">JongHoon@gmail.com</h5>
+                        		<p class="mb-0 text-muted">백종훈 닉네임</p>
+                        	</div>
+                        
+                       
+                  		</div>
+                  		<form class="needs-validation" novalidate="">
+                        <div class="form-row">
+                           <div class="col-md-4 mb-3">
+                              <label for="validationCustom01">First name</label>
+                              <input type="text" class="form-control" id="validationCustom01" value="Mark" required="">
+                              <div class="valid-feedback">
+                                 Looks good!
+                              </div>
+                           </div>
+                           <div class="col-md-4 mb-3">
+                              <label for="validationCustom02">Last name</label>
+                              <input type="text" class="form-control" id="validationCustom02" value="Otto" required="">
+                              <div class="valid-feedback">
+                                 Looks good!
+                              </div>
+                           </div>
+                           <div class="col-md-4 mb-3">
+                              <label for="validationCustomUsername">Username</label>
+                              <div class="input-group">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                 </div>
+                                 <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required="">
+                                 <div class="invalid-feedback">
+                                    Please choose a username.
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-row">
+                           <div class="col-md-6 mb-3">
+                              <label for="validationCustom03">City</label>
+                              <input type="text" class="form-control" id="validationCustom03" required="">
+                              <div class="invalid-feedback">
+                                 Please provide a valid city.
+                              </div>
+                           </div>
+                           <div class="col-md-3 mb-3">
+                              <label for="validationCustom04">State</label>
+                              <select class="custom-select" id="validationCustom04" required="">
+                                 <option selected="" disabled="" value="">Choose...</option>
+                                 <option>...</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                 Please select a valid state.
+                              </div>
+                           </div>
+                           <div class="col-md-3 mb-3">
+                              <label for="validationCustom05">Zip</label>
+                              <input type="text" class="form-control" id="validationCustom05" required="">
+                              <div class="invalid-feedback">
+                                 Please provide a valid zip.
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required="">
+                              <label class="form-check-label" for="invalidCheck">
+                              Agree to terms and conditions
+                              </label>
+                              <div class="invalid-feedback">
+                                 You must agree before submitting.
+                              </div>
+                           </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                     </form>
+                     </div>
+                  </div>
+                
+                 
                 </main>
                
                 

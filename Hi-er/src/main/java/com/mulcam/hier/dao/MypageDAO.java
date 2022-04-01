@@ -15,5 +15,9 @@ public interface MypageDAO {
 //	public List<Map<String,Object>> queryOrderss(int id)throws Exception;
 	public List<Map<String,Object>> queryOrdersss(int id)throws Exception;
 	public List<Map<String,Object>> queryLikepost(int id)throws Exception;
+	public int countBoard(int id)throws Exception;
+	public int countBoard2(int id)throws Exception;
+	public List<Map<String,Object>> selectBoardList(int startrow) throws Exception;
+	public List<Map<String,Object>> selectBoardList2(int startrow) throws Exception;
 	
 }
