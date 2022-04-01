@@ -1,8 +1,11 @@
 package com.mulcam.hier.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,6 +29,9 @@ public class PostController {
 	
 	@Autowired
 	PostService postService;
+	
+	@Autowired
+	ServletContext servletContext;
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
@@ -40,10 +46,35 @@ public class PostController {
 		return mav;
 	}
 	
+	private String fileupload(MultipartFile file) {
+		String filename = null;
+		try {
+			String path = servletContext.getRealPath("/upload/");
+			String time = Long.valueOf(new Date().getTime()).toString();
+			if (file != null && !file.isEmpty()) {
+				filename = file.getOriginalFilename()+time;
+				File destFile = new File(path + filename);
+				file.transferTo(destFile);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return filename;
+	}
+	
 	@PostMapping("/write")
 	public String write(@ModelAttribute Product product) {
 		System.out.println("글쓰기경로!!!!!!!!!!");
+		System.out.println(product.getTitle());
 		try {
+			product.setFilename1(fileupload(product.getFile1()));
+			product.setFilename2(fileupload(product.getFile2()));
+			product.setFilename3(fileupload(product.getFile3()));
+			product.setFilename4(fileupload(product.getFile4()));
+			product.setFilename5(fileupload(product.getFile5()));
+			product.setFilename6(fileupload(product.getFile6()));
+			product.setFilename7(fileupload(product.getFile7()));
+			product.setFilename8(fileupload(product.getFile8()));
 			postService.writePost(product);
 		} catch(Exception e) {
 			e.printStackTrace();

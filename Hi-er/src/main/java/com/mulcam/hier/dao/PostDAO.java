@@ -6,10 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.mulcam.hier.dto.Product;
 
 @Mapper       
-@Repository("PostDAO")   
+@Repository("postDAO")   
 public interface PostDAO {
-	public static void insertProduct(Product prod) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}  
+	public void insertProduct(Product prod) throws Exception;  
 }
