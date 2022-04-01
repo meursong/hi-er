@@ -2,13 +2,6 @@ package com.mulcam.hier.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
 public class Product {
 
 	// 제목
@@ -23,6 +16,15 @@ public class Product {
 	MultipartFile file6;
 	MultipartFile file7;
 	MultipartFile file8;
+	
+	String filename1;
+	String filename2;
+	String filename3;
+	String filename4;
+	String filename5;
+	String filename6;
+	String filename7;
+	String filename8;
 
 	// 내용(ckeditor)
 	String content;
@@ -203,6 +205,70 @@ public class Product {
 
 	public MultipartFile getFile8() {
 		return file8;
+	}
+	
+	public String getFilename1() {
+		return filename1;
+	}
+
+	public void setFilename1(String filename1) {
+		this.filename1 = filename1;
+	}
+
+	public String getFilename2() {
+		return filename2;
+	}
+
+	public void setFilename2(String filename2) {
+		this.filename2 = filename2;
+	}
+
+	public String getFilename3() {
+		return filename3;
+	}
+
+	public void setFilename3(String filename3) {
+		this.filename3 = filename3;
+	}
+
+	public String getFilename4() {
+		return filename4;
+	}
+
+	public void setFilename4(String filename4) {
+		this.filename4 = filename4;
+	}
+
+	public String getFilename5() {
+		return filename5;
+	}
+
+	public void setFilename5(String filename5) {
+		this.filename5 = filename5;
+	}
+
+	public String getFilename6() {
+		return filename6;
+	}
+
+	public void setFilename6(String filename6) {
+		this.filename6 = filename6;
+	}
+
+	public String getFilename7() {
+		return filename7;
+	}
+
+	public void setFilename7(String filename7) {
+		this.filename7 = filename7;
+	}
+
+	public String getFilename8() {
+		return filename8;
+	}
+
+	public void setFilename8(String filename8) {
+		this.filename8 = filename8;
 	}
 
 	public void setFile8(MultipartFile file8) {

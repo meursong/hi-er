@@ -363,7 +363,6 @@
 				</table>
 			</div>
 			<input type="submit" value="작성 완료" class="btn btn-primary">
-			<button id="submitBtn">작성완료</button>
 		</form>
 	</div>
 
@@ -423,25 +422,6 @@
 			};
 			reader.readAsDataURL(event.target.files[0]);
 		}); 
-				
-		$("#submitBtn").click(function () {
-			var formData = new FormData( $("#form"));
-		    $.ajax({
-		    	url: "/post/write",
-		    	method: "POST",
-		        data: formData,
-		        dataType: 'json',
-		        processData: false,
-		        contentType: false,
-		        success: function () {
-		        	console.log("completed!");
-		        },
-		        error: function () {
-		        	alert("failed! ")
-		        }
-		    });
-		});	
-		
 	});
 	
 	</script>
