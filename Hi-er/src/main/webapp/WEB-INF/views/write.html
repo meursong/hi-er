@@ -151,22 +151,22 @@
 								</div>
 							</th>
 							<td><input type="radio" id="b_commercial"
-								name="basicCommercializeAvailable" value="true"
+								name="b_commercial" value="true"
 								checked="checked"><label> &nbsp;가능</label><br> <input
-								type="radio" id="basicCommercializeAvailable"
-								name="basicCommercializeAvailable" value="false"><label>
+								type="radio" id="b_commercial"
+								name="b_commercial" value="false"><label>
 									&nbsp;불가능</label></td>
-							<td><input type="radio" id="standardCommercializeAvailable"
-								name="standardCommercializeAvailable" value="true"
+							<td><input type="radio" id="s_Commercial"
+								name="s_Commercial" value="true"
 								checked="checked"><label> &nbsp;가능</label><br> <input
-								type="radio" id="standardCommercializeAvailable"
-								name="standardCommercializeAvailable" value="false"><label>
+								type="radio" id="s_Commercial"
+								name="s_Commercial" value="false"><label>
 									&nbsp;불가능</label></td>
-							<td><input type="radio" id="premiumCommercializeAvailable"
-								name="premiumCommercializeAvailable" value="true"
+							<td><input type="radio" id="p_Commercial"
+								name="p_Commercial" value="true"
 								checked="checked"><label> &nbsp;가능</label><br> <input
-								type="radio" id="premiumCommercializeAvailable"
-								name="premiumCommercializeAvailable" value="false"><label>
+								type="radio" id="p_Commercial"
+								name="p_Commercial" value="false"><label>
 									&nbsp;불가능</label></td>
 						</tr>
 						<tr>
@@ -176,20 +176,20 @@
 									<span class="fit-popover-content">SNS 이미지 키트 제공</span>
 								</div>
 							</th>
-							<td><input type="radio" id="basicSNSKitProvide"
-								name="basicSNSKitProvide" value="true" checked="checked"><label>
-									&nbsp;제공</label><br> <input type="radio" id="basicSNSKitProvide"
-								name="basicSNSKitProvide" value="false"><label>
+							<td><input type="radio" id="b_sns_Kit"
+								name="b_sns_Kit" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="b_sns_Kit"
+								name="b_sns_Kit" value="false"><label>
 									&nbsp;미제공</label></td>
-							<td><input type="radio" id="standardSNSKitProvide"
-								name="standardSNSKitProvide" value="true" checked="checked"><label>
-									&nbsp;제공</label><br> <input type="radio"
-								id="standardSNSKitProvide" name="standardSNSKitProvide"
-								value="false"><label> &nbsp;미제공</label></td>
-							<td><input type="radio" id="premiumSNSKitProvide"
-								name="premiumSNSKitProvide" value="true" checked="checked"><label>
-									&nbsp;제공</label><br> <input type="radio" id="premiumSNSKitProvide"
-								name="premiumSNSKitProvide" value="false"><label>
+							<td><input type="radio" id="s_sns_Kit"
+								name="s_sns_Kit" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="s_sns_Kit" 
+									name="s_sns_Kit" value="false"><label> 
+									&nbsp;미제공</label></td>
+							<td><input type="radio" id="p_sns_Kit"
+								name="p_sns_Kit" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="p_sns_Kit"
+								name="p_sns_Kit" value="false"><label>
 									&nbsp;미제공</label></td>
 						</tr>
 						<tr>
@@ -202,15 +202,15 @@
 
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="basicDraftNumber" placeholder="개수">
+										name="b_draft" placeholder="개수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="standardDraftNumber" placeholder="개수">
+										name="s_draft" placeholder="개수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="premiumDraftNumber" placeholder="개수">
+										name="p_draft" placeholder="개수">
 								</div></td>
 						</tr>
 						<tr>
@@ -222,15 +222,15 @@
 							</th>
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="basicRevisionNumber" placeholder="횟수">
+										name="b_revision" placeholder="횟수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="standardRevisionNumber" placeholder="횟수">
+										name="s_revision" placeholder="횟수">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="premiumRevisionNumber" placeholder="횟수">
+										name="p_revision" placeholder="횟수">
 								</div></td>
 						</tr>
 						<tr class="delivery-time">
@@ -238,23 +238,23 @@
 							<td>
 								<div class="fake-radio-wrapper">
 									<label class="fake-radio"><input type="number" min="1"
-										class="form-control" name="basicDefaultDeliveryDate"
-										id="basicDefaultDeliveryDate" placeholder="기본 작업일"> </label>
+										class="form-control" name="b_default_delivery"
+										id="b_default_delivery" placeholder="기본 작업일"> </label>
 								</div>
 							</td>
 							<td>
 								<div class="fake-radio-wrapper">
 									<label class="fake-radio"><input type="number" min="1"
-										class="form-control" name="standardDefaultDeliveryDate"
-										id="standardDefaultDeliveryDate" placeholder="기본 작업일">
+										class="form-control" name="s_default_delivery"
+										id="s_default_delivery" placeholder="기본 작업일">
 									</label>
 								</div>
 							</td>
 							<td>
 								<div class="fake-radio-wrapper">
 									<label class="fake-radio"><input type="number" min="1"
-										class="form-control" name="premiumDefaultDeliveryDate"
-										id="premiumDefaultDeliveryDate" placeholder="기본 작업일">
+										class="form-control" name="p_default_delivery"
+										id="p_default_delivery" placeholder="기본 작업일">
 									</label>
 								</div>
 							</td>
@@ -271,12 +271,12 @@
 									</div>
 									<label class="fake-radio"> <label class="fake-radio">
 											<p>최소 작업 소요일</p> <input type="number" min="1" class="form-control"
-											name="basicCostomizedDeliveryDate"
-											id="basicCostomizedDeliveryDate" placeholder="일(days)">
+											name="b_minimum_delivery"
+											id="b_minimum_delivery" placeholder="일(days)">
 											<br>
 											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
-											class="form-control" name="basicCostomizedDeliveryPrice"
-											id="basicCostomizedDeliveryPrice" placeholder="추가요금(₩)">
+											class="form-control" name="b_additional_price"
+											id="b_additional_price" placeholder="추가요금(₩)">
 											</p>
 									</label>
 								</div>
@@ -292,12 +292,12 @@
 									</div>
 									<label class="fake-radio"> <label class="fake-radio">
 											<p>최소 작업 소요일</p> <input type="number" min="1" class="form-control"
-											name="standardCostomizedDeliveryDate"
-											id="standardCostomizedDeliveryDate" placeholder="일(days)">
+											name="s_minimum_delivery"
+											id="s_minimum_delivery" placeholder="일(days)">
 											<br>
 											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
-											class="form-control" name="standardCostomizedDeliveryPrice"
-											id="standardCostomizedDeliveryPrice" placeholder="추가요금(₩)">
+											class="form-control" name="s_additional_price"
+											id="s_additional_price" placeholder="추가요금(₩)">
 											</p>
 									</label>
 								</div>
@@ -312,12 +312,12 @@
 									</div>
 									<label class="fake-radio"> <label class="fake-radio">
 											<p>최소 작업 소요일</p> <input type="number" min="1" class="form-control"
-											name="premiumCostomizedDeliveryDate"
-											id="premiumCostomizedDeliveryDate" placeholder="일(days)">
+											name="p_minimum_delivery"
+											id="p_minimum_delivery" placeholder="일(days)">
 											<br>
 											<p>작업단축 하루 당 추가요금</p> <input type="number" min="1"
-											class="form-control" name="premiumCostomizedDeliveryPrice"
-											id="premiumCostomizedDeliveryDate" placeholder="추가요금(₩)">
+											class="form-control" name="p_additional_price"
+											id="p_additional_price" placeholder="추가요금(₩)">
 											</p>
 									</label>
 								</div>
@@ -327,20 +327,20 @@
 							<th>기본 금액</th>
 							<td>
 								<p class="price-label">
-									<input type="number" min="1" class="form-control" name="baicPrice"
-										id="baicPrice" placeholder="기본요금(₩)">
+									<input type="number" min="1" class="form-control" name="b_price"
+										id="b_price" placeholder="기본요금(₩)">
 								</p>
 							</td>
 							<td>
 								<p class="price-label">
-									<input type="number" min="1" class="form-control" name="standardPrice"
-										id="standardPrice" placeholder="기본요금(₩)">
+									<input type="number" min="1" class="form-control" name="s_price"
+										id="s_price" placeholder="기본요금(₩)">
 								</p>
 							</td>
 							<td>
 								<p class="price-label">
-									<input type="number" min="1" class="form-control" name="premiumPrice"
-										id="premiumPrice" placeholder="기본요금(₩)">
+									<input type="number" min="1" class="form-control" name="p_price"
+										id="p_price" placeholder="기본요금(₩)">
 								</p>
 							</td>
 						</tr>
