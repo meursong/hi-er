@@ -4,7 +4,5 @@
 <configuration>
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml"/>
-		
-		<mapper resource="mybatis/mappers/dh.xml"/>
 	</mappers>
 </configuration>

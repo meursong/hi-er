@@ -15,7 +15,10 @@ public class User {
 	private MultipartFile profile_image;
 	private int type;
 	private Date updateAt;
-	
+	private float stars;
+	private String nickname;
+	private String intro;
+	private String product_type;
 	public User() {}
 }
 

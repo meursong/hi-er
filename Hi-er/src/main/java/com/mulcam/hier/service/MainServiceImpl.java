@@ -1,5 +1,7 @@
 package com.mulcam.hier.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,15 +9,15 @@ import com.mulcam.hier.dao.UserDAO;
 import com.mulcam.hier.dto.User;
 
 @Service
-public class UserServiceImpl{
-	
-	@Autowired
-	UserDAO UserDAO;
+public class MainServiceImpl implements MainService{
 
-	public User userInfo(String email) throws Exception {
-		User user = UserDAO.selectUser(email);
-		if(user==null) throw new Exception("오류");
-		return user;
+	@Autowired
+	UserDAO userDAO;
+	
+	@Override
+	public List<User> getBestUserFive() throws Exception {
+		List<User> userList = userDAO.getBestUserFive();
+		return userList;
 	}
 
 }
