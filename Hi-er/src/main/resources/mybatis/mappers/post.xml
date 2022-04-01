@@ -2,9 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.PostDAO">
+	<select id="getMaxProductId" resultType="integer">
+		<![CDATA[
+			select max(product_id) from product
+		]]> 	
+	</select>
 	<insert id="insertProduct" parameterType="Product">
 		<![CDATA[
-			insert into product (title,
+			insert into product (product_id,
+								 title,
 								 filename1,
 								 filename2,
 								 filename3,
@@ -14,6 +20,29 @@
 								 filename7,
 								 filename8,
 								 content,
+								 revisionPolicy,
+								 refundPolicy,
+								 otherInformation)
+			             values(#{product_id},
+			             		#{title},
+			                    #{filename1},
+			                    #{filename2},
+			                    #{filename3},
+			                    #{filename4},
+			                    #{filename5},
+			                    #{filename6},
+			                    #{filename7},
+			                    #{filename8},
+			                    #{content},
+			                    #{revisionPolicy},
+			                    #{refundPolicy},
+			                    #{otherInformation})
+		]]> 
+	</insert> 
+	<insert id="insertDesignPriceInfo" parameterType="Product">
+		<![CDATA[
+			insert into design_price_info (
+								 product_price_id,
 								 b_pkg_description,
 								 s_pkg_description,
 								 p_pkg_description,
@@ -43,21 +72,10 @@
 								 p_additional_price,
 								 b_price,
 								 s_price,
-								 p_price,
-								 revisionPolicy,
-								 refundPolicy,
-								 otherInformation)
-			             values(#{title},
-			                    #{filename1},
-			                    #{filename2},
-			                    #{filename3},
-			                    #{filename4},
-			                    #{filename5},
-			                    #{filename6},
-			                    #{filename7},
-			                    #{filename8},
-			                    #{content},
-			                    #{b_pkg_description},
+								 p_price)
+								   values(
+								#{product_id},   
+								#{b_pkg_description},
 			                    #{s_pkg_description},
 			                    #{p_pkg_description},
 			                    #{b_original_image},
@@ -86,10 +104,7 @@
 			                    #{p_additional_price},
 			                    #{b_price},
 			                    #{s_price},
-			                    #{p_price},
-			                    #{revisionPolicy},
-			                    #{refundPolicy},
-			                    #{otherInformation})
-		]]> 
+			                    #{p_price})
+			]]> 
 	</insert> 
 </mapper>

@@ -9,4 +9,6 @@ import com.mulcam.hier.dto.Product;
 @Repository("postDAO")   
 public interface PostDAO {
 	public void insertProduct(Product prod) throws Exception;  
+	public void insertDesignPriceInfo(Product prod) throws Exception;  
+	public Integer getMaxProductId() throws Exception;
 }

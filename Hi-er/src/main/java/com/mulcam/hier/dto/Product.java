@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Product {
 
+	int product_id;
 	// 제목
 	String title;
 
@@ -88,6 +89,16 @@ public class Product {
 
 	// 기타 안내 사항
 	String otherInformation;
+	
+	
+
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
 
 	public String getTitle() {
 		return title;
