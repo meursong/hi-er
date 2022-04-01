@@ -14,7 +14,7 @@ public class PostServiceImpl implements PostService {
 	
 	@Override
 	public void writePost(Product prod) throws Exception {
-		PostDAO.insertProduct(prod);
+		postDAO.insertProduct(prod);
 	}
 
 	

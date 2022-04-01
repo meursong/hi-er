@@ -2,6 +2,7 @@ package com.mulcam.hier.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class Product {
 
 	// 제목
@@ -30,54 +31,54 @@ public class Product {
 	String content;
 
 	// 패키지 설명
-	String basicPkgDescription;
-	String standardPkgDescription;
-	String premiumPkgDescription;
+	String b_pkg_description;
+	String s_pkg_description;
+	String p_pkg_description;
 
 	// 원본 이미지 제공
-	String basicOriginalImageProvide;
-	String standardOriginalImageProvide;
-	String premiumOriginalImageProvide;
+	String b_original_image;
+	String s_original_image;
+	String p_original_image;
 
 	// 상업적 이용 가능
-	String basicCommercializeAvailable;
-	String standardCommercializeAvailable;
-	String premiumCommercializeAvailable;
+	String b_commercial;
+	String s_Commercial;
+	String p_Commercial;
 
 	// sns 이미지 키트
-	String basicSNSKitProvide;
-	String standardSNSKitProvide;
-	String premiumSNSKitProvide;
+	String b_sns_Kit;
+	String s_sns_Kit;
+	String p_sns_Kit;
 
 	// 시안 개수
-	int basicDraftNumber;
-	int standardDraftNumber;
-	int premiumDraftNumber;
+	int b_draft;
+	int s_draft;
+	int p_draft;
 
 	// 수정 횟수
-	int basicRevisionNumber;
-	int standardRevisionNumber;
-	int premiumRevisionNumber;
+	int b_revision;
+	int s_revision;
+	int p_revision;
 
 	// 기본 작업일
-	int basicDefaultDeliveryDate;
-	int standardDefaultDeliveryDate;
-	int premiumDefaultDeliveryDate;
+	int b_default_delivery;
+	int s_default_delivery;
+	int p_default_delivery;
 
 	// 최소 작업일
-	int basicCostomizedDeliveryDate;
-	int standardCostomizedDeliveryDate;
-	int premiumCostomizedDeliveryDate;
+	int b_minimum_delivery;
+	int s_minimum_delivery;
+	int p_minimum_delivery;
 
 	// 작업단축 하루 당 추가요금
-	int basicCostomizedDeliveryPrice;
-	int standardCostomizedDeliveryPrice;
-	int premiumCostomizedDeliveryPrice;
+	int b_additional_price;
+	int s_additional_price;
+	int p_additional_price;
 
 	// 기본금액
-	int baicPrice;
-	int standardPrice;
-	int premiumPrice;
+	int b_price;
+	int s_price;
+	int p_price;
 
 	// 수정 및 재진행
 	String revisionPolicy;
@@ -87,57 +88,6 @@ public class Product {
 
 	// 기타 안내 사항
 	String otherInformation;
-
-	/*
-	 * public Product() { }
-	 * 
-	 * public Product(String title, MultipartFile file1, MultipartFile file2,
-	 * MultipartFile file3, MultipartFile file4, MultipartFile file5, MultipartFile
-	 * file6, MultipartFile file7, MultipartFile file8, String content, String
-	 * basicPkgDescription, String standardPkgDescription, String
-	 * premiumPkgDescription, String basicOriginalImageProvide, String
-	 * standardOriginalImageProvide, String premiumOriginalImageProvide, String
-	 * basicCommercializeAvailable, String standardCommercializeAvailable, String
-	 * premiumCommercializeAvailable, String basicSNSKitProvide, String
-	 * standardSNSKitProvide, String premiumSNSKitProvide, int basicDraftNumber, int
-	 * standardDraftNumber, int premiumDraftNumber, int basicRevisionNumber, int
-	 * standardRevisionNumber, int premiumRevisionNumber, int
-	 * basicDefaultDeliveryDate, int standardDefaultDeliveryDate, int
-	 * premiumDefaultDeliveryDate, int basicCostomizedDeliveryDate, int
-	 * standardCostomizedDeliveryDate, int premiumCostomizedDeliveryDate, int
-	 * basicCostomizedDeliveryPrice, int standardCostomizedDeliveryPrice, int
-	 * premiumCostomizedDeliveryPrice, int baicPrice, int standardPrice, int
-	 * premiumPrice, String revisionPolicy, String refundPolicy, String
-	 * otherInformation ) { this.title = title; this.file1 = file1; this.file2 =
-	 * file2; this.file3 = file3; this.file4 = file4; this.file5 = file5; this.file6
-	 * = file6; this.file7 = file7; this.file8 = file8; this.content = content;
-	 * this.basicPkgDescription = basicPkgDescription; this.standardPkgDescription =
-	 * standardPkgDescription; this.premiumPkgDescription = premiumPkgDescription;
-	 * this.basicOriginalImageProvide = basicOriginalImageProvide;
-	 * this.standardOriginalImageProvide = standardOriginalImageProvide;
-	 * this.premiumOriginalImageProvide = premiumOriginalImageProvide;
-	 * this.basicCommercializeAvailable = basicCommercializeAvailable;
-	 * this.standardCommercializeAvailable = standardCommercializeAvailable;
-	 * this.premiumCommercializeAvailable = premiumCommercializeAvailable;
-	 * this.basicSNSKitProvide = basicSNSKitProvide; this.standardSNSKitProvide =
-	 * standardSNSKitProvide; this.premiumSNSKitProvide = premiumSNSKitProvide;
-	 * this.basicDraftNumber = basicDraftNumber; this.standardDraftNumber =
-	 * standardDraftNumber; this.premiumDraftNumber = premiumDraftNumber;
-	 * this.basicRevisionNumber = basicRevisionNumber; this.standardRevisionNumber =
-	 * standardRevisionNumber; this.premiumRevisionNumber = premiumRevisionNumber;
-	 * this.basicDefaultDeliveryDate = basicDefaultDeliveryDate;
-	 * this.standardDefaultDeliveryDate = standardDefaultDeliveryDate;
-	 * this.premiumDefaultDeliveryDate = premiumDefaultDeliveryDate;
-	 * this.basicCostomizedDeliveryDate = basicCostomizedDeliveryDate;
-	 * this.standardCostomizedDeliveryDate = standardCostomizedDeliveryDate;
-	 * this.premiumCostomizedDeliveryDate = premiumCostomizedDeliveryDate;
-	 * this.basicCostomizedDeliveryPrice = basicCostomizedDeliveryPrice;
-	 * this.standardCostomizedDeliveryPrice = standardCostomizedDeliveryPrice;
-	 * this.premiumCostomizedDeliveryPrice = premiumCostomizedDeliveryPrice;
-	 * this.baicPrice = baicPrice; this.standardPrice = standardPrice;
-	 * this.premiumPrice = premiumPrice; this.revisionPolicy = revisionPolicy;
-	 * this.refundPolicy = refundPolicy; this.otherInformation = otherInformation; }
-	 */
 
 	public String getTitle() {
 		return title;
@@ -206,7 +156,11 @@ public class Product {
 	public MultipartFile getFile8() {
 		return file8;
 	}
-	
+
+	public void setFile8(MultipartFile file8) {
+		this.file8 = file8;
+	}
+
 	public String getFilename1() {
 		return filename1;
 	}
@@ -271,10 +225,6 @@ public class Product {
 		this.filename8 = filename8;
 	}
 
-	public void setFile8(MultipartFile file8) {
-		this.file8 = file8;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -283,244 +233,244 @@ public class Product {
 		this.content = content;
 	}
 
-	public String getBasicPkgDescription() {
-		return basicPkgDescription;
+	public String getB_pkg_description() {
+		return b_pkg_description;
 	}
 
-	public void setBasicPkgDescription(String basicPkgDescription) {
-		this.basicPkgDescription = basicPkgDescription;
+	public void setB_pkg_description(String b_pkg_description) {
+		this.b_pkg_description = b_pkg_description;
 	}
 
-	public String getStandardPkgDescription() {
-		return standardPkgDescription;
+	public String getS_pkg_description() {
+		return s_pkg_description;
 	}
 
-	public void setStandardPkgDescription(String standardPkgDescription) {
-		this.standardPkgDescription = standardPkgDescription;
+	public void setS_pkg_description(String s_pkg_description) {
+		this.s_pkg_description = s_pkg_description;
 	}
 
-	public String getPremiumPkgDescription() {
-		return premiumPkgDescription;
+	public String getP_pkg_description() {
+		return p_pkg_description;
 	}
 
-	public void setPremiumPkgDescription(String premiumPkgDescription) {
-		this.premiumPkgDescription = premiumPkgDescription;
+	public void setP_pkg_description(String p_pkg_description) {
+		this.p_pkg_description = p_pkg_description;
 	}
 
-	public String getBasicOriginalImageProvide() {
-		return basicOriginalImageProvide;
+	public String getB_original_image() {
+		return b_original_image;
 	}
 
-	public void setBasicOriginalImageProvide(String basicOriginalImageProvide) {
-		this.basicOriginalImageProvide = basicOriginalImageProvide;
+	public void setB_original_image(String b_original_image) {
+		this.b_original_image = b_original_image;
 	}
 
-	public String getStandardOriginalImageProvide() {
-		return standardOriginalImageProvide;
+	public String getS_original_image() {
+		return s_original_image;
 	}
 
-	public void setStandardOriginalImageProvide(String standardOriginalImageProvide) {
-		this.standardOriginalImageProvide = standardOriginalImageProvide;
+	public void setS_original_image(String s_original_image) {
+		this.s_original_image = s_original_image;
 	}
 
-	public String getPremiumOriginalImageProvide() {
-		return premiumOriginalImageProvide;
+	public String getP_original_image() {
+		return p_original_image;
 	}
 
-	public void setPremiumOriginalImageProvide(String premiumOriginalImageProvide) {
-		this.premiumOriginalImageProvide = premiumOriginalImageProvide;
+	public void setP_original_image(String p_original_image) {
+		this.p_original_image = p_original_image;
 	}
 
-	public String getBasicCommercializeAvailable() {
-		return basicCommercializeAvailable;
+	public String getB_commercial() {
+		return b_commercial;
 	}
 
-	public void setBasicCommercializeAvailable(String basicCommercializeAvailable) {
-		this.basicCommercializeAvailable = basicCommercializeAvailable;
+	public void setB_commercial(String b_commercial) {
+		this.b_commercial = b_commercial;
 	}
 
-	public String getStandardCommercializeAvailable() {
-		return standardCommercializeAvailable;
+	public String getS_Commercial() {
+		return s_Commercial;
 	}
 
-	public void setStandardCommercializeAvailable(String standardCommercializeAvailable) {
-		this.standardCommercializeAvailable = standardCommercializeAvailable;
+	public void setS_Commercial(String s_Commercial) {
+		this.s_Commercial = s_Commercial;
 	}
 
-	public String getPremiumCommercializeAvailable() {
-		return premiumCommercializeAvailable;
+	public String getP_Commercial() {
+		return p_Commercial;
 	}
 
-	public void setPremiumCommercializeAvailable(String premiumCommercializeAvailable) {
-		this.premiumCommercializeAvailable = premiumCommercializeAvailable;
+	public void setP_Commercial(String p_Commercial) {
+		this.p_Commercial = p_Commercial;
 	}
 
-	public String getBasicSNSKitProvide() {
-		return basicSNSKitProvide;
+	public String getB_sns_Kit() {
+		return b_sns_Kit;
 	}
 
-	public void setBasicSNSKitProvide(String basicSNSKitProvide) {
-		this.basicSNSKitProvide = basicSNSKitProvide;
+	public void setB_sns_Kit(String b_sns_Kit) {
+		this.b_sns_Kit = b_sns_Kit;
 	}
 
-	public String getStandardSNSKitProvide() {
-		return standardSNSKitProvide;
+	public String getS_sns_Kit() {
+		return s_sns_Kit;
 	}
 
-	public void setStandardSNSKitProvide(String standardSNSKitProvide) {
-		this.standardSNSKitProvide = standardSNSKitProvide;
+	public void setS_sns_Kit(String s_sns_Kit) {
+		this.s_sns_Kit = s_sns_Kit;
 	}
 
-	public String getPremiumSNSKitProvide() {
-		return premiumSNSKitProvide;
+	public String getP_sns_Kit() {
+		return p_sns_Kit;
 	}
 
-	public void setPremiumSNSKitProvide(String premiumSNSKitProvide) {
-		this.premiumSNSKitProvide = premiumSNSKitProvide;
+	public void setP_sns_Kit(String p_sns_Kit) {
+		this.p_sns_Kit = p_sns_Kit;
 	}
 
-	public int getBasicDraftNumber() {
-		return basicDraftNumber;
+	public int getB_draft() {
+		return b_draft;
 	}
 
-	public void setBasicDraftNumber(int basicDraftNumber) {
-		this.basicDraftNumber = basicDraftNumber;
+	public void setB_draft(int b_draft) {
+		this.b_draft = b_draft;
 	}
 
-	public int getStandardDraftNumber() {
-		return standardDraftNumber;
+	public int getS_draft() {
+		return s_draft;
 	}
 
-	public void setStandardDraftNumber(int standardDraftNumber) {
-		this.standardDraftNumber = standardDraftNumber;
+	public void setS_draft(int s_draft) {
+		this.s_draft = s_draft;
 	}
 
-	public int getPremiumDraftNumber() {
-		return premiumDraftNumber;
+	public int getP_draft() {
+		return p_draft;
 	}
 
-	public void setPremiumDraftNumber(int premiumDraftNumber) {
-		this.premiumDraftNumber = premiumDraftNumber;
+	public void setP_draft(int p_draft) {
+		this.p_draft = p_draft;
 	}
 
-	public int getBasicRevisionNumber() {
-		return basicRevisionNumber;
+	public int getB_revision() {
+		return b_revision;
 	}
 
-	public void setBasicRevisionNumber(int basicRevisionNumber) {
-		this.basicRevisionNumber = basicRevisionNumber;
+	public void setB_revision(int b_revision) {
+		this.b_revision = b_revision;
 	}
 
-	public int getStandardRevisionNumber() {
-		return standardRevisionNumber;
+	public int getS_revision() {
+		return s_revision;
 	}
 
-	public void setStandardRevisionNumber(int standardRevisionNumber) {
-		this.standardRevisionNumber = standardRevisionNumber;
+	public void setS_revision(int s_revision) {
+		this.s_revision = s_revision;
 	}
 
-	public int getPremiumRevisionNumber() {
-		return premiumRevisionNumber;
+	public int getP_revision() {
+		return p_revision;
 	}
 
-	public void setPremiumRevisionNumber(int premiumRevisionNumber) {
-		this.premiumRevisionNumber = premiumRevisionNumber;
+	public void setP_revision(int p_revision) {
+		this.p_revision = p_revision;
 	}
 
-	public int getBasicDefaultDeliveryDate() {
-		return basicDefaultDeliveryDate;
+	public int getB_default_delivery() {
+		return b_default_delivery;
 	}
 
-	public void setBasicDefaultDeliveryDate(int basicDefaultDeliveryDate) {
-		this.basicDefaultDeliveryDate = basicDefaultDeliveryDate;
+	public void setB_default_delivery(int b_default_delivery) {
+		this.b_default_delivery = b_default_delivery;
 	}
 
-	public int getStandardDefaultDeliveryDate() {
-		return standardDefaultDeliveryDate;
+	public int getS_default_delivery() {
+		return s_default_delivery;
 	}
 
-	public void setStandardDefaultDeliveryDate(int standardDefaultDeliveryDate) {
-		this.standardDefaultDeliveryDate = standardDefaultDeliveryDate;
+	public void setS_default_delivery(int s_default_delivery) {
+		this.s_default_delivery = s_default_delivery;
 	}
 
-	public int getPremiumDefaultDeliveryDate() {
-		return premiumDefaultDeliveryDate;
+	public int getP_default_delivery() {
+		return p_default_delivery;
 	}
 
-	public void setPremiumDefaultDeliveryDate(int premiumDefaultDeliveryDate) {
-		this.premiumDefaultDeliveryDate = premiumDefaultDeliveryDate;
+	public void setP_default_delivery(int p_default_delivery) {
+		this.p_default_delivery = p_default_delivery;
 	}
 
-	public int getBasicCostomizedDeliveryDate() {
-		return basicCostomizedDeliveryDate;
+	public int getB_minimum_delivery() {
+		return b_minimum_delivery;
 	}
 
-	public void setBasicCostomizedDeliveryDate(int basicCostomizedDeliveryDate) {
-		this.basicCostomizedDeliveryDate = basicCostomizedDeliveryDate;
+	public void setB_minimum_delivery(int b_minimum_delivery) {
+		this.b_minimum_delivery = b_minimum_delivery;
 	}
 
-	public int getStandardCostomizedDeliveryDate() {
-		return standardCostomizedDeliveryDate;
+	public int getS_minimum_delivery() {
+		return s_minimum_delivery;
 	}
 
-	public void setStandardCostomizedDeliveryDate(int standardCostomizedDeliveryDate) {
-		this.standardCostomizedDeliveryDate = standardCostomizedDeliveryDate;
+	public void setS_minimum_delivery(int s_minimum_delivery) {
+		this.s_minimum_delivery = s_minimum_delivery;
 	}
 
-	public int getPremiumCostomizedDeliveryDate() {
-		return premiumCostomizedDeliveryDate;
+	public int getP_minimum_delivery() {
+		return p_minimum_delivery;
 	}
 
-	public void setPremiumCostomizedDeliveryDate(int premiumCostomizedDeliveryDate) {
-		this.premiumCostomizedDeliveryDate = premiumCostomizedDeliveryDate;
+	public void setP_minimum_delivery(int p_minimum_delivery) {
+		this.p_minimum_delivery = p_minimum_delivery;
 	}
 
-	public int getBasicCostomizedDeliveryPrice() {
-		return basicCostomizedDeliveryPrice;
+	public int getB_additional_price() {
+		return b_additional_price;
 	}
 
-	public void setBasicCostomizedDeliveryPrice(int basicCostomizedDeliveryPrice) {
-		this.basicCostomizedDeliveryPrice = basicCostomizedDeliveryPrice;
+	public void setB_additional_price(int b_additional_price) {
+		this.b_additional_price = b_additional_price;
 	}
 
-	public int getStandardCostomizedDeliveryPrice() {
-		return standardCostomizedDeliveryPrice;
+	public int getS_additional_price() {
+		return s_additional_price;
 	}
 
-	public void setStandardCostomizedDeliveryPrice(int standardCostomizedDeliveryPrice) {
-		this.standardCostomizedDeliveryPrice = standardCostomizedDeliveryPrice;
+	public void setS_additional_price(int s_additional_price) {
+		this.s_additional_price = s_additional_price;
 	}
 
-	public int getPremiumCostomizedDeliveryPrice() {
-		return premiumCostomizedDeliveryPrice;
+	public int getP_additional_price() {
+		return p_additional_price;
 	}
 
-	public void setPremiumCostomizedDeliveryPrice(int premiumCostomizedDeliveryPrice) {
-		this.premiumCostomizedDeliveryPrice = premiumCostomizedDeliveryPrice;
+	public void setP_additional_price(int p_additional_price) {
+		this.p_additional_price = p_additional_price;
 	}
 
-	public int getBaicPrice() {
-		return baicPrice;
+	public int getB_price() {
+		return b_price;
 	}
 
-	public void setBaicPrice(int baicPrice) {
-		this.baicPrice = baicPrice;
+	public void setB_price(int b_price) {
+		this.b_price = b_price;
 	}
 
-	public int getStandardPrice() {
-		return standardPrice;
+	public int getS_price() {
+		return s_price;
 	}
 
-	public void setStandardPrice(int standardPrice) {
-		this.standardPrice = standardPrice;
+	public void setS_price(int s_price) {
+		this.s_price = s_price;
 	}
 
-	public int getPremiumPrice() {
-		return premiumPrice;
+	public int getP_price() {
+		return p_price;
 	}
 
-	public void setPremiumPrice(int premiumPrice) {
-		this.premiumPrice = premiumPrice;
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
 	}
 
 	public String getRevisionPolicy() {
@@ -546,5 +496,7 @@ public class Product {
 	public void setOtherInformation(String otherInformation) {
 		this.otherInformation = otherInformation;
 	}
+
+	
 	
 }

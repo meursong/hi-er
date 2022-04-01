@@ -51,8 +51,8 @@ public class PostController {
 		try {
 			String path = servletContext.getRealPath("/upload/");
 			String time = Long.valueOf(new Date().getTime()).toString();
-			filename = file.getOriginalFilename()+time;
 			if (file != null && !file.isEmpty()) {
+				filename = file.getOriginalFilename()+time;
 				File destFile = new File(path + filename);
 				file.transferTo(destFile);
 			}
@@ -65,6 +65,7 @@ public class PostController {
 	@PostMapping("/write")
 	public String write(@ModelAttribute Product product) {
 		System.out.println("글쓰기경로!!!!!!!!!!");
+		System.out.println(product.getTitle());
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));

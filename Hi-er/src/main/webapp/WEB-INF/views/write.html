@@ -109,13 +109,13 @@
 						<tr class="description">
 							<th></th>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
-									class="desc1" name="basicPkgDescription" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+									class="desc1" name="b_pkg_description" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
 								<div id="test_cnt1">(0 / 50)</div></td>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
-									class="desc2" name="standardPkgDescription" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+									class="desc2" name="s_pkg_description" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
 								<div id="test_cnt2">(0 / 50)</div></td>
 							<td><textarea rows="3" th:type="text" th:maxlength="50"
-									class="desc3" name="premiumPkgDescription" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+									class="desc3" name="p_pkg_description" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
 								<div id="test_cnt3">(0 / 50)</div></td>
 						</tr>
 						<tr>
@@ -125,22 +125,22 @@
 									<span class="fit-popover-content">원본 이미지 제공</span>
 								</div>
 							</th>
-							<td><input type="radio" id="basicOriginalImageProvide"
-								name="basicOriginalImageProvide" value="true" checked="checked"><label>
-									&nbsp;제공</label><br> <input type="radio"
-								id="basicOriginalImageProvide" name="basicOriginalImageProvide"
+							<td><input type="radio" id="b_original_image"
+								name="b_original_image" value="true" 
+								checked="checked"><label> &nbsp;제공</label><br> <input type="radio"
+								id="b_original_image" name="b_original_image"
 								value="false"><label> &nbsp;미제공</label></td>
-							<td><input type="radio" id="standardOriginalImageProvide"
-								name="standardOriginalImageProvide" value="true"
+							<td><input type="radio" id="s_original_image"
+								name="s_original_image" value="true"
 								checked="checked"><label> &nbsp;제공</label><br> <input
-								type="radio" id="standardOriginalImageProvide"
-								name="standardOriginalImageProvide" value="false"><label>
+								type="radio" id="s_original_image"
+								name="s_original_image" value="false"><label>
 									&nbsp;미제공</label></td>
-							<td><input type="radio" id="premiumOriginalImageProvide"
-								name="premiumOriginalImageProvide" value="true"
+							<td><input type="radio" id="p_original_image"
+								name="p_original_image" value="true"
 								checked="checked"><label> &nbsp;제공</label><br> <input
-								type="radio" id="premiumOriginalImageProvide"
-								name="premiumOriginalImageProvide" value="false"><label>
+								type="radio" id="p_original_image"
+								name="p_original_image" value="false"><label>
 									&nbsp;미제공</label></td>
 						</tr>
 						<tr>
@@ -150,7 +150,7 @@
 									<span class="fit-popover-content">상업적 이용 가능</span>
 								</div>
 							</th>
-							<td><input type="radio" id="basicCommercializeAvailable"
+							<td><input type="radio" id="b_commercial"
 								name="basicCommercializeAvailable" value="true"
 								checked="checked"><label> &nbsp;가능</label><br> <input
 								type="radio" id="basicCommercializeAvailable"
