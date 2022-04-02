@@ -69,7 +69,7 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 
-하이어[hi-er]와 함께 더 높은 곳[higher]으로 !
+하이어[hi-er]와 함께 더 높은 곳[higher]으로 ! <br>
 전문가들을 고용[hire]하세요
 
 
@@ -165,11 +165,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-신동혁[팀장] - https://github.com/HyeokShine
-김기덕 - https://github.com/rlarlejrwl56
-백종훈 - https://github.com/hoon901
-송성욱 - https://github.com/meursong
-유예찬 - https://github.com/HumanSnowBall
+신동혁[팀장] - https://github.com/HyeokShine<br>
+김기덕 - https://github.com/rlarlejrwl56<br>
+백종훈 - https://github.com/hoon901<br>
+송성욱 - https://github.com/meursong<br>
+유예찬 - https://github.com/HumanSnowBall<br>
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
