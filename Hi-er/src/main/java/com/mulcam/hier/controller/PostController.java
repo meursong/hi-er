@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -126,4 +127,19 @@ public class PostController {
 		}
 		return result;
 	}
+	
+	@GetMapping("/detail/{pid}")
+	public ModelAndView accinfo(@PathVariable("pid") Integer pid) {
+		System.out.println("게시물 상세보기 테스트으이ㅡㅈ니ㅏㄷ름니ㅏㄷㄹ");
+		ModelAndView mav = new ModelAndView("product-detail");
+		try {
+			Product product = postService.productDetail(pid);
+			mav.addObject("product", product);
+		}	catch(Exception e) {
+			mav.addObject("err", e.getMessage());
+		}
+		return mav;
+	
+	}
+	
 }

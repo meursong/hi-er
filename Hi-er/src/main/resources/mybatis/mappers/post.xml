@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.PostDAO">
+	<select id="queryProduct" resultType="Product" parameterType="integer">
+		<![CDATA[
+			select * from product where product_id=#{id}
+		]]>
+	</select>
 	<select id="getMaxProductId" resultType="integer">
 		<![CDATA[
 			select max(product_id) from product

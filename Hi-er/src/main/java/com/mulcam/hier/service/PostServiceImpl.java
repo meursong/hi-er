@@ -21,6 +21,15 @@ public class PostServiceImpl implements PostService {
 		postDAO.insertDesignPriceInfo(prod);
 	}
 
+	@Override
+	public Product productDetail(Integer pid) throws Exception {
+		System.out.println("서비스임플에 도착했다아아앙아아............");
+		System.out.println(pid);
+		Product product = postDAO.querryProduct(pid);
+		if(product==null) new Exception("존재하지 않는 게시물 입니다");
+		return product;
+	}
+
 	
 	
 }
