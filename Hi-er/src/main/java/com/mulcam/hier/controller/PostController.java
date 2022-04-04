@@ -130,11 +130,12 @@ public class PostController {
 	
 	@GetMapping("/detail/{pid}")
 	public ModelAndView accinfo(@PathVariable("pid") Integer pid) {
-		System.out.println("게시물 상세보기 테스트으이ㅡㅈ니ㅏㄷ름니ㅏㄷㄹ");
 		ModelAndView mav = new ModelAndView("product-detail");
 		try {
 			Product product = postService.productDetail(pid);
+			Product priceInfo = postService.priceInfo(pid);
 			mav.addObject("product", product);
+			mav.addObject("priceInfo", priceInfo);
 		}	catch(Exception e) {
 			mav.addObject("err", e.getMessage());
 		}

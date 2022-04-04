@@ -7,6 +7,11 @@
 			select * from product where product_id=#{id}
 		]]>
 	</select>
+	<select id="queryDesignPriceInfo" resultType="Product" parameterType="integer">
+		<![CDATA[
+			select * from design_price_info where product_price_id=#{id}
+		]]>
+	</select>
 	<select id="getMaxProductId" resultType="integer">
 		<![CDATA[
 			select max(product_id) from product

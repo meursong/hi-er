@@ -163,26 +163,23 @@
 										<tr class="package-type">
 											<th>패키지</th>
 											<td>
-												<p class="price">$8,029</p> <b class="type">Basic</b><b
-												class="title">10 Screens</b>
+												<p class="price" th:text="${priceInfo.b_price}"></p> <b class="type">Basic</b><b
+												class="title">패키지 설명</b>
 											</td>
 											<td>
-												<p class="price">$11,240</p> <b class="type">Standard</b><b
-												class="title">15 Screens</b>
+												<p class="price" th:text="${priceInfo.s_price}"></p> <b class="type">Standard</b><b
+												class="title">패키지 설명</b>
 											</td>
 											<td>
-												<p class="price">$16,057</p> <b class="type">Premium</b><b
-												class="title">25 Screens </b>
+												<p class="price" th:text="${priceInfo.p_price}"></p> <b class="type">Premium</b><b
+												class="title">패키지 설명</b>
 											</td>
 										</tr>
 										<tr class="description">
 											<th></th>
-											<td>I will design rough sketches for upto 5 Screens of
-												your website/Mobile app.</td>
-											<td>I will design rough sketches for upto 10 Screens of
-												your website/Mobile app.</td>
-											<td>I will design rough sketches for upto 20 Screens of
-												your website/Mobile app.</td>
+											<td th:text="${priceInfo.b_pkg_description}"></td>
+											<td th:text="${priceInfo.s_pkg_description}"></td>
+											<td th:text="${priceInfo.p_pkg_description}"></td>
 										</tr>
 										<tr>
 											<th>
