@@ -53,9 +53,9 @@
 					<ul>
 						<li class="nav-overview selected"><a href="#title">글
 								제목()</a></li>
-						<li class="nav-description"><a href="#description">서비스 설명</a></li>
 						<li class="nav-aboutSeller"><a href="#aboutSeller">프리랜서
 								정보</a></li>
+						<li class="nav-description"><a href="#description">서비스 설명</a></li>
 						<li class="nav-packagesTable"><a href="#packagesTable">가격
 								정보</a></li>
 						<li class="nav-faq"><a href="#faq">거래 약관</a></li>
@@ -197,7 +197,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="stats-desc">
+						<div id="description" class="stats-desc">
 							<ul class="user-stats">
 								<li>From<strong>${user.location}</strong></li>
 								<li><strong></strong></li>
@@ -459,11 +459,11 @@
 						<div id="reviews" class="review-section">
 							<div
 								class="d-flex align-items-center justify-content-between mb-4">
-								<h4 class="m-0">37 Reviews</h4>
+								<h4 class="m-0">리뷰 (${review.length})</h4>
 								<select
 									class="custom-select custom-select-sm border-0 shadow-sm ml-2">
-									<option>Most Relevant</option>
-									<option>Most Recent</option>
+									<option>별점 높은 순</option>
+									<option>최근 순</option>
 								</select>
 							</div>
 							<div class=" row">
@@ -554,7 +554,7 @@
 									</table>
 								</div>
 								<div class="col-md-6">
-									<div class="ranking">
+									<!-- <div class="ranking">
 										<h6 class="text-display-7">Rating Breakdown</h6>
 										<ul>
 											<li>Seller communication level<span>5<span
@@ -567,7 +567,7 @@
 													class="review-star rate-10 show-one"></span></span>
 											</li>
 										</ul>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
