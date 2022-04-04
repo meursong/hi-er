@@ -43,12 +43,6 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8 left">
-						<!--  <nav aria-label="breadcrumb">
-                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">메인페이지</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">게시판</li>
-                     </ol>
-                  </nav> -->
 						<h2 th:text="${product.title}">글 제목</h2>
 						<div id="overview"
 							class="seller-overview d-flex align-items-center">
@@ -107,29 +101,12 @@
 								</div>
 							</div>
 						</div>
-						<div id="description" class="description">
+						<!-- <div id="description" class="description">
 							<h3>서비스 설명</h3>
-							<!-- 에러픽스 필요  @#@#@#@#@#@#@#@#@#@#@#@# -->
-							<!-- <div th:utext="${product.content"></div> -->
+							에러픽스 필요  @#@#@#@#@#@#@#@#@#@#@#@# 
+							<div th:utext="${product.content"></div> 
 						
-						</div>
-						<!-- <ul class="metadata">
-                     <li class="metadata-attribute">
-                        <p>Main Type</p>
-                        <ul>
-                           <li>Websites</li>
-                           <li>Mobile Apps</li>
-                        </ul>
-                     </li>
-                     <li class="metadata-attribute">
-                        <p>Image File Format</p>
-                        <ul>
-                           <li>JPG</li>
-                           <li>PNG</li>
-                           <li>PSD</li>
-                        </ul>
-                     </li>
-                  </ul> -->
+						</div> -->
 						<h3 id="aboutSeller">프리랜서 정보</h3>
 						<div class="profile-card">
 							<div class="user-profile-image d-flex">
@@ -163,13 +140,12 @@
 							</div>
 							<div class="stats-desc">
 								<ul class="user-stats">
-									<li>From<strong>India</strong></li>
-									<li><strong>()</strong></li>
+									<li>From<strong>${user.location}</strong></li>
+									<li><strong></strong></li>
 									<li>평균응답시간<strong>1 hour(쪽지 답장 정보로 표시 - 가능?)</strong></li>
 								</ul>
 								<article class="seller-desc">
-									<div class="inner">
-										- 여기에 &amp; 제공하는 <br /> - 서비스를 <br /> - 쭉 <br /> - 나열하도록 <br />
+									<div class="inner" th:utext="${product.content}">
 									</div>
 								</article>
 							</div>
