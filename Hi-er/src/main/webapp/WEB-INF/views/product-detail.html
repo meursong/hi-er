@@ -221,9 +221,9 @@
 													<span class="fit-popover-content">시안 개수</span>
 												</div>
 											</th>
-											<td th:text="${priceInfo.b_draft}">10</td>
-											<td th:text="${priceInfo.s_draft}">15</td>
-											<td th:text="${priceInfo.p_draft}">25</td>
+											<td th:text="${priceInfo.b_draft}"></td>
+											<td th:text="${priceInfo.s_draft}"></td>
+											<td th:text="${priceInfo.p_draft}"></td>
 										</tr>
 										<tr>
 											<th>
@@ -232,9 +232,9 @@
 													<span class="fit-popover-content">수정 횟수</span>
 												</div>
 											</th>
-											<td th:text="${priceInfo.b_revision}">0</td>
-											<td th:text="${priceInfo.s_revision}">1</td>
-											<td th:text="${priceInfo.p_revision}">2</td>
+											<td th:text="${priceInfo.b_revision}"></td>
+											<td th:text="${priceInfo.s_revision}"></td>
+											<td th:text="${priceInfo.p_revision}"></td>
 										</tr>
 										<tr class="delivery-time">
 											<th>작업일</th>
@@ -248,11 +248,11 @@
 													</div>
 													<label class="fake-radio"><input type="radio"
 														name="1" value="0" checked=""><span
-														class="radio-img"></span><span>3 일</span></label> <label
+														class="radio-img"></span><span>[[${priceInfo.b_default_delivery}]] 일</span></label> <label
 														class="fake-radio"> <input type="radio" name="1"
-														value="1"><span class="radio-img"></span><span>2
+														value="1"><span class="radio-img"></span><span>[[${priceInfo.b_minimum_delivery}]]
 															일</span>
-														<p class="faster-price">(+$2,008)</p>
+														<p class="faster-price">(+ [[${priceInfo.b_additional_price}]] 원)</p>
 													</label>
 												</div>
 											</td>
@@ -266,11 +266,11 @@
 													</div>
 													<label class="fake-radio"><input type="radio"
 														name="2" value="0" checked=""><span
-														class="radio-img"></span><span>4 일</span></label> <label
+														class="radio-img"></span><span>[[${priceInfo.s_default_delivery}]] 일</span></label> <label
 														class="fake-radio"> <input type="radio" name="2"
-														value="1"><span class="radio-img"></span><span>3
+														value="1"><span class="radio-img"></span><span>[[${priceInfo.s_minimum_delivery}]]
 															일</span>
-														<p class="faster-price">(+$4,818)</p>
+														<p class="faster-price">(+ [[${priceInfo.s_additional_price}]] 원)</p>
 													</label>
 												</div>
 											</td>
@@ -284,11 +284,11 @@
 													</div>
 													<label class="fake-radio"><input type="radio"
 														name="3" value="0" checked=""><span
-														class="radio-img"></span><span>7 일</span></label> <label
+														class="radio-img"></span><span>[[${priceInfo.p_default_delivery}]] 일</span></label> <label
 														class="fake-radio"> <input type="radio" name="3"
-														value="1"><span class="radio-img"></span><span>5
+														value="1"><span class="radio-img"></span><span>[[${priceInfo.p_minimum_delivery}]]
 															일</span>
-														<p class="faster-price">(+$8,029)</p>
+														<p class="faster-price">(+ [[${priceInfo.p_additional_price}]] 원)</p>
 													</label>
 												</div>
 											</td>

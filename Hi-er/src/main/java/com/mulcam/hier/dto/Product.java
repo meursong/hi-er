@@ -67,12 +67,12 @@ public class Product {
 	int s_default_delivery;
 	int p_default_delivery;
 
-	// 최소 작업일
+	// 단축 작업일
 	int b_minimum_delivery;
 	int s_minimum_delivery;
 	int p_minimum_delivery;
 
-	// 작업단축 하루 당 추가요금
+	// 작업단축 추가요금
 	int b_additional_price;
 	int s_additional_price;
 	int p_additional_price;
