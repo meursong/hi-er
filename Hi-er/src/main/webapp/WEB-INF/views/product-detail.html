@@ -9,7 +9,7 @@
 			<div class="row d-flex align-items-center justify-content-between">
 				<div class="col-lg-9 left">
 					<ul>
-						<li class="nav-overview selected"><a href="#overview-nav">글
+						<li class="nav-overview selected"><a href="#title">글
 								제목()</a></li>
 						<li class="nav-description"><a href="#description">서비스 설명</a></li>
 						<li class="nav-aboutSeller"><a href="#aboutSeller">프리랜서
@@ -42,7 +42,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 left">
-					<h2 th:text="${product.title}">글 제목</h2>
+					<h2 id="title" th:text="${product.title}">글 제목</h2>
 					<div id="overview"
 						class="seller-overview d-flex align-items-center">
 						<div class="user-profile-image d-flex">
@@ -70,21 +70,21 @@
 					<div class="slider mt-4">
 						<div id="aniimated-thumbnials"
 							class="slider-for slick-slider-single">
-							<a href="images/list/v1.png}"> <img class="img-fluid"
+							<a th:href="@{/upload/} + ${product.filename1}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename1}" />
-							</a> <a href="images/list/v2.png}"> <img class="img-fluid"
+							</a> <a th:href="@{/upload/} + ${product.filename2}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename2}" />
-							</a> <a href="images/list/v3.png}"> <img class="img-fluid"
+							</a> <a th:href="@{/upload/} + ${product.filename3}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename3}" />
-							</a> <a href="images/list/v4.png}"> <img class="img-fluid"
+							</a> <a th:href="@{/upload/} + ${product.filename4}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename4}" />
-							</a> <a href="images/list/v5.png}"> <img class="img-fluid"
+							</a> <a th:href="@{/upload/} + ${product.filename5}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename5}" />
-							</a> <a href="images/list/v5.png}"> <img class="img-fluid"
+							</a> <a th:href="@{/upload/} + ${product.filename6}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename6}" />
-							</a> <a href="images/list/v5.png}"> <img class="img-fluid"
+							</a> <a th:href="@{/upload/} + ${product.filename7}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename7}" />
-							</a> <a href="images/list/v5.png}"> <img class="img-fluid"
+							</a> <a th:href="@{/upload/} + ${product.filename8}"> <img class="img-fluid"
 								th:src="@{/upload/} + ${product.filename8}" />
 							</a>
 						</div>
@@ -123,12 +123,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div id="description" class="description">
-							<h3>서비스 설명</h3>
-							에러픽스 필요  @#@#@#@#@#@#@#@#@#@#@#@# 
-							<div th:utext="${product.content"></div> 
-						
-						</div> -->
 					<h3 id="aboutSeller">프리랜서 정보</h3>
 					<div class="profile-card">
 						<div class="user-profile-image d-flex">
