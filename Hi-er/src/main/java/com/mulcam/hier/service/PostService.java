@@ -8,4 +8,6 @@ public interface PostService {
 
 	Product productDetail(Integer pid) throws Exception;
 	
+	Product priceInfo(Integer pid) throws Exception;
+	
 }
