@@ -49,7 +49,7 @@
                         <li class="breadcrumb-item active" aria-current="page">게시판</li>
                      </ol>
                   </nav> -->
-						<h2>글 제목</h2>
+						<h2 th:text="${product.title}">글 제목</h2>
 						<div id="overview"
 							class="seller-overview d-flex align-items-center">
 							<div class="user-profile-image d-flex">
@@ -59,17 +59,17 @@
 								</label>
 								<div class="profile-name">
 									<span class="user-status"> <a href="#"
-										class="seller-link">판매자아이디</a>
+										class="seller-link">${user.seller_id}</a>
 									</span>
-									<div class="seller-level">판매자 등급(구현 보류)</div>
+									<div class="seller-level">${user.grade?}(구현 보류)</div>
 								</div>
 							</div>
 							<div class="user-info d-flex">
 								<span class="user-info-rating d-flex">
 									<div class="star-rating-s15-wrapper">
 										<span class="star-rating-s15 rate-10"> </span>
-									</div> <span class="total-rating-out-five">5.0 평점</span> <span
-									class="total-rating">(15 - 리뷰수)</span>
+									</div> <span class="total-rating-out-five">${평점}5.0 평점</span> <span
+									class="total-rating">(${리뷰수})</span>
 								</span>
 							</div>
 						</div>
@@ -109,7 +109,9 @@
 						</div>
 						<div id="description" class="description">
 							<h3>서비스 설명</h3>
-							${서비스 내용}
+							<!-- 에러픽스 필요  @#@#@#@#@#@#@#@#@#@#@#@# -->
+							<!-- <div th:utext="${product.content"></div> -->
+						
 						</div>
 						<!-- <ul class="metadata">
                      <li class="metadata-attribute">
