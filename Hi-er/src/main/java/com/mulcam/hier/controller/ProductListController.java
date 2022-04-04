@@ -18,8 +18,18 @@ public class ProductListController {
 	@Autowired
 	ProductListService productListService;
 	
+
 	@GetMapping("/product")
-	public String productList(Model model, @RequestParam(name="filter", defaultValue="1") String value) throws Exception {
+	public String productList1(Model model) throws Exception {
+		 List<ProductList> selectProductDate = productListService.selectProductDate();
+			model.addAttribute("productList", selectProductDate);
+		
+		return "/product";
+	}
+	
+	@PostMapping("/product")
+	public String productList(@RequestParam(name="value", required=false, defaultValue = "1") String value, Model model) throws Exception {
+		
 		switch(value) {
 		case "1" : List<ProductList> selectProductDate = productListService.selectProductDate();
 				model.addAttribute("productList", selectProductDate); break;
@@ -29,8 +39,11 @@ public class ProductListController {
 		
 		case "3" : List<ProductList> selectProductStarPoint = productListService.selectProductStarPoint();
 		model.addAttribute("productList", selectProductStarPoint); break;
+		
+		default : List<ProductList> selectProductdefault = productListService.selectProductDate();
+		model.addAttribute("productList", selectProductdefault);
 		}
-		return "/product :: #productList";
+		return "/product :: #productList1";
 	}
 	
 }
