@@ -23,12 +23,12 @@
                            </div>
                            <div class="user-profile-label">
                               <div class="username-line">
-                                 <span th:text="${user.nickname}" class="seller-link"></span>
+                                 <span th:text="${freelancer.nickname}" class="seller-link"></span>
                               </div>
                               <div class="oneliner-wrapper">
-                                 <small th:text="${user.job}" class="oneliner"></small><br></br>
+                                 <small th:text="${freelancer.job}" class="oneliner"></small><br></br>
                                  <div class="ratings-wrapper">
-                                    <p class="rating-text"><span class="star-rating-s15" style="width:22px"></span>[[${avg}]]</p>
+                                    <p class="rating-text"><span class="star-rating-s15" style="width:22px"></span>[[${freelancer.avg_star_point}]]</p>
                                  </div>
                               </div>
                            </div>
@@ -40,7 +40,7 @@
                         <div class="user-stats-desc">
                            <ul class="user-stats">
                               <li class="location">지역<strong th:text="${address[0]} + ' ' + ${address[1]}"></strong></li>
-                              <li class="member-since">가입일<strong th:text="${user.createdAt}"></strong></li>
+                              <li class="member-since">프리랜서 전환일<strong th:text="${freelancer.switchAt}"></strong></li>
                            </ul>
                         </div>
                      </div>
@@ -62,8 +62,8 @@
                <div class="box-title border-bottom p-3">
                <h3 style="text-align: center">소개글</h3>
                </div>
-                    <div th:text="${freelancer.introduction}" class="description" style="padding: 20px 55px">
-                     </div>
+                    <pre th:text="${freelancer.introduction}" class="description" style="padding: 20px 55px">
+                     </pre>
                      </div>
 				<div th:replace="fragments/review.html :: review"></div>
             </div>

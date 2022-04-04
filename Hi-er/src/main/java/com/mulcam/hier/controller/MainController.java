@@ -1,9 +1,9 @@
 package com.mulcam.hier.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
@@ -12,22 +12,22 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("cate/{id}")
-	public ModelAndView catePage(@PathVariable("id") String id) {
+	@GetMapping("product/category/{id}")
+	public String catePage(@PathVariable("id") String id, Model model) {
 		System.out.println(id);
-		ModelAndView mav = new ModelAndView("gitTest");
+		
 		switch(id) {
 			case "1":
-				mav.addObject("cate", "<i>aaaaa</i>");
+				
 				break;
 			case "2":
-				mav.addObject("cate", "dudtkd");
+				
 				break;
 			case "3":
-				mav.addObject("cate", "it");
+				
 				break;
 		}
-		return mav;
+		return "product";
 	}
 
 }

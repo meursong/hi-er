@@ -2,321 +2,108 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layout}">
-	<section layout:fragment="contents">
-      <!-- Inner Header -->
-      <section class="py-5">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12 text-center">
-                  <img src="images/dh/productposter.png">
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- End Inner Header -->
-      <!--   header -->
-      <div class="third-menu filter-options py-3">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-12 d-flex align-items-center justify-content-between">
-                  <div class="left">
-                     <div class="dropdown-filters d-flex">
-                        <div class="dropdown">
-                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Seller Details
-                           </button>
-                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <div class="options">
-                                 <h5>Main type</h5>
-                                 <div class="row">
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">Mobile Apps
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">Email Templates
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">Landing pages
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">Websites
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="options">
-                                 <h5>Image file format</h5>
-                                 <div class="row">
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">jpg
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">png
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">psd
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label class="custom-checkbox">pdf
-                                       <span class="count">(150)</span>
-                                       <input type="checkbox">
-                                       <span class="checkmark"></span>
-                                       </label>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="dropdown ml-4">
-                           <button class="btn btn-secondary dropdown-toggle" type="button" id="budget" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Budget
-                           </button>
-                           <div class="dropdown-menu budget" aria-labelledby="budget">
-                              <div class="options">
-                                 <div class="row">
-                                    <div class="col-md-6">
-                                       <label>Min.</label>
-                                       <input type="text" placeholder="Any">
-                                       <i class="fa fa-inr" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label>Min.</label>
-                                       <input type="text" placeholder="Any">
-                                       <i class="fa fa-inr" aria-hidden="true"></i>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="dropdown ml-4">
-                           <button class="btn btn-secondary dropdown-toggle" type="button" id="delivery" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Delivery Time
-                           </button>
-                           <div class="dropdown-menu delivery" aria-labelledby="delivery">
-                              <div class="options">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="fake-radio-wrapper">
-                                          <div><input type="hidden" name="gig_items[2][0007284419489][gig_item_id]"
-                                             value="117210558"><input type="hidden"
-                                             name="gig_items[2][0007284419489][quantity]" value="0"></div>
-                                          <label
-                                             class="fake-radio"><input type="radio" name="2" value="0" checked=""><span
-                                             class="radio-img"></span><span>Express 24H</span></label><label
-                                             class="fake-radio"><input type="radio" name="2" value="1"><span
-                                             class="radio-img"></span><span>Up to 3 days</span>
-                                          </label>
-                                          <label
-                                             class="fake-radio"><input type="radio" name="2" value="1"><span
-                                             class="radio-img"></span><span>Up to 7 days</span>
-                                          </label>
-                                          <label
-                                             class="fake-radio"><input type="radio" name="2" value="1"><span
-                                             class="radio-img"></span><span>Anytime</span>
-                                          </label>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="right">
-                     <ul class="d-flex align-items-center">
-                        <li>
-                           <label class="switch">
-                           <input type="checkbox">
-                           <span class="slider round"></span>                        
-                           </label>
-                           <h5>Pro Services</h5>
-                        </li>
-                        <li>
-                           <label class="switch">
-                           <input type="checkbox">
-                           <span class="slider round"></span>                       
-                           </label>
-                           <h5>Local Sellers</h5>
-                        </li>
-                        <li>
-                           <label class="switch">
-                           <input type="checkbox">
-                           <span class="slider round"></span>                        
-                           </label>
-                           <h5>Online Sellers</h5>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="main-page best-selling">
-         <div class="view_slider recommended pt-5">
-            <div class="container">
-               <div class="sorting-div d-flex align-items-center justify-content-between">
-                  <p class="mb-2">463 Services available</p>
-                  <div class="sorting d-flex align-items-center">
-                     <p>Sortby</p>
-                     <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
-                        <option>Best Selling</option>
-                        <option>Recommended</option>
-                        <option>Newest Arrivals</option>
-                     </select>
-                  </div>
-               </div>
-               <h3>Services In Web &amp; Mobile Design</h3>
-            </div>
-            <div class="container">
-               <div class="row">
-                  
-                 
-                 
-                 
-                  
-                  
-                  
-                 
-                  
-                 
-                 
-                  <div class="col-md-3">
-                     <a href="product-detail.html">
-                     <img class="img-fluid" src="images/list/v1.png" />
-                     </a>
-                     <div class="inner-slider">
-                        <div class="inner-wrapper">
-                           <div class="d-flex align-items-center">
-                              <span class="seller-image">
-                              <img class="img-fluid"
-                                 src="images/user/s3.png"
-                                 alt='' />
-                              </span>
-                              <span class="seller-name">
-                              <a href="#">닉네임</a>
-                              <span class="level hint--top level-one-seller">
-                             직업
-                              </span>
-                              </span>
-                           </div>
-                           <h3>
-                             제목
-                           </h3>
-                           <div class="content-info">
-                              <div class="rating-wrapper">
-                                 <span class="gig-rating text-body-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
-                                       <path fill="currentColor"
-                                          d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                       </path>
-                                    </svg>
-                                    평점
-                                    <span>(리뷰 수)</span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="footer">
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                              <div class="price">
-                                 <a href="#">
-                                 Basic <span> ₩비용</span>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="footer-pagination text-center">
-            <nav aria-label="Page navigation example">
-               <ul class="pagination">
-                  <li class="page-item">
-                     <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
-                        <!--                    <span class="sr-only"></span>-->
-                     </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#">5</a></li>
-                  <li class="page-item">
-                     <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-                        <!--                    <span class="sr-only"></span>-->
-                     </a>
-                  </li>
-               </ul>
-            </nav>
-         </div>
-         <section class="related-links">
-            <h2>Explore More Web &amp; Mobile Design Services</h2>
-            <ul>
-               <li>
-                  <a href="#" class="related-link" target="">Email Templates Design</a>
-               </li>
-               <li>
-                  <a href="#" class="related-link" target="">Landing Pages Design</a>
-               </li>
-               <li>
-                  <a href="#" class="related-link" target="">Mobile Apps Design</a>
-               </li>
-            </ul>
-         </section>
-         <div class="container">
-            <section class="faqs">
-               <h2>Web &amp; Mobile Design FAQs</h2>
-               <ul>
-                  <li>
-                     <h3>What is web design?</h3>
-                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                     </p>
-                  </li>
-                  <li>
-                     <h3>What kinds of projects need web design?</h3>
-                     <p>When an unknown printer took Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,  a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                  </li>
-                  <li>
-                     <h3>What makes good web design?</h3>
-                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many.                     </p>
-                  </li>
-                  <li>
-                     <h3>How do I pick the right web designer for me?</h3>
-                     <p>Making it look like readable English It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many.</p>
-                  </li>
-               </ul>
-            </section>
-         </div>
-      </div>
-      </section>
+<section layout:fragment="contents">
+	<!-- Inner Header -->
+	<section class="py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<img src="images/dh/productposter.png">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Inner Header -->
+	<!--   header -->
+	<div class="third-menu filter-options py-3">
+		<div class="container">
+			<div class="row">
+				<div
+					class="col-lg-12 d-flex align-items-center justify-content-between">
+					<div class="left">
+											<div class="sorting d-flex align-items-center">
+						<div class="dropdown-filters d-flex">
+							<div class="dropdown ml-4">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+									id="delivery" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">검색 필터</button>
+								<div class="dropdown-menu delivery" aria-labelledby="delivery">
+									<div class="options">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="fake-radio-wrapper">
+													<div>
+														
+														<input type="hidden"
+															name="gig_items[2][0007284419489][gig_item_id]"
+															value="117210558"><input type="hidden"
+															name="gig_items[2][0007284419489][quantity]" value="0">
+													</div>
+													<form name="filter" method="get">
+													<label class="fake-radio"><input type="radio"
+														name="filter" value="1" checked><span class="radio-img"></span><span>최신순</span>
+														</label>
+
+													<label class="fake-radio"><input type="radio"
+														name="filter" value="2"><span class="radio-img"></span><span>평점순</span>
+													</label>
+													
+													 <label class="fake-radio"><input type="radio"
+														name="filter" value="3" ><span class="radio-img"></span><span>리뷰많은순</span>
+													</label>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="right">
+						<ul class="d-flex align-items-center">
+							<li><label class="switch"> <input type="checkbox">
+									<span class="slider round"></span>
+							</label>
+								<h5>디자인</h5></li>
+							<li><label class="switch"> <input type="checkbox">
+									<span class="slider round"></span>
+							</label>
+								<h5>영상</h5></li>
+							<li><label class="switch"> <input type="checkbox">
+									<span class="slider round"></span>
+							</label>
+								<h5>IT</h5></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/productList :: productList"></div>
+</section>
+
 </html>
-     
+
+<script>
+$("input[type=radio]").click(function updateProductList(){
+	 $.ajax({
+	        url: "/product",
+	        type: "GET",
+	        data: $('input[name="filter"]'),
+	    })
+	    .done(function (fragment) {
+	        $('#productList').replaceWith(fragment);
+	    });
+	
+		
+	
+ /*  $("form[name='filter']").submit(); */
+})
+function updateProductList() {
+
+    
+   
+}
+</script>

@@ -6,15 +6,13 @@ import lombok.Setter;
 
 @RequiredArgsConstructor
 @Getter @Setter
-public class User {
-	private int user_id;
-	private String email;
+public class ProductList {
+	private int product_id;
 	private String nickname;
 	private String job;
+	private String title;
+	private int commission;
 	private int avg_star_point;
-	private String address;
-	private String switchAt;
-	private String introduction;
+	private int review_count;
+	
 }
-
-

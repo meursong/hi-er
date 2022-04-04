@@ -3,26 +3,20 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.UserDAO">
 
-	<select id="selectUser" resultType="User" parameterType="int">
+	<select id="selectUSerEmail" resultType="User" parameterType="Integer">
 		<![CDATA[
-			select * from user where user_id=#{user_id}
+			select email from user where user_id=#{user_id}
 		]]>
 	</select>
 
-	<select id="select_info_f" resultType="FreelancerUser"
-		parameterType="int">
+	<select id="select_info_f" resultType="User"
+		parameterType="Integer">
 		<![CDATA[
-			select * from f_info where f_id=#{user_id}
+			select u.nickname, u.job, avg(r.star_point)as avg_star_point, f.address, f.switchAt, f.introduction from user u left join f_info f on user_id=f_id left join review r on seller_id = user_id where u.type=2 and u.user_id=#{user_id} group by user_id;
 		]]>
 	</select>
 
-	<select id="selectReview" resultType="Review" parameterType="int">
-		<![CDATA[
-			select * from review where seller_id=#{seller_id}
-		]]>
-	</select>
-
-	<insert id="insert_info_f" parameterType="FreelancerUser">
+	<insert id="insert_info_f" parameterType="FreelancerForm">
 		<![CDATA[
 			insert into f_info (f_id, address, address2, introduction) value(#{f_id}, #{address}, #{address2}, #{introduction});
 		]]>
@@ -30,7 +24,7 @@
 
 	<update id="update_type_f" parameterType="User">
 		<![CDATA[
-			update user set type=2 where user_id=#{user_id}
+			update user set type=2, updatedAt=current_timestamp() where user_id=#{user_id}
 		]]>
 	</update>
 

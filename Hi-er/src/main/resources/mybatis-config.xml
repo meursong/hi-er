@@ -3,8 +3,9 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
+		<mapper resource="mybatis/mappers/dh.xml"/>
 		<mapper resource="mybatis/mappers/dh2.xml"/>
-		
+		<mapper resource="mybatis/mappers/dh3.xml"/>
 		<mapper resource="mybatis/mappers/post.xml"/>
 	</mappers>
 </configuration>

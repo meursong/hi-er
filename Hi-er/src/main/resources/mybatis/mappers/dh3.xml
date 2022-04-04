@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mulcam.hier.dao.ProductDAO">
+<mapper namespace="com.mulcam.hier.dao.ProductListDAO">
 
-	<select id="selectReview" resultType="Review" parameterType="int">
+	<select id="selectProductDate" resultType="ProductList">
 		<![CDATA[
-			select r.review_wid, r.product_id, r.seller_id, r.content, r.star_point, r.createdAt, u.nickname from review r left join user u on u.user_id=r.review_wid order by r.seller_id=u.user_id;
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by p.product_id desc;
+		]]>
+	</select>
+	
+		<select id="selectProductReviewCount" resultType="ProductList">
+		<![CDATA[
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by count(r.review_id) desc;
+		]]>
+	</select>
+	
+			<select id="selectProductStarPoint" resultType="ProductList">
+		<![CDATA[
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by avg_star_point desc;
 		]]>
 	</select>
 	
 </mapper>
+
