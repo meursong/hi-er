@@ -12,11 +12,11 @@ public class User {
 	private String email;
 	private String password;
 	private String job;
+	private String nickname;
 	private MultipartFile profile_image;
 	private int type;
-	private Date updateAt;
-	
-	public User() {}
+	private Date createdAt;
+	private User() {}
 }
 
 
