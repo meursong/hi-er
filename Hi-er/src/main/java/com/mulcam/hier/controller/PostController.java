@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,9 @@ public class PostController {
 	
 	@Autowired
 	ServletContext servletContext;
+	
+	@Autowired
+	HttpSession session;
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
@@ -144,12 +148,33 @@ public class PostController {
 	
 	@ResponseBody
 	@PostMapping("/report")
-	public String testreport(@RequestParam("reason") String reason, @RequestParam Integer pid) {
+	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid, @RequestParam("reported_userid") Integer reported_userid) {
 		String result;
-		
-		System.out.println(reason);
-		System.out.println(pid);
-		return "result";
+		//Integer report_userid = (Integer)session.getAttribute("id");
+		Integer report_userid = (Integer)session.getAttribute("id");
+		try {
+			postService.reportPost(reason, pid, reported_userid, report_userid);
+			result = "신고완료";
+		} catch(Exception e) {
+			e.printStackTrace();
+			result = "오류~";
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping("/like")
+	public String reportPost(@RequestParam("pid") Integer pid, @RequestParam("liked_userid") Integer liked_userid) {
+		String result;
+		Integer like_userid = (Integer)session.getAttribute("id");
+		try {
+			postService.likePost(pid, liked_userid, like_userid);
+			result = "찜하기 완료";
+		} catch(Exception e) {
+			e.printStackTrace();
+			result = "오류~";
+		}
+		return result;
 	}
 	
 	@PostMapping("/test")

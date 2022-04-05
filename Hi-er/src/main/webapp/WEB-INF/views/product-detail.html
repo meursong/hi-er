@@ -34,8 +34,8 @@
           <div class="col-lg-3 right">
             <ul class="d-flex align-items-center justify-content-end">
               <li>
-                <button>
-                  <i class="fa fa-heart" aria-hidden="true"></i> 찜하기
+                <button type="button" id="like">
+                  <i class="fa fa-heart red-color" aria-hidden="true"></i> 찜하기
                 </button>
               </li>
               <li class="ml-2">
@@ -1116,11 +1116,11 @@
                   class="form-check-input"
                   type="radio"
                   name="reportRadios"
-                  id="reportRadio"
+                  id="reportRadio1"
                   value="reason1"
                   checked
                 />
-                <label class="form-check-label" for="exampleRadios1">
+                <label class="form-check-label" for="reportRadio1">
                   카테고리와 맞지 않는 게시물
                 </label>
               </div>
@@ -1129,10 +1129,10 @@
                   class="form-check-input"
                   type="radio"
                   name="reportRadios"
-                  id="reportRadio"
+                  id="reportRadio2"
                   value="reason2"
                 />
-                <label class="form-check-label" for="exampleRadios1">
+                <label class="form-check-label" for="reportRadio2">
                   타 사이트 홍보성 게시물
                 </label>
               </div>
@@ -1141,10 +1141,10 @@
                   class="form-check-input"
                   type="radio"
                   name="reportRadios"
-                  id="reportRadio"
+                  id="reportRadio3"
                   value="reason3"
                 />
-                <label class="form-check-label" for="exampleRadios1">
+                <label class="form-check-label" for="reportRadio3">
                   음란성/청소년 유해 게시물
                 </label>
               </div>
@@ -1153,10 +1153,10 @@
                   class="form-check-input"
                   type="radio"
                   name="reportRadios"
-                  id="reportRadio"
+                  id="reportRadio4"
                   value="reason4"
                 />
-                <label class="form-check-label" for="exampleRadios1">
+                <label class="form-check-label" for="reportRadio4">
                   저작권 침해 게시물
                 </label>
               </div>
@@ -1165,10 +1165,10 @@
                   class="form-check-input"
                   type="radio"
                   name="reportRadios"
-                  id="reportRadio"
+                  id="reportRadio5"
                   value="reason5"
                 />
-                <label class="form-check-label" for="exampleRadios1">
+                <label class="form-check-label" for="reportRadio5">
                   비방/비하/욕설 게시물
                 </label>
               </div>
@@ -1243,10 +1243,11 @@
     e.preventDefault();
     let reason = $("input[name='reportRadios']:checked").val();
     let pid = `[[${product.product_id}]]`;
+    let reported_userid = 10;
     $.ajax({
       type: "POST",
       url: "/post/report",
-      data: {"reason": reason, "pid" : pid },
+      data: {"reason": reason, "pid" : pid, "reported_userid" :reported_userid },
       success: function (res) {
         alert(res);
       },
@@ -1254,6 +1255,23 @@
         alert("ajax 통신 실패.");
       },
     });
-    /* $('#reportModal').modal("hide"); */
+    $('#reportModal').modal("hide");
   });
+  $("#like").click(function (e) {
+	    e.preventDefault();
+	    let pid = `[[${product.product_id}]]`;
+	    let liked_userid = 10;
+	    $.ajax({
+	      type: "POST",
+	      url: "/post/like",
+	      data: {"pid" : pid, "liked_userid" :liked_userid },
+	      success: function (res) {
+	        alert(res);
+	        //res를 boolean으로 받아서 그 결과값으로 찜하기버튼의 하트 색을 변경하는 로직 필요
+	      },
+	      error: function (XMLHttpRequest, textStatus, errorThrown) {
+	        alert("ajax 통신 실패.");
+	      },
+	    });
+	  });
 </script>

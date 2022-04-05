@@ -33,4 +33,19 @@ public class PostServiceImpl implements PostService {
 		Product priceInfo = postDAO.queryDesignPriceInfo(pid);
 		return priceInfo;
 	}
+
+	@Override
+	public void reportPost(String reason, Integer product_id, Integer reported_userid, Integer report_userid) throws Exception  {
+		postDAO.insertReport(reason, product_id, reported_userid, report_userid);
+	}
+
+	@Override
+	public boolean likePost(Integer product_id, Integer liked_userid, Integer like_userid) throws Exception {
+		postDAO.like_unlike(product_id,liked_userid,like_userid);
+		return false;
+	}
+	
+	
+
+	
 }

@@ -117,4 +117,13 @@
 			                    #{p_price})
 			]]> 
 	</insert> 
+	<insert id="insertReport">
+		<![CDATA[
+			insert into report(
+			reason,product_id,reported_userid,report_userid,createdAt
+			) values(
+			#{reason},#{product_id},#{reported_userid},#{report_userid},now()
+			)
+		]]> 
+	</insert> 
 </mapper>
