@@ -144,11 +144,12 @@ public class PostController {
 	
 	@ResponseBody
 	@PostMapping("/report")
-	public String testreport(@RequestParam("contents") String contents, @RequestParam int prod_id) {
-	
-		System.out.println(contents);
-		System.out.println(prod_id);
-		return "성공";
+	public String testreport(@RequestParam("reason") String reason, @RequestParam Integer pid) {
+		String result;
+		
+		System.out.println(reason);
+		System.out.println(pid);
+		return "result";
 	}
 	
 	@PostMapping("/test")

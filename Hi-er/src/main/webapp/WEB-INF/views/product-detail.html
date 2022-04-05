@@ -1117,7 +1117,7 @@
                   type="radio"
                   name="reportRadios"
                   id="reportRadio"
-                  value="option1"
+                  value="reason1"
                   checked
                 />
                 <label class="form-check-label" for="exampleRadios1">
@@ -1130,7 +1130,7 @@
                   type="radio"
                   name="reportRadios"
                   id="reportRadio"
-                  value="option2"
+                  value="reason2"
                 />
                 <label class="form-check-label" for="exampleRadios1">
                   타 사이트 홍보성 게시물
@@ -1142,7 +1142,7 @@
                   type="radio"
                   name="reportRadios"
                   id="reportRadio"
-                  value="option3"
+                  value="reason3"
                 />
                 <label class="form-check-label" for="exampleRadios1">
                   음란성/청소년 유해 게시물
@@ -1154,7 +1154,7 @@
                   type="radio"
                   name="reportRadios"
                   id="reportRadio"
-                  value="option4"
+                  value="reason4"
                 />
                 <label class="form-check-label" for="exampleRadios1">
                   저작권 침해 게시물
@@ -1166,7 +1166,7 @@
                   type="radio"
                   name="reportRadios"
                   id="reportRadio"
-                  value="option5"
+                  value="reason5"
                 />
                 <label class="form-check-label" for="exampleRadios1">
                   비방/비하/욕설 게시물
@@ -1241,21 +1241,17 @@
   });
   $("#report").click(function (e) {
     e.preventDefault();
-    console.log($("input[name='reportRadios']:checked").val());
-    let contents = $("input[name='reportRadios']:checked").val();
-    let prod_id = `[[${product.product_id}]]`;
-    
+    let reason = $("input[name='reportRadios']:checked").val();
+    let pid = `[[${product.product_id}]]`;
     $.ajax({
       type: "POST",
       url: "/post/report",
-      data: {"contents": contents, "prod_id" : prod_id },
+      data: {"reason": reason, "pid" : pid },
       success: function (res) {
-        // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
         alert(res);
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
-        // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-        alert("통신 실패.");
+        alert("ajax 통신 실패.");
       },
     });
     /* $('#reportModal').modal("hide"); */
