@@ -9,5 +9,9 @@ public interface PostService {
 	Product productDetail(Integer pid) throws Exception;
 	
 	Product priceInfo(Integer pid) throws Exception;
+
+	void reportPost(String reason, Integer product_id,Integer reported_userid,Integer report_userid) throws Exception ;
+	
+	Integer like(Integer product_id,Integer liked_userid,Integer like_userid) throws Exception ;
 	
 }

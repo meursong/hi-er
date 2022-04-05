@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,9 @@ public class PostController {
 	
 	@Autowired
 	ServletContext servletContext;
+	
+	@Autowired
+	HttpSession session;
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
@@ -140,7 +144,46 @@ public class PostController {
 			mav.addObject("err", e.getMessage());
 		}
 		return mav;
-	
 	}
 	
+	@ResponseBody
+	@PostMapping("/report")
+	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid, @RequestParam("reported_userid") Integer reported_userid) {
+		String result;
+		//Integer report_userid = (Integer)session.getAttribute("id");
+		Integer report_userid = (Integer)session.getAttribute("id");
+		try {
+			postService.reportPost(reason, pid, reported_userid, report_userid);
+			result = "신고완료";
+		} catch(Exception e) {
+			e.printStackTrace();
+			result = "오류~";
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping("/like")
+	public Integer like(@RequestParam("pid") Integer pid, @RequestParam("liked_userid") Integer liked_userid) {
+		Integer result = 0;
+		session.setAttribute("id", 100);
+		Integer like_userid = (Integer)session.getAttribute("id");
+		try {
+			result = postService.like(pid, liked_userid, like_userid);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result; 
+	}
+	
+	@PostMapping("/test")
+	public String pay(Product p, @RequestParam String abc) { //mav로
+		System.out.println(p.getB_commercial());
+		System.out.println(abc);
+		// 
+		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
+		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
+		// a
+		return "hello"; //결제페이지로 이동
+	}
 }

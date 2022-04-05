@@ -1,9 +1,5 @@
 package com.mulcam.hier.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter @Setter
 public class ReviewPagenation {
 	
 	private int currentPageNo; //현제 페이지
@@ -18,6 +14,30 @@ public class ReviewPagenation {
 	
 	public int getStartPage() {
 		return (currentPageNo - 1) * recordsPerPage;
+	}
+
+	public int getCurrentPageNo() {
+		return currentPageNo;
+	}
+
+	public void setCurrentPageNo(int currentPageNo) {
+		this.currentPageNo = currentPageNo;
+	}
+
+	public int getRecordsPerPage() {
+		return recordsPerPage;
+	}
+
+	public void setRecordsPerPage(int recordsPerPage) {
+		this.recordsPerPage = recordsPerPage;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	
