@@ -125,5 +125,24 @@
 			#{reason},#{product_id},#{reported_userid},#{report_userid},now()
 			)
 		]]> 
-	</insert> 
+	</insert>
+	<select id="likeCheck" resultType="Integer">
+		<![CDATA[
+			select count(product_id) from likes where product_id=#{product_id} and like_userid=#{like_userid}
+		]]>
+	</select>
+	<insert id="like">
+		<![CDATA[
+			insert into likes(
+			product_id,liked_userid,like_userid,createdAt
+			) values(
+			#{product_id},#{liked_userid},#{like_userid},now()
+			)
+		]]> 
+	</insert>
+	<delete id="unlike">
+		<![CDATA[
+			delete from likes where product_id=#{product_id} and like_userid=#{like_userid}
+		]]> 
+	</delete>
 </mapper>

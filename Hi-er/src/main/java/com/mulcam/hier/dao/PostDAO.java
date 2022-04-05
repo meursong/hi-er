@@ -17,5 +17,7 @@ public interface PostDAO {
 	public void insertReport(@Param("reason") String reason,
 				@Param("product_id") Integer product_id,@Param("reported_userid") Integer reported_userid,
 				@Param("report_userid") Integer report_userid)  throws Exception;
-	public boolean like_unlike(Integer product_id, Integer liked_userid, Integer like_userid);
+	public void like(@Param("product_id") Integer product_id,@Param("liked_userid") Integer liked_userid,@Param("like_userid") Integer like_userid) throws Exception;
+	public void unlike(@Param("product_id") Integer product_id,@Param("like_userid") Integer like_userid) throws Exception;
+	public Integer likeCheck(@Param("product_id") Integer product_id,@Param("like_userid") Integer like_userid) throws Exception;
 }

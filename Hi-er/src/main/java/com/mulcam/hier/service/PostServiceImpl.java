@@ -40,10 +40,19 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public boolean likePost(Integer product_id, Integer liked_userid, Integer like_userid) throws Exception {
-		postDAO.like_unlike(product_id,liked_userid,like_userid);
-		return false;
+	public Integer like(Integer product_id, Integer liked_userid, Integer like_userid) throws Exception {
+		Integer isLiked = postDAO.likeCheck(product_id, like_userid);
+		if(isLiked==1) {
+			postDAO.unlike(product_id, like_userid);
+			return 0;
+		} else {
+			postDAO.like(product_id, liked_userid, like_userid);
+			return 1;
+		}
+		
 	}
+
+
 	
 	
 

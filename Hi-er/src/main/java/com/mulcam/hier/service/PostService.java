@@ -12,6 +12,6 @@ public interface PostService {
 
 	void reportPost(String reason, Integer product_id,Integer reported_userid,Integer report_userid) throws Exception ;
 	
-	boolean likePost(Integer product_id,Integer liked_userid,Integer like_userid) throws Exception ;
+	Integer like(Integer product_id,Integer liked_userid,Integer like_userid) throws Exception ;
 	
 }

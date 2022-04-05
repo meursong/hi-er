@@ -164,17 +164,16 @@ public class PostController {
 	
 	@ResponseBody
 	@PostMapping("/like")
-	public String reportPost(@RequestParam("pid") Integer pid, @RequestParam("liked_userid") Integer liked_userid) {
-		String result;
+	public Integer like(@RequestParam("pid") Integer pid, @RequestParam("liked_userid") Integer liked_userid) {
+		Integer result = 0;
+		session.setAttribute("id", 100);
 		Integer like_userid = (Integer)session.getAttribute("id");
 		try {
-			postService.likePost(pid, liked_userid, like_userid);
-			result = "찜하기 완료";
+			result = postService.like(pid, liked_userid, like_userid);
 		} catch(Exception e) {
 			e.printStackTrace();
-			result = "오류~";
 		}
-		return result;
+		return result; 
 	}
 	
 	@PostMapping("/test")
