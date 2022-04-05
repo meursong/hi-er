@@ -10,8 +10,10 @@ import com.mulcam.hier.dto.ProductList;
 @Mapper
 @Repository
 public interface ProductListDAO {
-	public List<ProductList> selectProductDate();
-	public List<ProductList> selectProductReviewCount();
-	public List<ProductList> selectProductStarPoint();
+	public List<ProductList> selectProductDate(ProductList productList);
+	public int selectTotalCount(ProductList productList);
+	public List<ProductList> selectProductReviewCount(ProductList productList);
+	public List<ProductList> selectProductStarPoint(ProductList productList);
+	
 
 }

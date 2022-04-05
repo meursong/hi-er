@@ -21,31 +21,29 @@
 				<div
 					class="col-lg-12 d-flex align-items-center justify-content-between">
 					<div class="left">
-											<div class="sorting d-flex align-items-center">
-						<div class="dropdown-filters d-flex">
-							<div class="dropdown ml-4">
-								<button class="btn btn-secondary dropdown-toggle" type="button"
-									id="delivery" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false">검색 필터</button>
-								<div class="dropdown-menu delivery" aria-labelledby="delivery">
-									<div class="options">
-										<div class="row">
-											<div class="col-md-12">
-												<div class="fake-radio-wrapper">
-													
-													<form name="filter" method="post">
-													<label class="fake-radio"><input type="radio"
-														name="filter" value="1" checked><span class="radio-img"></span><span>최신순</span>
-														</label>
+						<div class="sorting d-flex align-items-center">
+							<div class="dropdown-filters d-flex">
+								<div class="dropdown ml-4">
+									<button class="btn btn-secondary dropdown-toggle" type="button"
+										id="delivery" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">검색 필터</button>
+									<div class="dropdown-menu delivery" aria-labelledby="delivery">
+										<div class="options">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="fake-radio-wrapper">
 
-													<label class="fake-radio"><input type="radio"
-														name="filter" value="2"><span class="radio-img"></span><span>평점순</span>
-													</label>
-													
-													 <label class="fake-radio"><input type="radio"
-														name="filter" value="3" ><span class="radio-img"></span><span>리뷰많은순</span>
-													</label>
-													</form>
+														<form name="filter" method="post">
+															<label class="fake-radio"><input type="radio"
+																name="filter" value="1" checked><span
+																class="radio-img"></span><span>최신순</span> </label> <label
+																class="fake-radio"><input type="radio"
+																name="filter" value="2"><span class="radio-img"></span><span>평점순</span>
+															</label> <label class="fake-radio"><input type="radio"
+																name="filter" value="3"><span class="radio-img"></span><span>리뷰많은순</span>
+															</label>
+														</form>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -54,40 +52,39 @@
 							</div>
 						</div>
 					</div>
-					</div>
-					<div class="right">
+					<div class="right"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="main-page best-selling" id="productList">
+		<div class="view_slider recommended pt-5">
+			<div class="container">
+				<div
+					class="sorting-div d-flex align-items-center justify-content-between">
+					<p class="mb-2">[[${productList.size()}]]</p>
+					<div class="sorting d-flex align-items-center">
 						<ul class="d-flex align-items-center">
-							<li><label class="switch"> <input type="checkbox">
-									<span class="slider round"></span>
+							<li><label class="switch"> <input type="checkbox"
+									checked> <span class="slider round"></span>
 							</label>
 								<h5>디자인</h5></li>
-							<li><label class="switch"> <input type="checkbox">
-									<span class="slider round"></span>
+							<li><label class="switch"> <input type="checkbox"
+									checked> <span class="slider round"></span>
 							</label>
 								<h5>영상</h5></li>
-							<li><label class="switch"> <input type="checkbox">
-									<span class="slider round"></span>
+							<li><label class="switch"> <input type="checkbox"
+									checked> <span class="slider round"></span>
 							</label>
 								<h5>IT</h5></li>
 						</ul>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="main-page best-selling" id="productList1">
-		<div class="view_slider recommended pt-5">
-			<div class="container">
-				<div
-					class="sorting-div d-flex align-items-center justify-content-between">
-					<p class="mb-2">463 Services available</p>
-				</div>
 				<h3>Services In Web &amp; Mobile Design</h3>
 			</div>
 			<div class="container">
 				<div class="row">
-					<div th:each="productList : ${productList}"
-						class="col-md-3">
+					<div th:each="productList : ${productList}" class="col-md-3">
 						<a href="product-detail.html"> <img class="img-fluid"
 							src="images/list/v1.png" />
 						</a>
@@ -112,18 +109,18 @@
 													d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
                                        </path>
                                     </svg>
-											[[${productList.avg_star_point}]] <span
-											th:text="'('+${productList.review_count}+')'">(리뷰
-												수)</span>
+											[[${#numbers.formatDecimal(productList.avg_star_point,0,1)}]]<span
+											th:text="'('+${productList.review_count}+')'">(리뷰 수)</span>
 										</span>
 									</div>
 								</div>
 								<div class="footer">
-									<i class="fa fa-heart" aria-hidden="true"></i>
+									<!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
+									<span th:text="${productList.createdAt}"></span>
 									<div class="price">
-										<a href="#"> Basic <span
-											th:text="${productList.commission}"> ₩비용</span>
-										</a>
+										Basic <span th:text="'₩'+${productList.commission}">
+											₩비용</span>
+
 									</div>
 								</div>
 							</div>
@@ -132,23 +129,9 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="footer-pagination text-center">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true"><i
-								class="fa fa-chevron-left" aria-hidden="true"></i></span> <!--                    <span class="sr-only"></span>-->
-					</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item active"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true"><i
-								class="fa fa-chevron-right" aria-hidden="true"></i></span> <!--                    <span class="sr-only"></span>-->
-					</a></li>
-				</ul>
-			</nav>
+			<nav th:replace="fragments/pagination :: pagination"></nav>
 		</div>
 
 	</div>
@@ -157,30 +140,32 @@
 </html>
 
 <script>
-$("input[type=radio]").click(function updateProductList(){
-	
-	var value = $(this).val()
-	 $.ajax({
-	        url: "/product",
-	        type: "POST",
-	        data: {"value":value},
-	        
-	        success:function(data) {
-	        	console.log("성공");
-	        },
-	        
-	    })
-	    .done(function (fragment) {
-	        $('#productList1').replaceWith(fragment);
-	    });
-	
-		
-	 console.log(value);
- /*  $("form[name='filter']").submit(); */
-})
-function updateProductList() {
+	$("input[type=radio]").click(function updateProductList() {
 
-    
-   
-}
+		var value = $(this).val()
+		$.ajax({
+			url : "/product",
+			type : "POST",
+			data : {
+				"value" : value
+			},
+
+			success : function(data) {
+				console.log(data);
+			},
+
+		}).done(function(fragment) {
+
+			$('#productList').replaceWith(fragment);
+		});
+
+		console.log(value);
+		/*  $("form[name='filter']").submit(); */
+	})
+
+	function movePage(uri, queryString) {
+		alert("샹")
+		location.href = uri + queryString;
+
+	}
 </script>

@@ -3,23 +3,31 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.ProductListDAO">
 
-	<select id="selectProductDate" resultType="ProductList">
+	<select id="selectProductDate" resultType="ProductList" parameterType="ProductList">
 		<![CDATA[
-			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by p.product_id desc;
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by p.product_id desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
 		]]>
 	</select>
 	
-		<select id="selectProductReviewCount" resultType="ProductList">
+		<select id="selectTotalCount" resultType="int">
 		<![CDATA[
-			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by count(r.review_id) desc;
+			select count(*) from product;
+		]]>
+	</select>
+
+	<select id="selectProductReviewCount" resultType="ProductList" parameterType="ProductList">
+		<![CDATA[
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by count(r.review_id) desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+		]]>
+	</select>
+
+	<select id="selectProductStarPoint" resultType="ProductList" parameterType="ProductList">
+		<![CDATA[
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by avg_star_point desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
 		]]>
 	</select>
 	
-			<select id="selectProductStarPoint" resultType="ProductList">
-		<![CDATA[
-			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by avg_star_point desc;
-		]]>
-	</select>
+	
 	
 </mapper>
 

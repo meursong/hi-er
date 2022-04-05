@@ -28,7 +28,7 @@
                               <div class="oneliner-wrapper">
                                  <small th:text="${freelancer.job}" class="oneliner"></small><br></br>
                                  <div class="ratings-wrapper">
-                                    <p class="rating-text"><span class="star-rating-s15" style="width:22px"></span>[[${freelancer.avg_star_point}]]</p>
+                                    <p class="rating-text"><span class="star-rating-s15" style="width:22px"></span>[[${#numbers.formatDecimal(freelancer.avg_star_point,0,1)}]]</p>
                                  </div>
                               </div>
                            </div>

@@ -1,18 +1,22 @@
 package com.mulcam.hier.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@RequiredArgsConstructor
+
 @Getter @Setter
-public class ProductList {
-	private int product_id;
+public class ProductList extends Criteria {
+	
+	//게시글 이미지 필요
 	private String nickname;
+	private MultipartFile profile_image;
 	private String job;
 	private String title;
 	private int commission;
-	private int avg_star_point;
+	private float avg_star_point;
 	private int review_count;
+	private String createdAt;
 	
 }
