@@ -140,7 +140,25 @@ public class PostController {
 			mav.addObject("err", e.getMessage());
 		}
 		return mav;
-	
 	}
 	
+	@ResponseBody
+	@PostMapping("/report")
+	public String testreport(@RequestParam("contents") String contents, @RequestParam int prod_id) {
+	
+		System.out.println(contents);
+		System.out.println(prod_id);
+		return "성공";
+	}
+	
+	@PostMapping("/test")
+	public String pay(Product p, @RequestParam String abc) { //mav로
+		System.out.println(p.getB_commercial());
+		System.out.println(abc);
+		// 
+		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
+		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
+		// a
+		return "hello"; //결제페이지로 이동
+	}
 }
