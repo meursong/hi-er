@@ -1,215 +1,538 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta charset="utf-8">
-<!-- Favicon Icon -->
-<link rel="icon" type="image/png" href="images/titlelogo.ico">
-<!-- Bootstrap core CSS -->
-<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-<!-- Font Awesome-->
-<link th:href="@{/vendor/fontawesome/css/font-awesome.min.css}"
-	rel="stylesheet">
-<!-- Material Design Icons -->
-<link th:href="@{/vendor/icons/css/materialdesignicons.min.css}" media="all"
-	rel="stylesheet" type="text/css">
-<!-- Slick -->
-<link th:href="@{/vendor/slick-master/slick/slick.css}" rel="stylesheet"
-	type="text/css">
-<!-- Lightgallery -->
-<link th:href="@{/vendor/lightgallery-master/dist/css/lightgallery.min.css}"
-	rel="stylesheet">
-<!-- Select2 CSS -->
-<link th:href="@{/vendor/select2/css/select2-bootstrap.css}" />
-<link th:href="@{/vendor/select2/css/select2.min.css}" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
-<script src="https://kit.fontawesome.com/1ce47309da.js"></script>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" th:href="@{/images/fav.svg}" />
+    <!-- Bootstrap core CSS -->
+    <link
+      th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome-->
+    <link
+      th:href="@{/vendor/fontawesome/css/font-awesome.min.css}"
+      rel="stylesheet"
+    />
+    <!-- Material Design Icons -->
+    <link
+      th:href="@{/vendor/icons/css/materialdesignicons.min.css}"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Slick -->
+    <link
+      th:href="@{/vendor/slick-master/slick/slick.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Lightgallery -->
+    <link
+      th:href="@{/vendor/lightgallery-master/dist/css/lightgallery.min.css}"
+      rel="stylesheet"
+    />
+    <!-- Select2 CSS -->
+    <link th:href="@{/vendor/select2/css/select2-bootstrap.css}" />
+    <link th:href="@{/vendor/select2/css/select2.min.css}" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <title>Hi-er</title>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0"
+    >
+      <div class="container">
+        <!-- Sidebar Toggle (Topbar) -->
+        <a class="navbar-brand" href="/"
+          ><img th:src="@{/images/logo.svg}" alt=""
+        /></a>
+        <!-- Topbar Search -->
+        <form
+          class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search"
+        >
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control bg-white small"
+              placeholder="Find Services..."
+              aria-label="Search"
+              aria-describedby="basic-addon2"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-success" type="button">
+                <i class="fa fa-search fa-sm"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav align-items-center ml-auto">
+          <li
+            class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications d-sm-none"
+          >
+            <a
+              class="btn btn-icon btn-transparent-dark dropdown-toggle"
+              href="#"
+              id="searchDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fa fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div
+              class="dropdown-menu dropdown-menu-right p-3 shadow-sm animated--grow-in"
+              aria-labelledby="searchDropdown"
+            >
+              <form class="form-inline mr-auto w-100 navbar-search">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control bg-light border-0 small"
+                    placeholder="Find Services..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                      <i class="fa fa-search fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </li>
+          <li
+            class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications"
+          >
+            <a
+              class="btn btn-icon btn-transparent-dark dropdown-toggle"
+              id="navbarDropdownAlerts"
+              href="javascript:void(0);"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-bell"
+              >
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+              aria-labelledby="navbarDropdownAlerts"
+            >
+              <h6 class="dropdown-header dropdown-notifications-header">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-bell mr-2"
+                >
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                Alerts Center
+              </h6>
+              <a class="dropdown-item dropdown-notifications-item" href="#!">
+                <div class="dropdown-notifications-item-icon bg-warning">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-activity"
+                  >
+                    <polyline
+                      points="22 12 18 12 15 21 9 3 6 12 2 12"
+                    ></polyline>
+                  </svg>
+                </div>
+                <div class="dropdown-notifications-item-content">
+                  <div class="dropdown-notifications-item-content-details">
+                    December 29, 2020
+                  </div>
+                  <div class="dropdown-notifications-item-content-text">
+                    This is an alert message. It's nothing serious, but it
+                    requires your attention.
+                  </div>
+                </div>
+              </a>
+              <a class="dropdown-item dropdown-notifications-item" href="#!">
+                <div class="dropdown-notifications-item-icon bg-info">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-bar-chart"
+                  >
+                    <line x1="12" y1="20" x2="12" y2="10"></line>
+                    <line x1="18" y1="20" x2="18" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="16"></line>
+                  </svg>
+                </div>
+                <div class="dropdown-notifications-item-content">
+                  <div class="dropdown-notifications-item-content-details">
+                    December 22, 2020
+                  </div>
+                  <div class="dropdown-notifications-item-content-text">
+                    A new monthly report is ready. Click here to view!
+                  </div>
+                </div>
+              </a>
+              <a class="dropdown-item dropdown-notifications-item" href="#!">
+                <div class="dropdown-notifications-item-icon bg-danger">
+                  <svg
+                    class="svg-inline--fa fa-exclamation-triangle fa-w-18"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="exclamation-triangle"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 576 512"
+                    data-fa-i2svg=""
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"
+                    ></path>
+                  </svg>
+                  <!-- <i class="fas fa-exclamation-triangle"></i> -->
+                </div>
+                <div class="dropdown-notifications-item-content">
+                  <div class="dropdown-notifications-item-content-details">
+                    December 8, 2020
+                  </div>
+                  <div class="dropdown-notifications-item-content-text">
+                    Critical system failure, systems shutting down.
+                  </div>
+                </div>
+              </a>
+              <a class="dropdown-item dropdown-notifications-item" href="#!">
+                <div class="dropdown-notifications-item-icon bg-success">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-user-plus"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                  </svg>
+                </div>
+                <div class="dropdown-notifications-item-content">
+                  <div class="dropdown-notifications-item-content-details">
+                    December 2, 2020
+                  </div>
+                  <div class="dropdown-notifications-item-content-text">
+                    New user request. Woody has requested access to the
+                    organization.
+                  </div>
+                </div>
+              </a>
+              <a
+                class="dropdown-item dropdown-notifications-footer"
+                href="alerts.html"
+                >View All Alerts</a
+              >
+            </div>
+          </li>
+          <li
+            class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications"
+          >
+            <a
+              class="btn btn-icon btn-transparent-dark dropdown-toggle"
+              id="navbarDropdownMessages"
+              href="javascript:void(0);"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-mail"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+              aria-labelledby="navbarDropdownMessages"
+            >
+              <h6 class="dropdown-header dropdown-notifications-header">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-mail mr-2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                Message Center
+              </h6>
+              <a class="dropdown-item dropdown-notifications-item" href="#!">
+                <img
+                  class="dropdown-notifications-item-img"
+                  th:src="@{/images/user/s7.png}"
+                />
+                <div class="dropdown-notifications-item-content">
+                  <div class="dropdown-notifications-item-content-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                  </div>
+                  <div class="dropdown-notifications-item-content-details">
+                    Emily Fowler · 58m
+                  </div>
+                </div>
+              </a>
+              <a class="dropdown-item dropdown-notifications-item" href="#!">
+                <img
+                  class="dropdown-notifications-item-img"
+                  th:src="@{/images/user/s8.png}"
+                />
+                <div class="dropdown-notifications-item-content">
+                  <div class="dropdown-notifications-item-content-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                  </div>
+                  <div class="dropdown-notifications-item-content-details">
+                    Diane Chambers · 2d
+                  </div>
+                </div>
+              </a>
+              <a
+                class="dropdown-item dropdown-notifications-footer"
+                href="/gitTest"
+                >Read All Messages</a
+              >
+            </div>
+          </li>
+          <li class="nav-item dropdown no-arrow no-caret dropdown-user">
+            <a
+              class="btn btn-icon btn-transparent-dark dropdown-toggle"
+              id="navbarDropdownUserImage"
+              href="javascript:void(0);"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              ><img class="img-fluid" th:src="@{/images/user/s4.png}"
+            /></a>
+            <div
+              class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+              aria-labelledby="navbarDropdownUserImage"
+            >
+              <h6 class="dropdown-header d-flex align-items-center">
+                <img
+                  class="dropdown-user-img"
+                  th:src="@{/images/user/s4.png}"
+                />
+                <div class="dropdown-user-details">
+                  <div class="dropdown-user-details-name">Askbootstrap</div>
+                  <div class="dropdown-user-details-email">
+                    iamosahan@gmail.com
+                  </div>
+                </div>
+              </h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="account.html">
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-settings"
+                  >
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    ></path>
+                  </svg>
+                </div>
+                Account
+              </a>
+              <a class="dropdown-item" href="#">
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-log-out"
+                  >
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
+                </div>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white osahan-nav-mid px-0 border-top shadow-sm"
+    >
+      <div class="container">
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownPortfolio"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                카테고리
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownPortfolio"
+              >
+                <a class="dropdown-item" th:href="@{/cate/1}">디자인</a>
+                <a class="dropdown-item" th:href="@{/cate/2}">영상</a>
+                <a class="dropdown-item" th:href="@{/cate/3}">IT</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="freelancerInfo">프리랜서 정보</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownPortfolio"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Pages
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownPortfolio"
+              >
+                <a class="dropdown-item" href="product.html">Product List</a>
+                <a class="dropdown-item" href="product2.html">Product List 2</a>
+                <a class="dropdown-item" th:href="@{/post/detail}"
+                  >게시물 상세보기(테스트)</a
+                ><a class="dropdown-item" th:href="@{/post/write}"
+                  >글쓰기(테스트)</a
+                >
 
-<title>Hi-er</title>
-</head>
-<body>
-	<nav
-		class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0">
-		<div class="container">
-			<!-- Sidebar Toggle (Topbar) -->
-			<a class="navbar-brand" href="/"><img
-				th:src="@{/images/logo.png}" style="width:100%;" alt=""></a>
-			<!-- Topbar Search -->
-			<form
-				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
-				<div class="input-group">
-					<input type="text" class="form-control bg-white small"
-						placeholder="서비스와 전문가를 검색하세요" aria-label="Search"
-						aria-describedby="basic-addon2" style="width:400px;">
-					<div class="input-group-append">
-						<button class="btn btn-success" type="button">
-							<i class="fa fa-search fa-sm"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-			<!-- Topbar Navbar -->
-			<ul class="navbar-nav align-items-center ml-auto">
-			<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-					  th:href="@{/post/write}">
-					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
-					</svg>
-					</a>
-				</li>
-				
-					
-				<li
-					class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-					href="/mail" > <svg xmlns="http://www.w3.org/2000/svg"
-							width="24" height="24" viewBox="0 0 24 24" fill="none"
-							stroke="currentColor" stroke-width="2" stroke-linecap="round"
-							stroke-linejoin="round" class="feather feather-mail">
-                        <path
-								d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                     </svg>
-				</a>
-					<div
-						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
-						aria-labelledby="navbarDropdownMessages">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="currentColor"
-								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-mail mr-2">
-                           <path
-									d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                           <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-							
-						</a> 
-			
-					</div>
-				</li>
-					
-				<li class="nav-item dropdown no-arrow no-caret dropdown-user">
-					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-					id="navbarDropdownUserImage" href="javascript:void(0);"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><img class="img-fluid"
-						 th:src="@{/images/user/user3.svg}"></a>
-					<div
-						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
-						aria-labelledby="navbarDropdownUserImage">
-						<h6 class="dropdown-header d-flex align-items-center">
-							<img class="dropdown-user-img" style="width:24; height:24;" src="images/user/user3.svg">
-							<div class="dropdown-user-details">
-								<div class="dropdown-user-details-name">Askbootstrap</div>
-								<div class="dropdown-user-details-email">iamosahan@gmail.com</div>
-							</div>
-						</h6>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="/mypage">
-							<div class="dropdown-item-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-									viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-									class="feather feather-settings">
-                              <circle cx="12" cy="12" r="3"></circle>
-                              <path
-										d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                           </svg>
-							</div> Account
-						</a> <a class="dropdown-item" href="#">
-							<div class="dropdown-item-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-									viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-									class="feather feather-log-out">
-                              <path
-										d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                              <polyline points="16 17 21 12 16 7"></polyline>
-                              <line x1="21" y1="12" x2="9" y2="12"></line>
-                           </svg>
-							</div> Logout
-						</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<!-- Navigation -->
-	<nav
-		class="navbar navbar-expand-lg navbar-light bg-white osahan-nav-mid px-0 border-top shadow-sm">
-		<div class="container">
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation" >
-				<span class="navbar-toggler-icon"></span> <span style="font-size: 18px; font-weight: 500; padding-top:5.5px;">전체 카테고리</span></button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav">
-					<div style="color:#b9b9b9; font-weight:600; padding-top:12px;">비즈니스</div>
-					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">디자인</a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownPortfolio">
-							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">디자인</div>
-							
-							<a class="dropdown-item" th:href="@{/cate/1}">로고 브랜딩</a> 
-							<a class="dropdown-item" th:href="@{/cate/2}">상세 이벤트 페이지</a> 
-							<a class="dropdown-item" th:href="@{/cate/3}">명함 인쇄 홍보물</a>
-							<a class="dropdown-item" th:href="@{/cate/4}">웹 모바일 디자인</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">일러스트 캐리커처</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">웹툰 캐릭터 이모티콘</a>
-						</div></li>
-							<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">영상 · 사진 · 음향</a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownPortfolio">
-							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">영상 · 사진 · 음향</div>
-							
-							<a class="dropdown-item" th:href="@{/cate/1}">영상촬영 편집</a> 
-							<a class="dropdown-item" th:href="@{/cate/2}">인터뷰 영상 </a> 
-							<a class="dropdown-item" th:href="@{/cate/3}">교육 영상</a>
-							<a class="dropdown-item" th:href="@{/cate/4}">유튜브 제작</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">애니메이션</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">영상 자막</a>
-						<a class="dropdown-item" th:href="@{/cate/3}">사진촬영 </a>
-							<a class="dropdown-item" th:href="@{/cate/4}">사진 영상 보정</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">성우</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">음악 사운드</a>
-						
-						</div></li>
-	<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownPortfolio">
-							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">IT · 프로그래밍</div>
-							
-							<a class="dropdown-item" th:href="@{/cate/1}">웹</a> 
-							<a class="dropdown-item" th:href="@{/cate/2}">모바일 앱</a> 
-							<a class="dropdown-item" th:href="@{/cate/3}">보안</a>
-							<a class="dropdown-item" th:href="@{/cate/4}">챗봇</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">블록체인</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">쇼핑몰·커머스</a>
-						</div></li>
-				</ul>
-			</div>
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link"
-					href="freelancerForm"> <i class="fa fa-fw fa-trophy"></i>
-						<span>프리랜서 전환</span></a></li>
-			</ul>
-		</div>
-	</nav>
                 <a class="dropdown-item" href="profile.html">Profile</a>
                 <a class="dropdown-item" href="company-profile.html"
                   >Company Profile</a
@@ -260,105 +583,125 @@
         </ul>
       </div>
     </nav>
-	<footer class="bg-white">
-		<div class="container">
-			<div class="d-flex justify-content-between">
-				<div class="footer-list">
-					<h2>Categories</h2>
-					<ul class="list">
-						<li><a href="#">Graphics &amp; Design</a></li>
-						<li><a href="#">Digital Marketing</a></li>
-						<li><a href="#">Writing &amp; Translation</a></li>
-						<li><a href="#">Video &amp; Animation</a></li>
-						<li><a href="#">Music &amp; Audio</a></li>
-						<li><a href="#">Programming &amp; Tech</a></li>
-						<li><a href="#">Business</a></li>
-						<li><a href="#">Lifestyle</a></li>
-						<li><a href="#">Sitemap</a></li>
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>About</h2>
-					<ul class="list">
-						<li><a href="#">Careers</a></li>
-						<li><a href="#">Press &amp; News</a></li>
-						<li><a href="#">Partnerships</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="#">Terms of Service</a></li>
-						<li><a href="#">Intellectual Property Claims</a></li>
-						<li><a href="#" target="_blank">Investor Relations</a></li>
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>Support</h2>
-					<ul class="list">
-						<li><a href="#">Help &amp; Support</a></li>
-						<li><a href="#">Trust &amp; Safety</a></li>
-						<li><a href="#">Selling on Maer </a></li>
-						<li><a href="#">Buying on Maer </a></li>
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>Community</h2>
-					<ul class="list">
-						<li><a href="#">Events</a></li>
-						<li><a href="#">Blog</a></li>
-						<li><a href="#">Forum</a></li>
-						<li><a href="#">Community Standards</a></li>
-						<li><a href="#">Podcast</a></li>
-						<li><a href="#">Affiliates</a></li>
-						<li><a href="#">Invite a Friend</a></li>
-						<li><a href="#">프리랜서 전환 </a></li>
-						<li><a href="#">Maer Elevate<small>Exclusive
-									Benefits</small></a></li>
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>More From Maer</h2>
-					<ul class="list">
-						<li><a href="#">Maer Pro</a></li>
-						<li><a href="#">Maer Studios</a></li>
-						<li><a href="#">Maer Logo Maker</a></li>
-						<li><a href="#">Get Inspired</a></li>
-						<li><a href="#">ClearVoice<small>Content
-									Marketing</small></a></li>
-						<li><a href="#">AND CO<small>Invoice Software</small></a></li>
-						<li><a href="#">Learn<small>Online Courses</small></a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="copyright">
-				<div class="logo">
-					<a href="index.html"> <img th:src="@{/images/logo.png}">
-					</a>
-				</div>
-				<p>© Copyright 2020 Maer. All Rights Reserved</p>
-				<ul class="social">
-					<li><a href="http://www.facebook.com" target='_blank'><i class="fa fa-facebook"
-							aria-hidden="true"></i></a></li>
-					<li><a href="http://www.twitter.com" target='_blank'><i class="fa fa-twitter"
-							aria-hidden="true"></i></a></li>
-					<li><a href="http://www.linkedin.com" target='_blank'><i class="fa fa-linkedin"
-							aria-hidden="true"></i></a></li>
-					<li><a href="http://www.pinterest.co.kr/" target='_blank'><i class="fa fa-pinterest-p"
-							aria-hidden="true"></i></a></li>
-					<li><a href="http://www.instagram.com" target='_blank'><i class="fa fa-instagram"
-							aria-hidden="true"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</footer>
-</body>	
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- Contact form JavaScript -->
-<!-- Slick -->
-<script th:src="@{/vendor/slick-master/slick/slick.js}" type="text/javascript"
-	charset="utf-8"></script>
-<!-- lightgallery -->
-<script th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"></script>
-<!-- select2 Js -->
-<script th:src="@{/vendor/select2/js/select2.min.js}"></script>
-<!-- Custom -->
-<script th:src="@{/js/custom.js}"></script>
+
+    <section layout:fragment="contents"></section>
+
+    <footer class="bg-white">
+      <div class="container">
+        <div class="d-flex justify-content-between">
+          <div class="footer-list">
+            <h2>Categories</h2>
+            <ul class="list">
+              <li><a href="#">Graphics &amp; Design</a></li>
+              <li><a href="#">Digital Marketing</a></li>
+              <li><a href="#">Writing &amp; Translation</a></li>
+              <li><a href="#">Video &amp; Animation</a></li>
+              <li><a href="#">Music &amp; Audio</a></li>
+              <li><a href="#">Programming &amp; Tech</a></li>
+              <li><a href="#">Business</a></li>
+              <li><a href="#">Lifestyle</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>About</h2>
+            <ul class="list">
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press &amp; News</a></li>
+              <li><a href="#">Partnerships</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Intellectual Property Claims</a></li>
+              <li><a href="#" target="_blank">Investor Relations</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Support</h2>
+            <ul class="list">
+              <li><a href="#">Help &amp; Support</a></li>
+              <li><a href="#">Trust &amp; Safety</a></li>
+              <li><a href="#">Selling on Maer </a></li>
+              <li><a href="#">Buying on Maer </a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Community</h2>
+            <ul class="list">
+              <li><a href="#">Events</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Community Standards</a></li>
+              <li><a href="#">Podcast</a></li>
+              <li><a href="#">Affiliates</a></li>
+              <li><a href="#">Invite a Friend</a></li>
+              <li><a href="#">Become a Seller</a></li>
+              <li>
+                <a href="#">Maer Elevate<small>Exclusive Benefits</small></a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>More From Maer</h2>
+            <ul class="list">
+              <li><a href="#">Maer Pro</a></li>
+              <li><a href="#">Maer Studios</a></li>
+              <li><a href="#">Maer Logo Maker</a></li>
+              <li><a href="#">Get Inspired</a></li>
+              <li>
+                <a href="#">ClearVoice<small>Content Marketing</small></a>
+              </li>
+              <li>
+                <a href="#">AND CO<small>Invoice Software</small></a>
+              </li>
+              <li>
+                <a href="#">Learn<small>Online Courses</small></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="logo">
+            <a href="index.html"><img th:src="@{/images/logo.svg}" /> </a>
+          </div>
+          <p>© Copyright 2020 Maer. All Rights Reserved</p>
+          <ul class="social">
+            <li>
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fa fa-pinterest-p" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- Contact form JavaScript -->
+  <!-- Slick -->
+  <script
+    th:src="@{/vendor/slick-master/slick/slick.js}"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <!-- lightgallery -->
+  <script
+    th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"
+  ></script>
+  <!-- select2 Js -->
+  <script th:src="@{/vendor/select2/js/select2.min.js}"></script>
+  <!-- Custom -->
+  <script th:src="@{/js/custom.js}"></script>
 </html>
