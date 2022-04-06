@@ -105,7 +105,6 @@ public class MainController {
 		return mav;
 	}
 	
-	
 	@RequestMapping("/search")
 	public String getSearch(HttpServletRequest httpServletRequest, Model model) {
 		String search_Text = httpServletRequest.getParameter("text");
@@ -114,3 +113,4 @@ public class MainController {
 		return "/search";
 	}
 }
+

@@ -12,4 +12,7 @@ import com.mulcam.hier.dto.Product;
 public interface ProductDAO {
 	public List<Product> getBestProducts() throws Exception;
 	
+
+public class ProductDAO {
+
 }
