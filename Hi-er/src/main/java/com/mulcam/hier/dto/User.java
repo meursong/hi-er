@@ -13,7 +13,8 @@ public class User {
 	private int type;
 	private Date createdAt;
 	private User() {}
-	public String getEmail() {
+	
+  public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
@@ -55,8 +56,6 @@ public class User {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
-	
 }
 
 

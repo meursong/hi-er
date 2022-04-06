@@ -351,7 +351,7 @@ Version: 1.0
      width: 100%;
 }
  .osahan-nav-top a.navbar-brand img {
-     height: 26px;
+     height: 60px;
 }
  .osahan-nav-mid {
      padding-top: 0px;
@@ -1996,7 +1996,7 @@ Version: 1.0
      align-items: center;
 }
  .copyright .logo img {
-     height: 27px;
+     height: 40px;
 }
  .copyright .social {
      margin-left: auto;
