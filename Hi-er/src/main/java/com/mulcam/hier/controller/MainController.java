@@ -12,11 +12,6 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping({"write"})
-	public String writePage() {
-		return "write" ;
-	}
-	
 	@GetMapping("cate/{id}")
 	public ModelAndView catePage(@PathVariable("id") String id) {
 		System.out.println(id);

@@ -38,7 +38,7 @@
 		<div class="container">
 			<!-- Sidebar Toggle (Topbar) -->
 			<a class="navbar-brand" href="/"><img
-				src="images/logo.png" style="width:100%;" alt=""></a>
+				th:src="@{/images/logo.png}" style="width:100%;" alt=""></a>
 			<!-- Topbar Search -->
 			<form
 				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
@@ -57,7 +57,7 @@
 			<ul class="navbar-nav align-items-center ml-auto">
 			<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
 					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-					  th:href="@{/write}">
+					  th:href="@{/post/write}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
 					</svg>
 					</a>
@@ -98,7 +98,7 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						 src="images/user/user3.svg"></a>
+						 th:src="@{/images/user/user3.svg}"></a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
 						aria-labelledby="navbarDropdownUserImage">
@@ -207,10 +207,6 @@
 				<li class="nav-item"><a class="nav-link"
 					href="freelancerForm"> <i class="fa fa-fw fa-trophy"></i>
 						<span>프리랜서 전환</span></a></li>
-				<li class="nav-item"><a class="nav-link"> <img
-						class="country-flag img-fluid" src="images/flag/india.png">
-						<span>English</span>
-				</a></li>
 			</ul>
 		</div>
 	</nav>
