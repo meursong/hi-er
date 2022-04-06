@@ -1,15 +1,27 @@
 package com.mulcam.hier.dto;
 
 
+import java.time.LocalDate;
+
 import org.springframework.web.multipart.MultipartFile;
 
 
 public class Product {
 
 	int product_id;
+	
 	// 제목
 	String title;
-
+	
+	// 프리랜서(글쓴이) id
+	int seller_id;
+	
+	// 작업가능 여부 - 거래신청 블락
+	int is_available;
+	
+	// category
+	String category;
+	
 	// 이미지
 	MultipartFile file1;
 	MultipartFile file2;
@@ -44,8 +56,8 @@ public class Product {
 
 	// 상업적 이용 가능
 	String b_commercial;
-	String s_Commercial;
-	String p_Commercial;
+	String s_commercial;
+	String p_commercial;
 
 	// sns 이미지 키트
 	String b_sns_Kit;
@@ -91,6 +103,8 @@ public class Product {
 	// 기타 안내 사항
 	String otherInformation;
 	
+	// 글쓴 시간
+	LocalDate createdAt;
 	
 
 	public int getProduct_id() {
@@ -107,6 +121,30 @@ public class Product {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public int getSeller_id() {
+		return seller_id;
+	}
+
+	public void setSeller_id(int seller_id) {
+		this.seller_id = seller_id;
+	}
+
+	public int getIs_available() {
+		return is_available;
+	}
+
+	public void setIs_available(int is_available) {
+		this.is_available = is_available;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public MultipartFile getFile1() {
@@ -300,21 +338,21 @@ public class Product {
 	public void setB_commercial(String b_commercial) {
 		this.b_commercial = b_commercial;
 	}
-
-	public String getS_Commercial() {
-		return s_Commercial;
+	
+	public String getS_commercial() {
+		return s_commercial;
 	}
 
-	public void setS_Commercial(String s_Commercial) {
-		this.s_Commercial = s_Commercial;
+	public void setS_commercial(String s_commercial) {
+		this.s_commercial = s_commercial;
 	}
 
-	public String getP_Commercial() {
-		return p_Commercial;
+	public String getP_commercial() {
+		return p_commercial;
 	}
 
-	public void setP_Commercial(String p_Commercial) {
-		this.p_Commercial = p_Commercial;
+	public void setP_commercial(String p_commercial) {
+		this.p_commercial = p_commercial;
 	}
 
 	public String getB_sns_Kit() {
@@ -509,7 +547,13 @@ public class Product {
 		this.otherInformation = otherInformation;
 	}
 
-	
+	public LocalDate getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
+	}
 	
 
 }

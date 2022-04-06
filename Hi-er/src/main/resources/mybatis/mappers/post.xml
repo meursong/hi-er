@@ -20,6 +20,9 @@
 	<insert id="insertProduct" parameterType="Product">
 		<![CDATA[
 			insert into product (product_id,
+								 seller_id,
+								 is_available,
+								 category,
 								 title,
 								 filename1,
 								 filename2,
@@ -32,8 +35,13 @@
 								 content,
 								 revisionPolicy,
 								 refundPolicy,
-								 otherInformation)
+								 otherInformation,
+								 createdAt
+								 )
 			             values(#{product_id},
+			             		#{seller_id},
+			             		#{is_available},
+			             		#{category},
 			             		#{title},
 			                    #{filename1},
 			                    #{filename2},
@@ -46,7 +54,9 @@
 			                    #{content},
 			                    #{revisionPolicy},
 			                    #{refundPolicy},
-			                    #{otherInformation})
+			                    #{otherInformation},
+			                    now()
+			                    )
 		]]> 
 	</insert> 
 	<insert id="insertDesignPriceInfo" parameterType="Product">
@@ -60,8 +70,8 @@
 								 s_original_image,
 								 p_original_image,
 								 b_commercial,
-								 s_Commercial,
-								 p_Commercial,
+								 s_commercial,
+								 p_commercial,
 								 b_sns_Kit,
 								 s_sns_Kit,
 								 p_sns_Kit,
@@ -92,8 +102,8 @@
 			                    #{s_original_image},
 			                    #{p_original_image},
 			                    #{b_commercial},
-			                    #{s_Commercial},
-			                    #{p_Commercial},
+			                    #{s_commercial},
+			                    #{p_commercial},
 			                    #{b_sns_Kit},
 			                    #{s_sns_Kit},
 			                    #{p_sns_Kit},
