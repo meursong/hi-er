@@ -35,13 +35,36 @@
             <ul class="d-flex align-items-center justify-content-end">
               <li>
                 <button type="button" id="like">
-                  <li th:if="${status == 0}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-</svg>
-				</li>
-				  <i class="bi bi-heart"></i>
-				  <i></i> 찜하기 
+                  <span class="heart">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="red"
+                      class="bi bi-heart"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        class="like"
+                        th:attr="style=${likeInfo.isLike} == true ? 'display : none' : ''"
+                        d="m8
+                    2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641
+                    2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368
+                    5.365-4.542
+                    6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28
+                    8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824
+                    1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1
+                    .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                      />
+                      <path
+                        class="like"
+                        th:attr="style=${!likeInfo.isLike} == true ? 'display : none' : ''"
+                        fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                      />
+                    </svg>
+                  </span>
+                  <span id="likeNum">[[${likeInfo.likeNum}]]</span>
                 </button>
               </li>
               <li class="ml-2">
@@ -436,7 +459,11 @@
                               >
                             </label>
                             <label class="fake-radio">
-                              <input type="radio" name="s_delivery" th:value="${priceInfo.s_price+priceInfo.s_additional_price}" />
+                              <input
+                                type="radio"
+                                name="s_delivery"
+                                th:value="${priceInfo.s_price+priceInfo.s_additional_price}"
+                              />
                               <span class="radio-img"></span>
                               <span
                                 >[[${priceInfo.s_minimum_delivery}]] 일</span
@@ -462,7 +489,11 @@
                               >
                             </label>
                             <label class="fake-radio">
-                              <input type="radio" name="p_delivery" th:value="${priceInfo.p_price+priceInfo.p_additional_price}"/>
+                              <input
+                                type="radio"
+                                name="p_delivery"
+                                th:value="${priceInfo.p_price+priceInfo.p_additional_price}"
+                              />
                               <span class="radio-img"></span>
                               <span
                                 >[[${priceInfo.p_minimum_delivery}]] 일</span
@@ -480,13 +511,22 @@
                           <p class="price-label" id="b-price">
                             [[${priceInfo.b_price}]]원
                           </p>
-                          <button id="test" name="abc" value="bbbbbb" type="submit">선택하기</button>
+                          <button
+                            id="test"
+                            name="abc"
+                            value="bbbbbb"
+                            type="submit"
+                          >
+                            선택하기
+                          </button>
                         </td>
                         <td>
                           <p class="price-label" id="s-price">
                             [[${priceInfo.s_price}]]원
                           </p>
-                          <button  name="abc" value="sssss"  type="submit">선택하기</button>
+                          <button name="abc" value="sssss" type="submit">
+                            선택하기
+                          </button>
                         </td>
                         <td>
                           <p class="price-label" id="p-price">
@@ -1223,7 +1263,7 @@
     }
     $("#s-price").text(result + "원");
   });
-  
+
   $("[name='p_delivery']").change(function (e) {
     let result;
     e.preventDefault();
@@ -1235,7 +1275,6 @@
     }
     $("#p-price").text(result + "원");
   });
-
 
   $("#reportBtn").click(function (e) {
     e.preventDefault();
@@ -1253,7 +1292,7 @@
     $.ajax({
       type: "POST",
       url: "/post/report",
-      data: {"reason": reason, "pid" : pid, "reported_userid" :reported_userid },
+      data: { reason: reason, pid: pid, reported_userid: reported_userid },
       success: function (res) {
         alert(res);
       },
@@ -1261,25 +1300,37 @@
         alert("ajax 통신 실패.");
       },
     });
-    $('#reportModal').modal("hide");
+    $("#reportModal").modal("hide");
   });
-  $("#like").click(function (e) {
-	    e.preventDefault();
-	    let pid = `[[${product.product_id}]]`;
-	    let liked_userid = 10;
-	    $.ajax({
-	      type: "POST",
-	      url: "/post/like",
-	      data: {"pid" : pid, "liked_userid" :liked_userid },
-	      success: function (res) {
-	        alert(res);
-	        
-	        //res를 Integer로 받아서 그 결과값으로 찜하기버튼의 하트 색을 변경하는 로직 필요 [1:찜한상]
-	      	
-	      },
-	      error: function (XMLHttpRequest, textStatus, errorThrown) {
-	        alert("ajax 통신 실패.");
-	      },
-	    });
-	  });
+
+  $("#like").click(function () {
+    let pid = `[[${product.product_id}]]`;
+    $.ajax({
+      type: "POST",
+      url: "/post/like",
+      data: { pid: pid },
+      success: function (likeInfo) {
+        if (likeInfo.isLike) {
+          $("#like .heart").html(
+            "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='red' class='bi bi-heart' viewBox='0 0 16 16' > <path class='like' fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg>"
+          );
+          let num = $("#like").text();
+          console.log(num);
+          $("#likeNum").text(Number(num) + 1);
+        } else {
+          $("#like .heart").html(
+            "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='red' class='bi bi-heart' viewBox='0 0 16 16' > <path class='like' d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg>"
+          );
+          let num = $("#likeNum").text();
+          console.log(num);
+          $("#likeNum").text(num - 1);
+        }
+
+        //res를 Integer로 받아서 그 결과값으로 찜하기버튼의 하트 색을 변경하는 로직 필요 [1:찜한상]
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("ajax 통신 실패.");
+      },
+    });
+  });
 </script>

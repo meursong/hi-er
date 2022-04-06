@@ -1,5 +1,7 @@
 package com.mulcam.hier.service;
 
+import java.util.Map;
+
 import com.mulcam.hier.dto.Product;
 
 public interface PostService {
@@ -12,6 +14,10 @@ public interface PostService {
 
 	void reportPost(String reason, Integer product_id,Integer reported_userid,Integer report_userid) throws Exception ;
 	
-	Integer like(Integer product_id,Integer liked_userid,Integer like_userid) throws Exception ;
+	Integer likeNum(Integer product_id, Integer like_userid) throws Exception;
+	
+	boolean isLike(Integer product_id, Integer like_userid) throws Exception;
+
+	Map<String, Object> like(Integer pid, Integer like_userid) throws Exception;
 	
 }

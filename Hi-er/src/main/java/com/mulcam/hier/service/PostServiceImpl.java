@@ -1,5 +1,8 @@
 package com.mulcam.hier.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,21 +43,37 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Integer like(Integer product_id, Integer liked_userid, Integer like_userid) throws Exception {
-		Integer isLiked = postDAO.likeCheck(product_id, like_userid);
-		if(isLiked==1) {
-			postDAO.unlike(product_id, like_userid);
-			return 0;
-		} else {
-			postDAO.like(product_id, liked_userid, like_userid);
-			return 1;
-		}
-		
+	public Integer likeNum(Integer product_id, Integer like_userid) throws Exception {
+			// 본 게시물의 좋아요 수
+			return postDAO.likeNum(product_id);
+	}
+	
+	@Override
+	public boolean isLike(Integer product_id, Integer like_userid) throws Exception {
+		return postDAO.likeCheck(product_id, like_userid).equals(1);
 	}
 
-
-	
-	
-
+	@Override
+	public Map<String, Object> like(Integer pid, Integer like_userid)  throws Exception {
+		Map<String, Object> likeInfo = new HashMap<String,Object>();
+		
+		Product product = postDAO.queryProduct(pid);
+		// Integer liked_userid = product.getSellerId();
+		Integer liked_userid = 10;
+		
+		boolean isLike = postDAO.likeCheck(pid, like_userid).equals(1);
+		if (isLike == true) {
+			postDAO.unlike(pid, like_userid);
+		} else {
+			postDAO.like(pid, liked_userid, like_userid);
+		}
+		
+		isLike = postDAO.likeCheck(pid, like_userid).equals(1);
+		Integer likedNum = postDAO.likeNum(pid);
+		
+		likeInfo.put("likeNum", likedNum);
+		likeInfo.put("isLike", isLike);
+		return likeInfo;
+	}
 	
 }
