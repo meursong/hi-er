@@ -10,6 +10,7 @@ import lombok.Setter;
 public class ProductList extends Criteria {
 	
 	//게시글 이미지 필요
+	private String category;
 	private String nickname;
 	private MultipartFile profile_image;
 	private String job;

@@ -17,7 +17,7 @@ public class ProductListServiceImpl implements ProductListService {
 	ProductListDAO productListDAO;
 
 	@Override
-	public List<ProductList> selectProductDate(ProductList params) throws Exception {
+	public List<ProductList> selectProductTotal(ProductList params) throws Exception {
 
 		List<ProductList> product = Collections.emptyList();
 
@@ -29,46 +29,12 @@ public class ProductListServiceImpl implements ProductListService {
 		params.setPaginationInfo(paginationInfo);
 
 		if (totalCount > 0) {
-			product = productListDAO.selectProductDate(params);
+			product = productListDAO.selectProductTotal(params);
 		}
 
 		return product;
 	}
 
-	@Override
-	public List<ProductList> selectProductReviewCount(ProductList params) throws Exception {
-
-		List<ProductList> product = Collections.emptyList();
-
-		int totalCount = productListDAO.selectTotalCount(params);
-
-		PaginationInfo paginationInfo = new PaginationInfo(params);
-		paginationInfo.setTotalRecordCount(totalCount);
-
-		params.setPaginationInfo(paginationInfo);
-
-		if (totalCount > 0) {
-			product = productListDAO.selectProductReviewCount(params);
-		}
-		return product;
-	}
-
-	@Override
-	public List<ProductList> selectProductStarPoint(ProductList params) throws Exception {
-		List<ProductList> product = Collections.emptyList();
-
-		int totalCount = productListDAO.selectTotalCount(params);
-
-		PaginationInfo paginationInfo = new PaginationInfo(params);
-		paginationInfo.setTotalRecordCount(totalCount);
-		
-		params.setPaginationInfo(paginationInfo);
-
-		if (totalCount > 0) {
-			product = productListDAO.selectProductStarPoint(params);
-		}
-		return product;
-	}
 
 	@Override
 	public List<ProductList> selectProduct1(ProductList params) throws Exception {

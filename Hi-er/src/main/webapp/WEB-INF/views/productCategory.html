@@ -35,7 +35,7 @@
 
 														<form name="filter" method="post">
 															<label class="fake-radio"><input type="radio"
-																name="filter" value="product_id" th:checked="${params.sort eq 'product_id' ? 'checked' : ''}=='product_id'"><span
+																name="filter" value="product_id"><span
 																class="radio-img"></span><span>최신순</span> </label> <label
 																class="fake-radio"><input type="radio"
 																name="filter" value="avg_star_point"><span class="radio-img"></span><span>평점순</span>
@@ -125,11 +125,11 @@
 </html>
 
 <script>
-	$("input[type=radio]").change(function updateProductList() {
+		$("input[type=radio]").change(function updateProductList() {
 
 		var value = $(this).val()
 		$.ajax({
-			url : "/product",
+			url : "/product/category",
 			type : "POST",
 			data : {
 				"value" : value
@@ -147,11 +147,12 @@
 		console.log(value);
 		/*  $("form[name='filter']").submit(); */
 	})
-
+	
 	function movePage(uri, queryString) {
 		var filter = $("input[type='radio']:checked").val();
 		alert($("input[type='radio']:checked").val());
-		$("#productList").load(window.location.href = uri + queryString + " #productList");
-		/* location.href = uri + queryString; */
+		/* $("#productList").load(window.location.href = uri + queryString + " #productList"); */
+		location.assign = uri + queryString;
+	/* 	location.href = uri + queryString; */
 	}
 </script>
