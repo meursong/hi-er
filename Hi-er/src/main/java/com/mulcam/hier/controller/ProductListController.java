@@ -19,12 +19,38 @@ public class ProductListController {
 	@Autowired
 	ProductListService productListService;
 
-	@GetMapping(value="/product")
-	public String productList1(@ModelAttribute("params") ProductList params, Model model) throws Exception {
-		List<ProductList> selectProductDate = productListService.selectProductDate(params);
+	@GetMapping("/product")
+	public String productList1(@ModelAttribute("params") ProductList params, Model model, @RequestParam(defaultValue =  "product_id", name="filter", required=false) String value) throws Exception {
 		
-		model.addAttribute("productList", selectProductDate);
+		
+		switch (value) {
+		case "product_id":
+			params.setSort(value);
+			List<ProductList> selectProductDate = productListService.selectProductDate(params);
+			model.addAttribute("productList", selectProductDate);
+			break;
 
+		case "avg_star_point":
+			params.setSort(value);
+			List<ProductList> selectProductDate2 = productListService.selectProductDate(params);
+			model.addAttribute("productList", selectProductDate2);
+			break;
+
+		case "review_count":
+			params.setSort(value);
+			List<ProductList> selectProductDate3 = productListService.selectProductDate(params);
+			model.addAttribute("productList", selectProductDate3);
+			break;
+			
+		}
+		
+		
+		/*
+		 * List<ProductList> selectProductDate =
+		 * productListService.selectProductDate(params);
+		 * 
+		 * model.addAttribute("productList", selectProductDate);
+		 */
 		return "product";
 	}
 
@@ -34,19 +60,22 @@ public class ProductListController {
 		
 
 		switch (value) {
-		case "1":
+		case "product_id":
+			params.setSort(value);
 			List<ProductList> selectProductDate = productListService.selectProductDate(params);
 			model.addAttribute("productList", selectProductDate);
 			break;
 
-		case "2":
-			List<ProductList> selectProductStarPoint = productListService.selectProductStarPoint(params);
-			model.addAttribute("productList", selectProductStarPoint);
+		case "avg_star_point":
+			params.setSort(value);
+			List<ProductList> selectProductDate2 = productListService.selectProductDate(params);
+			model.addAttribute("productList", selectProductDate2);
 			break;
 
-		case "3":
-			List<ProductList> selectProductReviewCount = productListService.selectProductReviewCount(params);
-			model.addAttribute("productList", selectProductReviewCount);
+		case "review_count":
+			params.setSort(value);
+			List<ProductList> selectProductDate3 = productListService.selectProductDate(params);
+			model.addAttribute("productList", selectProductDate3);
 			break;
 			
 		}

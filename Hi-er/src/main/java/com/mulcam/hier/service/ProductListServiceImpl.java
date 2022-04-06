@@ -70,4 +70,55 @@ public class ProductListServiceImpl implements ProductListService {
 		return product;
 	}
 
+	@Override
+	public List<ProductList> selectProduct1(ProductList params) throws Exception {
+		List<ProductList> product = Collections.emptyList();
+
+		int count1 = productListDAO.selectCount1(params);
+
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(count1);
+		
+		params.setPaginationInfo(paginationInfo);
+
+		if (count1 > 0) {
+			product = productListDAO.selectProduct1(params);
+		}
+		return product;
+	}
+
+	@Override
+	public List<ProductList> selectProduct2(ProductList params) throws Exception {
+		List<ProductList> product = Collections.emptyList();
+
+		int count2 = productListDAO.selectCount2(params);
+
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(count2);
+		
+		params.setPaginationInfo(paginationInfo);
+
+		if (count2 > 0) {
+			product = productListDAO.selectProduct2(params);
+		}
+		return product;
+	}
+
+	@Override
+	public List<ProductList> selectProduct3(ProductList params) throws Exception {
+		List<ProductList> product = Collections.emptyList();
+
+		int count3 = productListDAO.selectCount3(params);
+
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(count3);
+		
+		params.setPaginationInfo(paginationInfo);
+
+		if (count3 > 0) {
+			product = productListDAO.selectProduct3(params);
+		}
+		return product;
+	}
+
 }

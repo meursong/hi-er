@@ -26,6 +26,7 @@ public class PaginationInfo {
 
 	/** SQL의 조건절에 사용되는 마지막 RNUM */
 	private int lastRecordIndex;
+	
 
 	/** 이전 페이지 존재 여부 */
 	private boolean hasPreviousPage;
@@ -41,7 +42,7 @@ public class PaginationInfo {
 			criteria.setRecordsPerPage(12);
 		}
 		if (criteria.getPageSize() < 5 || criteria.getPageSize() > 20) {
-			criteria.setPageSize(10);
+			criteria.setPageSize(5);
 		}
 
 		this.criteria = criteria;
@@ -74,6 +75,8 @@ public class PaginationInfo {
 
 		/* SQL의 조건절에 사용되는 첫 RNUM */
 		firstRecordIndex = (criteria.getCurrentPageNo() - 1) * criteria.getRecordsPerPage();
+		
+		
 
 		/* SQL의 조건절에 사용되는 마지막 RNUM */
 		lastRecordIndex = criteria.getCurrentPageNo() * criteria.getRecordsPerPage();

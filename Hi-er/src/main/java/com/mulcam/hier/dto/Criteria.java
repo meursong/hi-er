@@ -26,21 +26,28 @@ public class Criteria {
 
 	/** 검색 유형 */
 	private String searchType;
+	
+	//정렬방법
+	private String sort;
 
 	public Criteria() {
 		this.currentPageNo = 1;
 		this.recordsPerPage = 12;
 		this.pageSize = 5;
+//		this.sort = "product_id";
 	}
 	
 	public String makeQueryString(int pageNo) {
 
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("sort", sort)
 				.queryParam("currentPageNo", pageNo)
 				.queryParam("recordsPerPage", recordsPerPage)
 				.queryParam("pageSize", pageSize)
-				.queryParam("searchType", searchType)
-				.queryParam("searchKeyword", searchKeyword)
+				/*
+				 * .queryParam("searchType", searchType) .queryParam("searchKeyword",
+				 * searchKeyword)
+				 */
 				.build()
 				.encode();
 

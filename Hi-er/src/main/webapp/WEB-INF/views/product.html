@@ -8,7 +8,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<img src="images/dh/productposter.png">
+					<img th:src="@{/images/dh/productposter.png}">
 				</div>
 			</div>
 		</div>
@@ -35,12 +35,12 @@
 
 														<form name="filter" method="post">
 															<label class="fake-radio"><input type="radio"
-																name="filter" value="1" checked><span
+																name="filter" value="product_id" checked><span
 																class="radio-img"></span><span>최신순</span> </label> <label
 																class="fake-radio"><input type="radio"
-																name="filter" value="2"><span class="radio-img"></span><span>평점순</span>
+																name="filter" value="avg_star_point"><span class="radio-img"></span><span>평점순</span>
 															</label> <label class="fake-radio"><input type="radio"
-																name="filter" value="3"><span class="radio-img"></span><span>리뷰많은순</span>
+																name="filter" value="review_count"><span class="radio-img"></span><span>리뷰많은순</span>
 															</label>
 														</form>
 													</div>
@@ -86,13 +86,13 @@
 				<div class="row">
 					<div th:each="productList : ${productList}" class="col-md-3">
 						<a href="product-detail.html"> <img class="img-fluid"
-							src="images/list/v1.png" />
+							th:src="@{/images/list/v1.png}" />
 						</a>
 						<div class="inner-slider">
 							<div class="inner-wrapper">
 								<div class="d-flex align-items-center">
 									<span class="seller-image"> <img class="img-fluid"
-										src="images/user/s3.png" alt='' />
+										th:src="@{/images/user/s3.png}" alt='' />
 									</span> <span class="seller-name"> <a
 										th:text="${productList.nickname}" href="#">닉네임</a> <span
 										th:text="${productList.job}"
@@ -140,7 +140,7 @@
 </html>
 
 <script>
-	$("input[type=radio]").click(function updateProductList() {
+	$("input[type=radio]").change(function updateProductList() {
 
 		var value = $(this).val()
 		$.ajax({
@@ -164,6 +164,7 @@
 	})
 
 	function movePage(uri, queryString) {
+		
 		alert("샹")
 		location.href = uri + queryString;
 

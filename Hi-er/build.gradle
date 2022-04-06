@@ -22,11 +22,9 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//페이징처리
-	implementation group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.4.1'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	
+	implementation"com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0"
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
 

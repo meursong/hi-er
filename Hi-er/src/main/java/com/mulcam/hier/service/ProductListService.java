@@ -10,4 +10,8 @@ public interface ProductListService {
 	
 	List<ProductList> selectProductReviewCount(ProductList params) throws Exception;
 	List<ProductList> selectProductStarPoint(ProductList params) throws Exception;
+	
+	List<ProductList> selectProduct1(ProductList params) throws Exception;
+	List<ProductList> selectProduct2(ProductList params) throws Exception;
+	List<ProductList> selectProduct3(ProductList params) throws Exception;
 }

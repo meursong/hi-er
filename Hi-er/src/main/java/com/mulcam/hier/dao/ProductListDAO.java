@@ -15,5 +15,13 @@ public interface ProductListDAO {
 	public List<ProductList> selectProductReviewCount(ProductList productList);
 	public List<ProductList> selectProductStarPoint(ProductList productList);
 	
+	public List<ProductList> selectProduct1(ProductList productList);
+	public List<ProductList> selectProduct2(ProductList productList);
+	public List<ProductList> selectProduct3(ProductList productList);
+	
+	public int selectCount1(ProductList productList);
+	public int selectCount2(ProductList productList);
+	public int selectCount3(ProductList productList);
+	
 
 }

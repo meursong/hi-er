@@ -3,9 +3,58 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.ProductListDAO">
 
-	<select id="selectProductDate" resultType="ProductList" parameterType="ProductList">
+	<select id="selectProductDate" resultType="ProductList"
+		parameterType="ProductList">
 		<![CDATA[
-			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by p.product_id desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt 
+			from product p 
+			left join user u on u.user_id=p.seller_id 
+			left join review r on p.product_id=r.product_id 
+			group by p.product_id 
+			order by ${sort} desc
+			limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+		]]>
+	</select>
+
+		<select id="selectProduct1" resultType="ProductList"
+		parameterType="ProductList">
+		<![CDATA[
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt 
+			from product p 
+			left join user u on u.user_id=p.seller_id 
+			left join review r on p.product_id=r.product_id 
+            where p.category="디자인"
+			group by p.product_id 
+			order by p.product_id desc
+			limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+		]]>
+	</select>
+	
+		<select id="selectProduct2" resultType="ProductList"
+		parameterType="ProductList">
+		<![CDATA[
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt 
+			from product p 
+			left join user u on u.user_id=p.seller_id 
+			left join review r on p.product_id=r.product_id 
+            where p.category="영상"
+			group by p.product_id 
+			order by p.product_id desc
+			limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+		]]>
+	</select>
+	
+		<select id="selectProduct3" resultType="ProductList"
+		parameterType="ProductList">
+		<![CDATA[
+			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt 
+			from product p 
+			left join user u on u.user_id=p.seller_id 
+			left join review r on p.product_id=r.product_id 
+            where p.category="it"
+			group by p.product_id 
+			order by p.product_id desc
+			limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
 		]]>
 	</select>
 	
@@ -14,20 +63,26 @@
 			select count(*) from product;
 		]]>
 	</select>
-
-	<select id="selectProductReviewCount" resultType="ProductList" parameterType="ProductList">
+	
+		<select id="selectCount1" resultType="int">
 		<![CDATA[
-			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by count(r.review_id) desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
-		]]>
-	</select>
-
-	<select id="selectProductStarPoint" resultType="ProductList" parameterType="ProductList">
-		<![CDATA[
-			select p.product_id, u.nickname, u.job, p.title, p.commission, avg(r.star_point)as avg_star_point, count(r.review_id)as review_count, p.createdAt from product p left join user u on u.user_id=p.seller_id left join review r on p.product_id=r.product_id group by p.product_id order by avg_star_point desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+			select count(*) from product where category="디자인";
 		]]>
 	</select>
 	
+		<select id="selectCount2" resultType="int">
+		<![CDATA[
+			select count(*) from product where category="영상";
+		]]>
+	</select>
 	
-	
+			<select id="selectCount3" resultType="int">
+		<![CDATA[
+			select count(*) from product where category="it";
+		]]>
+	</select>
+
+
+
 </mapper>
 
