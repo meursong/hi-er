@@ -1,15 +1,18 @@
 package com.mulcam.hier.controller;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.hier.dto.Product;
 import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.MainService;
 
@@ -49,8 +52,11 @@ public class MainController {
 	public ModelAndView mainView() {
 		ModelAndView mav = new ModelAndView("index");
 		try {
-			List<User> userList = mainService.getBestUserFive();
+//			List<User> userList = mainService.getBestUserFive();
 //			List<Board> boardList = mainService.getBestBoardFive();
+			List<Product> bestProduct = mainService.getBestProducts();
+
+			mav.addObject("bestProduct", bestProduct);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
@@ -94,7 +100,17 @@ public class MainController {
 		userList.add(user5);
 
 		mav.addObject("bestUserList", userList);
+	
 		
 		return mav;
+	}
+	
+	
+	@RequestMapping("/search")
+	public String getSearch(HttpServletRequest httpServletRequest, Model model) {
+		String search_Text = httpServletRequest.getParameter("text");
+		
+		model.addAttribute("text", search_Text);
+		return "/search";
 	}
 }

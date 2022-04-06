@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.mulcam.hier.dto.SelectP;
 import com.mulcam.hier.dto.User;
 
 @Mapper
@@ -12,4 +13,5 @@ import com.mulcam.hier.dto.User;
 public interface UserDAO {
 	public User selectUser(String nickname) throws Exception;
 	public List<User> getBestUserFive() throws Exception;
+	public List <SelectP> getList() throws Exception;
 }

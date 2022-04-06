@@ -20,17 +20,11 @@
 						</h5>
 					</div>
 					<div class="homepage-search-form">
-						<form class="form-noborder">
+						<form class="form-noborder" action="/search" method="GET">
 							<div class="form-row">
-								<div class="col-lg-3 col-md-3 col-sm-12 form-group">
+								<div class="col-lg-3 col-md-3 col-sm-12 form-group" style="padding-left:400px;">
 									<div class="location-dropdown">
-										<i class="icofont-location-arrow"></i> <select
-											class="custom-select form-control border-0 shadow-sm form-control-lg">
-											<option>All</option>
-											<option>IT 프로그래밍</option>
-											<option>영상 사진 음향 </option>
-											<option>디자인</option>
-										</select>
+										<i class="icofont-location-arrow"></i>
 									</div>
 								</div>
 								<div class="col-lg-7 col-md-7 col-sm-12 form-group">
@@ -49,11 +43,10 @@
 					<div class="popular">
 						<span class="text-body-2">Popular</span>
 						<ul>
-							<li><a href="#" class="text-body-2">Voice over</a></li>
-							<li><a href="#" class="text-body-2">translation</a></li>
-							<li><a href="#" class="text-body-2">logo design</a></li>
-							<li><a href="#" class="text-body-2">Articles &amp; Blog
-									Posts</a></li>
+							<li><a href="#" class="text-body-2">로고 브랜딩</a></li>
+							<li><a href="#" class="text-body-2">쇼핑몰 제작</a></li>
+							<li><a href="#" class="text-body-2">영상 촬영 편집</a></li>
+							<li><a href="#" class="text-body-2">사진 촬영</a></li>
 						</ul>
 					</div>
 				</div>
@@ -107,9 +100,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<h3>최고 평점 게시물</h3>
+			<h3>최고 평점 게시물 </h3>
 						<div class="view recent-slider recommended-slider">
-							<div>
+							<div class="col" th:each="product: ${bestProduct}">
 								<a href="product-detail.html"> <img class="img-fluid"
 									src="images/list/v1.png" />
 								</a>
@@ -117,14 +110,12 @@
 									<div class="inner-wrapper">
 										<div class="d-flex align-items-center">
 											<span class="seller-image"> <img class="img-fluid"
-												src="images/user/s1.png" alt='' />
-											</span> <span class="seller-name"> <a href="profile.html">Marcin
-													Kowalski</a> <span class="level hint--top level-one-seller">
+												src="images/user/user1.png" alt='' />
+											</span> <span class="seller-name"> <a href="profile.html">[[${product.title}]]</a> <span class="level hint--top level-one-seller">
 													Level 1 Seller </span>
 											</span>
 										</div>
-										<h3>I will create professional audio ads or radio
-											commercials for your project</h3>
+										<h3>[[${product.product_content}]]</h3>
 										<div class="content-info">
 											<div class="rating-wrapper">
 												<span class="gig-rating text-body-2"> <svg
@@ -133,204 +124,14 @@
                                              <path fill="currentColor"
 															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
                                              </path>
-                                          </svg> 5.0 <span>(7)</span>
+                                          </svg> [[${product.work_available}]] <span>(7)</span>
 												</span>
 											</div>
 										</div>
 										<div class="footer">
 											<i class="fa fa-heart" aria-hidden="true"></i>
 											<div class="price">
-												<a href="#"> Starting At <span> $1,205</span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div>
-								<a href="product-detail.html"> <img class="img-fluid"
-									src="images/list/v2.png" />
-								</a>
-								<div class="inner-slider">
-									<div class="inner-wrapper">
-										<div class="d-flex align-items-center">
-											<span class="seller-image"> <img class="img-fluid"
-												src="images/user/s2.png" alt='' />
-											</span> <span class="seller-name"> <a href="profile.html">Marcin
-													Kowalski</a> <span class="level hint--top level-one-seller">
-													Level 1 Seller </span>
-											</span>
-										</div>
-										<h3>I will create professional audio ads or radio
-											commercials for your project</h3>
-										<div class="content-info">
-											<div class="rating-wrapper">
-												<span class="gig-rating text-body-2"> <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"
-														width="15" height="15">
-                                             <path fill="currentColor"
-															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                             </path>
-                                          </svg> 5.0 <span>(7)</span>
-												</span>
-											</div>
-										</div>
-										<div class="footer">
-											<i class="fa fa-heart" aria-hidden="true"></i>
-											<div class="price">
-												<a href="#"> Starting At <span> $1,205</span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div>
-								<a href="product-detail.html"> <img class="img-fluid"
-									src="images/list/v3.png" />
-								</a>
-								<div class="inner-slider">
-									<div class="inner-wrapper">
-										<div class="d-flex align-items-center">
-											<span class="seller-image"> <img class="img-fluid"
-												src="images/user/s3.png" alt='' />
-											</span> <span class="seller-name"> <a href="profile.html">Marcin
-													Kowalski</a> <span class="level hint--top level-one-seller">
-													Level 1 Seller </span>
-											</span>
-										</div>
-										<h3>I will create professional audio ads or radio
-											commercials for your project</h3>
-										<div class="content-info">
-											<div class="rating-wrapper">
-												<span class="gig-rating text-body-2"> <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"
-														width="15" height="15">
-                                             <path fill="currentColor"
-															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                             </path>
-                                          </svg> 5.0 <span>(7)</span>
-												</span>
-											</div>
-										</div>
-										<div class="footer">
-											<i class="fa fa-heart" aria-hidden="true"></i>
-											<div class="price">
-												<a href="#"> Starting At <span> $1,205</span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div>
-								<a href="product-detail.html"> <img class="img-fluid"
-									src="images/list/v4.png" />
-								</a>
-								<div class="inner-slider">
-									<div class="inner-wrapper">
-										<div class="d-flex align-items-center">
-											<span class="seller-image"> <img class="img-fluid"
-												src="images/user/s4.png" alt='' />
-											</span> <span class="seller-name"> <a href="profile.html">Marcin
-													Kowalski</a> <span class="level hint--top level-one-seller">
-													Level 1 Seller </span>
-											</span>
-										</div>
-										<h3>I will create professional audio ads or radio
-											commercials for your project</h3>
-										<div class="content-info">
-											<div class="rating-wrapper">
-												<span class="gig-rating text-body-2"> <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"
-														width="15" height="15">
-                                             <path fill="currentColor"
-															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                             </path>
-                                          </svg> 5.0 <span>(7)</span>
-												</span>
-											</div>
-										</div>
-										<div class="footer">
-											<i class="fa fa-heart" aria-hidden="true"></i>
-											<div class="price">
-												<a href="#"> Starting At <span> $1,205</span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div>
-								<a href="product-detail.html"> <img class="img-fluid"
-									src="images/list/v5.png" />
-								</a>
-								<div class="inner-slider">
-									<div class="inner-wrapper">
-										<div class="d-flex align-items-center">
-											<span class="seller-image"> <img class="img-fluid"
-												src="images/user/s5.png" alt='' />
-											</span> <span class="seller-name"> <a href="profile.html">Marcin
-													Kowalski</a> <span class="level hint--top level-one-seller">
-													Level 1 Seller </span>
-											</span>
-										</div>
-										<h3>I will create professional audio ads or radio
-											commercials for your project</h3>
-										<div class="content-info">
-											<div class="rating-wrapper">
-												<span class="gig-rating text-body-2"> <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"
-														width="15" height="15">
-                                             <path fill="currentColor"
-															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                             </path>
-                                          </svg> 5.0 <span>(7)</span>
-												</span>
-											</div>
-										</div>
-										<div class="footer">
-											<i class="fa fa-heart" aria-hidden="true"></i>
-											<div class="price">
-												<a href="#"> Starting At <span> $1,205</span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div>
-								<a href="product-detail.html"> <img class="img-fluid"
-									src="images/list/v6.png" />
-								</a>
-								<div class="inner-slider">
-									<div class="inner-wrapper">
-										<div class="d-flex align-items-center">
-											<span class="seller-image"> <img class="img-fluid"
-												src="images/user/s6.png" alt='' />
-											</span> <span class="seller-name"> <a href="profile.html">Marcin
-													Kowalski</a> <span class="level hint--top level-one-seller">
-													Level 1 Seller </span>
-											</span>
-										</div>
-										<h3>I will create professional audio ads or radio
-											commercials for your project</h3>
-										<div class="content-info">
-											<div class="rating-wrapper">
-												<span class="gig-rating text-body-2"> <svg
-														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"
-														width="15" height="15">
-                                             <path fill="currentColor"
-															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                             </path>
-                                          </svg> 5.0 <span>(7)</span>
-												</span>
-											</div>
-										</div>
-										<div class="footer">
-											<i class="fa fa-heart" aria-hidden="true"></i>
-											<div class="price">
-												<a href="#"> Starting At <span> $1,205</span>
+												<a href="#"> Starting At <span> $[[${product.commission}]]</span>
 												</a>
 											</div>
 										</div>
@@ -342,6 +143,8 @@
 				</div>
 			</div>
 		</div>
+		</div>
+
 	</section>
 	<!--       recent -->
 	<!--       services-->
@@ -432,27 +235,6 @@
 			</div>
 		</div>
 	</div>
-	<!--       services-->
-	<!--       testimonials -->
-	<div class="testi-wrap pt-5">
-		<div class="container">
-			<div class="testimonial">
-				<div class="video-modal">
-					<div class="picture-wrapper">
-						<img src="images/1440-haerfest-2x.jpg">
-					</div>
-				</div>
-				<div class="text-content">
-					<p>"Being a small but growing brand, we have to definitely do a
-						lot more with less. And when you want to create a business bigger
-						than yourself, you’re going to need help. And that’s what Maer
-						does"</p>
-					<span>Tim and Dan Joo, Co-founders</span> <img alt="Company logo"
-						src="images/haerfest-logo.png" loading="lazy">
-				</div>
-			</div>
-		</div>
-	</div>
 	<!--       testimonials -->
 	<!--       guides  -->
 	<div class="guide-wrapper py-5">
@@ -492,10 +274,10 @@
 	<!-- get started -->
 	<div>
 		<div class="get-started">
-			<div class="content">
-				<h2>Find Freelance Services For Your Business Today</h2>
-				<p>We've got you covered for all your business needs</p>
-				<a href="#" class="c-btn c-fill-color-btn">Get Started</a>
+			<div class="content" style="text-align: center;">
+				<h2>Hi-er 전문가로 등록하고, <br> 수익을 창출해보세요! </h2>
+				<p>Hi-er에서는 누구나 전문가가 될 수 있습니다. <br>당신의 전문성을 필요로하는 사람, Hi-er에 다 모여있어요.</p>
+				<a href="/프리랜서 전환페이" class="c-btn c-fill-color-btn">전문가 등록하기</a>
 			</div>
 		</div>
 	</div>
