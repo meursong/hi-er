@@ -25,19 +25,19 @@ public class ProductListController {
 		
 		switch (value) {
 		case "product_id":
-			params.setSort(value);
+			
 			List<ProductList> selectProductDate = productListService.selectProductDate(params);
 			model.addAttribute("productList", selectProductDate);
 			break;
 
 		case "avg_star_point":
-			params.setSort(value);
+			
 			List<ProductList> selectProductDate2 = productListService.selectProductDate(params);
 			model.addAttribute("productList", selectProductDate2);
 			break;
 
 		case "review_count":
-			params.setSort(value);
+	
 			List<ProductList> selectProductDate3 = productListService.selectProductDate(params);
 			model.addAttribute("productList", selectProductDate3);
 			break;

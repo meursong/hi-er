@@ -164,9 +164,8 @@
 	})
 
 	function movePage(uri, queryString) {
-		
-		alert("샹")
+		var filter = $("input[type='radio']:checked").val();
+		alert($("input[type='radio']:checked").val());
 		location.href = uri + queryString;
-
 	}
 </script>

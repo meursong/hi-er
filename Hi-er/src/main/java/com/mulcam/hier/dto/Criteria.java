@@ -34,7 +34,7 @@ public class Criteria {
 		this.currentPageNo = 1;
 		this.recordsPerPage = 12;
 		this.pageSize = 5;
-//		this.sort = "product_id";
+		this.sort = "product_id";
 	}
 	
 	public String makeQueryString(int pageNo) {
