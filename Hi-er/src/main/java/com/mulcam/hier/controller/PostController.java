@@ -190,14 +190,15 @@ public class PostController {
 	}
 	
 	//결제하기 테스트
-	@PostMapping("/test")
-	public String pay(Product p, @RequestParam String abc) { //mav로
-		System.out.println(p.getB_commercial());
+	@PostMapping("/payment")
+	public ModelAndView pay(Product product, @RequestParam String abc) { //mav로
+		ModelAndView mav = new ModelAndView("payment");
+		System.out.println(product.getB_commercial());
 		System.out.println(abc);
 		// 
 		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
 		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
 		// a
-		return "hello"; //결제페이지로 이동
+		return mav; //결제페이지로 이동
 	}
 }
