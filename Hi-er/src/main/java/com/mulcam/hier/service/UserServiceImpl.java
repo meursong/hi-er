@@ -8,10 +8,11 @@ import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.User;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl{
 	
 	@Autowired
 	UserDAO userDAO;
+
 
 	@Override
 	public User userInfo(int user_id) throws Exception {
