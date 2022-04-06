@@ -3,6 +3,8 @@ package com.mulcam.hier.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -80,6 +82,8 @@ public class PostController {
 			product.setFilename6(fileupload(product.getFile6()));
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
+			product.setIs_available(0); // 0:거래가능  1:거래중지
+			product.setSeller_id(10); //추후 수정 필요
 			postService.writePost(product);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -136,8 +140,17 @@ public class PostController {
 	public ModelAndView accinfo(@PathVariable("pid") Integer pid) {
 		ModelAndView mav = new ModelAndView("product-detail");
 		try {
+			Integer logined_userid = (Integer)session.getAttribute("id");
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
+			Integer likedNum = postService.likeNum(pid, logined_userid);
+			boolean isLike = postService.isLike(pid, logined_userid);
+			
+			Map<String, Object> likeInfo = new HashMap<String,Object>();
+			likeInfo.put("likeNum", likedNum);
+			likeInfo.put("isLike", isLike);
+			
+			mav.addObject("likeInfo", likeInfo);
 			mav.addObject("product", product);
 			mav.addObject("priceInfo", priceInfo);
 		}	catch(Exception e) {
@@ -151,7 +164,7 @@ public class PostController {
 	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid, @RequestParam("reported_userid") Integer reported_userid) {
 		String result;
 		//Integer report_userid = (Integer)session.getAttribute("id");
-		Integer report_userid = (Integer)session.getAttribute("id");
+		Integer report_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
 		try {
 			postService.reportPost(reason, pid, reported_userid, report_userid);
 			result = "신고완료";
@@ -164,18 +177,19 @@ public class PostController {
 	
 	@ResponseBody
 	@PostMapping("/like")
-	public Integer like(@RequestParam("pid") Integer pid, @RequestParam("liked_userid") Integer liked_userid) {
-		Integer result = 0;
-		session.setAttribute("id", 100);
-		Integer like_userid = (Integer)session.getAttribute("id");
+	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
+		Map<String, Object> result = new HashMap<String,Object>();
 		try {
-			result = postService.like(pid, liked_userid, like_userid);
+			//Integer like_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
+			Integer like_userid = 100; //추후에 바꿔줘야함
+			result = postService.like(pid, like_userid);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return result; 
 	}
 	
+	//결제하기 테스트
 	@PostMapping("/test")
 	public String pay(Product p, @RequestParam String abc) { //mav로
 		System.out.println(p.getB_commercial());

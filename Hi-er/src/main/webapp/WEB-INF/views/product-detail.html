@@ -35,13 +35,36 @@
             <ul class="d-flex align-items-center justify-content-end">
               <li>
                 <button type="button" id="like">
-                  <li th:if="${status == 0}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-</svg>
-				</li>
-				  <i class="bi bi-heart"></i>
-				  <i></i> 찜하기 
+                  <span class="heart">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="red"
+                      class="bi bi-heart"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        class="like"
+                        th:attr="style=${likeInfo.isLike} == true ? 'display : none' : ''"
+                        d="m8
+                    2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641
+                    2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368
+                    5.365-4.542
+                    6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28
+                    8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824
+                    1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1
+                    .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                      />
+                      <path
+                        class="like"
+                        th:attr="style=${!likeInfo.isLike} == true ? 'display : none' : ''"
+                        fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                      />
+                    </svg>
+                  </span>
+                  <span id="likeNum">[[${likeInfo.likeNum}]]</span>
                 </button>
               </li>
               <li class="ml-2">
@@ -78,7 +101,7 @@
                 </label>
                 <div class="profile-name">
                   <span class="user-status">
-                    <a href="#" class="seller-link">${user.seller_id}</a>
+                    <a href="#" class="seller-link">[[${product.seller_id}]]추후 닉네임으로 변경</a>
                   </span>
                   <div class="seller-level">${user.grade?}(구현 보류)</div>
                 </div>
@@ -338,10 +361,10 @@
                           />
                         </td>
                         <td
-                          th:attr="class=${priceInfo.s_Commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                          th:attr="class=${priceInfo.s_commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
                         ></td>
                         <td
-                          th:attr="class=${priceInfo.p_Commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                          th:attr="class=${priceInfo.p_commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
                         ></td>
                       </tr>
                       <tr>
@@ -436,7 +459,11 @@
                               >
                             </label>
                             <label class="fake-radio">
-                              <input type="radio" name="s_delivery" th:value="${priceInfo.s_price+priceInfo.s_additional_price}" />
+                              <input
+                                type="radio"
+                                name="s_delivery"
+                                th:value="${priceInfo.s_price+priceInfo.s_additional_price}"
+                              />
                               <span class="radio-img"></span>
                               <span
                                 >[[${priceInfo.s_minimum_delivery}]] 일</span
@@ -462,7 +489,11 @@
                               >
                             </label>
                             <label class="fake-radio">
-                              <input type="radio" name="p_delivery" th:value="${priceInfo.p_price+priceInfo.p_additional_price}"/>
+                              <input
+                                type="radio"
+                                name="p_delivery"
+                                th:value="${priceInfo.p_price+priceInfo.p_additional_price}"
+                              />
                               <span class="radio-img"></span>
                               <span
                                 >[[${priceInfo.p_minimum_delivery}]] 일</span
@@ -480,13 +511,22 @@
                           <p class="price-label" id="b-price">
                             [[${priceInfo.b_price}]]원
                           </p>
-                          <button id="test" name="abc" value="bbbbbb" type="submit">선택하기</button>
+                          <button
+                            id="test"
+                            name="abc"
+                            value="bbbbbb"
+                            type="submit"
+                          >
+                            선택하기
+                          </button>
                         </td>
                         <td>
                           <p class="price-label" id="s-price">
                             [[${priceInfo.s_price}]]원
                           </p>
-                          <button  name="abc" value="sssss"  type="submit">선택하기</button>
+                          <button name="abc" value="sssss" type="submit">
+                            선택하기
+                          </button>
                         </td>
                         <td>
                           <p class="price-label" id="p-price">
@@ -584,20 +624,7 @@
                         않았거나, 디자인 상품 패키지 내 수정 횟수가 1회(1회
                         포함) 이상인 서비스 상품의 시안 or 샘플이 제공된 경우 →
                         구매금액의 10% 환불(디자인 비용이 별도 기재되어 있는
-                        경우, 해당금액 차감 후 환불) ※ 시안 제공 및 수정이
-                        추가로 이뤄진 경우 환불 금액내 수정 횟수에 따라 분할하여
-                        환불. 05. 주문 제작 상품 등 서비스 받은 항목이 없으며,
-                        결제 후 1일 이내 작업이 진행되기 전 시점은 전액 환불
-                        가능. 06. 다만, 환불이 불가능한 서비스에 대한 사실을
-                        표시사항에 포함한 경우에는 의뢰인의 환불요청이 제한될 수
-                        있습니다. 가. 고객의 요청에 따라 개별적으로 주문
-                        제작되는 재판매가 불가능한 경우(인쇄, 이니셜 각인,
-                        사이즈 맞춤 등) ⓐ. 주문 제작 상품 특성상 제작(인쇄 등)
-                        진행된 경우. ⓑ. 인쇄 색상의 차이 : 모니터의 종류에 따라
-                        색상의 차이가 발생하며,인쇄 시마다 합판 인쇄 방법의
-                        특성상 색상 표현의 오차가 발생함. ⓒ. 디자인 서비스이며
-                        수정 횟수가 존재하지 않았던 상품일 경우 시안 수령 후
-                        환불 불가
+                        경우, 해당금액 차감 후 환불)
                       </div>
                     </div>
                   </div>
@@ -1024,7 +1051,7 @@
                         제공
                       </li>
                       <li
-                        th:attr="class=${priceInfo.s_Commercial == 'true' ? 'feature included' : 'feature'}"
+                        th:attr="class=${priceInfo.s_commercial == 'true' ? 'feature included' : 'feature'}"
                       >
                         <i class="fa fa-check" aria-hidden="true"></i>상업적
                         이용 가능
@@ -1069,7 +1096,7 @@
                         제공
                       </li>
                       <li
-                        th:attr="class=${priceInfo.p_Commercial == 'true' ? 'feature included' : 'feature'}"
+                        th:attr="class=${priceInfo.p_commercial == 'true' ? 'feature included' : 'feature'}"
                       >
                         <i class="fa fa-check" aria-hidden="true"></i>상업적
                         이용 가능
@@ -1223,7 +1250,7 @@
     }
     $("#s-price").text(result + "원");
   });
-  
+
   $("[name='p_delivery']").change(function (e) {
     let result;
     e.preventDefault();
@@ -1235,7 +1262,6 @@
     }
     $("#p-price").text(result + "원");
   });
-
 
   $("#reportBtn").click(function (e) {
     e.preventDefault();
@@ -1253,7 +1279,7 @@
     $.ajax({
       type: "POST",
       url: "/post/report",
-      data: {"reason": reason, "pid" : pid, "reported_userid" :reported_userid },
+      data: { reason: reason, pid: pid, reported_userid: reported_userid },
       success: function (res) {
         alert(res);
       },
@@ -1261,25 +1287,37 @@
         alert("ajax 통신 실패.");
       },
     });
-    $('#reportModal').modal("hide");
+    $("#reportModal").modal("hide");
   });
-  $("#like").click(function (e) {
-	    e.preventDefault();
-	    let pid = `[[${product.product_id}]]`;
-	    let liked_userid = 10;
-	    $.ajax({
-	      type: "POST",
-	      url: "/post/like",
-	      data: {"pid" : pid, "liked_userid" :liked_userid },
-	      success: function (res) {
-	        alert(res);
-	        
-	        //res를 Integer로 받아서 그 결과값으로 찜하기버튼의 하트 색을 변경하는 로직 필요 [1:찜한상]
-	      	
-	      },
-	      error: function (XMLHttpRequest, textStatus, errorThrown) {
-	        alert("ajax 통신 실패.");
-	      },
-	    });
-	  });
+
+  $("#like").click(function () {
+    let pid = `[[${product.product_id}]]`;
+    $.ajax({
+      type: "POST",
+      url: "/post/like",
+      data: { pid: pid },
+      success: function (likeInfo) {
+        if (likeInfo.isLike) {
+          $("#like .heart").html(
+            "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='red' class='bi bi-heart' viewBox='0 0 16 16' > <path class='like' fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg>"
+          );
+          let num = $("#like").text();
+          console.log(num);
+          $("#likeNum").text(Number(num) + 1);
+        } else {
+          $("#like .heart").html(
+            "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='red' class='bi bi-heart' viewBox='0 0 16 16' > <path class='like' d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg>"
+          );
+          let num = $("#likeNum").text();
+          console.log(num);
+          $("#likeNum").text(num - 1);
+        }
+
+        //res를 Integer로 받아서 그 결과값으로 찜하기버튼의 하트 색을 변경하는 로직 필요 [1:찜한상]
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("ajax 통신 실패.");
+      },
+    });
+  });
 </script>

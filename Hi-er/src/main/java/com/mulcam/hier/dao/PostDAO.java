@@ -20,4 +20,5 @@ public interface PostDAO {
 	public void like(@Param("product_id") Integer product_id,@Param("liked_userid") Integer liked_userid,@Param("like_userid") Integer like_userid) throws Exception;
 	public void unlike(@Param("product_id") Integer product_id,@Param("like_userid") Integer like_userid) throws Exception;
 	public Integer likeCheck(@Param("product_id") Integer product_id,@Param("like_userid") Integer like_userid) throws Exception;
+	public Integer likeNum(@Param("product_id") Integer product_id) throws Exception;
 }
