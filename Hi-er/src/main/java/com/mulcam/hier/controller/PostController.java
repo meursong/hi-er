@@ -191,12 +191,13 @@ public class PostController {
 	
 	//결제하기 테스트
 	@PostMapping("/payment")
-	public ModelAndView pay(Product product, @RequestParam String paymentPkg) { //mav로
+	public ModelAndView pay(Product product) { //mav로
 		ModelAndView mav = new ModelAndView("payment");
 		System.out.println(product.getB_commercial());
-		System.out.println(paymentPkg);
+		System.out.println(product.getPaymentPkg());
 		System.out.println(product.getS_commercial());
 		System.out.println(product.getTitle());
+		System.out.println(product.getSeller_id());
 		// 
 		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
 		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
