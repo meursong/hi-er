@@ -16,10 +16,10 @@ public interface ProductListDAO {
 	public List<ProductList> selectProduct2(ProductList productList);
 	public List<ProductList> selectProduct3(ProductList productList);
 	
-	public int selectTotalCount(ProductList productList);
-	public int selectCount1(ProductList productList);
-	public int selectCount2(ProductList productList);
-	public int selectCount3(ProductList productList);
+	public Integer selectTotalCount();
+	public Integer selectCount1();
+	public Integer selectCount2();
+	public Integer selectCount3();
 	
 
 }

@@ -7,10 +7,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
-@RequiredArgsConstructor
-public class Review {
+
+public class Review extends Criteria {
 	private int review_wid;
 	private int product_id;
+	private int user_id;
 	private int seller_id;
 	private String content;
 	private int star_point;

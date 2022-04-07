@@ -10,7 +10,8 @@ import com.mulcam.hier.dto.Review;
 @Mapper
 @Repository
 public interface ReviewDAO {
-	public List<Review> selectReview(int seller_id) throws Exception;
+	public List<Review> selectReview(Review review) throws Exception;
+	public int selectCount(Review review) throws Exception;
 
 
 }

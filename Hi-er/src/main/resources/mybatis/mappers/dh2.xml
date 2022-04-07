@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.ReviewDAO">
 
-	<select id="selectReview" resultType="Review" parameterType="int">
+    <select id="selectReview" resultType="Review" parameterType="Review">
 		<![CDATA[
-			select u.nickname, r.content, r.star_point, r.createdAt from review r left join user u on u.user_id=r.review_wid order by review_id desc;
+        select u.nickname, r.content, r.star_point, r.createdAt
+        from review r
+                 left join user u on u.user_id = r.review_wid
+        where r.seller_id = #{seller_id}
+        order by ${sort} desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+        ]]>
+	</select>
+
+	<select id="selectCount" resultType="int" parameterType="Review">
+		<![CDATA[
+		select count(*) from review r where r.seller_id=#{seller_id};
 		]]>
 	</select>
-	
+
 </mapper>

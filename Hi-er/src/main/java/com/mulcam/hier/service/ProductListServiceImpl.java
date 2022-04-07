@@ -21,7 +21,7 @@ public class ProductListServiceImpl implements ProductListService {
 
 		List<ProductList> product = Collections.emptyList();
 
-		int totalCount = productListDAO.selectTotalCount(params);
+		int totalCount = productListDAO.selectTotalCount();
 
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(totalCount);
@@ -40,7 +40,7 @@ public class ProductListServiceImpl implements ProductListService {
 	public List<ProductList> selectProduct1(ProductList params) throws Exception {
 		List<ProductList> product = Collections.emptyList();
 
-		int count1 = productListDAO.selectCount1(params);
+		int count1 = productListDAO.selectCount1();
 
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(count1);
@@ -57,7 +57,7 @@ public class ProductListServiceImpl implements ProductListService {
 	public List<ProductList> selectProduct2(ProductList params) throws Exception {
 		List<ProductList> product = Collections.emptyList();
 
-		int count2 = productListDAO.selectCount2(params);
+		int count2 = productListDAO.selectCount2();
 
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(count2);
@@ -74,7 +74,7 @@ public class ProductListServiceImpl implements ProductListService {
 	public List<ProductList> selectProduct3(ProductList params) throws Exception {
 		List<ProductList> product = Collections.emptyList();
 
-		int count3 = productListDAO.selectCount3(params);
+		int count3 = productListDAO.selectCount3();
 
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(count3);

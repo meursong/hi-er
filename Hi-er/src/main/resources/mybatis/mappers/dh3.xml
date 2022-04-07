@@ -58,25 +58,25 @@
 		]]>
 	</select>
 	
-		<select id="selectTotalCount" resultType="int">
+		<select id="selectTotalCount" resultType="Integer">
 		<![CDATA[
 			select count(*) from product;
 		]]>
 	</select>
 	
-		<select id="selectCount1" resultType="int">
+		<select id="selectCount1" resultType="Integer">
 		<![CDATA[
 			select count(*) from product where category="디자인";
 		]]>
 	</select>
 	
-		<select id="selectCount2" resultType="int">
+		<select id="selectCount2" resultType="Integer">
 		<![CDATA[
 			select count(*) from product where category="영상";
 		]]>
 	</select>
 	
-			<select id="selectCount3" resultType="int">
+			<select id="selectCount3" resultType="Integer">
 		<![CDATA[
 			select count(*) from product where category="it";
 		]]>

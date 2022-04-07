@@ -149,8 +149,8 @@
 	})
 	
 	function movePage(uri, queryString) {
-		var filter = $("input[type='radio']:checked").val();
-		alert($("input[type='radio']:checked").val());
+/*		const filter = $("input[type='radio']:checked").val();
+		alert($("input[type='radio']:checked").val());*/
 		$("#productList").load(uri + queryString + " #productList");
 		/* $("#productList").load(window.location.href = uri + queryString + " #productList"); */
 		
