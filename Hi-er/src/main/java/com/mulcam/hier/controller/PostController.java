@@ -197,6 +197,7 @@ public class PostController {
 		System.out.println(paymentPkg);
 		System.out.println(product.getS_commercial());
 		System.out.println(product.getTitle());
+		System.out.println(product.getSeller_id());
 		// 
 		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
 		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
