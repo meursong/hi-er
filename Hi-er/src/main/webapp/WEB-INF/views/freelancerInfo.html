@@ -89,10 +89,13 @@
 </html>
 <script>
     function movePage(uri, queryString) {
-        /*var filter = $("input[type='radio']:checked").val();
-        alert($("input[type='radio']:checked").val());*/
-        $("#review").load(uri + queryString + " #review");
+        history.pushState({}, null, queryString);
+       $("#review").load(uri + queryString + " #review");
+        // location.href = uri + queryString;
     }
+    window.onpopstate = function(event) {
+        $("#review").load(location.href + " #review");
+    };
 
-    /* location.href = uri + queryString; */
+
 </script>

@@ -150,9 +150,10 @@
 	})
 
 	function movePage(uri, queryString) {
-	/*	const filter = $("input[type='radio']:checked").val();
-		alert($("input[type='radio']:checked").val());*/
+		history.pushState({}, null, queryString);
 		$("#productList").load(uri + queryString + " #productList");
-		/* location.href = uri + queryString; */
 	}
+	window.onpopstate = function(event) {
+		$("#productList").load(location.href + " #productList");
+	};
 </script>
