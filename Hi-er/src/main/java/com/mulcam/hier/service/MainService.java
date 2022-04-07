@@ -9,4 +9,5 @@ public interface MainService {
 
 	List<User> getBestUserFive() throws Exception;
 	List<Product> getBestProducts() throws Exception;
+	List<Product> searchProduct(String keyword) throws Exception;
 }

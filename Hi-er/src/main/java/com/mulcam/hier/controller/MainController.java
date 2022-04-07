@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Product;
@@ -21,6 +24,7 @@ public class MainController {
 	
 	@Autowired
 	MainService mainService;
+
 //	@GetMapping({"", "/"})
 //	public String mainPage() {
 //		return "index";
@@ -107,10 +111,24 @@ public class MainController {
 	
 	
 	@RequestMapping("/search")
-	public String getSearch(HttpServletRequest httpServletRequest, Model model) {
-		String search_Text = httpServletRequest.getParameter("text");
-		
-		model.addAttribute("text", search_Text);
-		return "/search";
+	public ModelAndView getSearch(String keyword) {
+		ModelAndView mav = new ModelAndView("404");
+		try {
+			
+			List<Product> ResultList = mainService.searchProduct(keyword);
+			if(!ResultList.isEmpty()) {
+				mav.addObject("ResultList", ResultList);
+				for(Product p: ResultList) {
+					System.out.println(p.getTitle());
+				}
+			} else {
+				mav.addObject("SearchCheck", "empty");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
 	}
+
 }

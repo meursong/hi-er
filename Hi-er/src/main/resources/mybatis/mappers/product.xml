@@ -27,6 +27,10 @@
 		]]>
 	</select>
 	
-<!-- 	<selec\t id=""
- -->
+	<select id="searchProduct" resultType="Product" parameterType="String">
+		<![CDATA[
+		select * from product where title like CONCAT('%',#{keyword},'%') or category like CONCAT('%',#{keyword},'%') or content like CONCAT('%',#{keyword},'%')
+		]]>
+	</select>
+	
  </mapper>

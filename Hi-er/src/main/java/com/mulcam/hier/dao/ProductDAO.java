@@ -11,5 +11,7 @@ import com.mulcam.hier.dto.Product;
 @Repository
 public interface ProductDAO {
 	public List<Product> getBestProducts() throws Exception;
+
+	public List<Product> searchProduct(String keyword) throws Exception;
 	
 }

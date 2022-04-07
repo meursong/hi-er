@@ -1,5 +1,6 @@
 package com.mulcam.hier.service;
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class MainServiceImpl implements MainService{
 		List<Product> bestProducts = productDAO.getBestProducts();
 		return bestProducts;
 		
+	}
+
+	@Override
+	public List<Product> searchProduct(String keyword) throws Exception {
+		List<Product> result = productDAO.searchProduct(keyword);
+		return result;
 	}
 	
 
