@@ -106,6 +106,10 @@ public class Product {
 	// 글쓴 시간
 	LocalDate createdAt;
 	
+	// basic, standard, premium 구분
+	String paymentPkg;
+
+	
 
 	public int getProduct_id() {
 		return product_id;
@@ -553,6 +557,14 @@ public class Product {
 
 	public void setCreatedAt(LocalDate createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public String getPaymentPkg() {
+		return paymentPkg;
+	}
+
+	public void setPaymentPkg(String paymentPkg) {
+		this.paymentPkg = paymentPkg;
 	}
 	
 
