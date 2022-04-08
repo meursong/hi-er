@@ -127,7 +127,7 @@
 <script>
 	$("input[type=radio]").change(function updateProductList() {
 
-		var value = $(this).val()
+		const value = $(this).val()
 		$.ajax({
 			url : "all",
 			type : "POST",
@@ -136,13 +136,14 @@
 			},
 
 			success : function(data) {
-				console.log(data);
+				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5");
+				// console.log(data);
 			},
 
 		}).done(function(fragment) {
-			
+
 			$('#productList').replaceWith(fragment);
-			/* location.href = "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5"; */
+
 		});
 
 		console.log(value);

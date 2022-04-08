@@ -7,106 +7,116 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-
 public class Criteria {
-	/**페이징 정보*/
-	private PaginationInfo paginationInfo;
-	
-	/** 현재 페이지 번호 */
-	private int currentPageNo;
+    /**
+     * 페이징 정보
+     */
+    private PaginationInfo paginationInfo;
 
-	/** 페이지당 출력할 데이터 개수 */
-	private int recordsPerPage;
+    /**
+     * 현재 페이지 번호
+     */
+    private int currentPageNo;
 
-	/** 화면 하단에 출력할 페이지 사이즈 */
-	private int pageSize;
+    /**
+     * 페이지당 출력할 데이터 개수
+     */
+    private int recordsPerPage;
 
-	/** 검색 키워드 */
-	private String searchKeyword;
+    /**
+     * 화면 하단에 출력할 페이지 사이즈
+     */
+    private int pageSize;
 
-	/** 검색 유형 */
-	private String searchType;
-	
-	//정렬방법
-	private String sort;
+    /**
+     * 검색 키워드
+     */
+    private String searchKeyword;
 
-	public Criteria() {
-		this.currentPageNo = 1;
-		this.recordsPerPage = 12;
-		this.pageSize = 5;
-		this.sort = "product_id";
-	}
-	
-	public String makeQueryString(int pageNo) {
+    /**
+     * 검색 유형
+     */
+    private String searchType;
 
-		UriComponents uriComponents = UriComponentsBuilder.newInstance()
-				.queryParam("sort", sort)
-				.queryParam("currentPageNo", pageNo)
-				.queryParam("recordsPerPage", recordsPerPage)
-				.queryParam("pageSize", pageSize)
-				/*
-				 * .queryParam("searchType", searchType) .queryParam("searchKeyword",
-				 * searchKeyword)
-				 */
-				.build()
-				.encode();
+    //정렬방법
+    private String sort;
 
-		return uriComponents.toUriString();
-	}
+    public Criteria() {
+        this.currentPageNo = 1;
+        this.recordsPerPage = 12;
+        this.pageSize = 5;
+        this.sort = "product_id";
+    }
 
-	public PaginationInfo getPaginationInfo() {
-		return paginationInfo;
-	}
+    public String makeQueryString(int pageNo) {
 
-	public void setPaginationInfo(PaginationInfo paginationInfo) {
-		this.paginationInfo = paginationInfo;
-	}
+        UriComponents uriComponents = UriComponentsBuilder.newInstance()
+                .queryParam("sort", sort)
+                .queryParam("currentPageNo", pageNo)
+                .queryParam("recordsPerPage", recordsPerPage)
+                .queryParam("pageSize", pageSize)
+//                .queryParam("searchType", searchType)
+                .queryParam("searchKeyword", searchKeyword)
 
-	public int getCurrentPageNo() {
-		return currentPageNo;
-	}
+                .build()
+                .encode();
 
-	public void setCurrentPageNo(int currentPageNo) {
-		this.currentPageNo = currentPageNo;
-	}
+        return uriComponents.toUriString();
+    }
 
-	public int getRecordsPerPage() {
-		return recordsPerPage;
-	}
+    public PaginationInfo getPaginationInfo() {
+        return paginationInfo;
+    }
 
-	public void setRecordsPerPage(int recordsPerPage) {
-		this.recordsPerPage = recordsPerPage;
-	}
+    public void setPaginationInfo(PaginationInfo paginationInfo) {
+        this.paginationInfo = paginationInfo;
+    }
 
-	public int getPageSize() {
-		return pageSize;
-	}
+    public int getCurrentPageNo() {
+        return currentPageNo;
+    }
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
+    public void setCurrentPageNo(int currentPageNo) {
+        this.currentPageNo = currentPageNo;
+    }
 
-	public String getSearchKeyword() {
-		return searchKeyword;
-	}
+    public int getRecordsPerPage() {
+        return recordsPerPage;
+    }
 
-	public void setSearchKeyword(String searchKeyword) {
-		this.searchKeyword = searchKeyword;
-	}
+    public void setRecordsPerPage(int recordsPerPage) {
+        this.recordsPerPage = recordsPerPage;
+    }
 
-	public String getSearchType() {
-		return searchType;
-	}
+    public int getPageSize() {
+        return pageSize;
+    }
 
-	public void setSearchType(String searchType) {
-		this.searchType = searchType;
-	}
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
-	public String getSort() {
-		return sort;
-	}
+    public String getSearchKeyword() {
+        return searchKeyword;
+    }
 
-	public void setSort(String sort) {
-		this.sort = sort;
-	}
+    public void setSearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
+    }
+
+    public String getSearchType() {
+        return searchType;
+    }
+
+    public void setSearchType(String searchType) {
+        this.searchType = searchType;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 }
