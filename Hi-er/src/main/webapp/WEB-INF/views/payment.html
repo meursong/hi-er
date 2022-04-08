@@ -145,16 +145,12 @@ input.card {
 	<div class="containerPay">
 		<div class="row m-0">
 			<div class="col-md-7 col-12">
-				<div class="row" style="margin-right : 15px">
+				<div class="row" style="margin-right: 15px">
 					<div class="col-12 px-0 mb-4">
 						<div class="box-right">
 							<div class="d-flex pb-2">
-								<p class="fw-bold h7">
-									<span class="textmuted">[[${product.paymentPkg}]]/</span>Publicnote
-								</p>
-								<p class="ms-auto p-blue">
-									<span class=" bg btn btn-primary fas fa-pencil-alt me-3"></span>
-									<span class=" bg btn btn-primary far fa-clone"></span>
+								<p class="fw-bold h2">
+									[[${product.title}]]/<span class="textmuted">[[${product.paymentPkg}]]</span>
 								</p>
 							</div>
 							<div class="bg-blue p-2">
@@ -165,6 +161,12 @@ input.card {
 							</div>
 						</div>
 					</div>
+					<div>
+						<h2>IAMPORT 결제 데모</h2>
+						<li>
+							<button id="iamportPayment" type="button">결제테스트</button>
+						</li>
+					</div>
 					<div class="col-12 mb-4">
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
@@ -172,6 +174,7 @@ input.card {
 								<p class="h1 fw-bold d-flex">
 									<span
 										class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>[[${product.b_price}]]
+									원(₩)
 									<!-- <span class="textmuted">.58</span> -->
 								</p>
 								<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
@@ -181,25 +184,32 @@ input.card {
 					<div class="col-12 px-0">
 						<div class="box-right">
 							<div class="d-flex mb-2">
-								<p class="fw-bold">Create new invoice</p>
-								<p class="ms-auto textmuted">
-									<span class="fas fa-times"></span>
-								</p>
+								<p class="fw-bold">구매자 정보</p>
 							</div>
 							<div class="d-flex mb-2">
 								<p class="h7">#AL2545</p>
 								<p class="ms-auto bg btn btn-primary p-blue h8">
-									<span class="far fa-clone pe-2"></span>COPY PAYMENT LINK
+									COPY PAYMENT LINK
 								</p>
 							</div>
 							<div class="row">
 								<div class="col-12 mb-2">
-									<p class="textmuted h8">Project / Description</p>
+									<p class="textmuted h8">성함 <p>
 									<input class="form-control" type="text"
-										placeholder="Legal Consulting">
+										placeholder="홍길동">
 								</div>
-								<div class="col-6">
-									<p class="textmuted h8">Issused on</p>
+								<div class="col-12 mb-2">
+									<p class="textmuted h8">이메일 <p>
+									<input class="form-control" type="text"
+										placeholder="@를 포함한 메일주소를 입력해 주세요">
+								</div>
+								<div class="col-12 mb-2">
+									<p class="textmuted h8">전화번호 <p>
+									<input class="form-control" type="text"
+										placeholder="010-1111-2222">
+								</div>
+								<!-- <div class="col-6">
+									<p class="textmuted h8">전화번호</p>
 									<input class="form-control" type="text"
 										placeholder="Oct 25, 2020">
 								</div>
@@ -207,7 +217,7 @@ input.card {
 									<p class="textmuted h8">Due on</p>
 									<input class="form-control" type="text"
 										placeholder="Oct 25, 2020">
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -288,5 +298,39 @@ input.card {
 		</div>
 	</div>
 </section>
+<!-- JQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script>
+//문서가 준비되면 제일 먼저 실행
+$(document).ready(function(){ 
+	$("#iamportPayment").click(function(){ 
+    	payment(); //버튼 클릭하면 호출 
+    }); 
+})
 
+//버튼 클릭하면 실행
+function payment(data) { //param
+    IMP.init('imp57611856');//아임포트 관리자 콘솔에서 확인한 '가맹점 식별코드' 입력
+    IMP.request_pay({// param
+        pg: "kakaopay.TC0ONETIME", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
+        pay_method: "card", //지불 방법
+        merchant_uid: "iamport_test_id", //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+        name: "디자인", //결제창에 노출될 상품명
+        amount: 13700, //금액
+        buyer_email : "testiamport@naver.com", 
+        buyer_name : "홍길동",
+        buyer_tel : "01012341234"
+    }, function (res) { // callback
+        if (res.success) {  // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+            alert("완료 -&gt; imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : " +res.merchant_uid);
+        } else {
+            alert("실패 : 코드("+res.error_code+") / 메세지(" + res.error_msg + ")");
+        }
+    });
+}
+</script>
 </html>
