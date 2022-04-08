@@ -12,7 +12,7 @@ import com.mulcam.hier.dto.User;
 
 @Mapper
 @Repository
-public interface UserDAO {
+public interface UserDAO { 
 
 	User login(Map<String, String> param) throws Exception;
 

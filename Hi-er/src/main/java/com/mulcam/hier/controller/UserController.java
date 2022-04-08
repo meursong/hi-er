@@ -32,7 +32,7 @@ public class UserController {
 		return mav;
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/login") 
 	public ModelAndView login(@RequestParam("email") String email, @RequestParam("password") String password) {
 		ModelAndView mav = new ModelAndView("index");
 		try {

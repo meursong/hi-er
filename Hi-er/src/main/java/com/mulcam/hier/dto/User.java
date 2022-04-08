@@ -5,7 +5,7 @@ import java.sql.Date;
 public class User {
 	int user_id, type;
 	String email, password, job, nickname, name, profile_image, interest;
-	Date createdAt, updatedAt;
+	Date createdAt, updatedAt; 
 	public int getUser_id() {
 		return user_id;
 	}
