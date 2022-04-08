@@ -11,6 +11,13 @@
                <div class="col-lg-8 col-md-8 mx-auto text-center">
                   <h1><img class="img-fluid" th:src="@{/images/404.png}" alt="404"></h1>
                   <h1>Sorry! Page not found.</h1>
+                  <div th:if="${SearchCheck != 'empty'}">
+                  	 <h2>결과 있음</h2>
+                  </div>
+                  <div th:unless= "${SearchCheck != 'empty'}">
+                                    	 <h2>결과 없음</h2>
+
+                  </div>
                   <p class="land">Unfortunately the page you are looking for has been moved or deleted.</p>
                   <div class="mt-5">
                      <a th:href="@{/}" class="btn btn-success"><i class="mdi mdi-home"></i> GO TO HOME PAGE</a>

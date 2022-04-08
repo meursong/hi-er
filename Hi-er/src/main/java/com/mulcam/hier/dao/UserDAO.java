@@ -12,7 +12,7 @@ import com.mulcam.hier.dto.User;
 
 @Mapper
 @Repository
-public interface UserDAO {
+public interface UserDAO { 
 
 	public List<User> getBestUserFive() throws Exception;
 	public List <SelectP> getList() throws Exception;
