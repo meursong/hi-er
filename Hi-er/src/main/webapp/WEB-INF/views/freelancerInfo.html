@@ -1,75 +1,101 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{common/layout}">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
 
 <section layout:fragment="contents">
 
-      <div class="main-page second py-5">
-         <div class="container">
+    <div class="main-page second py-5">
+        <div class="container">
             <div class="row">
-               <div class="col-lg-4 left">
-                  <div class="profile_info">
-                     <div class="seller-card">
-                        <div class="user-profile-info">
-                           <div>
-                              <div class="user-profile-image">
-                                 <label class="user-pict">
-                                 <img
-                                    src="images/user/s10.png"
-                                    class="img-fluid user-pict-img" alt="Askbootstrap">
-                                </label>
-                              </div>
-                           </div>
-                           <div class="user-profile-label">
-                              <div class="username-line">
-                                 <span th:text="${user.nickname}" class="seller-link"></span>
-                              </div>
-                              <div class="oneliner-wrapper">
-                                 <small th:text="${user.job}" class="oneliner"></small><br></br>
-                                 <div class="ratings-wrapper">
-                                    <p class="rating-text"><span class="star-rating-s15" style="width:22px"></span>[[${avg}]]</p>
-                                 </div>
-                              </div>
-                           </div>
+                <div class="col-lg-4 left">
+                    <div class="profile_info">
+                        <div class="seller-card">
+                            <div class="user-profile-info">
+                                <div>
+                                    <div class="user-profile-image">
+                                        <label class="user-pict">
+                                            <img
+                                                    src="images/user/s10.png"
+                                                    class="img-fluid user-pict-img" alt="Askbootstrap">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="user-profile-label">
+                                    <div class="username-line">
+                                        <span th:text="${freelancer.nickname}" class="seller-link"></span>
+                                    </div>
+                                    <div class="oneliner-wrapper">
+                                        <small th:text="${freelancer.job}" class="oneliner"></small><br></br>
+                                        <div class="ratings-wrapper">
+                                            <p class="rating-text"><span class="star-rating-s15"
+                                                                         style="width:22px"></span>[[${#numbers.formatDecimal(freelancer.avg_star_point,0,1)}]]
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buttons-wrapper">
+                                <a href="#" class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">쪽지보내기</a>
+
+                            </div>
+                            <div class="user-stats-desc">
+                                <ul class="user-stats">
+                                    <li class="location">지역<strong
+                                            th:text="${address[0]} + ' ' + ${address[1]}"></strong></li>
+                                    <li class="member-since">프리랜서 전환일<strong th:text="${freelancer.switchAt}"></strong>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="buttons-wrapper">
-                           <a href="#" class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">쪽지보내기</a>
-                 
+                    </div>
+                    <div class="seller-profile">
+
+                        <div class="linked-accounts">
+                            <h3>SNS</h3>
+                            <ul>
+                                <li class="platform social-account facebook"><i class="platform-icon facebook hint--top"
+                                                                                aria-hidden="true"
+                                                                                data-hint="facebook"></i><span
+                                        class="text">facebook</span></li>
+                                <li class="platform social-account google"><i class="platform-icon google hint--top"
+                                                                              aria-hidden="true" data-hint="google"></i><span
+                                        class="text">google</span></li>
+                            </ul>
                         </div>
-                        <div class="user-stats-desc">
-                           <ul class="user-stats">
-                              <li class="location">지역<strong th:text="${address[0]} + ' ' + ${address[1]}"></strong></li>
-                              <li class="member-since">가입일<strong th:text="${user.createdAt}"></strong></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="seller-profile">
-                   
-                     <div class="linked-accounts">
-                        <h3>SNS</h3>
-                        <ul>
-                           <li class="platform social-account facebook"><i class="platform-icon facebook hint--top"
-                              aria-hidden="true" data-hint="facebook"></i><span class="text">facebook</span></li>
-                           <li class="platform social-account google"><i class="platform-icon google hint--top"
-                              aria-hidden="true" data-hint="google"></i><span class="text">google</span></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div class=" col-lg-8 right shadow-sm rounded bg-white mb-3">
-               <div class="box-title border-bottom p-3">
-               <h3 style="text-align: center">소개글</h3>
-               </div>
-                    <div th:text="${freelancer.introduction}" class="description" style="padding: 20px 55px">
-                     </div>
-                     </div>
-				<div th:replace="fragments/review.html :: review"></div>
+                    </div>
+                </div>
+                <div class=" col-lg-8 right shadow-sm rounded bg-white mb-3">
+                    <div class="box-title border-bottom p-3">
+                        <h3 style="text-align: center">소개글</h3>
+                    </div>
+                    <pre th:text="${freelancer.introduction}" class="description" style="padding: 20px 40px">
+                     </pre>
+                </div>
+
             </div>
-         </div>
-      </div>
+            <div id="review">
+                <div th:replace="fragments/review :: review"></div>
+
+                <div class="footer-pagination text-center">
+                    <nav th:replace="fragments/pagination :: pagination"></nav>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
 
 </html>
+<script>
+    function movePage(uri, queryString) {
+        history.pushState({}, null, queryString);
+       $("#review").load(uri + queryString + " #review");
+        // location.href = uri + queryString;
+    }
+    window.onpopstate = function(event) {
+        $("#review").load(location.href + " #review");
+    };
+
+
+</script>
