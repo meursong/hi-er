@@ -53,6 +53,12 @@ public class PostController {
 		return mav;
 	}
 	
+	@GetMapping("/videoWrite")
+	public ModelAndView videoWrite() {
+		ModelAndView mav = new ModelAndView("videoWrite");
+		return mav;
+	}
+	
 	private String fileupload(MultipartFile file) {
 		String filename = null;
 		try {
