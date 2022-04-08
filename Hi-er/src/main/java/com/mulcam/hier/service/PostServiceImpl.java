@@ -21,7 +21,7 @@ public class PostServiceImpl implements PostService {
 		if(pid==null) pid = 1;
 		prod.setProduct_id(pid+1);
 		postDAO.insertProduct(prod);
-		postDAO.insertDesignPriceInfo(prod);
+		postDAO.insertPriceInfo(prod);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Product priceInfo(Integer pid) throws Exception {
-		Product priceInfo = postDAO.queryDesignPriceInfo(pid);
+		Product priceInfo = postDAO.queryPriceInfo(pid);
 		return priceInfo;
 	}
 

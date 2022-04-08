@@ -28,9 +28,10 @@
 </head>
 
 <section layout:fragment="contents">
+	<div style="margin:50px">
 	<div class="container">
-		<h1>글쓰기</h1>
-		<form action="/post/write" method="post" enctype="multipart/form-data" id="form" name="board_write" >
+		<h1>디자인 글쓰기</h1>
+		<form action="/post/designWrite" method="post" enctype="multipart/form-data" id="form" name="board_write" >
 			<div class="form-group">
 				<label for="title">글 제목</label>
 				<div class="input-group mb-3">
@@ -354,7 +355,7 @@
 			<input type="submit" value="작성 완료" class="btn btn-primary">
 		</form>
 	</div>
-
+	</div>
 	<!-- CK editor -->
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>

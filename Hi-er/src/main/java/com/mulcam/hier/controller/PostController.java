@@ -47,9 +47,9 @@ public class PostController {
 		return mav;
 	}
 
-	@GetMapping("/write")
+	@GetMapping("/designWrite")
 	public ModelAndView write() {
-		ModelAndView mav = new ModelAndView("write");
+		ModelAndView mav = new ModelAndView("designWrite");
 		return mav;
 	}
 	
@@ -69,10 +69,9 @@ public class PostController {
 		return filename;
 	}
 	
-	@PostMapping("/write")
+	@PostMapping("/designWrite")
 	public String write(@ModelAttribute Product product) {
-		System.out.println("글쓰기경로!!!!!!!!!!");
-		System.out.println(product.getTitle());
+		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));
