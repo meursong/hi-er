@@ -1,18 +1,13 @@
 package com.mulcam.hier.controller;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Product;
@@ -21,6 +16,10 @@ import com.mulcam.hier.service.MainService;
 
 @Controller
 public class MainController {
+	@GetMapping({"", "/"})
+	public String mainPage() {
+		return "index";
+	}
 	
 	@Autowired
 	MainService mainService;
@@ -37,14 +36,15 @@ public class MainController {
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		
-		
 		List<User> userList = new ArrayList<User>();
 
 		mav.addObject("bestUserList", userList);
-	
-		
+		return mav;
+	}
+
+	@GetMapping("/messages")
+	public ModelAndView messagesPage() {
+		ModelAndView mav = new ModelAndView("messages");
 		return mav;
 	}
 	
@@ -68,6 +68,22 @@ public class MainController {
 		}
 		return mav;
 	}
+	@GetMapping("cate/{id}")
+	public ModelAndView catePage(@PathVariable("id") String id) {
+		System.out.println(id);
+		ModelAndView mav = new ModelAndView("gitTest");
+		switch(id) {
+			case "1":
+				mav.addObject("cate", "<i>aaaaa</i>");
+				break;
+			case "2":
+				mav.addObject("cate", "dudtkd");
+				break;
+			case "3":
+				mav.addObject("cate", "it");
+				break;
+		}
+		return mav;
+	}
 
 }
-

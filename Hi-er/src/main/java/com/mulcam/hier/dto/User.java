@@ -2,19 +2,23 @@ package com.mulcam.hier.dto;
 
 import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class User {
-	private String email;
-	private String password;
-	private String job;
-	private String nickname;
-	private MultipartFile profile_image;
-	private int type;
-	private Date createdAt;
-	private User() {}
-	
-  public String getEmail() {
+	int user_id, type;
+	String email, password, job, nickname, name, profile_image, interest;
+	Date createdAt, updatedAt; 
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
@@ -38,17 +42,23 @@ public class User {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public MultipartFile getProfile_image() {
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getProfile_image() {
 		return profile_image;
 	}
-	public void setProfile_image(MultipartFile profile_image) {
+	public void setProfile_image(String profile_image) {
 		this.profile_image = profile_image;
 	}
-	public int getType() {
-		return type;
+	public String getInterest() {
+		return interest;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setInterest(String interest) {
+		this.interest = interest;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -56,6 +66,19 @@ public class User {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", type=" + type + ", email=" + email + ", password=" + password + ", job="
+				+ job + ", nickname=" + nickname + ", name=" + name + ", profile_image=" + profile_image + ", interest=" + interest
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+	
 }
 
 

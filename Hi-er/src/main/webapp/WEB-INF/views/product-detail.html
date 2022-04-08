@@ -283,9 +283,36 @@
                 </article>
               </div>
               <div id="packagesTable" class="table-package">
+              
                 <!-- 가격 정보 -->
+                
                 <h3>가격 정보</h3>
                 <form action="/post/payment" method="post">
+               		 <!-- 결제페이지로 넘길 정보들  -->
+                	<input type="hidden" name="title" th:value="${product.title}">
+                	<input type="hidden" name="category" th:value="${product.category}">
+                	<input type="hidden" name="seller_id" th:value="${product.seller_id}"><!-- 추후 닉네임으로 변경 -->
+                	<input type="hidden" name="b_price" th:value="${priceInfo.b_price}">
+                	<input type="hidden" name="s_price" th:value="${priceInfo.s_price}">
+                	<input type="hidden" name="p_price" th:value="${priceInfo.p_price}">
+                	<input type="hidden" name="b_pkg_description" th:value="${priceInfo.b_pkg_description}">
+                	<input type="hidden" name="s_pkg_description" th:value="${priceInfo.s_pkg_description}">
+                	<input type="hidden" name="p_pkg_description" th:value="${priceInfo.p_pkg_description}">
+                	<input type="hidden" name="b_original_image" th:value="${priceInfo.b_original_image}">
+                	<input type="hidden" name="s_original_image" th:value="${priceInfo.s_original_image}">
+                	<input type="hidden" name="p_original_image" th:value="${priceInfo.p_original_image}">
+                	<input type="hidden" name="b_commercial" th:value="${priceInfo.b_commercial}">
+                	<input type="hidden" name="s_commercial" th:value="${priceInfo.s_commercial}">
+                	<input type="hidden" name="p_commercial" th:value="${priceInfo.p_commercial}">
+                	<input type="hidden" name="b_sns_Kit" th:value="${priceInfo.b_sns_Kit}">
+                	<input type="hidden" name="s_sns_Kit" th:value="${priceInfo.s_sns_Kit}">
+                	<input type="hidden" name="p_sns_Kit" th:value="${priceInfo.p_sns_Kit}">
+                	<input type="hidden" name="b_draft" th:value="${priceInfo.b_draft}">
+                	<input type="hidden" name="s_draft" th:value="${priceInfo.s_draft}">
+                	<input type="hidden" name="p_draft" th:value="${priceInfo.p_draft}">
+                	<input type="hidden" name="b_revision" th:value="${priceInfo.b_revision}">
+                	<input type="hidden" name="s_revision" th:value="${priceInfo.s_revision}">
+                	<input type="hidden" name="p_revision" th:value="${priceInfo.p_revision}">
                   <table>
                     <colgroup>
                       <col />
@@ -353,12 +380,12 @@
                         <td
                           th:attr="class=${priceInfo.b_commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
                         >
-                          <input
+                          <!-- <input
                             type="hidden"
                             th:value="${priceInfo.b_commercial}"
                             class="commercial_using"
                             name="b_commercial"
-                          />
+                          /> -->
                         </td>
                         <td
                           th:attr="class=${priceInfo.s_commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
@@ -513,8 +540,8 @@
                           </p>
                           <button
                             id="test"
-                            name="abc"
-                            value="bbbbbb"
+                            name="paymentPkg"
+                            value="Basic"
                             type="submit"
                           >
                             선택하기
@@ -524,7 +551,7 @@
                           <p class="price-label" id="s-price">
                             [[${priceInfo.s_price}]]원
                           </p>
-                          <button name="abc" value="sssss" type="submit">
+                          <button name="paymentPkg" value="Standard" type="submit">
                             선택하기
                           </button>
                         </td>
@@ -532,7 +559,8 @@
                           <p class="price-label" id="p-price">
                             [[${priceInfo.p_price}]]원
                           </p>
-                          <button type="submit">선택하기</button>
+                          <button name="paymentPkg"
+                            value="Premium" type="submit">선택하기</button>
                         </td>
                       </tr>
                     </tbody>
