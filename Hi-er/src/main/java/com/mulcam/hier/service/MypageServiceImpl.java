@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.MypageDAO;
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.User;
 
 @Service
 public class MypageServiceImpl implements MypageService {
@@ -114,6 +115,42 @@ public class MypageServiceImpl implements MypageService {
 		//pageInfo.setListCount(listCount);
 		int startrow=(page-1)*5+1;
 		return mypageDAO.selectBoardList2(startrow);
+		
+	}
+	
+	@Override
+	public boolean nickOverlap(String nick)throws Exception{
+		if(0==mypageDAO.queryNick(nick)) {
+			return false; //중복된게 없음
+		}
+		return true;//중복된게 있음 
+	}
+	
+	@Override
+	public void nickupdate(String nick)throws Exception{
+		User user=new User();
+		user.setNickname(nick);
+		user.setUser_id(1);///수정해야함 겟세션아이디
+		mypageDAO.nickupdate(user);
+		
+		
+		
+	}
+	
+	@Override
+	public boolean passfindupdate(String pass,String pass2)throws Exception{
+		User user=new User();
+		user.setPassword(pass);
+		user.setUser_id(1);///수정해야함 겟세션아이디
+		if(true==mypageDAO.passfind(user)) {
+			user.setPassword(pass2);
+			mypageDAO.passupdate(user);
+			return true;
+		}
+		return false;
+		
+		
+		
 		
 	}
 

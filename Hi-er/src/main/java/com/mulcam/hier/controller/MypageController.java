@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Paging;
@@ -21,7 +24,7 @@ public class MypageController {
 	@GetMapping("mypage")
 	public ModelAndView mypage() {
 		ModelAndView mav = new ModelAndView("account");
-		System.out.println("fklsafklsakflsakflsakfls");
+		System.out.println("마이페이지안");
 		try {
 			System.out.println("트라이 안이다다다다다다");
 			List<Map<String,Object>> ord=mypageService.history2(1);
@@ -36,6 +39,53 @@ public class MypageController {
 		}
 		return mav;
 	}
+	
+	@ResponseBody
+	@PostMapping("nickoverlap")
+	public String accoverlap(@RequestParam(value="nick")String nick) {
+		boolean overlap=false;
+		try {
+			overlap=mypageService.nickOverlap(nick);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(overlap);
+	}
+	
+	@ResponseBody
+	@PostMapping("nickupdate")
+	public String nickupdate(@RequestParam(value="nick")String nick) {
+		System.out.println("여기 닉네임업데이트");
+		//boolean nickupdate=false;
+		try {
+			System.out.println("트라이 안");
+			mypageService.nickupdate(nick);
+			return String.valueOf(true);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return String.valueOf(false);
+		}
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("passupdate")
+	public String passupdate(@RequestParam(value="pass")String pass,@RequestParam(value="pass2")String pass2) {
+		System.out.println("여기 패스워드 업데이트");
+		
+		try {
+			
+			if(true==mypageService.passfindupdate(pass,pass2)) {
+				return String.valueOf(true);
+			}
+			else return String.valueOf(false);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return String.valueOf(false);
+		}
+		
+	}
+	
 	
 	@GetMapping("mypage/{num}/{page2}")
 	public ModelAndView mypage1(@PathVariable String num,@PathVariable String page2) {
@@ -72,6 +122,12 @@ public class MypageController {
 		System.out.println("fklsafklsakflsakflsakfls");
 		mav.addObject("page", num);
 		return mav;
+	}
+	
+	@PostMapping("/imageupload")
+	public String imageupload() {
+		System.out.println("sssssssssssssssssssssssss");
+		return "account";
 	}
 	
 	@GetMapping("mypage/{num}")
@@ -134,4 +190,7 @@ public class MypageController {
 	public String logout() {
 		return "account";
 	}
+	
+	
+	
 }

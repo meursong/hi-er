@@ -49,6 +49,22 @@
 	]]>	
 	</select>
 	
+	<!--닉네임 중복검사-->
+	<select id="queryNick" resultType="int" parameterType="String">
+	<![CDATA[
+		select count(*)
+		from user
+		where nickname=#{nick}
+	]]>	
+	</select>
+	
+	<!--닉네임 업데이트-->
+	<update id="nickupdate" parameterType="user">
+	<![CDATA[
+		update user set nickname=#{nickname} where user_id=#{user_id}
+	]]>	
+	</update>
+	
 	<select id="countBoard2" resultType="int" parameterType="int">
 	<![CDATA[
 		select count(*)
@@ -56,6 +72,22 @@
 		on p.product_id=l.product_id and u.user_id=1 and us.user_id=l.clicked_user
 	]]>	
 	</select>
+	
+	<!--패스워드 파인드-->
+	<select id="passfind" resultType="boolean" parameterType="user">
+	<![CDATA[
+		select count(*)
+		from user
+		where user_id=#{user_id} and password=#{password}
+	]]>	
+	</select>
+	
+	<!--패스워드 업데이트-->
+	<update id="passupdate"  parameterType="user">
+	<![CDATA[
+		update user set password=#{password} where user_id=#{user_id}
+	]]>	
+	</update>
 
 	<select id="selectBoardList111" resultType="Map" parameterType="int">
 	<![CDATA[
