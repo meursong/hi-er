@@ -31,7 +31,7 @@ local.properties
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
+bin/main/application.oauth.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
