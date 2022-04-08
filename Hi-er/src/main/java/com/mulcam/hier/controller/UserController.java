@@ -46,8 +46,10 @@ public class UserController {
 	
 	@GetMapping("/freelancerInfo")
 	public String freelancerInfo(Model model, @ModelAttribute("params") Review params) throws Exception {
+
 		User freelancer = userService.freelancerInfo(seller_id);
 		params.setSeller_id(2); // 로그인시 세션에서 값 가져와서 넣는다
+
 		params.setRecordsPerPage(4);
 		List<Review> reviews = reviewService.reviewList(params);
 		

@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Getter @Setter
+
 public class Criteria {
 	/**페이징 정보*/
 	private PaginationInfo paginationInfo;
@@ -54,4 +54,59 @@ public class Criteria {
 		return uriComponents.toUriString();
 	}
 
+	public PaginationInfo getPaginationInfo() {
+		return paginationInfo;
+	}
+
+	public void setPaginationInfo(PaginationInfo paginationInfo) {
+		this.paginationInfo = paginationInfo;
+	}
+
+	public int getCurrentPageNo() {
+		return currentPageNo;
+	}
+
+	public void setCurrentPageNo(int currentPageNo) {
+		this.currentPageNo = currentPageNo;
+	}
+
+	public int getRecordsPerPage() {
+		return recordsPerPage;
+	}
+
+	public void setRecordsPerPage(int recordsPerPage) {
+		this.recordsPerPage = recordsPerPage;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
 }

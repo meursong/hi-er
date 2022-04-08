@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
-@RequiredArgsConstructor
 public class FreelancerForm {
 	private int f_id;
 	private String address;
@@ -19,5 +17,36 @@ public class FreelancerForm {
 		this.introduction=introduction;
 	}
 
+	public int getF_id() {
+		return f_id;
+	}
+
+	public void setF_id(int f_id) {
+		this.f_id = f_id;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
 }
 
