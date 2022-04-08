@@ -5,6 +5,20 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+
 ### STS ###
 .metadata
 .apt_generated
