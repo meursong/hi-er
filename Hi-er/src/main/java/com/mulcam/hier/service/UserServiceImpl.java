@@ -11,7 +11,6 @@ import com.mulcam.hier.dto.User;
 
 @Service
 public class UserServiceImpl implements UserService{
-
 	@Autowired
 	UserDAO ud;
 	 
