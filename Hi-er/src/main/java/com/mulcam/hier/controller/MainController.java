@@ -3,6 +3,8 @@ package com.mulcam.hier.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -10,6 +12,12 @@ public class MainController {
 	@GetMapping({"", "/"})
 	public String mainPage() {
 		return "index";
+	}
+	
+	@GetMapping("/messages")
+	public ModelAndView messagesPage() {
+		ModelAndView mav = new ModelAndView("messages");
+		return mav;
 	}
 	
 	@GetMapping("cate/{id}")
