@@ -13,6 +13,12 @@
 			SELECT name FROM user where email = #{email}
 		]]>
 	</select>
+	
+	<select id="nicknameCheck" resultType="String" parameterType="String">
+		<![CDATA[
+			SELECT name FROM user where nickname = #{nickname}
+		]]>
+	</select>
 <!-- <select id="selectUser" resultType="User" parameterType="String">
 		<![CDATA[
 			select * from user where nickname = #{nickname};

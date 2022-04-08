@@ -7,6 +7,8 @@ public interface UserService {
 	User login(String email, String password) throws Exception;
 
 	Boolean emailCheck(String useremail) throws Exception;
+
+	Boolean nicknameCheck(String usernickname) throws Exception;
  
 //	String signup(String name, String email, String password, String job) throws Exception;
 

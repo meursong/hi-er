@@ -18,6 +18,8 @@ public interface UserDAO {
 
 	String emailCheck(String useremail) throws Exception;
 
+	String nicknameCheck(String usernickname) throws Exception;
+
 //	String signup(Map<String, String> param) throws Exception;
 
 public List<User> getBestUserFive() throws Exception;

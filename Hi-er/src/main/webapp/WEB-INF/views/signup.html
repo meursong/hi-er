@@ -67,9 +67,9 @@
 								<label class="mb-1">닉네임</label>
 								<div class="position-relative icon-form-control">
 									<i class="mdi mdi-email-outline position-absolute"></i> <input
-										type="text" id="Nickname" name="Nickname" class="form-control" required>
+										type="text" id="nickname" name="nickname" class="form-control" required>
 								</div>
-								
+								<div id="checknickname"></div>
 							</div>
 
 							<div class="form-group">
@@ -194,9 +194,35 @@
 					$("#checkemail").html('사용할 수 있는 이메일입니다.');
 					$("#checkemail").css('color','green');
 				} else{
-					$("#checkemail").html('사용할 수 없는 이메일입니다.');
+					$("#checkemail").html('중복된 이메일입니다.');
 					$("#checkemail").css('color','red');
 					$('#signUpBtn').text('사용할 수 없는 이메일이라잖아!!!');
+					$('#signUpBtn').attr('disabled', "true");
+				}
+			},
+			error : function(){
+				alert("서버요청실패");
+			}
+		})
+	})
+	</script>
+	<script>
+	$('#nickname').focusout(function(){
+		let userNicknamel = $('#nickname').val();
+		
+		$.ajax({
+			url : "/nicknamecheck",
+			type : "post",
+			data : {"usernickname": usernickname},
+			dataType : 'json',
+			success : function(result){
+				if(result){
+					$("#checnickname").html('사용할 수 있는 닉네임입니다.');
+					$("#checnickname").css('color','green');
+				} else{
+					$("#checnickname").html('사용할 수 없는 닉네임입니다.');
+					$("#checnickname").css('color','red');
+					$('#signUpBtn').text('사용할 수 없는 닉네임이라잖아!!!');
 					$('#signUpBtn').attr('disabled', "true");
 				}
 			},

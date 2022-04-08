@@ -81,10 +81,21 @@ public class UserController {
 	@PostMapping("/emailcheck")
 	public Boolean emailCheck(@RequestParam String useremail) {
 		Boolean result = false;
-		int length = useremail.length();
-		System.out.println("입력한 이메일의 길이:" + length);
+		
 		try {
 			result = us.emailCheck(useremail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@ResponseBody
+	@PostMapping("/nicknamecheck")
+	public Boolean nicknameCheck(@RequestParam String usernickname) {
+		Boolean result = false;
+		try {
+			result = us.nicknameCheck(usernickname);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

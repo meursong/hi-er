@@ -34,6 +34,16 @@ public class UserServiceImpl implements UserService{
 		}
 		return result;
 	}
+
+	@Override
+	public Boolean nicknameCheck(String usernickname) throws Exception {
+		Boolean result = false;
+		String name = ud.emailCheck(usernickname);
+		if (name == null) {
+			result = true;
+		}
+		return result;
+	}
 	
 //	@Override
 //	public String signup(String name,String email, String password, String job ) throws Exception {
