@@ -7,6 +7,11 @@
 			select * from product where product_id=#{id}
 		]]>
 	</select>
+	<select id="queryDesignPriceInfo" resultType="Product" parameterType="integer">
+		<![CDATA[
+			select * from design_price_info where product_price_id=#{id}
+		]]>
+	</select>
 	<select id="getMaxProductId" resultType="integer">
 		<![CDATA[
 			select max(product_id) from product
@@ -15,6 +20,9 @@
 	<insert id="insertProduct" parameterType="Product">
 		<![CDATA[
 			insert into product (product_id,
+								 seller_id,
+								 is_available,
+								 category,
 								 title,
 								 filename1,
 								 filename2,
@@ -27,8 +35,13 @@
 								 content,
 								 revisionPolicy,
 								 refundPolicy,
-								 otherInformation)
+								 otherInformation,
+								 createdAt
+								 )
 			             values(#{product_id},
+			             		#{seller_id},
+			             		#{is_available},
+			             		#{category},
 			             		#{title},
 			                    #{filename1},
 			                    #{filename2},
@@ -41,7 +54,9 @@
 			                    #{content},
 			                    #{revisionPolicy},
 			                    #{refundPolicy},
-			                    #{otherInformation})
+			                    #{otherInformation},
+			                    now()
+			                    )
 		]]> 
 	</insert> 
 	<insert id="insertDesignPriceInfo" parameterType="Product">
@@ -55,8 +70,8 @@
 								 s_original_image,
 								 p_original_image,
 								 b_commercial,
-								 s_Commercial,
-								 p_Commercial,
+								 s_commercial,
+								 p_commercial,
 								 b_sns_Kit,
 								 s_sns_Kit,
 								 p_sns_Kit,
@@ -87,8 +102,8 @@
 			                    #{s_original_image},
 			                    #{p_original_image},
 			                    #{b_commercial},
-			                    #{s_Commercial},
-			                    #{p_Commercial},
+			                    #{s_commercial},
+			                    #{p_commercial},
 			                    #{b_sns_Kit},
 			                    #{s_sns_Kit},
 			                    #{p_sns_Kit},
@@ -112,4 +127,39 @@
 			                    #{p_price})
 			]]> 
 	</insert> 
+	<insert id="insertReport">
+		<![CDATA[
+			insert into report(
+			reason,product_id,reported_userid,report_userid,createdAt
+			) values(
+			#{reason},#{product_id},#{reported_userid},#{report_userid},now()
+			)
+		]]> 
+	</insert>
+	<select id="likeCheck" resultType="Integer">
+		<![CDATA[
+			select count(product_id) from likes where product_id=#{product_id} and like_userid=#{like_userid}
+		]]>
+	</select>
+	
+	<select id="likeNum" resultType="Integer">
+		<![CDATA[
+			select count(*) from likes where product_id=#{product_id}
+		]]>
+	</select>
+	
+	<insert id="like">
+		<![CDATA[
+			insert into likes(
+			product_id,liked_userid,like_userid,createdAt
+			) values(
+			#{product_id},#{liked_userid},#{like_userid},now()
+			)
+		]]> 
+	</insert>
+	<delete id="unlike">
+		<![CDATA[
+			delete from likes where product_id=#{product_id} and like_userid=#{like_userid}
+		]]> 
+	</delete>
 </mapper>

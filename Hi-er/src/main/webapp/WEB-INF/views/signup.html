@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Gurdeep singh osahan">
+<meta name="author" content="Gurdeep singh osahan">
+<title>Maer - LMS & Freelance Services Marketplace for
+	Businesses HTML Template</title>
+<!-- Favicon Icon -->
+<link rel="icon" type="image/png" href="images/fav.svg">
+<!-- Bootstrap core CSS -->
+<link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Font Awesome--> 
+<link th:href="@{vendor/fontawesome/css/font-awesome.min.css}"
+	rel="stylesheet">
+<!-- Material Design Icons -->
+<link th:href="@{vendor/icons/css/materialdesignicons.min.css}" media="all"
+	rel="stylesheet" type="text/css">
+<!-- Slick -->
+<link th:href="@{vendor/slick-master/slick/slick.css}" rel="stylesheet"
+	type="text/css">
+<!-- Lightgallery -->
+<link th:href="@{vendor/lightgallery-master/dist/css/lightgallery.min.css}"
+	rel="stylesheet">
+<!-- Select2 CSS -->
+<link th:href="@{vendor/select2/css/select2-bootstrap.css}" />
+<link th:href="@{vendor/select2/css/select2.min.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link th:href="@{css/style.css}" rel="stylesheet">
+</head>
+<body>
+	<!-- Register -->
+	<div class="bg-white">
+		<div class="container">
+			<div
+				class="row justify-content-center align-items-center d-flex vh-100">
+				<div class="col-lg-4 mx-auto">
+					<div class="osahan-login py-4">
+						<div class="text-center mb-4">
+							<a th:href="@{/index.html}"><img src="images/fav.svg" alt=""></a>
+							<h5 class="font-weight-bold mt-3">회원가입</h5>
+						</div>
+
+						<form method="post" th:action="@{/signup}"  oninput='password2.setCustomValidity(password2.value != password.value ? "비밀번호가 달라요~~" : "")'>
+							<div class="form-group">
+								<label class="mb-1">이름</label>
+								<div class="position-relative icon-form-control">
+									<i class="mdi mdi-account position-absolute"></i> <input
+										type="text" id="name" name="name" class="form-control" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="mb-1">이메일</label>
+								<div class="position-relative icon-form-control">
+									<i class="mdi mdi-email-outline position-absolute"></i> <input
+										type="email" id="email" name="email" class="form-control" required>
+								</div>
+								<div id="checkemail"></div>
+							</div>
+							
+							<div class="form-group">
+								<label class="mb-1">닉네임</label>
+								<div class="position-relative icon-form-control">
+									<i class="mdi mdi-email-outline position-absolute"></i> <input
+										type="text" id="Nickname" name="Nickname" class="form-control" required>
+								</div>
+								
+							</div>
+
+							<div class="form-group">
+								<label class="mb-1">비밀번호</label>
+								<div class="position-relative icon-form-control">
+									<i class="mdi mdi-key-variant position-absolute"></i> <input
+										type="password" id="password" name="password"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="mb-1">비밀번호 확인</label>
+								<div class="position-relative icon-form-control">
+									<i class="mdi mdi-key-variant position-absolute"></i> <input
+										type="password" id="password2" class="form-control" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="mb-1">직업</label> <select name="job"
+									class="form-control form-control-lg" required>
+									<option selected value="" disabled>직업을 선택해 주세요.</option>
+									<option value="fl">프리랜서</option>
+									<option value="ow">직장인</option>
+									<option value="sbo">소상공인</option>
+									<option value="su">스타트업</option>
+									<option value="us">대학(원)생</option>
+									<option value="js">취업준비생</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label class="mb-1">관심분야</label> <select name="interest"
+									class="form-control form-control-lg" required>
+									<option selected value="" disabled>관심분야를 선택해 주세요.</option>
+									<option value="de">디자인</option>
+									<option value="pr">IT∙프로그래밍</option>
+									<option value="vps">영상∙사진∙음향</option>
+									<option value="ma">마케팅</option>
+									<option value="ti">번역∙통역</option>
+									<option value="dw">문서∙글쓰기</option>
+								</select>
+							</div>
+
+							</select>
+							<!-- 약관 넣어주는자리 -->
+							<!--  <div class="form-group">
+                           <label class="mb-1">You agree to the Maer <a href="#">User Agreement</a>, <a href="#">Privacy Policy</a>, and <a  href="#">Cookie Policy</a>.</label>
+                        </div> -->
+							<button class="btn btn-success btn-block text-uppercase" id="signUpBtn"
+								type="submit">누르면 끝!</button>
+							<div class="text-center mt-3 border-bottom pb-3">
+								<p class="small text-muted">Or login with</p>
+								<div class="row">
+									<div class="col-6">
+										<button type="button"
+											class="btn btn-outline-instagram btn-block">
+											<i class="mdi mdi-instagram"></i> Instagram
+										</button>
+									</div>
+									<div class="col-6">
+										<button type="button"
+											class="btn btn-outline-facebook btn-block">
+											<i class="mdi mdi-facebook"></i> Facebook
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="py-3 d-flex align-item-center">
+								<a href="forgot-password.html">Forgot password?</a> <span
+									class="ml-auto"> Already on Maer? <a th:href="@{/login}">Sign
+										in</a></span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Register -->
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Contact form JavaScript -->
+	<!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+	<script src="js/jqBootstrapValidation.js"></script>
+	<script src="js/contact_me.js"></script>
+	<!-- Slick -->
+	<script src="vendor/slick-master/slick/slick.js" type="text/javascript"
+		charset="utf-8"></script>
+	<!-- lightgallery -->
+	<script
+		src="vendor/lightgallery-master/dist/js/lightgallery-all.min.js"></script>
+	<!-- select2 Js -->
+	<script src="vendor/select2/js/select2.min.js"></script>
+	<!-- Custom -->
+	<script src="js/custom.js"></script>
+	<script>
+	/*	
+	$(document).ready(function() {
+			$('#signUpBtn').on('click', function(e) {
+				if($('#password').val() != $('#password2').val()) {
+					alert('달라');
+					e.preventDefault();
+				}
+			})
+		})
+	*/
+	</script>
+	<script>
+	$('#email').focusout(function(){
+		let useremail = $('#email').val();
+		
+		$.ajax({
+			url : "/emailcheck",
+			type : "post",
+			data : {"useremail": useremail},
+			dataType : 'json',
+			success : function(result){
+				if(result){
+					$("#checkemail").html('사용할 수 있는 이메일입니다.');
+					$("#checkemail").css('color','green');
+				} else{
+					$("#checkemail").html('사용할 수 없는 이메일입니다.');
+					$("#checkemail").css('color','red');
+					$('#signUpBtn').text('사용할 수 없는 이메일이라잖아!!!');
+					$('#signUpBtn').attr('disabled', "true");
+				}
+			},
+			error : function(){
+				alert("서버요청실패");
+			}
+		})
+	})
+	</script>
+	
+</body>
+</html>

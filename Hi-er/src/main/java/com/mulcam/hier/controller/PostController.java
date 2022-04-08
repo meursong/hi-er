@@ -3,11 +3,14 @@ package com.mulcam.hier.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,9 @@ public class PostController {
 	
 	@Autowired
 	ServletContext servletContext;
+	
+	@Autowired
+	HttpSession session;
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
@@ -76,6 +82,8 @@ public class PostController {
 			product.setFilename6(fileupload(product.getFile6()));
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
+			product.setIs_available(0); // 0:거래가능  1:거래중지
+			product.setSeller_id(10); //추후 수정 필요
 			postService.writePost(product);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -130,16 +138,70 @@ public class PostController {
 	
 	@GetMapping("/detail/{pid}")
 	public ModelAndView accinfo(@PathVariable("pid") Integer pid) {
-		System.out.println("게시물 상세보기 테스트으이ㅡㅈ니ㅏㄷ름니ㅏㄷㄹ");
 		ModelAndView mav = new ModelAndView("product-detail");
 		try {
+			Integer logined_userid = (Integer)session.getAttribute("id");
 			Product product = postService.productDetail(pid);
+			Product priceInfo = postService.priceInfo(pid);
+			Integer likedNum = postService.likeNum(pid, logined_userid);
+			boolean isLike = postService.isLike(pid, logined_userid);
+			
+			Map<String, Object> likeInfo = new HashMap<String,Object>();
+			likeInfo.put("likeNum", likedNum);
+			likeInfo.put("isLike", isLike);
+			
+			mav.addObject("likeInfo", likeInfo);
 			mav.addObject("product", product);
+			mav.addObject("priceInfo", priceInfo);
 		}	catch(Exception e) {
 			mav.addObject("err", e.getMessage());
 		}
 		return mav;
-	
 	}
 	
+	@ResponseBody
+	@PostMapping("/report")
+	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid, @RequestParam("reported_userid") Integer reported_userid) {
+		String result;
+		//Integer report_userid = (Integer)session.getAttribute("id");
+		Integer report_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
+		try {
+			postService.reportPost(reason, pid, reported_userid, report_userid);
+			result = "신고완료";
+		} catch(Exception e) {
+			e.printStackTrace();
+			result = "오류~";
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping("/like")
+	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
+		Map<String, Object> result = new HashMap<String,Object>();
+		try {
+			//Integer like_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
+			Integer like_userid = 100; //추후에 바꿔줘야함
+			result = postService.like(pid, like_userid);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result; 
+	}
+	
+	//결제하기 테스트
+	@PostMapping("/payment")
+	public ModelAndView pay(Product product) { //mav로
+		ModelAndView mav = new ModelAndView("payment");
+		System.out.println(product.getB_commercial());
+		System.out.println(product.getPaymentPkg());
+		System.out.println(product.getS_commercial());
+		System.out.println(product.getTitle());
+		System.out.println(product.getSeller_id());
+		// 
+		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
+		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
+		// a
+		return mav; //결제페이지로 이동
+	}
 }

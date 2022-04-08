@@ -1,5 +1,9 @@
 package com.mulcam.hier.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.mulcam.hier.dto.FreelancerUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,33 +12,62 @@ import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.User;
 
 @Service
-public class UserServiceImpl implements UserService {
-	
+public class UserServiceImpl implements UserService{
 	@Autowired
-	UserDAO userDAO;
-
+	UserDAO ud;
+	 
 	@Override
 	public User selectEmail(int user_id) throws Exception {
-		User user = userDAO.selectUSerEmail(user_id);
+		User user = ud.selectUSerEmail(user_id);
 		if(user==null) throw new Exception("오류");
 		return user;
 	}
 	
 	@Override
-	public User freelancerInfo(int user_id) throws Exception {
-		User freelancer = userDAO.select_info_f(user_id);
+	public User login(String email, String password) throws Exception {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("email", email);
+		param.put("password",password);
+		User user = ud.login(param);
+		user.setPassword("안가르쳐주지");
+		return user;
+	}
+
+	@Override
+	public Boolean emailCheck(String useremail) throws Exception {
+		Boolean result = false;
+		String name = ud.emailCheck(useremail);
+		if (name == null) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public FreelancerUser freelancerInfo(int user_id) throws Exception {
+		FreelancerUser freelancer = ud.select_info_f(user_id);
 		if(freelancer==null) throw new Exception("오류");
 		return freelancer;
 	}
 
 	@Override
 	public void insert_info(FreelancerForm free) throws Exception {
-		userDAO.insert_info_f(free);
+		ud.insert_info_f(free);
 	}
 
 	@Override
 	public void update_type(int user_id) throws Exception {
-		userDAO.update_type_f(user_id);
+		ud.update_type_f(user_id);
 		
 	}
+//	@Override
+//	public String signup(String name,String email, String password, String job ) throws Exception {
+//		Map<String, String> param = new HashMap<String, String>();
+//		param.put("name", name);
+//		param.put("email", email);
+//		param.put("password", password);
+//		param.put("job", job);
+//		String name = ud.login(param);
+//		return name;
+//	}
 }
