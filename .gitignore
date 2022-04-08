@@ -1,3 +1,5 @@
+
+@@ -1,52 +0,0 @@
 HELP.md
 .gradle
 build/
@@ -6,6 +8,7 @@ build/
 !**/src/test/**/build/
 
 ### Eclipse ###
+.metadata
 .metadata
 bin/
 tmp/
