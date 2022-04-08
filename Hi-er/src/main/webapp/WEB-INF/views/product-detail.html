@@ -1,0 +1,1323 @@
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{common/layout}"
+>
+  <head>
+    <style></style>
+  </head>
+
+  <section layout:fragment="contents">
+    <div class="third-menu border-top">
+      <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+          <div class="col-lg-9 left">
+            <ul>
+              <li class="nav-overview selected">
+                <a href="#title">글 제목()</a>
+              </li>
+              <li class="nav-aboutSeller">
+                <a href="#aboutSeller">프리랜서 정보</a>
+              </li>
+              <li class="nav-description">
+                <a href="#description">서비스 설명</a>
+              </li>
+              <li class="nav-packagesTable">
+                <a href="#packagesTable">가격 정보</a>
+              </li>
+              <li class="nav-faq"><a href="#faq">거래 약관</a></li>
+              <li class="nav-reviews"><a href="#reviews">리뷰</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 right">
+            <ul class="d-flex align-items-center justify-content-end">
+              <li>
+                <button type="button" id="like">
+                  <span class="heart">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="red"
+                      class="bi bi-heart"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        class="like"
+                        th:attr="style=${likeInfo.isLike} == true ? 'display : none' : ''"
+                        d="m8
+                    2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641
+                    2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368
+                    5.365-4.542
+                    6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28
+                    8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824
+                    1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1
+                    .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                      />
+                      <path
+                        class="like"
+                        th:attr="style=${!likeInfo.isLike} == true ? 'display : none' : ''"
+                        fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                      />
+                    </svg>
+                  </span>
+                  <span id="likeNum">[[${likeInfo.likeNum}]]</span>
+                </button>
+              </li>
+              <li class="ml-2">
+                <button
+                  type="button"
+                  id="reportBtn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#reportModal"
+                >
+                  <i class="fa fa-share-alt" aria-hidden="true"></i> 신고
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-page py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 left">
+            <h2 id="title" th:text="${product.title}">글 제목</h2>
+            <div
+              id="overview"
+              class="seller-overview d-flex align-items-center"
+            >
+              <div class="user-profile-image d-flex">
+                <label class="profile-pict" for="profile_image">
+                  <img
+                    th:src="@{/images/user/s2.png}"
+                    class="profile-pict-img img-fluid"
+                    alt=""
+                  />
+                </label>
+                <div class="profile-name">
+                  <span class="user-status">
+                    <a href="#" class="seller-link">[[${product.seller_id}]]추후 닉네임으로 변경</a>
+                  </span>
+                  <div class="seller-level">${user.grade?}(구현 보류)</div>
+                </div>
+              </div>
+              <div class="user-info d-flex">
+                <span class="user-info-rating d-flex">
+                  <div class="star-rating-s15-wrapper">
+                    <span class="star-rating-s15 rate-10"> </span>
+                  </div>
+                  <span class="total-rating-out-five">${평점}5.0 평점</span>
+                  <span class="total-rating">(${리뷰수})</span>
+                </span>
+              </div>
+            </div>
+            <!--  이미지 -->
+            <div class="slider mt-4">
+              <div
+                id="aniimated-thumbnials"
+                class="slider-for slick-slider-single"
+              >
+                <a th:href="@{/upload/} + ${product.filename1}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename1}"
+                  />
+                </a>
+                <a th:href="@{/upload/} + ${product.filename2}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename2}"
+                  />
+                </a>
+                <a th:href="@{/upload/} + ${product.filename3}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename3}"
+                  />
+                </a>
+                <a th:href="@{/upload/} + ${product.filename4}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename4}"
+                  />
+                </a>
+                <a th:href="@{/upload/} + ${product.filename5}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename5}"
+                  />
+                </a>
+                <a th:href="@{/upload/} + ${product.filename6}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename6}"
+                  />
+                </a>
+                <a th:href="@{/upload/} + ${product.filename7}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename7}"
+                  />
+                </a>
+                <a th:href="@{/upload/} + ${product.filename8}">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename8}"
+                  />
+                </a>
+              </div>
+              <div class="slider-nav slick-slider-single">
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename1}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename2}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename3}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename4}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename5}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename6}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename7}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+                <div class="item-slick">
+                  <img
+                    class="img-fluid"
+                    th:src="@{/upload/} + ${product.filename8}"
+                    alt="사이트 로고 사진으로 대체"
+                  />
+                </div>
+              </div>
+            </div>
+            <h3 id="aboutSeller">프리랜서 정보</h3>
+            <div class="profile-card">
+              <div class="user-profile-image d-flex">
+                <label class="profile-pict" for="profile_image">
+                  <img
+                    th:src="@{/images/user/s2.png}"
+                    class="profile-pict-img img-fluid"
+                    alt="프리랜서 사진-(클릭시 판매자정보 페이지로 이동)"
+                  />
+                </label>
+                <div class="right">
+                  <div class="profile-name">
+                    <span class="user-status">
+                      <a href="#" class="seller-link"
+                        >프리랜서 이름(클릭시 판매자정보 페이지로 이동)</a
+                      >
+                    </span>
+                    <div class="seller-level">한줄소개(구현 보류)</div>
+                  </div>
+                  <div class="user-info">
+                    <span class="user-info-rating d-flex align-items-center">
+                      <div class="star-rating-s15-wrapper">
+                        <!-- 별점 (어떻게 나타낼건지 고민)-->
+                        <span class="star-rating-s15 rate-10">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <span class="total-rating-out-five">5.0(별점)</span>
+                      <span class="total-rating">(36 reviews)(리뷰수)</span>
+                    </span>
+                    <a href="#">쪽지보내기(클릭시 쪽지 모달창 출력)</a>
+                  </div>
+                </div>
+              </div>
+              <div id="description" class="stats-desc">
+                <ul class="user-stats">
+                  <li>From<strong>${user.location}</strong></li>
+                  <li><strong></strong></li>
+                  <li>
+                    평균응답시간<strong
+                      >1 hour(쪽지 답장 정보로 표시 - 가능?)</strong
+                    >
+                  </li>
+                </ul>
+                <article class="seller-desc">
+                  <div class="inner" th:utext="${product.content}"></div>
+                </article>
+              </div>
+              <div id="packagesTable" class="table-package">
+                <!-- 가격 정보 -->
+                <h3>가격 정보</h3>
+                <form action="/post/payment" method="post">
+                  <table>
+                    <colgroup>
+                      <col />
+                      <col />
+                      <col />
+                      <col />
+                    </colgroup>
+                    <tbody>
+                      <tr class="package-type">
+                        <th>패키지</th>
+                        <td>
+                          <p class="price">[[${priceInfo.b_price}]]원</p>
+                          <b class="type">Basic</b
+                          ><b class="title">패키지 설명</b>
+                        </td>
+                        <td>
+                          <p class="price">[[${priceInfo.s_price}]]원</p>
+                          <b class="type">Standard</b
+                          ><b class="title">패키지 설명</b>
+                        </td>
+                        <td>
+                          <p class="price">[[${priceInfo.p_price}]]원</p>
+                          <b class="type">Premium</b
+                          ><b class="title">패키지 설명</b>
+                        </td>
+                      </tr>
+                      <tr class="description">
+                        <th></th>
+                        <td th:text="${priceInfo.b_pkg_description}"></td>
+                        <td th:text="${priceInfo.s_pkg_description}"></td>
+                        <td th:text="${priceInfo.p_pkg_description}"></td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <div
+                            class="fit-popover fit-popover-top fit-tooltip"
+                            data-position="top"
+                          >
+                            <span class="fit-popover-content"
+                              >원본 이미지 제공</span
+                            >
+                          </div>
+                        </th>
+                        <td
+                          th:attr="class=${priceInfo.b_original_image == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                        <td
+                          th:attr="class=${priceInfo.s_original_image == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                        <td
+                          th:attr="class=${priceInfo.p_original_image == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <div
+                            class="fit-popover fit-popover-top fit-tooltip"
+                            data-position="top"
+                          >
+                            <span class="fit-popover-content"
+                              >상업적 이용 가능</span
+                            >
+                          </div>
+                        </th>
+                        <td
+                          th:attr="class=${priceInfo.b_commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        >
+                          <input
+                            type="hidden"
+                            th:value="${priceInfo.b_commercial}"
+                            class="commercial_using"
+                            name="b_commercial"
+                          />
+                        </td>
+                        <td
+                          th:attr="class=${priceInfo.s_commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                        <td
+                          th:attr="class=${priceInfo.p_commercial == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <div
+                            class="fit-popover fit-popover-top fit-tooltip"
+                            data-position="top"
+                          >
+                            <span class="fit-popover-content"
+                              >SNS 이미지 키트 제공</span
+                            >
+                          </div>
+                        </th>
+                        <td
+                          th:attr="class=${priceInfo.b_sns_Kit == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                        <td
+                          th:attr="class=${priceInfo.s_sns_Kit == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                        <td
+                          th:attr="class=${priceInfo.p_sns_Kit == 'true' ? 'boolean-pricing-factor included' : 'boolean-pricing-factor'}"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <div
+                            class="fit-popover fit-popover-top fit-tooltip"
+                            data-position="top"
+                          >
+                            <span class="fit-popover-content">시안 개수</span>
+                          </div>
+                        </th>
+                        <td th:text="${priceInfo.b_draft}"></td>
+                        <td th:text="${priceInfo.s_draft}"></td>
+                        <td th:text="${priceInfo.p_draft}"></td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <div
+                            class="fit-popover fit-popover-top fit-tooltip"
+                            data-position="top"
+                          >
+                            <span class="fit-popover-content">수정 횟수</span>
+                          </div>
+                        </th>
+                        <td th:text="${priceInfo.b_revision}"></td>
+                        <td th:text="${priceInfo.s_revision}"></td>
+                        <td th:text="${priceInfo.p_revision}"></td>
+                      </tr>
+                      <tr class="delivery-time">
+                        <th>작업일</th>
+                        <td>
+                          <div class="fake-radio-wrapper">
+                            <label class="fake-radio">
+                              <input
+                                type="radio"
+                                name="b_delivery"
+                                th:value="${priceInfo.b_price}"
+                                checked
+                              />
+                              <span class="radio-img"></span
+                              ><span
+                                >[[${priceInfo.b_default_delivery}]] 일</span
+                              >
+                            </label>
+                            <label class="fake-radio">
+                              <input
+                                type="radio"
+                                name="b_delivery"
+                                th:value="${priceInfo.b_price+priceInfo.b_additional_price}"
+                              />
+                              <span class="radio-img"></span>
+                              <span>[[${priceInfo.b_minimum_delivery}]]일</span>
+                              <p class="faster-price">
+                                (+ [[${priceInfo.b_additional_price}]] 원)
+                              </p>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="fake-radio-wrapper">
+                            <label class="fake-radio">
+                              <input
+                                type="radio"
+                                name="s_delivery"
+                                th:value="${priceInfo.s_price}"
+                                checked
+                              />
+                              <span class="radio-img"></span>
+                              <span
+                                >[[${priceInfo.s_default_delivery}]] 일</span
+                              >
+                            </label>
+                            <label class="fake-radio">
+                              <input
+                                type="radio"
+                                name="s_delivery"
+                                th:value="${priceInfo.s_price+priceInfo.s_additional_price}"
+                              />
+                              <span class="radio-img"></span>
+                              <span
+                                >[[${priceInfo.s_minimum_delivery}]] 일</span
+                              >
+                              <p class="faster-price">
+                                (+[[${priceInfo.s_additional_price}]] 원)
+                              </p>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="fake-radio-wrapper">
+                            <label class="fake-radio">
+                              <input
+                                type="radio"
+                                name="p_delivery"
+                                th:value="${priceInfo.p_price}"
+                                checked
+                              />
+                              <span class="radio-img"></span>
+                              <span
+                                >[[${priceInfo.p_default_delivery}]] 일</span
+                              >
+                            </label>
+                            <label class="fake-radio">
+                              <input
+                                type="radio"
+                                name="p_delivery"
+                                th:value="${priceInfo.p_price+priceInfo.p_additional_price}"
+                              />
+                              <span class="radio-img"></span>
+                              <span
+                                >[[${priceInfo.p_minimum_delivery}]] 일</span
+                              >
+                              <p class="faster-price">
+                                (+[[${priceInfo.p_additional_price}]] 원)
+                              </p>
+                            </label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="select-package">
+                        <th>Total</th>
+                        <td>
+                          <p class="price-label" id="b-price">
+                            [[${priceInfo.b_price}]]원
+                          </p>
+                          <button
+                            id="test"
+                            name="abc"
+                            value="bbbbbb"
+                            type="submit"
+                          >
+                            선택하기
+                          </button>
+                        </td>
+                        <td>
+                          <p class="price-label" id="s-price">
+                            [[${priceInfo.s_price}]]원
+                          </p>
+                          <button name="abc" value="sssss" type="submit">
+                            선택하기
+                          </button>
+                        </td>
+                        <td>
+                          <p class="price-label" id="p-price">
+                            [[${priceInfo.p_price}]]원
+                          </p>
+                          <button type="submit">선택하기</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+              <!-- 거래 약관 -->
+              <div id="faq" class="faq">
+                <h3>거래 약관</h3>
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseOne"
+                          aria-expanded="true"
+                          aria-controls="collapseOne"
+                        >
+                          수정 및 재진행
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseOne"
+                      class="collapse show"
+                      aria-labelledby="headingOne"
+                      data-parent="#accordionExample"
+                    >
+                      <div
+                        class="card-body"
+                        th:text="${product.revisionPolicy}"
+                      >
+                        [수정 안내] · 수정 횟수는 주문 사양별 조건을 참조하시기
+                        바랍니다. · 각 상품 별 수정 제공 횟수 초과 시 별도의
+                        비용이 청구될 수 있습니다. · 기본 수정 범위 : 폰트,
+                        컬러, 배치, 간격 등 선택된 1개의 시안의 컨셉 범주 내에서
+                        수정 가능합니다. · 원하시는 폰트 요청 시, 해당
+                        폰트/저작권을 보유하고 계셔야 수정 가능합니다. · 시안
+                        확정 후에는 수정이 종료됩니다. (확정 후 수정 요청 시
+                        별도의 비용이 청구될 수 있습니다.) · *작업 전 요청사항*
+                        외에 새로운 컨셉 또는 방향을 제시하시는 경우 수정이 아닌
+                        재작업으로 간주되어 별도의 비용이 청구될 수 있습니다.
+                        [인쇄 안내] 철자, 오타, 폰트 사이즈 등 꼼꼼하게
+                        확인하시어 최종 컨펌해 주셔야 합니다. 합판 인쇄 (명함,
+                        전단) 특성상 인쇄(CMYK) 컬러는 모니터(RGB)와 차이가
+                        있습니다. 인쇄 시마다 컬러와 재단 오차가 상이할 수
+                        있습니다.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="collapseTwo"
+                        >
+                          취소 및 환불
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseTwo"
+                      class="collapse"
+                      aria-labelledby="headingTwo"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body" th:text="${product.refundPolicy}">
+                        01. 전문가와 의뢰인 간의 상호 협의 후 청약철회가
+                        가능합니다. 02. 전문가의 귀책사유로 디자인작업을
+                        시작하지 않았거나 혹은 이에 준하는 보편적인 관점에서
+                        심각하게 잘못 이행한 경우 결제 금액 전체 환불이
+                        가능합니다. 03. 전문가가 작업 기간 동안 지정된 서비스를
+                        제공하지 못할 것이 확실한 경우 지급받은 서비스 비용을
+                        일할 계산하여 작업물 개수와 작업 기간 일수만큼 공제하고
+                        잔여 금액을 환불합니다. 04. 서비스 받은 항목을 공제하여
+                        환불하며, 공제 비용은 정가 처리됩니다. 가. 소비자 피해
+                        보상 규정에 의거하여 작업물 원본의 멸실 및 작업 기간
+                        미이행 및 이에 상응하는 전문가 책임으로 인한 피해 발생
+                        시, 전액 환불 나. 시안 작업 진행된 상품 차감 환불 ⓐ.
+                        '디자인'에 대한 금액이 서비스 내 별도 기재가 되지
+                        않았거나, 디자인 상품 패키지 내 수정 횟수가 1회(1회
+                        포함) 이상인 서비스 상품의 시안 or 샘플이 제공된 경우 →
+                        구매금액의 10% 환불(디자인 비용이 별도 기재되어 있는
+                        경우, 해당금액 차감 후 환불)
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseThree"
+                          aria-expanded="false"
+                          aria-controls="collapseThree"
+                        >
+                          기타 안내 사항
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseThree"
+                      class="collapse"
+                      aria-labelledby="headingThree"
+                      data-parent="#accordionExample"
+                    >
+                      <div
+                        class="card-body"
+                        th:text="${product.otherInformation}"
+                      >
+                        이런 분들은 의뢰를 다시 한번 생각해주세요. 1.명령조의
+                        언행, 타인에대한 배려가 없으신 분 2.구매자의 입장을
+                        이용하여 조율이 아닌 일방적인 요구를 하시는 분
+                        3.이용사항을 충분히 숙지하지 않으신 분
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 리뷰 -->
+              <div id="reviews" class="review-section">
+                <div
+                  class="d-flex align-items-center justify-content-between mb-4"
+                >
+                  <h4 class="m-0">리뷰 (${review.length})</h4>
+                  <select
+                    class="custom-select custom-select-sm border-0 shadow-sm ml-2"
+                  >
+                    <option>별점 높은 순</option>
+                    <option>최근 순</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="stars-counters">
+                      <tbody>
+                        <tr class="">
+                          <td>
+                            <span>
+                              <button
+                                class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
+                              >
+                                5 Stars
+                              </button>
+                            </span>
+                          </td>
+                          <td class="progress-bar-container">
+                            <div
+                              class="fit-progressbar fit-progressbar-bar star-progress-bar"
+                            >
+                              <div class="fit-progressbar-background">
+                                <span
+                                  class="progress-fill"
+                                  style="width: 97.2973%"
+                                ></span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="star-num">(36)</td>
+                        </tr>
+                        <tr class="">
+                          <td>
+                            <span>
+                              <button
+                                class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
+                              >
+                                5 Stars
+                              </button>
+                            </span>
+                          </td>
+                          <td class="progress-bar-container">
+                            <div
+                              class="fit-progressbar fit-progressbar-bar star-progress-bar"
+                            >
+                              <div class="fit-progressbar-background">
+                                <span
+                                  class="progress-fill"
+                                  style="width: 2.2973%"
+                                ></span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="star-num">(2)</td>
+                        </tr>
+                        <tr class="">
+                          <td>
+                            <span>
+                              <button
+                                class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
+                              >
+                                5 Stars
+                              </button>
+                            </span>
+                          </td>
+                          <td class="progress-bar-container">
+                            <div
+                              class="fit-progressbar fit-progressbar-bar star-progress-bar"
+                            >
+                              <div class="fit-progressbar-background">
+                                <span
+                                  class="progress-fill"
+                                  style="width: 0"
+                                ></span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="star-num">(0)</td>
+                        </tr>
+                        <tr class="">
+                          <td>
+                            <span>
+                              <button
+                                class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
+                              >
+                                5 Stars
+                              </button>
+                            </span>
+                          </td>
+                          <td class="progress-bar-container">
+                            <div
+                              class="fit-progressbar fit-progressbar-bar star-progress-bar"
+                            >
+                              <div class="fit-progressbar-background">
+                                <span
+                                  class="progress-fill"
+                                  style="width: 0"
+                                ></span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="star-num">(0)</td>
+                        </tr>
+                        <tr class="">
+                          <td>
+                            <span>
+                              <button
+                                class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
+                              >
+                                5 Stars
+                              </button>
+                            </span>
+                          </td>
+                          <td class="progress-bar-container">
+                            <div
+                              class="fit-progressbar fit-progressbar-bar star-progress-bar"
+                            >
+                              <div class="fit-progressbar-background">
+                                <span
+                                  class="progress-fill"
+                                  style="width: 0"
+                                ></span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="star-num">(0)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <!-- <div class="ranking">
+										<h6 class="text-display-7">Rating Breakdown</h6>
+										<ul>
+											<li>Seller communication level<span>5<span
+													class="review-star rate-10 show-one"></span></span>
+											</li>
+											<li>Recommend to a friend<span>5<span
+													class="review-star rate-10 show-one"></span></span>
+											</li>
+											<li>Service as described<span>4.9<span
+													class="review-star rate-10 show-one"></span></span>
+											</li>
+										</ul>
+									</div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="review-list">
+                <ul>
+                  <li>
+                    <div class="d-flex">
+                      <div class="left">
+                        <span>
+                          <img
+                            th:src="@{/images/user/s5.png}"
+                            class="profile-pict-img img-fluid"
+                            alt=""
+                          />
+                        </span>
+                      </div>
+                      <div class="right">
+                        <h4>
+                          Askbootstrap
+                          <span class="gig-rating text-body-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 1792 1792"
+                              width="15"
+                              height="15"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
+                              ></path>
+                            </svg>
+                            5.0
+                          </span>
+                        </h4>
+                        <div class="country d-flex align-items-center">
+                          <span>
+                            <img
+                              class="country-flag img-fluid"
+                              th:src="@{/images/flag/india.png}"
+                            />
+                          </span>
+                          <div class="country-name font-accent">India</div>
+                        </div>
+                        <div class="review-description">
+                          <p>
+                            The process was smooth, after providing the required
+                            info, Pragyesh sent me an outstanding packet of
+                            wireframes. Thank you a lot!
+                          </p>
+                        </div>
+                        <span class="publish py-3 d-inline-block w-100"
+                          >Published 4 weeks ago</span
+                        >
+                        <div class="helpful-thumbs">
+                          <div class="helpful-thumb text-body-2">
+                            <span class="fit-icon thumbs-icon">
+                              <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.5804 7.81165C13.8519 7.45962 14 7 14 6.43858C14 5.40843 13.123 4.45422 12.0114 4.45422H10.0932C10.3316 3.97931 10.6591 3.39024 10.6591 2.54516C10.6591 0.948063 10.022 0 8.39207 0C7.57189 0 7.26753 1.03682 7.11159 1.83827C7.01843 2.31708 6.93041 2.76938 6.65973 3.04005C6.01524 3.68457 5.03125 5.25 4.44013 5.56787C4.38028 5.59308 4.3038 5.61293 4.22051 5.62866C4.06265 5.39995 3.79889 5.25 3.5 5.25H0.875C0.391754 5.25 0 5.64175 0 6.125V13.125C0 13.6082 0.391754 14 0.875 14H3.5C3.98325 14 4.375 13.6082 4.375 13.125V12.886C5.26354 12.886 7.12816 14.0002 9.22728 13.9996C9.37781 13.9997 10.2568 14.0004 10.3487 13.9996C11.9697 14 12.8713 13.0183 12.8188 11.5443C13.2325 11.0596 13.4351 10.3593 13.3172 9.70944C13.6578 9.17552 13.7308 8.42237 13.5804 7.81165ZM0.875 13.125V6.125H3.5V13.125H0.875ZM12.4692 7.5565C12.9062 7.875 12.9062 9.1875 12.3159 9.48875C12.6856 10.1111 12.3529 10.9439 11.9053 11.1839C12.1321 12.6206 11.3869 13.1146 10.3409 13.1246C10.2504 13.1255 9.32247 13.1246 9.22731 13.1246C7.23316 13.1246 5.54296 12.011 4.37503 12.011V6.44287C5.40611 6.44287 6.35212 4.58516 7.27847 3.65879C8.11368 2.82357 7.83527 1.43153 8.3921 0.874727C9.78414 0.874727 9.78414 1.84589 9.78414 2.54518C9.78414 3.69879 8.94893 4.21561 8.94893 5.32924H12.0114C12.6329 5.32924 13.1223 5.88607 13.125 6.44287C13.1277 6.99967 12.9062 7.4375 12.4692 7.5565ZM2.84375 11.8125C2.84375 12.1749 2.54994 12.4688 2.1875 12.4688C1.82506 12.4688 1.53125 12.1749 1.53125 11.8125C1.53125 11.4501 1.82506 11.1562 2.1875 11.1562C2.54994 11.1562 2.84375 11.4501 2.84375 11.8125Z"
+                                ></path>
+                              </svg>
+                            </span>
+                            <span class="thumb-title">Helpful</span>
+                          </div>
+                          <div class="helpful-thumb text-body-2 ml-3">
+                            <span class="fit-icon thumbs-icon">
+                              <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M0.419563 6.18835C0.148122 6.54038 6.11959e-07 7 5.62878e-07 7.56142C2.81294e-05 8.59157 0.876996 9.54578 1.98863 9.54578L3.90679 9.54578C3.66836 10.0207 3.34091 10.6098 3.34091 11.4548C3.34089 13.0519 3.97802 14 5.60793 14C6.42811 14 6.73247 12.9632 6.88841 12.1617C6.98157 11.6829 7.06959 11.2306 7.34027 10.9599C7.98476 10.3154 8.96875 8.75 9.55987 8.43213C9.61972 8.40692 9.6962 8.38707 9.77949 8.37134C9.93735 8.60005 10.2011 8.75 10.5 8.75L13.125 8.75C13.6082 8.75 14 8.35825 14 7.875L14 0.875C14 0.391754 13.6082 -3.42482e-08 13.125 -7.64949e-08L10.5 -3.0598e-07C10.0168 -3.48226e-07 9.625 0.391754 9.625 0.875L9.625 1.11398C8.73647 1.11398 6.87184 -0.000191358 4.77272 0.00038257C4.62219 0.000300541 3.74322 -0.000438633 3.65127 0.000382472C2.03027 -1.04643e-06 1.12867 0.981667 1.18117 2.45566C0.76754 2.94038 0.564868 3.64065 0.682829 4.29056C0.342234 4.82448 0.269227 5.57763 0.419563 6.18835ZM13.125 0.875L13.125 7.875L10.5 7.875L10.5 0.875L13.125 0.875ZM1.53079 6.4435C1.09375 6.125 1.09375 4.8125 1.6841 4.51125C1.31436 3.88891 1.64713 3.05613 2.09467 2.81605C1.86791 1.37941 2.61313 0.885417 3.65906 0.875355C3.74962 0.874535 4.67753 0.875355 4.77269 0.875355C6.76684 0.875355 8.45704 1.98898 9.62497 1.98898L9.62497 7.55713C8.5939 7.55713 7.64788 9.41484 6.72153 10.3412C5.88632 11.1764 6.16473 12.5685 5.6079 13.1253C4.21586 13.1253 4.21586 12.1541 4.21586 11.4548C4.21586 10.3012 5.05107 9.78439 5.05107 8.67076L1.9886 8.67076C1.36708 8.67076 0.877707 8.11393 0.874973 7.55713C0.872266 7.00033 1.09375 6.5625 1.53079 6.4435ZM11.1563 2.1875C11.1563 1.82506 11.4501 1.53125 11.8125 1.53125C12.1749 1.53125 12.4688 1.82506 12.4688 2.1875C12.4688 2.54994 12.1749 2.84375 11.8125 2.84375C11.4501 2.84375 11.1563 2.54994 11.1563 2.1875Z"
+                                ></path>
+                              </svg>
+                            </span>
+                            <span class="thumb-title">Not Helpful</span>
+                          </div>
+                        </div>
+                        <div class="response-item mt-4 d-flex">
+                          <div class="left">
+                            <span>
+                              <img
+                                th:src="@{/images/user/s1.png}"
+                                class="profile-pict-img img-fluid"
+                                alt=""
+                              />
+                            </span>
+                          </div>
+                          <div class="right">
+                            <h4>
+                              Gurdeep Osahan
+                              <span class="gig-rating text-body-2">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 1792 1792"
+                                  width="15"
+                                  height="15"
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
+                                  ></path>
+                                </svg>
+                                5.0
+                              </span>
+                            </h4>
+                            <div class="country d-flex align-items-center">
+                              <span>
+                                <img
+                                  class="country-flag img-fluid"
+                                  th:src="@{/images/flag/india.png}"
+                                />
+                              </span>
+                              <div class="country-name font-accent">India</div>
+                            </div>
+                            <div class="review-description">
+                              <p>
+                                The process was smooth, after providing the
+                                required info, Pragyesh sent me an outstanding
+                                packet of wireframes. Thank you a lot!
+                              </p>
+                            </div>
+                            <span class="publish py-3 d-inline-block w-100"
+                              >Published 4 weeks ago</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- 태그(보류) -->
+              <div class="tags">
+                <h3>Related tags</h3>
+                <ul class="d-flex">
+                  <li><a href="#">Mobile Ui</a></li>
+                  <li><a href="#">UI/UX</a></li>
+                  <li><a href="#">Prototype</a></li>
+                  <li><a href="#">Wireframes</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- 가격정보(거래신청) 우측 사이드 내브바 -->
+          <div class="col-lg-4 right">
+            <div class="sticky">
+              <ul class="nav nav-tabs">
+                <li>
+                  <a class="active" data-toggle="tab" href="#basic">Basic</a>
+                </li>
+                <li><a data-toggle="tab" href="#standard">Standard</a></li>
+                <li><a data-toggle="tab" href="#Premium">Premium</a></li>
+              </ul>
+              <div class="tab-content">
+                <div id="basic" class="tab-pane fade show active">
+                  <div class="header">
+                    <h3>
+                      <b class="title">베이직</b
+                      ><span class="price">[[${priceInfo.b_price}]]원</span>
+                    </h3>
+                    <p>[[${priceInfo.b_pkg_description}]]</p>
+                  </div>
+                  <article>
+                    <div class="d-flex">
+                      <b class="delivery"
+                        ><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        [[${priceInfo.b_default_delivery}]] 작업일</b
+                      >
+                      <b class="delivery ml-3"
+                        ><i class="fa fa-refresh" aria-hidden="true"></i> 수정
+                        [[${priceInfo.b_revision}]] 회</b
+                      >
+                    </div>
+                    <ul class="features">
+                      <li
+                        th:attr="class=${priceInfo.b_original_image == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>원본 파일
+                        제공
+                      </li>
+                      <li
+                        th:attr="class=${priceInfo.b_commercial == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>상업적
+                        이용 가능
+                      </li>
+                      <li
+                        th:attr="class=${priceInfo.b_sns_Kit == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>SNS 키트
+                        제공
+                      </li>
+                      <li class="feature included">
+                        <i class="fa fa-check" aria-hidden="true"></i>시안 개수
+                        : [[${priceInfo.b_draft}]]
+                      </li>
+                    </ul>
+                  </article>
+                  <button>계속하기 (결제페이지로 이동)</button>
+                </div>
+                <div id="standard" class="tab-pane fade">
+                  <div class="header">
+                    <h3>
+                      <b class="title">스탠다드</b
+                      ><span class="price">[[${priceInfo.s_price}]]원</span>
+                    </h3>
+                    <p>[[${priceInfo.s_pkg_description}]]</p>
+                  </div>
+                  <article>
+                    <div class="d-flex">
+                      <b class="delivery"
+                        ><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        [[${priceInfo.s_default_delivery}]] 작업일</b
+                      ><b class="delivery ml-3"
+                        ><i class="fa fa-refresh" aria-hidden="true"></i> 수정
+                        [[${priceInfo.s_revision}]] 회</b
+                      >
+                    </div>
+                    <ul class="features">
+                      <li
+                        th:attr="class=${priceInfo.s_original_image == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>원본 파일
+                        제공
+                      </li>
+                      <li
+                        th:attr="class=${priceInfo.s_commercial == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>상업적
+                        이용 가능
+                      </li>
+                      <li
+                        th:attr="class=${priceInfo.s_sns_Kit == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>SNS 키트
+                        제공
+                      </li>
+                      <li class="feature included">
+                        <i class="fa fa-check" aria-hidden="true"></i>시안 개수
+                        : [[${priceInfo.s_draft}]]
+                      </li>
+                    </ul>
+                  </article>
+                  <button>계속하기 (결제페이지로 이동)</button>
+                </div>
+                <div id="Premium" class="tab-pane fade">
+                  <div class="header">
+                    <h3>
+                      <b class="title">프리미엄</b
+                      ><span class="price">[[${priceInfo.p_price}]]원</span>
+                    </h3>
+                    <p>[[${priceInfo.p_pkg_description}]]</p>
+                  </div>
+                  <article>
+                    <div class="d-flex">
+                      <b class="delivery"
+                        ><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        [[${priceInfo.p_default_delivery}]] 작업일</b
+                      ><b class="delivery ml-3"
+                        ><i class="fa fa-refresh" aria-hidden="true"></i> 수정
+                        [[${priceInfo.p_revision}]] 회</b
+                      >
+                    </div>
+                    <ul class="features">
+                      <li
+                        th:attr="class=${priceInfo.p_original_image == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>원본 파일
+                        제공
+                      </li>
+                      <li
+                        th:attr="class=${priceInfo.p_commercial == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>상업적
+                        이용 가능
+                      </li>
+                      <li
+                        th:attr="class=${priceInfo.p_sns_Kit == 'true' ? 'feature included' : 'feature'}"
+                      >
+                        <i class="fa fa-check" aria-hidden="true"></i>SNS 키트
+                        제공
+                      </li>
+                      <li class="feature included">
+                        <i class="fa fa-check" aria-hidden="true"></i>시안 개수
+                        : [[${priceInfo.p_draft}]]
+                      </li>
+                    </ul>
+                  </article>
+                  <button>계속하기 (결제페이지로 이동)</button>
+                </div>
+              </div>
+              <div class="contact-seller-wrapper">
+                <a class="fit-button" href="#"
+                  >판매자에게 쪽지 보내기(쪽지 모달창 팝업)</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 신고모달창 -->
+    <div
+      class="modal fade"
+      id="reportModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">신고하기</h4>
+            <h5 style="opacity: 0.7">신고 사유를 선택해 주세요</h5>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button> -->
+          </div>
+          <div class="modal-body">
+            <div class="report-modal-body">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="reportRadios"
+                  id="reportRadio1"
+                  value="reason1"
+                  checked
+                />
+                <label class="form-check-label" for="reportRadio1">
+                  카테고리와 맞지 않는 게시물
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="reportRadios"
+                  id="reportRadio2"
+                  value="reason2"
+                />
+                <label class="form-check-label" for="reportRadio2">
+                  타 사이트 홍보성 게시물
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="reportRadios"
+                  id="reportRadio3"
+                  value="reason3"
+                />
+                <label class="form-check-label" for="reportRadio3">
+                  음란성/청소년 유해 게시물
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="reportRadios"
+                  id="reportRadio4"
+                  value="reason4"
+                />
+                <label class="form-check-label" for="reportRadio4">
+                  저작권 침해 게시물
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="reportRadios"
+                  id="reportRadio5"
+                  value="reason5"
+                />
+                <label class="form-check-label" for="reportRadio5">
+                  비방/비하/욕설 게시물
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="reportCancel"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+            <button type="button" id="report" class="btn btn-primary">
+              신고하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</html>
+
+<script>
+  $("[name='b_delivery']").change(function (e) {
+    let result;
+    e.preventDefault();
+    let radioArr = document.getElementsByName("b_delivery");
+    for (let radio of radioArr) {
+      if (radio.checked) {
+        result = radio.value;
+      }
+    }
+    $("#b-price").text(result + "원");
+  });
+
+  $("[name='s_delivery']").change(function (e) {
+    let result;
+    e.preventDefault();
+    let radioArr = document.getElementsByName("s_delivery");
+    for (let radio of radioArr) {
+      if (radio.checked) {
+        result = radio.value;
+      }
+    }
+    $("#s-price").text(result + "원");
+  });
+
+  $("[name='p_delivery']").change(function (e) {
+    let result;
+    e.preventDefault();
+    let radioArr = document.getElementsByName("p_delivery");
+    for (let radio of radioArr) {
+      if (radio.checked) {
+        result = radio.value;
+      }
+    }
+    $("#p-price").text(result + "원");
+  });
+
+  $("#reportBtn").click(function (e) {
+    e.preventDefault();
+    $("#reportModal").modal("show");
+  });
+  $("#reportCancel").click(function (e) {
+    e.preventDefault();
+    $("#reportModal").modal("hide");
+  });
+  $("#report").click(function (e) {
+    e.preventDefault();
+    let reason = $("input[name='reportRadios']:checked").val();
+    let pid = `[[${product.product_id}]]`;
+    let reported_userid = 10;
+    $.ajax({
+      type: "POST",
+      url: "/post/report",
+      data: { reason: reason, pid: pid, reported_userid: reported_userid },
+      success: function (res) {
+        alert(res);
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("ajax 통신 실패.");
+      },
+    });
+    $("#reportModal").modal("hide");
+  });
+
+  $("#like").click(function () {
+    let pid = `[[${product.product_id}]]`;
+    $.ajax({
+      type: "POST",
+      url: "/post/like",
+      data: { pid: pid },
+      success: function (likeInfo) {
+        if (likeInfo.isLike) {
+          $("#like .heart").html(
+            "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='red' class='bi bi-heart' viewBox='0 0 16 16' > <path class='like' fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg>"
+          );
+          let num = $("#like").text();
+          console.log(num);
+          $("#likeNum").text(Number(num) + 1);
+        } else {
+          $("#like .heart").html(
+            "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='red' class='bi bi-heart' viewBox='0 0 16 16' > <path class='like' d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/></svg>"
+          );
+          let num = $("#likeNum").text();
+          console.log(num);
+          $("#likeNum").text(num - 1);
+        }
+
+        //res를 Integer로 받아서 그 결과값으로 찜하기버튼의 하트 색을 변경하는 로직 필요 [1:찜한상]
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("ajax 통신 실패.");
+      },
+    });
+  });
+</script>

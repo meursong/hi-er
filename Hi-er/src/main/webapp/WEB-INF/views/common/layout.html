@@ -203,9 +203,56 @@
 			</ul>
 		</div>
 	</nav>
-
-	<section layout:fragment="contents"></section>
-
+                <a class="dropdown-item" href="profile.html">Profile</a>
+                <a class="dropdown-item" href="company-profile.html"
+                  >Company Profile</a
+                >
+                <a class="dropdown-item" href="alerts.html">Alerts</a>
+                <a class="dropdown-item" href="messages.html">Messages</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownBlog"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Other Pages
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="login.html">Login</a>
+                <a class="dropdown-item" href="register.html">Register</a>
+                <a class="dropdown-item" href="forgot-password.html"
+                  >Forgot Password</a
+                >
+                <a class="dropdown-item" href="faq.html">FAQ</a>
+                <a class="dropdown-item" href="404.html">404 Page</a>
+                <a class="dropdown-item" href="blank.html">Blank Page</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="freelancerForm">
+              <i class="fa fa-fw fa-trophy"></i> <span>프리랜서 전환</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <img
+                class="country-flag img-fluid"
+                th:src="@{/images/flag/india.png}"
+              />
+              <span>English</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 	<footer class="bg-white">
 		<div class="container">
 			<div class="d-flex justify-content-between">
@@ -282,3 +329,4 @@
 <!-- Custom -->
 <script th:src="@{/js/custom.js}"></script>
 </html>
+

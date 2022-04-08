@@ -24,7 +24,6 @@ public class MainController {
 	
 	@Autowired
 	MainService mainService;
-
 //	@GetMapping({"", "/"})
 //	public String mainPage() {
 //		return "index";
@@ -109,7 +108,6 @@ public class MainController {
 		return mav;
 	}
 	
-	
 	@RequestMapping("/search")
 	public ModelAndView getSearch(String keyword) {
 		ModelAndView mav = new ModelAndView("404");
@@ -132,3 +130,4 @@ public class MainController {
 	}
 
 }
+
