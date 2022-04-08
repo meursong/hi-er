@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="Gurdeep singh osahan">
+      <meta name="author" content="Gurdeep singh osahan">
+      <title>로그인</title>
+      <!-- Favicon Icon --> 
+      <link rel="icon" type="image/png" th:href="@{/images/fav.svg}">
+      <!-- Bootstrap core CSS -->
+      <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+      <!-- Font Awesome-->
+      <link th:href="@{/vendor/fontawesome/css/font-awesome.min.css}" rel="stylesheet">
+      <!-- Material Design Icons -->
+      <link th:href="@{/vendor/icons/css/materialdesignicons.min.css}" media="all" rel="stylesheet" type="text/css">
+      <!-- Slick -->
+      <link th:href="@{/vendor/slick-master/slick/slick.css}" rel="stylesheet" type="text/css">
+      <!-- Lightgallery -->
+      <link th:href="@{/vendor/lightgallery-master/dist/css/lightgallery.min.css}" rel="stylesheet">
+      <!-- Select2 CSS -->
+      <link th:href="@{/vendor/select2/css/select2-bootstrap.css}" />
+      <link th:href="@{/vendor/select2/css/select2.min.css}" rel="stylesheet">
+      <!-- Custom styles for this template -->
+      <link th:href="@{/css/style.css}" rel="stylesheet">
+   </head>
+   <body>
+      <!-- Login -->
+      <div class="bg-white">
+         <div class="container">
+            <div class="row justify-content-center align-items-center d-flex vh-100">
+               <div class="col-lg-4 mx-auto">
+                  <div class="osahan-login py-4">
+                     <div class="text-center mb-4">
+                        <a th:href="@{/}"><img src="images/fav.svg" alt=""></a>
+                        <h5 class="font-weight-bold mt-3">로그인</h5>
+                     </div>
+                     <form method="post" th:action="@{/login}">
+                        <div class="form-group">
+                           <label class="mb-1">이메일</label>
+                           <div class="position-relative icon-form-control">
+                              <i class="mdi mdi-account position-absolute"></i>
+                              <input type="email" name="email" class="form-control">
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="mb-1">비밀번호</label>
+                           <div class="position-relative icon-form-control">
+                              <i class="mdi mdi-key-variant position-absolute"></i>
+                              <input type="password" name="password" class="form-control">
+                           </div>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                           <input type="checkbox" class="custom-control-input" id="customCheck1">
+                           <label class="custom-control-label" for="customCheck1">아이디저장</label>
+                        </div>
+                        <button class="btn btn-success btn-block text-uppercase" type="submit"> 로그인 </button>
+                        <div class="text-center mt-3 border-bottom pb-3">
+                           <p class="medium text-muted">간편로그인</p>
+                           <div class="row">
+                              <div class="col-6">
+                                 <button type="button" class="btn btn-outline-instagram btn-block"><i class="mdi mdi-instagram"></i> Instagram</button>
+                              </div>
+                              <div class="col-6">
+                                 <button type="button" class="btn btn-outline-facebook btn-block"><i class="mdi mdi-facebook"></i> Facebook</button>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="py-3 d-flex align-item-center">
+                           <a th:href="@{/forgot-password.html}">아이디/비밀번호 찾기</a>
+                           <span class="ml-auto"> <a th:href="@{/signup}">회원가입</a></span>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+   </body>
+</html>

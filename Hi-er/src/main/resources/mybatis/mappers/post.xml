@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.hier.dao.PostDAO">
+	<select id="queryProduct" resultType="Product" parameterType="integer">
+		<![CDATA[
+			select * from product where product_id=#{id}
+		]]>
+	</select>
+	<select id="queryDesignPriceInfo" resultType="Product" parameterType="integer">
+		<![CDATA[
+			select * from design_price_info where product_price_id=#{id}
+		]]>
+	</select>
+	<select id="getMaxProductId" resultType="integer">
+		<![CDATA[
+			select max(product_id) from product
+		]]> 	
+	</select>
+	<insert id="insertProduct" parameterType="Product">
+		<![CDATA[
+			insert into product (product_id,
+								 seller_id,
+								 is_available,
+								 category,
+								 title,
+								 filename1,
+								 filename2,
+								 filename3,
+								 filename4,
+								 filename5,
+								 filename6,
+								 filename7,
+								 filename8,
+								 content,
+								 revisionPolicy,
+								 refundPolicy,
+								 otherInformation,
+								 createdAt
+								 )
+			             values(#{product_id},
+			             		#{seller_id},
+			             		#{is_available},
+			             		#{category},
+			             		#{title},
+			                    #{filename1},
+			                    #{filename2},
+			                    #{filename3},
+			                    #{filename4},
+			                    #{filename5},
+			                    #{filename6},
+			                    #{filename7},
+			                    #{filename8},
+			                    #{content},
+			                    #{revisionPolicy},
+			                    #{refundPolicy},
+			                    #{otherInformation},
+			                    now()
+			                    )
+		]]> 
+	</insert> 
+	<insert id="insertDesignPriceInfo" parameterType="Product">
+		<![CDATA[
+			insert into design_price_info (
+								 product_price_id,
+								 b_pkg_description,
+								 s_pkg_description,
+								 p_pkg_description,
+								 b_original_image,
+								 s_original_image,
+								 p_original_image,
+								 b_commercial,
+								 s_commercial,
+								 p_commercial,
+								 b_sns_Kit,
+								 s_sns_Kit,
+								 p_sns_Kit,
+								 b_draft,
+								 s_draft,
+								 p_draft,
+								 b_revision,
+								 s_revision,
+								 p_revision,
+								 b_default_delivery,
+								 s_default_delivery,
+								 p_default_delivery,
+								 b_minimum_delivery,
+								 s_minimum_delivery,
+								 p_minimum_delivery,
+								 b_additional_price,
+								 s_additional_price,
+								 p_additional_price,
+								 b_price,
+								 s_price,
+								 p_price)
+								   values(
+								#{product_id},   
+								#{b_pkg_description},
+			                    #{s_pkg_description},
+			                    #{p_pkg_description},
+			                    #{b_original_image},
+			                    #{s_original_image},
+			                    #{p_original_image},
+			                    #{b_commercial},
+			                    #{s_commercial},
+			                    #{p_commercial},
+			                    #{b_sns_Kit},
+			                    #{s_sns_Kit},
+			                    #{p_sns_Kit},
+			                    #{b_draft},
+			                    #{s_draft},
+			                    #{p_draft},
+			                    #{b_revision},
+			                    #{s_revision},
+			                    #{p_revision},
+			                    #{b_default_delivery},
+			                    #{s_default_delivery},
+			                    #{p_default_delivery},
+			                    #{b_minimum_delivery},
+			                    #{s_minimum_delivery},
+			                    #{p_minimum_delivery},
+			                    #{b_additional_price},
+			                    #{s_additional_price},
+			                    #{p_additional_price},
+			                    #{b_price},
+			                    #{s_price},
+			                    #{p_price})
+			]]> 
+	</insert> 
+	<insert id="insertReport">
+		<![CDATA[
+			insert into report(
+			reason,product_id,reported_userid,report_userid,createdAt
+			) values(
+			#{reason},#{product_id},#{reported_userid},#{report_userid},now()
+			)
+		]]> 
+	</insert>
+	<select id="likeCheck" resultType="Integer">
+		<![CDATA[
+			select count(product_id) from likes where product_id=#{product_id} and like_userid=#{like_userid}
+		]]>
+	</select>
+	
+	<select id="likeNum" resultType="Integer">
+		<![CDATA[
+			select count(*) from likes where product_id=#{product_id}
+		]]>
+	</select>
+	
+	<insert id="like">
+		<![CDATA[
+			insert into likes(
+			product_id,liked_userid,like_userid,createdAt
+			) values(
+			#{product_id},#{liked_userid},#{like_userid},now()
+			)
+		]]> 
+	</insert>
+	<delete id="unlike">
+		<![CDATA[
+			delete from likes where product_id=#{product_id} and like_userid=#{like_userid}
+		]]> 
+	</delete>
+</mapper>
