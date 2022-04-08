@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService{
 	 
 	@Override
 	public User selectEmail(int user_id) throws Exception {
-		User user = ud.selectUSerEmail(user_id);
+		User user = ud.selectUserEmail(user_id);
 		if(user==null) throw new Exception("오류");
 		return user;
 	}

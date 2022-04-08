@@ -68,7 +68,7 @@
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-        where p.category = "디자인"
+        where p.category = '디자인'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
@@ -89,7 +89,7 @@
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-        where p.category = "영상"
+        where p.category = '영상'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
@@ -110,7 +110,7 @@
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-        where p.category = "it"
+        where p.category = 'it'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
@@ -123,7 +123,7 @@
         select count(*)
         from product
         WHERE REPLACE(title, ' ', '') like '%${searchKeyword}%'
-           or title like "%#{searchKeyword}%"
+           or title like '%#{searchKeyword}%'
            or REPLACE(content, ' ', '') like '%${searchKeyword}%'
            or content like '%${searchKeyword}%';
         ]]>
@@ -140,7 +140,7 @@
 		<![CDATA[
         select count(*)
         from product
-        where category = "디자인";
+        where category = '디자인';
         ]]>
 	</select>
 
@@ -148,7 +148,7 @@
 		<![CDATA[
         select count(*)
         from product
-        where category = "영상";
+        where category = '영상';
         ]]>
 	</select>
 
@@ -156,7 +156,7 @@
 		<![CDATA[
         select count(*)
         from product
-        where category = "it";
+        where category = 'it';
         ]]>
 	</select>
 

@@ -3,7 +3,7 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.UserDAO">
 
-	<select id="selectUSerEmail" resultType="User" parameterType="Integer">
+	<select id="selectUserEmail" resultType="User" parameterType="Integer">
 		<![CDATA[
 			select email from user where user_id=#{user_id}
 		]]>
@@ -18,11 +18,11 @@
 
 	<insert id="insert_info_f" parameterType="FreelancerForm">
 		<![CDATA[
-			insert into f_info (f_id, address, address2, introduction) value(#{f_id}, #{address}, #{address2}, #{introduction});
+			insert into f_info (f_id, address, address2, introduction) value(#{user_id}, #{address}, #{address2}, #{introduction});
 		]]>
 	</insert>
 
-	<update id="update_type_f" parameterType="User">
+	<update id="update_type_f" parameterType="Integer">
 		<![CDATA[
 			update user set type=2, updatedAt=current_timestamp() where user_id=#{user_id}
 		]]>

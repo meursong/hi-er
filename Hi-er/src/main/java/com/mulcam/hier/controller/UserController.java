@@ -42,10 +42,11 @@ public class UserController {
 
 	@PostMapping("freelancerForm")
 	public String joinFreelancer(FreelancerForm form) throws Exception {
-		int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-		FreelancerForm freelancer = new FreelancerForm(user_id, form.getAddress(), form.getAddress2(), form.getIntroduction());
-		us.insert_info(freelancer);
+		Integer user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+		form.setUser_id(user_id);
+		FreelancerForm freelancer = new FreelancerForm(form.getUser_id(), form.getAddress(), form.getAddress2(), form.getIntroduction());
 		us.update_type(user_id);
+		us.insert_info(freelancer);
 		return "redirect:/";
 	}
 	
