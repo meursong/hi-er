@@ -44,17 +44,11 @@ public class User {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public MultipartFile getProfile_image() {
+	public String getProfile_image() {
 		return profile_image;
 	}
-	public void setProfile_image(MultipartFile profile_image) {
+	public void setProfile_image(String profile_image) {
 		this.profile_image = profile_image;
-	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
 	}
 	public Date getCreatedAt() {
 		return createdAt;

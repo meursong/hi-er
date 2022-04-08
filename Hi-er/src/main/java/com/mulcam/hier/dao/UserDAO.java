@@ -1,6 +1,7 @@
 package com.mulcam.hier.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,6 @@ public interface UserDAO {
   public FreelancerUser select_info_f(int user_id) throws Exception;
   public void insert_info_f(FreelancerUser f_info) throws Exception;
   public void update_type_f(int user_id) throws Exception;
+public String emailCheck(String useremail);
+public User login(Map<String, String> param);
 }
