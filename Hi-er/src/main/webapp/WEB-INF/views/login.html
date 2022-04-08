@@ -9,7 +9,7 @@
       <meta name="author" content="Gurdeep singh osahan">
       <title>로그인</title>
       <!-- Favicon Icon --> 
-      <link rel="icon" type="image/png" th:href="@{/images/fav.svg}">
+	 <link rel="icon" type="image/png" th:href="@{images/titlelogo.ico}">
       <!-- Bootstrap core CSS -->
       <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
       <!-- Font Awesome-->
@@ -34,7 +34,7 @@
                <div class="col-lg-4 mx-auto">
                   <div class="osahan-login py-4">
                      <div class="text-center mb-4">
-                        <a th:href="@{/}"><img src="images/fav.svg" alt=""></a>
+                        <a th:href="@{/}"><img th:src="@{images/titlelogo.png}" alt=""></a>
                         <h5 class="font-weight-bold mt-3">로그인</h5>
                      </div>
                      <form method="post" th:action="@{/login}">
