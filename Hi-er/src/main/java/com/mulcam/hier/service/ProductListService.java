@@ -10,4 +10,5 @@ public interface ProductListService {
 	List<ProductList> selectProduct1(ProductList params) throws Exception;
 	List<ProductList> selectProduct2(ProductList params) throws Exception;
 	List<ProductList> selectProduct3(ProductList params) throws Exception;
+	List<ProductList> selectProductSearch(ProductList params) throws Exception;
 }

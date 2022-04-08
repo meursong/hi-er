@@ -129,14 +129,13 @@
 
 		const value = $(this).val()
 		$.ajax({
-			url : "all",
 			type : "POST",
 			data : {
 				"value" : value
 			},
 
 			success : function(data) {
-				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5");
+				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=[[${params.searchKeyword}]]");
 				// console.log(data);
 			},
 
@@ -145,7 +144,6 @@
 			$('#productList').replaceWith(fragment);
 
 		});
-
 		console.log(value);
 		/*  $("form[name='filter']").submit(); */
 	})

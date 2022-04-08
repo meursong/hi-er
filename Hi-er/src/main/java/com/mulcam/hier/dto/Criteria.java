@@ -46,6 +46,7 @@ public class Criteria {
         this.recordsPerPage = 12;
         this.pageSize = 5;
         this.sort = "product_id";
+        this.searchKeyword = "";
     }
 
     public String makeQueryString(int pageNo) {
@@ -57,7 +58,6 @@ public class Criteria {
                 .queryParam("pageSize", pageSize)
 //                .queryParam("searchType", searchType)
                 .queryParam("searchKeyword", searchKeyword)
-
                 .build()
                 .encode();
 

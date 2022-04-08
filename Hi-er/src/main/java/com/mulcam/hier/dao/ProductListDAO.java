@@ -15,11 +15,13 @@ public interface ProductListDAO {
 	public List<ProductList> selectProduct1(ProductList productList);
 	public List<ProductList> selectProduct2(ProductList productList);
 	public List<ProductList> selectProduct3(ProductList productList);
+	public List<ProductList> selectProductSearch(ProductList productList);
 	
 	public Integer selectTotalCount();
 	public Integer selectCount1();
 	public Integer selectCount2();
 	public Integer selectCount3();
+	public Integer selectSearchCount();
 	
 
 }

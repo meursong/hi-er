@@ -23,23 +23,21 @@ public class ProductListController {
 	@GetMapping("product/category/{id}")
 	public String categoryPage(@PathVariable("id") String id, @ModelAttribute("params") ProductList params, Model model)
 			throws Exception {
-		System.out.println(id);
 
 		switch (id) {
-		
-		case "all":
+			case "all":
 
-			List<ProductList> selectProductDate = productListService.selectProductTotal(params);
-			model.addAttribute("productList", selectProductDate);
-			break;
-		
-		case "1":
+				List<ProductList> selectProductDate = productListService.selectProductTotal(params);
+				model.addAttribute("productList", selectProductDate);
+				break;
 
-			List<ProductList> selectProduct1 = productListService.selectProduct1(params);
-			model.addAttribute("productList", selectProduct1);
-			break;
+			case "1":
 
-		case "2":
+				List<ProductList> selectProduct1 = productListService.selectProduct1(params);
+				model.addAttribute("productList", selectProduct1);
+				break;
+
+			case "2":
 
 			List<ProductList> selectProduct2 = productListService.selectProduct2(params);
 			model.addAttribute("productList", selectProduct2);
@@ -51,54 +49,67 @@ public class ProductListController {
 			model.addAttribute("productList", selectProduct3);
 			break;
 		}
-		return "/productCategory"+id;
+		return "/productCategory";
 	}
 
-	@PostMapping("/product/category/all")
-	public String productLisSortAll(@RequestParam String value, @ModelAttribute("params") ProductList params,
+	@PostMapping("/product/category/{id}")
+	public String productLisSortAll(@PathVariable("id") String id, @RequestParam String value, @ModelAttribute("params") ProductList params,
 			Model model) throws Exception {
-
-		params.setSort(value);
-		List<ProductList> sorttProductDate1 = productListService.selectProductTotal(params);
-		model.addAttribute("productList", sorttProductDate1);
-
-		return "/productCategoryall :: #productList";
+		switch (id) {
+			case "all":
+				params.setSort(value);
+				List<ProductList> sortProductDate1 = productListService.selectProductTotal(params);
+				model.addAttribute("productList", sortProductDate1);
+				break;
+			case "1":
+				params.setSort(value);
+				List<ProductList> sortProduct1 = productListService.selectProduct1(params);
+				model.addAttribute("productList", sortProduct1);
+				break;
+			case "2":
+				params.setSort(value);
+				List<ProductList> sortProduct2 = productListService.selectProduct2(params);
+				model.addAttribute("productList", sortProduct2);
+				break;
+			case "3":
+				params.setSort(value);
+				List<ProductList> sortProduct3 = productListService.selectProduct3(params);
+				model.addAttribute("productList", sortProduct3);
+				break;
+		}
+		return "/productCategory :: #productList";
 	}
 
-	@PostMapping("/product/category/1")
-	public String categoryPageSort1(@RequestParam String value, @ModelAttribute("params") ProductList params,
-			Model model) throws Exception {
+	@GetMapping("product/a")
+	public String searchPage(@PathVariable("id") String id, @ModelAttribute("params") ProductList params, Model model)
+			throws Exception {
 
-		params.setSort(value);
-		List<ProductList> sortProduct1 = productListService.selectProduct1(params);
-		model.addAttribute("productList", sortProduct1);
+		switch (id) {
+			case "all":
 
-		return "/productCategory1 :: #productList";
+				List<ProductList> selectProductDate = productListService.selectProductTotal(params);
+				model.addAttribute("productList", selectProductDate);
+				break;
 
-	}
-	
-	@PostMapping("/product/category/2")
-	public String categoryPageSort2(@RequestParam String value, @ModelAttribute("params") ProductList params,
-			Model model) throws Exception {
+			case "1":
 
-		params.setSort(value);
-		List<ProductList> sortProduct2 = productListService.selectProduct2(params);
-		model.addAttribute("productList", sortProduct2);
+				List<ProductList> selectProduct1 = productListService.selectProduct1(params);
+				model.addAttribute("productList", selectProduct1);
+				break;
 
-		return "/productCategory2 :: #productList";
+			case "2":
 
-	}
-	
-	@PostMapping("/product/category/3")
-	public String categoryPageSort3(@RequestParam String value, @ModelAttribute("params") ProductList params,
-			Model model) throws Exception {
+				List<ProductList> selectProduct2 = productListService.selectProduct2(params);
+				model.addAttribute("productList", selectProduct2);
+				break;
 
-		params.setSort(value);
-		List<ProductList> sortProduct3 = productListService.selectProduct3(params);
-		model.addAttribute("productList", sortProduct3);
+			case "3":
 
-		return "/productCategory3 :: #productList";
-
+				List<ProductList> selectProduct3 = productListService.selectProduct3(params);
+				model.addAttribute("productList", selectProduct3);
+				break;
+		}
+		return "/productCategory";
 	}
 
 }
