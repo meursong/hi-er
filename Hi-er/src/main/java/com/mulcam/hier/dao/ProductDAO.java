@@ -14,7 +14,4 @@ public interface ProductDAO {
 
 	public List<Product> searchProduct(String keyword) throws Exception;
 	
-
-public class ProductDAO {
-
 }

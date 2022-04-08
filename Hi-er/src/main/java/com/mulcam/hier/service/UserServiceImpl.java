@@ -8,7 +8,7 @@ import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.User;
 
 @Service
-public class UserServiceImpl{
+public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserDAO userDAO;
