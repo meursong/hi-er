@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public FreelancerUser freelancerInfo(int user_id) throws Exception {
-		FreelancerUser freelancer = ud.select_info_f(user_id);
+	public FreelancerUser freelancerInfo(int seller_id) throws Exception {
+		FreelancerUser freelancer = ud.select_info_f(seller_id);
 		if(freelancer==null) throw new Exception("오류");
 		return freelancer;
 	}

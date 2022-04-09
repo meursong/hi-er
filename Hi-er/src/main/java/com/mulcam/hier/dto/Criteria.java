@@ -3,10 +3,6 @@ package com.mulcam.hier.dto;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class Criteria {
     /**
      * 페이징 정보

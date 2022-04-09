@@ -3,7 +3,6 @@ package com.mulcam.hier.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mulcam.hier.service.ProductListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mulcam.hier.dto.Product;
 import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.MainService;
+import com.mulcam.hier.service.ProductListService;
 
 @Controller
 public class MainController {

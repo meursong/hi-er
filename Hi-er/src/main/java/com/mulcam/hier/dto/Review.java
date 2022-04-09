@@ -2,12 +2,6 @@ package com.mulcam.hier.dto;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
-
-
 public class Review extends Criteria {
 	private int review_wid;
 	private int product_id;
@@ -15,8 +9,9 @@ public class Review extends Criteria {
 	private int seller_id;
 	private String content;
 	private int star_point;
-	private Date CreatedAt;
+	private Date createdAt;
 	private String nickname;
+
 
 	public int getReview_wid() {
 		return review_wid;
@@ -67,11 +62,11 @@ public class Review extends Criteria {
 	}
 
 	public Date getCreatedAt() {
-		return CreatedAt;
+		return createdAt;
 	}
 
 	public void setCreatedAt(Date createdAt) {
-		CreatedAt = createdAt;
+		createdAt = createdAt;
 	}
 
 	public String getNickname() {

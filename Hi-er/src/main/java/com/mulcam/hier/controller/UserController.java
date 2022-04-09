@@ -53,16 +53,16 @@ public class UserController {
 	@GetMapping("/freelancerInfo")
 	public String freelancerInfo(Model model, @ModelAttribute("params") Review params) throws Exception {
 		// seller_id는 임시
-		int seller_id = 2;
+		int seller_id = 1;
 
 		FreelancerUser freelancer = us.freelancerInfo(seller_id);
-		params.setSeller_id(2); // 로그인시 세션에서 값 가져와서 넣는다
+		params.setSeller_id(seller_id); // 로그인시 세션에서 값 가져와서 넣는다
 
 		params.setRecordsPerPage(4);
+		/*params.setSeller_id(seller_id);*/
 		List<Review> reviews = reviewService.reviewList(params);
-		
+
 		String address[] = freelancer.getAddress().split(" ");
-		
 		model.addAttribute("freelancer", freelancer);
 		model.addAttribute("address", address);
 		model.addAttribute("reviews", reviews);

@@ -22,7 +22,7 @@
 		]]>
 	</insert>
 
-	<update id="update_type_f" parameterType="Integer">
+	<update id="update_type_f" parameterType="int">
 		<![CDATA[
 			update user set type=2, updatedAt=current_timestamp() where user_id=#{user_id}
 		]]>

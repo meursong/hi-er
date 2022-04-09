@@ -22,7 +22,7 @@ public class ProductListServiceImpl implements ProductListService {
 
 		List<ProductList> product = Collections.emptyList();
 
-		int totalCount = productListDAO.selectTotalCount();
+		int totalCount = productListDAO.selectTotalCount(params);
 
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(totalCount);

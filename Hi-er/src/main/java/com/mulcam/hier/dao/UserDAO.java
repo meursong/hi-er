@@ -15,7 +15,7 @@ import com.mulcam.hier.dto.User;
 @Repository
 public interface UserDAO {
 	public User selectUserEmail(int user_id) throws Exception;
-    public FreelancerUser select_info_f(int user_id) throws Exception;
+    public FreelancerUser select_info_f(int seller_id) throws Exception;
     public void insert_info_f(FreelancerForm f_info) throws Exception;
 
 	User login(Map<String, String> param) throws Exception;

@@ -2,10 +2,6 @@ package com.mulcam.hier.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
 
 public class ProductList extends Criteria {
 	

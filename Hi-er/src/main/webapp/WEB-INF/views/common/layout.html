@@ -380,10 +380,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link" th:href="@{/post/write}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="/freelancerInfo">Contact</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a
@@ -544,7 +544,7 @@
     function search() {
         const searchKeyword = $("input[id='searchKeyword']").val();
         location.href =
-            'product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
+            '/product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
             searchKeyword;
     }
 
