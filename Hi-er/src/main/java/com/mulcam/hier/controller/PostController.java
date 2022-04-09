@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,7 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Product;
+import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.service.PostService;
+import com.mulcam.hier.service.ReviewService;
 
 @RequestMapping("/post")
 @Controller
@@ -33,6 +36,9 @@ public class PostController {
 	
 	@Autowired
 	PostService postService;
+	
+	@Autowired
+	ReviewService reviewService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -75,9 +81,9 @@ public class PostController {
 		return filename;
 	}
 	
-	@PostMapping("/designWrite")
-	public String write(@ModelAttribute Product product) {
-		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
+	@PostMapping("/videoWrite")
+	public String videoWrite(@ModelAttribute Product product) {
+		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));
@@ -95,6 +101,28 @@ public class PostController {
 		}	
 		return "/product-detail";
 	}
+	
+	@PostMapping("/designWrite")
+	public String write(@ModelAttribute Product product) {
+		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
+		try {
+			product.setFilename1(fileupload(product.getFile1()));
+			product.setFilename2(fileupload(product.getFile2()));
+			product.setFilename3(fileupload(product.getFile3()));
+			product.setFilename4(fileupload(product.getFile4()));
+			product.setFilename5(fileupload(product.getFile5()));
+			product.setFilename6(fileupload(product.getFile6()));
+			product.setFilename7(fileupload(product.getFile7()));
+			product.setFilename8(fileupload(product.getFile8()));
+			product.setIs_available(0); // 0:거래가능  1:거래중지
+			product.setSeller_id(10); //추후 세션에서 글쓴사람 아이디 얻어오는 코드로 수정 필요
+			postService.writePost(product);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		return "/product-detail"; //추후 게시판 페이지로 변경 
+	}
+
 
 	@ResponseBody
 	@PostMapping("/uploadImage")
@@ -150,6 +178,7 @@ public class PostController {
 			Product priceInfo = postService.priceInfo(pid);
 			Integer likedNum = postService.likeNum(pid, logined_userid);
 			boolean isLike = postService.isLike(pid, logined_userid);
+			List<Review> review = reviewService.prodReviewList(pid);
 			
 			Map<String, Object> likeInfo = new HashMap<String,Object>();
 			likeInfo.put("likeNum", likedNum);
@@ -158,6 +187,7 @@ public class PostController {
 			mav.addObject("likeInfo", likeInfo);
 			mav.addObject("product", product);
 			mav.addObject("priceInfo", priceInfo);
+			
 		}	catch(Exception e) {
 			mav.addObject("err", e.getMessage());
 		}
