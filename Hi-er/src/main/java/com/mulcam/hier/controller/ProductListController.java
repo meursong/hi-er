@@ -49,7 +49,7 @@ public class ProductListController {
 			model.addAttribute("productList", selectProduct3);
 			break;
 		}
-		return "/productCategory";
+		return "productList";
 	}
 
 	@PostMapping("/product/category/{id}")
@@ -77,7 +77,7 @@ public class ProductListController {
 				model.addAttribute("productList", sortProduct3);
 				break;
 		}
-		return "/productCategory :: #productList";
+		return "/productList :: #productList";
 	}
 
 	@GetMapping("product/a")
@@ -109,7 +109,7 @@ public class ProductListController {
 				model.addAttribute("productList", selectProduct3);
 				break;
 		}
-		return "/productCategory";
+		return "productList";
 	}
 
 }
