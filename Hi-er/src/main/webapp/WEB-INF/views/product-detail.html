@@ -126,7 +126,7 @@
                   <img
                     class="img-fluid"
                     th:src="@{/upload/} + ${product.filename1}"
-                    th:onerror="@{this.onerror=null; this.src='/images/logo.png';}"
+                    th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}"
                   />
                 </a>
                 <a th:href="@{/upload/} + ${product.filename2}">
@@ -705,12 +705,6 @@
                   class="d-flex align-items-center justify-content-between mb-4"
                 >
                   <h4 class="m-0">리뷰 (리뷰 개수)</h4>
-                  <select
-                    class="custom-select custom-select-sm border-0 shadow-sm ml-2"
-                  >
-                    <option>별점 높은 순</option>
-                    <option>최근 순</option>
-                  </select>
                 </div>
                 <div class="row">
                   <div class="col-md-6">

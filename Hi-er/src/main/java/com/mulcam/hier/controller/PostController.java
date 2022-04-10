@@ -184,8 +184,6 @@ public class PostController {
 			boolean isLike = postService.isLike(pid, logined_userid);
 			List<Review> reviews = reviewService.prodReviewList(params);
 			
-			System.out.println(reviews);
-			
 			Map<String, Object> likeInfo = new HashMap<String,Object>();
 			likeInfo.put("likeNum", likedNum);
 			likeInfo.put("isLike", isLike);
@@ -194,7 +192,6 @@ public class PostController {
 			mav.addObject("product", product);
 			mav.addObject("priceInfo", priceInfo);
 			mav.addObject("reviews", reviews);
-			
 		}	catch(Exception e) {
 			e.printStackTrace();
 			mav.addObject("err", e.getMessage());
