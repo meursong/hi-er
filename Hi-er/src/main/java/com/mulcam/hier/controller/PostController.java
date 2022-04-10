@@ -173,12 +173,13 @@ public class PostController {
 	public ModelAndView accinfo(@PathVariable("pid") Integer pid) {
 		ModelAndView mav = new ModelAndView("product-detail");
 		try {
-			Integer logined_userid = (Integer)session.getAttribute("id");
+			//Integer logined_userid = (Integer)session.getAttribute("id");
+			Integer logined_userid = 10; //추후 변경필요
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
 			Integer likedNum = postService.likeNum(pid, logined_userid);
 			boolean isLike = postService.isLike(pid, logined_userid);
-			List<Review> review = reviewService.prodReviewList(pid);
+			List<Review> reviews = reviewService.prodReviewList(pid);
 			
 			Map<String, Object> likeInfo = new HashMap<String,Object>();
 			likeInfo.put("likeNum", likedNum);
@@ -187,6 +188,7 @@ public class PostController {
 			mav.addObject("likeInfo", likeInfo);
 			mav.addObject("product", product);
 			mav.addObject("priceInfo", priceInfo);
+			mav.addObject("reviews", reviews);
 			
 		}	catch(Exception e) {
 			mav.addObject("err", e.getMessage());

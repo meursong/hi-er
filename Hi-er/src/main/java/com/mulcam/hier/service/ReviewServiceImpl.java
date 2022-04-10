@@ -22,7 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<Review> prodReviewList(int product_id) throws Exception {
+	public List<Review> prodReviewList(Integer product_id) throws Exception {
 		List<Review> review = reviewDAO.selectProdReview(product_id);
 		return review;
 	}
