@@ -186,11 +186,4 @@ public class MypageController {
 //		return mav;
 //	}
 	
-	@GetMapping("logout")
-	public String logout() {
-		return "account";
-	}
-	
-	
-	
 }

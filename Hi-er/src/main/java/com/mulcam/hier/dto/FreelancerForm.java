@@ -1,9 +1,5 @@
 package com.mulcam.hier.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 public class FreelancerForm {
 	private int f_id;
 	private String address;

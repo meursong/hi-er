@@ -2,12 +2,6 @@ package com.mulcam.hier.dto;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
-
-
 public class Review extends Criteria {
 	private int review_wid;
 	private int product_id;
