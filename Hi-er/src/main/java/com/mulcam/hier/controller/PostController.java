@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -170,16 +171,20 @@ public class PostController {
 	}
 	
 	@GetMapping("/detail/{pid}")
-	public ModelAndView accinfo(@PathVariable("pid") Integer pid) {
+	public ModelAndView detail(@PathVariable("pid") Integer pid, @ModelAttribute("params") Review params) {
 		ModelAndView mav = new ModelAndView("product-detail");
+		params.setProduct_id(pid);
+		params.setRecordsPerPage(2);
 		try {
 			//Integer logined_userid = (Integer)session.getAttribute("id");
-			Integer logined_userid = 10; //추후 변경필요
+			Integer logined_userid = 10; //추후 변경 필요
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
 			Integer likedNum = postService.likeNum(pid, logined_userid);
 			boolean isLike = postService.isLike(pid, logined_userid);
-			List<Review> reviews = reviewService.prodReviewList(pid);
+			List<Review> reviews = reviewService.prodReviewList(params);
+			
+			System.out.println(reviews);
 			
 			Map<String, Object> likeInfo = new HashMap<String,Object>();
 			likeInfo.put("likeNum", likedNum);
@@ -191,9 +196,42 @@ public class PostController {
 			mav.addObject("reviews", reviews);
 			
 		}	catch(Exception e) {
+			e.printStackTrace();
 			mav.addObject("err", e.getMessage());
 		}
 		return mav;
+	}
+	
+	//테스트용 : mav - model 차이?
+	@GetMapping("/detailPage")
+	public String prodDetail(Model model, @ModelAttribute("params") Review params) {
+		Integer pid = 4;
+		params.setProduct_id(pid);
+		params.setRecordsPerPage(2);
+		try {
+			//Integer logined_userid = (Integer)session.getAttribute("id");
+			Integer logined_userid = 10; //추후 변경 필요
+			Product product = postService.productDetail(pid);
+			Product priceInfo = postService.priceInfo(pid);
+			Integer likedNum = postService.likeNum(pid, logined_userid);
+			boolean isLike = postService.isLike(pid, logined_userid);
+			List<Review> reviews = reviewService.prodReviewList(params);
+			
+			System.out.println(reviews);
+			
+			Map<String, Object> likeInfo = new HashMap<String,Object>();
+			likeInfo.put("likeNum", likedNum);
+			likeInfo.put("isLike", isLike);
+			
+			model.addAttribute("likeInfo", likeInfo);
+			model.addAttribute("product", product);
+			model.addAttribute("priceInfo", priceInfo);
+			model.addAttribute("reviews", reviews);
+			
+		}	catch(Exception e) {
+			model.addAttribute("err", e.getMessage());
+		}
+		return "product-detail";
 	}
 	
 	@ResponseBody
