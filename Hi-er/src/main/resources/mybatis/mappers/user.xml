@@ -7,7 +7,9 @@
 			SELECT * FROM user where email = #{email} and password = #{password};
 		]]>
 	</select>
-	 
+
+
+
 	<select id="emailCheck" resultType="String" parameterType="String">
 		<![CDATA[
 			SELECT name FROM user where email = #{email}
@@ -34,7 +36,7 @@
 </mapper>
 
 <!--  
-CREATE DATABASE if not exists `hire` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE if not exists `hier` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 DROP table if exists `image`;
 DROP table if exists `portfolio_src`;
 DROP table if exists `review`;

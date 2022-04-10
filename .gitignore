@@ -52,3 +52,4 @@ out/
 ### VS Code ###
 .vscode/
 *.index
+.idea/workspace.xml

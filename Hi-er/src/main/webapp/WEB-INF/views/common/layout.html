@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="utf-8" />
 <!-- Favicon Icon -->
-<link rel="icon" type="image/png" th:href="@{/images/fav.svg}" />
+<link rel="icon" type="image/png" th:href="@{images/titlelogo.ico}">
+
 <!-- Bootstrap core CSS -->
 <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet" />
@@ -56,8 +57,7 @@
 			</form>
 			<!-- Topbar Navbar -->
 			<ul class="navbar-nav align-items-center ml-auto">
-				<li
-					class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications d-sm-none">
+				<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
 					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
 					 href="/write">
 					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
@@ -74,51 +74,17 @@
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
 						aria-labelledby="navbarDropdownMessages">
-						<h6 class="dropdown-header dropdown-notifications-header">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 								class="feather feather-mail mr-2">
-                  <path
+                           <path
 									d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-							메시지 보관함
-						</h6>
-						<a class="dropdown-item dropdown-notifications-item"
-							th:href="@{/}"> <img class="dropdown-notifications-item-img"
-							src="images/user/s7.png" />
-							<div class="dropdown-notifications-item-content">
-								<div class="dropdown-notifications-item-content-text">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud exercitation ullamco
-									laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-									irure dolor in reprehenderit in voluptate velit esse cillum
-									dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-									cupidatat non proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.</div>
-								<div class="dropdown-notifications-item-content-details">
-									Emily Fowler · 58m</div>
-							</div>
-						</a> <a class="dropdown-item dropdown-notifications-item" href="#!">
-							<img class="dropdown-notifications-item-img"
-							src="images/user/s8.png" />
-							<div class="dropdown-notifications-item-content">
-								<div class="dropdown-notifications-item-content-text">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud exercitation ullamco
-									laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-									irure dolor in reprehenderit in voluptate velit esse cillum
-									dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-									cupidatat non proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.</div>
-								<div class="dropdown-notifications-item-content-details">
-									Diane Chambers · 2d</div>
-							</div>
-						</a> <a class="dropdown-item dropdown-notifications-footer"
-							href="/messages">Read All Messages</a>
+                           <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+							
+						</a> 
+			
 					</div>
 				</li>
 				<li class="nav-item dropdown no-arrow no-caret dropdown-user">
@@ -126,7 +92,7 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						 th:src="@{/images/user/NoProfile.png}" style="width:21px; height: 21px;;"></a>
+						th:if="${session.loginedUser}"  th:src="@{/images/user/NoProfile.png}" style="width:21px; height: 21px;;"></a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
 						aria-labelledby="navbarDropdownUserImage">
@@ -140,7 +106,7 @@
 									[[${session.loginedUser.email }]]</div>
 							</div>
 						</h6>
-						<h6 th:unless="${session.loginedUser}">로그인부터 진행해주세요</h6>
+						<h6 th:unless="${session.loginedUser}" style="text-align:center;font-weight: 400; font-size: 15px;" >로그인부터 진행해주세요</h6>
 						<div class="dropdown-divider"></div>
 
 						<a class="dropdown-item" href="account.html"
@@ -152,40 +118,81 @@
 									class="feather feather-settings">
                     <circle cx="12" cy="12" r="3"></circle>
                     <path
-										d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    ></path>
                   </svg>
-							</div> [[${session.loginedUser.name }]]님의 계정정보
-						</a> <a class="dropdown-item" th:href="@{/logout}"
-							th:if="${session.loginedUser}">
-							<div class="dropdown-item-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-									viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-									class="feather feather-log-out">
+                </div>
+                [[${session.loginedUser.name }]]님의 계정정보
+              </a>
+              <a
+                class="dropdown-item"
+                th:href="@{/logout}"
+                th:if="${session.loginedUser}"
+              >
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-log-out"
+                  >
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                     <polyline points="16 17 21 12 16 7"></polyline>
                     <line x1="21" y1="12" x2="9" y2="12"></line>
                   </svg>
-							</div> Logout
-						</a> <a class="dropdown-item" th:href="@{/signup}"
-							th:unless="${session.loginedUser}">
-							<div class="dropdown-item-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-									viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-									class="feather feather-settings">
+                </div>
+                Logout
+              </a>
+              <a
+                class="dropdown-item"
+                th:href="@{/signup}"
+                th:unless="${session.loginedUser}"
+              >
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-settings"
+                  >
                     <circle cx="12" cy="12" r="3"></circle>
                     <path
-										d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    ></path>
                   </svg>
-							</div> 회원가입
-						</a> <a class="dropdown-item" th:href="@{/login}"
-							th:unless="${session.loginedUser}">
-							<div class="dropdown-item-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-									viewBox="0 0 24 24" fill="none" stroke="currentColor"
-									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-									class="feather feather-login">
+                </div>
+                회원가입
+              </a>
+              <a
+                class="dropdown-item"
+                th:href="@{/login}"
+                th:unless="${session.loginedUser}"
+              >
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-login"
+                  >
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                     <polyline points="16 17 21 12 16 7"></polyline>
                     <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -204,50 +211,60 @@
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				aria-label="Toggle navigation" >
+				<span class="navbar-toggler-icon"></span> <span style="font-size: 18px; font-weight: 500; padding-top:5.5px;">전체 카테고리</span></button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav">
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
+					<div style="color:#b9b9b9; font-weight:600; padding-top:12px;">비즈니스</div>
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> 카테고리 </a>
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">디자인</a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio">
-							<a class="dropdown-item" th:href="@{/cate/1}">디자인</a> <a
-								class="dropdown-item" th:href="@{/cate/2}">영상</a> <a
-								class="dropdown-item" th:href="@{/cate/3}">IT</a>
+							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">디자인</div>
+							
+							<a class="dropdown-item" th:href="@{/cate/1}">로고 브랜딩</a> 
+							<a class="dropdown-item" th:href="@{/cate/2}">상세 이벤트 페이지</a> 
+							<a class="dropdown-item" th:href="@{/cate/3}">명함 인쇄 홍보물</a>
+							<a class="dropdown-item" th:href="@{/cate/4}">웹 모바일 디자인</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">일러스트 캐리커처</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">웹툰 캐릭터 이모티콘</a>
 						</div></li>
-					<li class="nav-item"><a class="nav-link" href="about.html">About</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a>
-					</li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
+							<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Pages </a>
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">영상 · 사진 · 음향</a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio">
-							<a class="dropdown-item" href="product.html">Product List</a> <a
-								class="dropdown-item" href="product2.html">Product List 2</a> <a
-								class="dropdown-item" href="product-detail.html">List Detail</a>
-							<a class="dropdown-item" href="profile.html">Profile</a> <a
-								class="dropdown-item" href="company-profile.html">Company
-								Profile</a> <a class="dropdown-item" href="alerts.html">Alerts</a> <a
-								class="dropdown-item" href="messages.html">Messages</a>
+							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">영상 · 사진 · 음향</div>
+							
+							<a class="dropdown-item" th:href="@{/cate/1}">영상촬영 편집</a> 
+							<a class="dropdown-item" th:href="@{/cate/2}">인터뷰 영상 </a> 
+							<a class="dropdown-item" th:href="@{/cate/3}">교육 영상</a>
+							<a class="dropdown-item" th:href="@{/cate/4}">유튜브 제작</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">애니메이션</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">영상 자막</a>
+						<a class="dropdown-item" th:href="@{/cate/3}">사진촬영 </a>
+							<a class="dropdown-item" th:href="@{/cate/4}">사진 영상 보정</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">성우</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">음악 사운드</a>
+						
 						</div></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Other Pages </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="login.html">Login</a> <a
-								class="dropdown-item" href="register.html">Register</a> <a
-								class="dropdown-item" href="forgot-password.html">Forgot
-								Password</a> <a class="dropdown-item" href="faq.html">FAQ</a> <a
-								class="dropdown-item" href="404.html">404 Page</a> <a
-								class="dropdown-item" href="blank.html">Blank Page</a>
+	<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownPortfolio" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownPortfolio">
+							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">IT · 프로그래밍</div>
+							
+							<a class="dropdown-item" th:href="@{/cate/1}">웹</a> 
+							<a class="dropdown-item" th:href="@{/cate/2}">모바일 앱</a> 
+							<a class="dropdown-item" th:href="@{/cate/3}">보안</a>
+							<a class="dropdown-item" th:href="@{/cate/4}">챗봇</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">블록체인</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">쇼핑몰·커머스</a>
 						</div></li>
 				</ul>
 			</div>
@@ -256,84 +273,112 @@
 					href="freelancerForm"> <i class="fa fa-fw fa-trophy"></i>
 						<span>프리랜서 전환</span></a></li>
 			</ul>
-		</div>
-	</nav>
+		</div>	
+		</nav>
 
-	<section layout:fragment="contents"></section>
+    <section layout:fragment="contents"></section>
 
-	<footer class="bg-white">
-		<div class="container">
-			<div class="d-flex justify-content-between">
-				<div style="width:540px;">
-				<h2 style="padding-top: 15px; font-weight: 800;">고객센터 1588-1234
-				<p style="color: #c5c7c9; padding-top:10px; font-size: 12px; font-weight: 500;">10:30~18:00(점심시간 13:00~14:00)
-				<br>주말,공휴일 휴무</p>
-				<a href="/문의" class="c-btn c-fill-color-btn">1:1문의하기</a>
-				</h2>
-					<div>
-	</div>
-				</div>
-				<div class="footer-list">
-					<h2>Hi-er</h2>
-					<ul class="list">
-						<li><a href="#" >Main</a></li>
-						<li><a href="#">introduction</a></li>
-						<li><a href="#">About the developer</a></li>
+    <footer class="bg-white">
+      <div class="container">
+        <div class="d-flex justify-content-between">
+          <div style="width: 540px">
+            <h2 style="padding-top: 15px; font-weight: 800">
+              고객센터 1588-1234
+              <p
+                style="
+                  color: #c5c7c9;
+                  padding-top: 10px;
+                  font-size: 12px;
+                  font-weight: 500;
+                "
+              >
+                10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
+              </p>
+              <a href="/문의" class="c-btn c-fill-color-btn">1:1문의하기</a>
+            </h2>
+            <div></div>
+          </div>
+          <div class="footer-list">
+            <h2>Hi-er</h2>
+            <ul class="list">
+              <li><a href="#">Main</a></li>
+              <li><a href="#">introduction</a></li>
+              <li><a href="#">About the developer</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Categories</h2>
+            <ul class="list">
+              <li><a href="#">Design</a></li>
+              <li><a href="#">IT · Programing</a></li>
+              <li><a href="#">Video · Photo · Music</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Support</h2>
+            <ul class="list">
+              <li><a href="#">Help &amp; Support</a></li>
+              <li><a href="#">Trust &amp; Safety</a></li>
+              <li><a href="#">Selling on Hi-er </a></li>
+              <li><a href="#">Buying on Hi-er </a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="logo">
+            <a href="index.html"><img th:src="@{/images/logo.svg}" /> </a>
+          </div>
+          <p>© Copyright 2022 Hi-er. All Rights Reserved</p>
+          <ul class="social">
+            <li>
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fa fa-pinterest-p" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- Contact form JavaScript -->
+  <!-- Slick -->
+  <script
+    th:src="@{/vendor/slick-master/slick/slick.js}"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <!-- lightgallery -->
+  <script
+    th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"
+  ></script>
+  <!-- select2 Js -->
+  <script th:src="@{/vendor/select2/js/select2.min.js}"></script>
+  <!-- Custom -->
+  <script th:src="@{/js/custom.js}"></script>
+  <script>
+    function search() {
+      const searchKeyword = $("input[id='searchKeyword']").val();
+      location.href =
+        'product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
+        searchKeyword;
+    }
 
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>Categories</h2>
-					<ul class="list">
-						<li><a href="#">Design</a></li>
-						<li><a href="#">IT · Programing</a></li>
-						<li><a href="#">Video · Photo · Music</a></li>
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>Support</h2>
-					<ul class="list">
-						<li><a href="#">Help &amp; Support</a></li>
-						<li><a href="#">Trust &amp; Safety</a></li>
-						<li><a href="#">Selling on Hi-er </a></li>
-						<li><a href="#">Buying on Hi-er </a></li>
-					</ul>
-				</div>
-				
-				
-			</div>
-			<div class="copyright">
-				<div class="logo">
-					<a href="index.html"><img th:src="@{/images/logo.svg}" /> </a>
-				</div>
-				<p>© Copyright 2022 Hi-er. All Rights Reserved</p>
-				<ul class="social">
-					<li><a href="#"><i class="fa fa-facebook"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-pinterest-p"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-instagram"
-							aria-hidden="true"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</footer>
-</body>
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- Contact form JavaScript -->
-<!-- Slick -->
-<script th:src="@{/vendor/slick-master/slick/slick.js}"
-	type="text/javascript" charset="utf-8"></script>
-<!-- lightgallery -->
-<script
-	th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"></script>
-<!-- select2 Js -->
-<script th:src="@{/vendor/select2/js/select2.min.js}"></script>
-<!-- Custom -->
-<script th:src="@{/js/custom.js}"></script>
+    window.onpopstate = function (event) {
+      $('#productList').load(location.href + ' #productList');
+    };
+  </script>
 </html>

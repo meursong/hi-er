@@ -3,6 +3,7 @@ package com.mulcam.hier.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mulcam.hier.service.ProductListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ import com.mulcam.hier.service.MainService;
 
 @Controller
 public class MainController {
+
+	@Autowired
+	ProductListService productListService;
 	@GetMapping({"", "/"})
 	public String mainPage() {
 		return "index";
@@ -85,5 +89,6 @@ public class MainController {
 		}
 		return mav;
 	}
-
+	
+	
 }
