@@ -31,6 +31,7 @@ import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.PostService;
 import com.mulcam.hier.service.ReviewService;
+import com.mulcam.hier.service.UserService;
 
 @RequestMapping("/post")
 @Controller
@@ -59,7 +60,7 @@ public class PostController {
 	}
 
 	@GetMapping("/designWrite")
-	public String write(Model model) throws Exception {
+	public String designWrite(Model model) throws Exception {
 		System.out.println((User) session.getAttribute("loginedUser"));
 		if ((User) session.getAttribute("loginedUser") != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
@@ -72,7 +73,7 @@ public class PostController {
 	}
 	
 	@GetMapping("/videoWrite")
-	public String write(Model model) throws Exception {
+	public String videoWrite(Model model) throws Exception {
 		System.out.println((User) session.getAttribute("loginedUser"));
 		if ((User) session.getAttribute("loginedUser") != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
