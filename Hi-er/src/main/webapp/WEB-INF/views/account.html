@@ -6,16 +6,19 @@
 
 <section layout:fragment="contents">
 	<div class="py-5">
-         <div class="container">
-            <div class="row">
-               <!-- Main Content -->
-               <aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
-                  <div class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
-                     <div class="py-4 px-3 border-bottom">
-                        <img th:src="@{/images/user/s4.png}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-                        <h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep Osahan</h5>
-                        <p class="mb-0 text-muted">UI / UX Designer</p>
-                     </div>
+		<div class="container">
+			<div class="row">
+				<!-- Main Content -->
+				<aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
+					<div
+						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
+						<div class="py-4 px-3 border-bottom">
+							<img th:src="@{/images/user/s4.png}"
+								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep
+								Osahan</h5>
+							<p class="mb-0 text-muted">UI / UX Designer</p>
+						</div>
 						<div class="d-flex">
 							<div class="col-6 border-right p-3">
 								<h6 class="font-weight-bold text-dark mb-1">358</h6>
@@ -38,124 +41,145 @@
 						</div>
 
 					</div>
-                  <div class="box shadow-sm  rounded bg-white mb-3">
-                     <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">Skills & Endorsements</h6>
-                     </div>
-                     <div class="box-body">
-                        <div class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
-                           <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" th:src="@{/images/l4.png}" alt="">
-                           </div>
-                           <div class="font-weight-bold">
-                              <div class="text-truncate">Character Concept <span class="badge badge-dark ml-1">1</span></div>
-                              <div class="small text-muted"><span class="text-primary">You and 1 connection</span> have given endorsements for this skill
-                              </div>
-                           </div>
-                        </div>
-                        <div class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
-                           <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" th:src="@{/images/l8.png}" alt="">
-                           </div>
-                           <div class="font-weight-bold">
-                              <div class="text-truncate">Digital Painting <span class="badge badge-danger ml-1">6</span></div>
-                              <div class="small text-muted"><span class="text-primary">Ask</span> has given an endorsement for this skill
-                              </div>
-                           </div>
-                        </div>
-                        <div class="d-flex align-items-center osahan-post-header p-3 people-list">
-                           <div class="dropdown-list-image mr-3">
-                              <img class="rounded-circle" th:src="@{/images/l5.png}" alt="">
-                           </div>
-                           <div class="font-weight-bold">
-                              <div class="text-truncate">Adobe Photoshop <span class="badge badge-info ml-1">3</span></div>
-                              <div class="small text-muted"><span class="text-primary">Julia Cox</span> has given an endorsement for this skill
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
-                     <img th:src="@{/images/job1.png}" class="img-fluid" alt="Responsive image">
-                     <div class="p-3 border-bottom">
-                        <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
-                        <p class="mb-0 text-muted">Looking for talent?</p>
-                     </div>
-                     <div class="p-3">
-                        <button type="button" class="btn btn-outline-success pl-4 pr-4"> POST A JOB </button>
-                     </div>
-                  </div>
-               </aside>
-               
-               
-               
-               
-               <!-- ================================================================================================================================== -->
-             
-               <main th:if="${page}=='0'" class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
-                  <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="d-flex box-title border-bottom p-3">
-                        <h6 class="m-0 col-6">거래내역</h6>
-                        
-                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/1/1}'|">자세히보기</button> 
-                       
-                     </div>
-                    
-                     <div class="box-body p-3">
-                        <div>
-                        	<table class="table table-striped">
-                        		<thead>                       		                       		
-                        		<tr>                       			
-                        			<th>시간</th>
-                        			<th>구매유저닉네임</th>
-                        			<th>상품제목</th>
-                        			<th>판매자닉네임</th>
-                        			<th>리뷰달기</th>
-                        		</tr>
-                        		
-                        		</thead>
-                        		<tbody>
-                        		<tr th:each="order: ${orders}">
-                        			<td th:text="${order.createdAt}"></td>
-                        			<td th:text="${order.nickname}"></td>
-                        			<td th:text="${order.title}"></td>
-                        			<td th:text="${order.nickname2}"></td>
+					<div class="box shadow-sm  rounded bg-white mb-3">
+						<div class="box-title border-bottom p-3">
+							<h6 class="m-0">Skills & Endorsements</h6>
+						</div>
+						<div class="box-body">
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l4.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Character Concept <span class="badge badge-dark ml-1">1</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">You and 1 connection</span> have
+										given endorsements for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l8.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Digital Painting <span class="badge badge-danger ml-1">6</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Ask</span> has given an endorsement
+										for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l5.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Adobe Photoshop <span class="badge badge-info ml-1">3</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Julia Cox</span> has given an
+										endorsement for this skill
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+						<img th:src="@{/images/job1.png}" class="img-fluid"
+							alt="Responsive image">
+						<div class="p-3 border-bottom">
+							<h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
+							<p class="mb-0 text-muted">Looking for talent?</p>
+						</div>
+						<div class="p-3">
+							<button type="button" class="btn btn-outline-success pl-4 pr-4">
+								POST A JOB</button>
+						</div>
+					</div>
+				</aside>
+
+
+
+
+				<!-- ================================================================================================================================== -->
+
+				<main th:if="${page}=='0'"
+					class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">거래내역</h6>
+
+							<button type="button" class="btn btn-light btn-sm col-6"
+								th:onclick="|location.href='@{/mypage/1/1}'|">자세히보기</button>
+
+						</div>
+
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>시간</th>
+											<th>구매유저닉네임</th>
+											<th>상품제목</th>
+											<th>판매자닉네임</th>
+											<th>리뷰달기</th>
+										</tr>
+
+									</thead>
+									<tbody>
+										<tr th:each="order: ${orders}">
+											<td th:text="${order.order_id}"></td>
+											<td th:text="${order.createdAt}"></td>
+											<td th:text="${order.nickname}"></td>
+											<td th:text="${order.title}"></td>
+											<td th:text="${order.nickname2}"></td>
 											<td>
 												<div class="container">
 													<div class="row" style="margin-top: 0;">
 														<div class="col-md-12">
 															<div class="well well-sm">
+																
 																<div class="text-right">
-																	<a class="btn btn-success btn-green"
-																		href="#reviews-anchor" id="open-review-box">리뷰 달기</a>
+																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
+																		href="#">리뷰 달기</a>
 																</div>
 
-																<div class="row" id="post-review-box"
-																	style="display: none;">
+																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
 																	<div class="col-md-12">
 																		<form accept-charset="UTF-8" action="" method="post">
 																			<input id="ratings-hidden" name="rating"
 																				type="hidden">
 																			<textarea class="form-control animated" cols="50"
-																				id="new-review" name="comment"
-																				placeholder="Enter your review here..." rows="5"></textarea>
+																				th:id="'new-review'+${order.order_id}" name="comment"
+																				placeholder="리뷰를 입력해주세요" rows="5"></textarea>
 
 
-																			<div name="myform" id="myform">
+																			<div name="myform" class="myform" >
 
 																				<fieldset>
-																					<legend>이모지 별점</legend>
+																					<legend>★★★별점★★★</legend>
 																					<input type="radio" name="rating" value="5"
-																						id="rate1"><label for="rate1">⭐</label> <input
-																						type="radio" name="rating" value="4" id="rate2"><label
-																						for="rate2">⭐</label> <input type="radio"
-																						name="rating" value="3" id="rate3"><label
-																						for="rate3">⭐</label> <input type="radio"
-																						name="rating" value="2" id="rate4"><label
-																						for="rate4">⭐</label> <input type="radio"
-																						name="rating" value="1" id="rate5"><label
-																						for="rate5">⭐</label>
-																				</fieldset>
+																						th:id="'rate1'+${order.order_id}"><label th:for="'rate1'+${order.order_id}">⭐</label> <input
+																						type="radio" name="rating" value="4" th:id="'rate2'+${order.order_id}"><label
+																						th:for="'rate2'+${order.order_id}">⭐</label> <input type="radio"
+																						name="rating" value="3" th:id="'rate3'+${order.order_id}"><label
+																						th:for="'rate3'+${order.order_id}">⭐</label> <input type="radio"
+																						name="rating" value="2" th:id="'rate4'+${order.order_id}"><label
+																						th:for="'rate4'+${order.order_id}">⭐</label> <input type="radio"
+																						name="rating" value="1" th:id="'rate5'+${order.order_id}"><label
+																						th:for="'rate5'+${order.order_id}">⭐</label>
+																				</fieldset> 
 
 
 																			</div>
@@ -165,8 +189,8 @@
 
 																			<div class="text-right">
 
-																				<a class="btn btn-danger btn-lg" th:href="@{#}"
-																					id="close-review-box"
+																				<a class="btn btn-danger btn-lg close-review-box" th:href="@{#}"
+																					th:id="'close-review-box'+${order.order_id}"
 																					style="display: none; margin-right: 10px;"> <span
 																					class="glyphicon glyphicon-remove"></span>Cancel
 																				</a>
@@ -183,239 +207,267 @@
 
 											</td>
 										</tr>
-                        		</tbody>
-                        	
-                        	</table>
-                        </div>
-                        
-                     </div>
-                  </div>
-                  <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="d-flex box-title border-bottom p-3">
-                        <h6 class="m-0 col-6">찜한 게시물</h6>
-                       
-                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/2/1}'|">자세히보기</button>
-                       
-                     </div>
-                     <div class="box-body p-3">
-                        <div>
-                        	<table class="table table-striped">
-                        		<thead>                       		                       		
-                        		<tr>                      			
-                        			<th>시간</th>
-                        			<th>찜누른닉네임</th>
-                        			<th>찜당한포스트제목</th>
-                        			<th>판매자닉네임</th>
-                        		</tr>                       		
-                        		</thead>
-                        		<tbody>
-                        		<tr th:each="likepost: ${likeposts}">
-                        			<td th:text="${likepost.clicked_date}"></td>
-                        			<td th:text="${likepost.nickname}"></td>
-                        			<td th:text="${likepost.title}"></td>
-                        			<td th:text="${likepost.nickname2}"></td>
-                        		</tr>
-                        		</tbody>                      	
-                        	</table>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="d-flex box-title border-bottom p-3">
-                        <h6 class="m-0 col-6">쪽지</h6>
-                        <button type="button" class="btn btn-light btn-sm col-6" th:onclick="|location.href='@{/mypage/3}'|">자세히보기</button>
-                     </div>
-                     <div class="box-body p-3">
-                        <div>
-                        	<table class="table table-striped">
-                        		<thead>
-                        		<tr>                       			
-                        			<th>시간</th>
-                        			<th>보낸사람닉네임</th>
-                        			<th>관련포스트제목</th>
-                        			<th>받은사람닉넹미</th>
-                        		</tr>                       		
-                        		</thead>
-                        		<tbody>
-                        		<tr th:each="order: ${orders}">
-                        			<td th:text="${order.createdAt}"></td>
-                        			<td th:text="${order.nickname}"></td>
-                        			<td th:text="${order.title}"></td>
-                        			<td th:text="${order.nickname2}"></td>
-                        		</tr>
-                        		</tbody>
-                        	
-                        	</table>
-                        </div>
-                     </div>
-                  </div>
-                  
-                  <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="box-title border-bottom p-3">
-                        <h6 class="m-0">Education</h6>
-                     </div>
-                     <div class="box-body p-3 border-bottom">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">Stanford University</h6>
-                              <div class="text-truncate text-primary">Master’s programmes</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" th:src="@{/images/e1.png}" alt="">
-                        </div>
-                        <p class="mb-0">Find the most qualified people in the most unexpected places. Information for applicants to consider when applying for local positions.</p>
-                     </div>
-                     <div class="box-body p-3">
-                        <div class="d-flex align-items-top job-item-header pb-2">
-                           <div class="mr-2">
-                              <h6 class="font-weight-bold text-dark mb-0">Harvard University</h6>
-                              <div class="text-truncate text-primary">Maths and science education</div>
-                              <div class="small text-gray-500">Oct 2020 - Present (4 year 7 month) </div>
-                           </div>
-                           <img class="img-fluid ml-auto mb-auto" th:src="@{/images/e2.png}" alt="">
-                        </div>
-                        <p class="mb-0">Wualified people in the most unexpected places. Information for applicants to consider when applying for local positions.</p>
-                     </div>
-                  </div>
-               </main>
-               
-                <main th:if="${page}=='1'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
-                거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역
-                <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="d-flex box-title border-bottom p-3">
-                        <h6 class="m-0 col-6">거래내역</h6>
-                        
-                        
-                     </div>
-                
-                     <div class="box-body p-3">
-                        <div>
-                        	<table class="table table-striped">
-                        		<thead>                       		                       		
-                        		<tr>                       			
-                        			<th>시간</th>
-                        			<th>구매유저닉네임</th>
-                        			<th>상품제목</th>
-                        			<th>판매자닉네임</th>
-                        		</tr>
-                        		
-                        		</thead>
-                        		<tbody>
-                        		<tr th:each="order: ${orders}">
-                        			<td th:text="${order.createdAt}"></td>
-                        			<td th:text="${order.nickname}"></td>
-                        			<td th:text="${order.title}"></td>
-                        			<td th:text="${order.nickname2}"></td>
-                        		</tr>
-                        		</tbody>
-                        	
-                        	</table>
-                        </div>
-                        
-                     </div>
-                  </div>
-                  <div class="footer-pagination text-center">
-            <nav aria-label="Page navigation example">
-               <ul class="pagination">
-               		
-                  <li  class="page-item">
-                     <a th:if="${pageInfo.nowPage}>='2'" class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage-1}" aria-label="Previous">
-                        <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
-                     </a>
-                     <th:block th:unless="${pageInfo.nowPage}=='1'" class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage-1}" aria-label="Previous">
-                        <span aria-hidden="true"></span>
-                     </th:block>   
-                  </li>
-                 
-                   <th:block th:each="num: ${#numbers.sequence({pageInfo.startPage},{pageInfo.endPage})}">
-       				<li class="page-item">
-       					
-                  		<a class="page-link" th:href="@{/mypage/1/}+${num}" th:text="${num}"></a>
-                  	</li>
-   				   </th:block> 
-                 <th:block th:text="${pageInfo.nowPage}"></th:block>
-                 
-          
-                  <li class="page-item">
-                     <a th:if="${pageInfo.nowPage}<${pageInfo.lastPage}" class="page-link" th:href="@{/mypage/1/}+(${pageInfo.nowPage+1})" aria-label="Next">
-                        <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-                 
-                     </a>
-                      <th:block th:unless="${pageInfo.nowPage}==${pageInfo.lastPage}" class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage+1}" aria-label="Next">
-                        <span aria-hidden="true"></span>
-                     </th:block>   
-                  </li>
-               </ul>
-            </nav>
-         </div>
-                </main>
-                
-                 <main th:if="${page}=='2'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
-               	찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물
-               	<div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="d-flex box-title border-bottom p-3">
-                        <h6 class="m-0 col-6">찜한 게시물</h6>
-                     </div>
-                     <div class="box-body p-3">
-                        <div>
-                        	<table class="table table-striped">
-                        		<thead>                       		                       		
-                        		<tr>                      			
-                        			<th>시간</th>
-                        			<th>찜누른닉네임</th>
-                        			<th>찜당한포스트제목</th>
-                        			<th>판매자닉네임</th>
-                        		</tr>                       		
-                        		</thead>
-                        		<tbody>
-                        		<tr th:each="likepost: ${likeposts}">
-                        			<td th:text="${likepost.clicked_date}"></td>
-                        			<td th:text="${likepost.nickname}"></td>
-                        			<td th:text="${likepost.title}"></td>
-                        			<td th:text="${likepost.nickname2}"></td>
-                        		</tr>
-                        		</tbody>                      	
-                        	</table>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="footer-pagination text-center">
-            <nav aria-label="Page navigation example">
-               <ul class="pagination">
-               
-               <li  class="page-item">
-                     <a th:if="${pageInfo2.nowPage}>='2'" class="page-link" th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}" aria-label="Previous">
-                        <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
-                     </a>
-                     <th:block th:unless="${pageInfo2.nowPage}=='1'" class="page-link" th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}" aria-label="Previous">
-                        <span aria-hidden="true"></span>
-                     </th:block>   
-                  </li>
-                 
-                   <th:block th:each="num: ${#numbers.sequence({pageInfo2.startPage},{pageInfo2.endPage})}">
-       				<li class="page-item">
-       					
-                  		<a class="page-link" th:href="@{/mypage/2/}+${num}" th:text="${num}"></a>
-                  	</li>
-   				   </th:block> 
-                 <th:block th:text="${pageInfo2.nowPage}"></th:block>
-                 
-          
-                  <li class="page-item">
-                     <a th:if="${pageInfo2.nowPage}<${pageInfo2.lastPage}" class="page-link" th:href="@{/mypage/2/}+(${pageInfo2.nowPage+1})" aria-label="Next">
-                        <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-                 
-                     </a>
-                      <th:block th:unless="${pageInfo2.nowPage}==${pageInfo2.lastPage}" class="page-link" th:href="@{/mypage/1/}+${pageInfo2.nowPage+1}" aria-label="Next">
-                        <span aria-hidden="true"></span>
-                     </th:block>   
-                  </li>
-               
-               
-               
-               
-               
-               <!-- 
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
+					</div>
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">찜한 게시물</h6>
+
+							<button type="button" class="btn btn-light btn-sm col-6"
+								th:onclick="|location.href='@{/mypage/2/1}'|">자세히보기</button>
+
+						</div>
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>시간</th>
+											<th>찜누른닉네임</th>
+											<th>찜당한포스트제목</th>
+											<th>판매자닉네임</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="likepost: ${likeposts}">
+											<td th:text="${likepost.clicked_date}"></td>
+											<td th:text="${likepost.nickname}"></td>
+											<td th:text="${likepost.title}"></td>
+											<td th:text="${likepost.nickname2}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">쪽지</h6>
+							<button type="button" class="btn btn-light btn-sm col-6"
+								th:onclick="|location.href='@{/mypage/3}'|">자세히보기</button>
+						</div>
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>시간</th>
+											<th>보낸사람닉네임</th>
+											<th>관련포스트제목</th>
+											<th>받은사람닉넹미</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="order: ${orders}">
+											<td th:text="${order.createdAt}"></td>
+											<td th:text="${order.nickname}"></td>
+											<td th:text="${order.title}"></td>
+											<td th:text="${order.nickname2}"></td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="box-title border-bottom p-3">
+							<h6 class="m-0">Education</h6>
+						</div>
+						<div class="box-body p-3 border-bottom">
+							<div class="d-flex align-items-top job-item-header pb-2">
+								<div class="mr-2">
+									<h6 class="font-weight-bold text-dark mb-0">Stanford
+										University</h6>
+									<div class="text-truncate text-primary">Master’s
+										programmes</div>
+									<div class="small text-gray-500">Oct 2020 - Present (4
+										year 7 month)</div>
+								</div>
+								<img class="img-fluid ml-auto mb-auto"
+									th:src="@{/images/e1.png}" alt="">
+							</div>
+							<p class="mb-0">Find the most qualified people in the most
+								unexpected places. Information for applicants to consider when
+								applying for local positions.</p>
+						</div>
+						<div class="box-body p-3">
+							<div class="d-flex align-items-top job-item-header pb-2">
+								<div class="mr-2">
+									<h6 class="font-weight-bold text-dark mb-0">Harvard
+										University</h6>
+									<div class="text-truncate text-primary">Maths and science
+										education</div>
+									<div class="small text-gray-500">Oct 2020 - Present (4
+										year 7 month)</div>
+								</div>
+								<img class="img-fluid ml-auto mb-auto"
+									th:src="@{/images/e2.png}" alt="">
+							</div>
+							<p class="mb-0">Wualified people in the most unexpected
+								places. Information for applicants to consider when applying for
+								local positions.</p>
+						</div>
+					</div>
+				</main>
+
+				<main th:if="${page}=='1'"
+					class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역거래내역
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">거래내역</h6>
+
+
+						</div>
+
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>시간</th>
+											<th>구매유저닉네임</th>
+											<th>상품제목</th>
+											<th>판매자닉네임</th>
+										</tr>
+
+									</thead>
+									<tbody>
+										<tr th:each="order: ${orders}">
+											<td th:text="${order.createdAt}"></td>
+											<td th:text="${order.nickname}"></td>
+											<td th:text="${order.title}"></td>
+											<td th:text="${order.nickname2}"></td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
+					</div>
+					<div class="footer-pagination text-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+
+								<li class="page-item"><a th:if="${pageInfo.nowPage}>='2'"
+									class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage-1}"
+									aria-label="Previous"> <span aria-hidden="true"><i
+											class="fa fa-chevron-left" aria-hidden="true"></i></span>
+								</a> <th:block th:unless="${pageInfo.nowPage}=='1'"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo.nowPage-1}"
+										aria-label="Previous">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+
+								<th:block
+									th:each="num: ${#numbers.sequence({pageInfo.startPage},{pageInfo.endPage})}">
+									<li class="page-item"><a class="page-link"
+										th:href="@{/mypage/1/}+${num}" th:text="${num}"></a></li>
+								</th:block>
+								<th:block th:text="${pageInfo.nowPage}"></th:block>
+
+
+								<li class="page-item"><a
+									th:if="${pageInfo.nowPage}<${pageInfo.lastPage}"
+									class="page-link"
+									th:href="@{/mypage/1/}+(${pageInfo.nowPage+1})"
+									aria-label="Next"> <span aria-hidden="true"><i
+											class="fa fa-chevron-right" aria-hidden="true"></i></span>
+
+								</a> <th:block th:unless="${pageInfo.nowPage}==${pageInfo.lastPage}"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo.nowPage+1}"
+										aria-label="Next">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+							</ul>
+						</nav>
+					</div>
+				</main>
+
+				<main th:if="${page}=='2'"
+					class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물찜한게시물
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">찜한 게시물</h6>
+						</div>
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>시간</th>
+											<th>찜누른닉네임</th>
+											<th>찜당한포스트제목</th>
+											<th>판매자닉네임</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="likepost: ${likeposts}">
+											<td th:text="${likepost.clicked_date}"></td>
+											<td th:text="${likepost.nickname}"></td>
+											<td th:text="${likepost.title}"></td>
+											<td th:text="${likepost.nickname2}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="footer-pagination text-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+
+								<li class="page-item"><a th:if="${pageInfo2.nowPage}>='2'"
+									class="page-link"
+									th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}"
+									aria-label="Previous"> <span aria-hidden="true"><i
+											class="fa fa-chevron-left" aria-hidden="true"></i></span>
+								</a> <th:block th:unless="${pageInfo2.nowPage}=='1'"
+										class="page-link"
+										th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}"
+										aria-label="Previous">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+
+								<th:block
+									th:each="num: ${#numbers.sequence({pageInfo2.startPage},{pageInfo2.endPage})}">
+									<li class="page-item"><a class="page-link"
+										th:href="@{/mypage/2/}+${num}" th:text="${num}"></a></li>
+								</th:block>
+								<th:block th:text="${pageInfo2.nowPage}"></th:block>
+
+
+								<li class="page-item"><a
+									th:if="${pageInfo2.nowPage}<${pageInfo2.lastPage}"
+									class="page-link"
+									th:href="@{/mypage/2/}+(${pageInfo2.nowPage+1})"
+									aria-label="Next"> <span aria-hidden="true"><i
+											class="fa fa-chevron-right" aria-hidden="true"></i></span>
+
+								</a> <th:block
+										th:unless="${pageInfo2.nowPage}==${pageInfo2.lastPage}"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo2.nowPage+1}"
+										aria-label="Next">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+
+
+
+
+
+								<!-- 
                   <li class="page-item">
                      <a class="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
@@ -432,47 +484,52 @@
                                            <span class="sr-only"></span>
                      </a>
                   </li> -->
-               </ul>
-            </nav>
-         </div>
-                </main>
-                
-                 <main th:if="${page}=='3'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
-                쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지
-                </main>
-                
-                <!-- =============================================개인정보수정================= -->
-                <main th:if="${page}=='5'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
-              
-                
-                <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="d-flex box-title border-bottom p-3">
-                        <h6 class="m-0 col-6">개인정보수정</h6>
-                       
-                     </div>
-                    
-                     <div class="box-body p-3">
-                        <div class="py-4 px-3 border-bottom d-flex">
-                        	
-                        	<div class="box mb-3 rounded bg-white profile-box text-center border-right">
-                     			<div class="py-4 px-3">
-                        			<img th:src="@{/images/user/s4.png}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-                        			
-                     			</div>
+							</ul>
+						</nav>
+					</div>
+				</main>
+
+				<main th:if="${page}=='3'"
+					class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지
+				</main>
+
+				<!-- =============================================개인정보수정================= -->
+				<main th:if="${page}=='5'"
+					class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+
+
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">개인정보수정</h6>
+
+						</div>
+
+						<div class="box-body p-3">
+							<div class="py-4 px-3 border-bottom d-flex">
+
+								<div
+									class="box mb-3 rounded bg-white profile-box text-center border-right">
+									<div class="py-4 px-3">
+										<img th:src="@{/images/user/s4.png}"
+											class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+
+									</div>
 									<div class="p-4">
-										<form method="post" enctype="multipart/form-data" action="/imageupload"> 
+										<form method="post" enctype="multipart/form-data"
+											action="/imageupload">
 											<label data-toggle="tooltip" data-placement="top"
 												data-original-title="Upload New Picture"
 												class="btn btn-info m-0" for="fileAttachmentBtn"> <i
 												class="mdi mdi-image"></i> Upload <input
 												id="fileAttachmentBtn" name="file-attachment" type="file"
 												class="d-none">
-												
+
 
 											</label>
 											<div>dddddddddddddddddddddd</div>
-											
- 										</form> 
+
+										</form>
 										<button data-toggle="tooltip" data-placement="top"
 											data-original-title="Delete" type="submit"
 											class="btn btn-danger">
@@ -480,98 +537,108 @@
 										</button>
 									</div>
 								</div>
-                        	<div class="col-6 p-3">
-                        		<h5 class="font-weight-bold text-dark mb-1 mt-4">JongHoon@gmail.com</h5>
-                        		<p class="mb-0 text-muted">백종훈 닉네임</p>
-                        		<p class="mb-0 text-muted">직업</p>
-                        	</div>
-                        
-                       
-                  		</div>
-                  		<form class="needs-validation" novalidate="">
-                        <div class="form-row mt-3 ml-1 border-bottom">
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">닉네임</label>
-                              <input type="text" class="form-control" id="validationCustom01" value="Mark" required="">
-                             
-                           </div>
-                           
-                           <div class="col-md-4 mb-3">
-                           
-                              <label for="validationCustomUsername">Username</label><br>
-                               <button type="button" class="btn btn-light btn-sm" id="validationCustom02">중복확인</button> 
-                             
-                           </div>
-                           <div class="col-md-4 mb-3">
-                           
-                         
-                              <button class="btn btn-primary" id="nickmody" type="submit" disabled>닉네임 수정</button>
-                           </div>
-                           
-                        </div>    
-                     </form>
-                     <form class="needs-validation" novalidate="">
-                        <div class="form-row mt-3 ml-1 border-bottom">
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">현재 비밀번호</label>
-                              <input type="password" class="form-control" id="validationCustom03" value="" required="">
-                             
-                           </div>
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">새 비밀번호</label>
-                              <input type="password" class="form-control" id="validationCustom04" value="" required="">
-                             
-                           </div>
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">새 비밀번호 확인</label>
-                              <input type="password" class="form-control" id="validationCustom05" value="" required="">
-                             
-                           </div>
-                           
-                           <div class="col-md-5 mb-3">
-                           
-                         
-                              <button class="btn btn-primary" id="passmody" type="submit">비밀번호 수정</button>
-                           </div>
-                           
-                        </div>    
-                     </form>
-                     </div>
-                  </div>
-                
-                 
-                </main>
-               
-                
-              <!--  ==========================프리랜서 정보 수정========================================================== -->
-              <main th:if="${page}=='4'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
-              
-                
-                <div class="box shadow-sm rounded bg-white mb-3">
-                     <div class="d-flex box-title border-bottom p-3">
-                        <h6 class="m-0 col-6">개인정보수정</h6>
-                       
-                     </div>
-                    
-                     <div class="box-body p-3">
-                        <div class="py-4 px-3 border-bottom d-flex">
-                        	
-                        	<div class="box mb-3 rounded bg-white profile-box text-center border-right">
-                     			<div class="py-4 px-3">
-                        			<img th:src="@{/images/user/s4.png}" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-                        			
-                     			</div>
+								<div class="col-6 p-3">
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">JongHoon@gmail.com</h5>
+									<p class="mb-0 text-muted">백종훈 닉네임</p>
+									<p class="mb-0 text-muted">직업</p>
+								</div>
+
+
+							</div>
+							<form class="needs-validation" novalidate="">
+								<div class="form-row mt-3 ml-1 border-bottom">
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">닉네임</label> <input type="text"
+											class="form-control" id="validationCustom01" value="Mark"
+											required="">
+
+									</div>
+
+									<div class="col-md-4 mb-3">
+
+										<label for="validationCustomUsername">Username</label><br>
+										<button type="button" class="btn btn-light btn-sm"
+											id="validationCustom02">중복확인</button>
+
+									</div>
+									<div class="col-md-4 mb-3">
+
+
+										<button class="btn btn-primary" id="nickmody" type="submit"
+											disabled>닉네임 수정</button>
+									</div>
+
+								</div>
+							</form>
+							<form class="needs-validation" novalidate="">
+								<div class="form-row mt-3 ml-1 border-bottom">
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">현재 비밀번호</label> <input
+											type="password" class="form-control" id="validationCustom03"
+											value="" required="">
+
+									</div>
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">새 비밀번호</label> <input
+											type="password" class="form-control" id="validationCustom04"
+											value="" required="">
+
+									</div>
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">새 비밀번호 확인</label> <input
+											type="password" class="form-control" id="validationCustom05"
+											value="" required="">
+
+									</div>
+
+									<div class="col-md-5 mb-3">
+
+
+										<button class="btn btn-primary" id="passmody" type="submit">비밀번호
+											수정</button>
+									</div>
+
+								</div>
+							</form>
+						</div>
+					</div>
+
+
+				</main>
+
+
+				<!--  ==========================프리랜서 정보 수정========================================================== -->
+				<main th:if="${page}=='4'"
+					class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+
+
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">개인정보수정</h6>
+
+						</div>
+
+						<div class="box-body p-3">
+							<div class="py-4 px-3 border-bottom d-flex">
+
+								<div
+									class="box mb-3 rounded bg-white profile-box text-center border-right">
+									<div class="py-4 px-3">
+										<img th:src="@{/images/user/s4.png}"
+											class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+
+									</div>
 									<div class="p-4">
-										<form method="post" enctype="multipart/form-data" action="/imageupload"> 
+										<form method="post" enctype="multipart/form-data"
+											action="/imageupload">
 											<label data-toggle="tooltip" data-placement="top"
 												data-original-title="Upload New Picture"
-												class="btn btn-info m-0" for="fileAttachmentBtn"> 
-												<i
+												class="btn btn-info m-0" for="fileAttachmentBtn"> <i
 												class="mdi mdi-image"></i> Upload <input
 												id="fileAttachmentBtn" name="file-attachment" type="file"
 												class="d-none">
 											</label>
- 										</form> 
+										</form>
 										<button data-toggle="tooltip" data-placement="top"
 											data-original-title="Delete" type="submit"
 											class="btn btn-danger">
@@ -579,62 +646,69 @@
 										</button>
 									</div>
 								</div>
-                        	<div class="col-6 p-3">
-                        		<h5 class="font-weight-bold text-dark mb-1 mt-4">JongHoon@gmail.com</h5>
-                        		<p class="mb-0 text-muted">백종훈 닉네임</p>
-                        		<p class="mb-0 text-muted">직업</p>
-                        	</div>
-                        
-                       
-                  		</div>
-                  		<form class="needs-validation" novalidate="">
-                        <div class="form-row mt-3 ml-1 border-bottom">
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">닉네임</label>
-                              <input type="text" class="form-control" id="validationCustom01" value="Mark" required="">
-                             
-                           </div>
-                           
-                           <div class="col-md-4 mb-3">
-                           
-                              <label for="validationCustomUsername">Username</label><br>
-                               <button type="button" class="btn btn-light btn-sm" id="validationCustom02">중복확인</button> 
-                             
-                           </div>
-                           <div class="col-md-4 mb-3">
-                           
-                         
-                              <button class="btn btn-primary" id="nickmody" type="submit" disabled>닉네임 수정</button>
-                           </div>
-                           
-                        </div>    
-                     </form>
-                     <form class="needs-validation" novalidate="">
-                        <div class="form-row mt-3 ml-1 border-bottom">
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">현재 비밀번호</label>
-                              <input type="password" class="form-control" id="validationCustom03" value="" required="">
-                             
-                           </div>
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">새 비밀번호</label>
-                              <input type="password" class="form-control" id="validationCustom04" value="" required="">
-                             
-                           </div>
-                           <div class="col-md-8 mb-3">
-                              <label for="validationCustom01">새 비밀번호 확인</label>
-                              <input type="password" class="form-control" id="validationCustom05" value="" required="">
-                             
-                           </div>
-                           
-                           <div class="col-md-5 mb-3">
-                           
-                         
-                              <button class="btn btn-primary" id="passmody" type="submit">비밀번호 수정</button>
-                           </div>
-                           
-                        </div>    
-                     </form>
+								<div class="col-6 p-3">
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">JongHoon@gmail.com</h5>
+									<p class="mb-0 text-muted">백종훈 닉네임</p>
+									<p class="mb-0 text-muted">직업</p>
+								</div>
+
+
+							</div>
+							<form class="needs-validation" novalidate="">
+								<div class="form-row mt-3 ml-1 border-bottom">
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">닉네임</label> <input type="text"
+											class="form-control" id="validationCustom01" value="Mark"
+											required="">
+
+									</div>
+
+									<div class="col-md-4 mb-3">
+
+										<label for="validationCustomUsername">Username</label><br>
+										<button type="button" class="btn btn-light btn-sm"
+											id="validationCustom02">중복확인</button>
+
+									</div>
+									<div class="col-md-4 mb-3">
+
+
+										<button class="btn btn-primary" id="nickmody" type="submit"
+											disabled>닉네임 수정</button>
+									</div>
+
+								</div>
+							</form>
+							<form class="needs-validation" novalidate="">
+								<div class="form-row mt-3 ml-1 border-bottom">
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">현재 비밀번호</label> <input
+											type="password" class="form-control" id="validationCustom03"
+											value="" required="">
+
+									</div>
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">새 비밀번호</label> <input
+											type="password" class="form-control" id="validationCustom04"
+											value="" required="">
+
+									</div>
+									<div class="col-md-8 mb-3">
+										<label for="validationCustom01">새 비밀번호 확인</label> <input
+											type="password" class="form-control" id="validationCustom05"
+											value="" required="">
+
+									</div>
+
+									<div class="col-md-5 mb-3">
+
+
+										<button class="btn btn-primary" id="passmody" type="submit">비밀번호
+											수정</button>
+									</div>
+
+								</div>
+							</form>
 							<form class="needs-validation" novalidate="">
 								<div class="row form-row mt-3 ml-1">
 									<!-- Input -->
@@ -656,17 +730,18 @@
 									<!-- End Input -->
 
 								</div>
-								
+
 								<div class="col-md-5 mb-3">
 
-									<button class="btn btn-primary" id="locationmody" type="submit">주소 수정</button>
-									</div>
-				
-							</form>
-							
+									<button class="btn btn-primary" id="locationmody" type="submit">주소
+										수정</button>
+								</div>
 
-							
-							
+							</form>
+
+
+
+
 							<form class="needs-validation" novalidate="">
 								<div class="box-title border-bottom border-top p-3">
 									<h6 class="m-0">소개글 (양식에 맞춰서 글을 써주세요)</h6>
@@ -694,25 +769,26 @@
 
 								<div class="col-md-5 mb-3">
 
-									<button class="btn btn-primary" id="intromody" type="submit">소개글 수정</button>
+									<button class="btn btn-primary" id="intromody" type="submit">소개글
+										수정</button>
 								</div>
 
 							</form>
-							
+
 						</div>
-                  </div>
-                
-                 
-                </main>
-              
-              
-              
-              <!-- ========================================================================================================== -->
-              
-              
-             <!--  ============================================어사이드================================================ -->
-              
-               <!-- <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
+					</div>
+
+
+				</main>
+
+
+
+				<!-- ========================================================================================================== -->
+
+
+				<!--  ============================================어사이드================================================ -->
+
+				<!-- <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Who viewed your profile</h6>
@@ -847,170 +923,170 @@
                      </div>
                   </a>
                </aside> -->
-            </div>
-         </div>
-      </div>
-      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-      <script>
-    $(function() {
-    	$("#validationCustom02").click(function() {
-    		
-    		let nick = $('#validationCustom01').val();
-    		if(nick=='') {
-    			alert("닉네임을 입력하세요.");
-    			
-    			return;
-    		}
-    		
-    		console.log(nick);
-    		
-    		$.ajax({
-    			type:"post",
-    			dataType:"text",
-    			async:false,
-    			url:"http://localhost:8090/nickoverlap",
-    			data:{nick:$('#validationCustom01').val()},
-    			success: function(data, textStatus) {
-    				if(data=='true') {
-    					alert('사용 불가능합니다.');
-    					$('#nickmody').attr('disabled',true);
-    				}else {
-    					alert('사용 가능합니다.');
-    					$('#nickmody').attr('disabled',false);
-    				}
-    			}
-    		});          		 
-    	});
-    	
-       
-        
-        $('#nickmody').click(function() {
+			</div>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function() {
+			$("#validationCustom02").click(function() {
 
-    		
-        	let nick = $('#validationCustom01').val();
-        	$.ajax({
-    			type:"post",
-    			dataType:"text",
-    			async:false,
-    			url:"http://localhost:8090/nickupdate",
-    			data:{nick:$('#validationCustom01').val()},
-    			success: function(data, textStatus) {
-    				if(data=='true') {
-    					alert('닉네임 수정을 완료했습니다');
-    					
-    				}else {
-    					alert('닉네임 수정을 실패했습니다.');
-    					
-    				}
-    			}
-    		});      
-      
-        });
-        
-        
-////////////////////////////////////////////////
-        $("#passmody").click(function() {
-    		let pass1=$('#validationCustom03').val();
-    		console.log("jjj");
-    		if(pass1==''){
-    			alert("현재 비밀번호를 입력하세요");
-    			$('#validationCustom03').focus();
-            	return false;
-    		}
-    		let pass2=$('#validationCustom04').val();
-    		if(pass2==''){
-    			alert("새 비밀번호를 입력하세요");
-    			$('#validationCustom04').focus();
-            	return false;
-    		}
-    		let pass3=$('#validationCustom05').val();
-    		if(pass3==''){
-    			alert("새 비밀번호 확인을 입력하세요");
-    			$('#validationCustom05').focus();
-            	return false;
-    		}
-    		if(pass2!=pass3){
-    			alert("새 비밀번호와 새 비밀번호 확인이 다릅니다");
-    			$('#validationCustom05').focus();
-            	return false;
-    			
-    		}
-    	
-    		
-    		$.ajax({
-    			type:"post",
-    			dataType:"text",
-    			async:false,
-    			url:"http://localhost:8090/passupdate",
-    			data:{pass:$('#validationCustom03').val(),pass2:$('#validationCustom04').val(),pass3:$('#validationCustom05').val()},
-    			success: function(data, textStatus) {
-    				if(data=='true') {
-    					alert('패스워드가 수정되었습니다.');
-    				
-    				}else {
-    					alert('현재 비밀번호가 틀렸습니다.');
-    					
-    				}
-    			}
-    		});          		 
-    	});
-    	
-    	
-    	//=============================인트로덕션모디================
-    	
-        $("#intromody").click(function() {
-    		let intro=$('#intromody2').val();
-    		console.log("intro");
-    		
-    		
-    		$.ajax({
-    			type:"post",
-    			dataType:"text",
-    			async:false,
-    			url:"http://localhost:8090/intromody",
-    			data:{intro:$('#intromody2').val()},
-    			success: function(data, textStatus) {
-    				if(data=='true') {
-    					alert('소개글이 수정되었습니다.');
-    				
-    				}else {
-    					alert('소개글 수정을 실패하였습니다.');
-    					
-    				}
-    			}
-    		});          		 
-    	});
-    	
-    	//=====================주소수정===========================
-        $("#locationmody").click(function() {
-    		
-    		
-    		$.ajax({
-    			type:"post",
-    			dataType:"text",
-    			async:false,
-    			url:"http://localhost:8090/locationmody",
-    			data:{address:$('#sample6_address').val(),address2:$('#sample6_detailAddress').val()},
-    			success: function(data, textStatus) {
-    				if(data=='true') {
-    					alert('주소가 수정되었습니다');
-    				
-    				}else {
-    					alert('주소 수정이 실패하였습니다.');
-    					
-    				}
-    			}
-    		});          		 
-    	});
-    	
-     
-        
-        
-    });
-    
-    
-    </script> 
-   
+				let nick = $('#validationCustom01').val();
+				if (nick == '') {
+					alert("닉네임을 입력하세요.");
+
+					return;
+				}
+
+				console.log(nick);
+
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/nickoverlap",
+					data : {
+						nick : $('#validationCustom01').val()
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('사용 불가능합니다.');
+							$('#nickmody').attr('disabled', true);
+						} else {
+							alert('사용 가능합니다.');
+							$('#nickmody').attr('disabled', false);
+						}
+					}
+				});
+			});
+
+			$('#nickmody').click(function() {
+
+				let nick = $('#validationCustom01').val();
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/nickupdate",
+					data : {
+						nick : $('#validationCustom01').val()
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('닉네임 수정을 완료했습니다');
+
+						} else {
+							alert('닉네임 수정을 실패했습니다.');
+
+						}
+					}
+				});
+
+			});
+
+			////////////////////////////////////////////////
+			$("#passmody").click(function() {
+				let pass1 = $('#validationCustom03').val();
+				console.log("jjj");
+				if (pass1 == '') {
+					alert("현재 비밀번호를 입력하세요");
+					$('#validationCustom03').focus();
+					return false;
+				}
+				let pass2 = $('#validationCustom04').val();
+				if (pass2 == '') {
+					alert("새 비밀번호를 입력하세요");
+					$('#validationCustom04').focus();
+					return false;
+				}
+				let pass3 = $('#validationCustom05').val();
+				if (pass3 == '') {
+					alert("새 비밀번호 확인을 입력하세요");
+					$('#validationCustom05').focus();
+					return false;
+				}
+				if (pass2 != pass3) {
+					alert("새 비밀번호와 새 비밀번호 확인이 다릅니다");
+					$('#validationCustom05').focus();
+					return false;
+
+				}
+
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/passupdate",
+					data : {
+						pass : $('#validationCustom03').val(),
+						pass2 : $('#validationCustom04').val(),
+						pass3 : $('#validationCustom05').val()
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('패스워드가 수정되었습니다.');
+
+						} else {
+							alert('현재 비밀번호가 틀렸습니다.');
+
+						}
+					}
+				});
+			});
+
+			//=============================인트로덕션모디================
+
+			$("#intromody").click(function() {
+				let intro = $('#intromody2').val();
+				console.log("intro");
+
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/intromody",
+					data : {
+						intro : $('#intromody2').val()
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('소개글이 수정되었습니다.');
+
+						} else {
+							alert('소개글 수정을 실패하였습니다.');
+
+						}
+					}
+				});
+			});
+
+			//=====================주소수정===========================
+			$("#locationmody").click(function() {
+
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/locationmody",
+					data : {
+						address : $('#sample6_address').val(),
+						address2 : $('#sample6_detailAddress').val()
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('주소가 수정되었습니다');
+
+						} else {
+							alert('주소 수정이 실패하였습니다.');
+
+						}
+					}
+				});
+			});
+
+		});
+	</script>
+
 
 </section>
 

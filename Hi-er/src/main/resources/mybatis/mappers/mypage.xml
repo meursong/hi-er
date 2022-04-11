@@ -10,18 +10,18 @@
 	
 	</select>
 	
-	<select id="queryOrderss" resultType="Map" parameterType="int">
+<!-- 	<select id="queryOrderss" resultType="Map" parameterType="int">
 	<![CDATA[
 		select * from Orders where buyer_id=#{id}
 		order by createdAt desc limit 5
 	]]>	
-	</select>
+	</select> -->
 	
 	<!--거래관리 5개 출력-->
 	<select id="queryOrdersss" resultType="Map" parameterType="int">
 	<![CDATA[
 		
-		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id
 		from user u join user us join product p join orders o
 		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
 		, (SELECT @rownum:=0) TMP
