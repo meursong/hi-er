@@ -14,7 +14,7 @@
 			select * from user order by 인기 desc limit 5;
 		]]>
 	</select>
-	
+
 	<select id="getList" resultType="SelectP">
 		<![CDATA[
 			select product from product where category like = #{productName};

@@ -4,6 +4,50 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layout}">
 <head>
+
+<!-- JQuery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script>
+$(function() {
+	$('#iamportPayment').click(function() {
+		console.log("결제버튼클릭");
+		iamport(); //메서드 호출	
+		});
+});
+function iamport(){
+	//가맹점 식별코드
+	IMP.init('imp57611856');
+	IMP.request_pay({
+	    pg : 'kakaopay.TC0ONETIME',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '상품1' , //결제창에서 보여질 이름
+	    amount : 100, //실제 결제되는 가격
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울 강남구 도곡동',
+	    buyer_postcode : '123-456'
+	}, function(rsp) {
+		console.log(rsp);
+	    if ( rsp.success ) {
+	    	var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	    	 var msg = '결제에 실패하였습니다.';
+	         msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+}
+</script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -145,16 +189,12 @@ input.card {
 	<div class="containerPay">
 		<div class="row m-0">
 			<div class="col-md-7 col-12">
-				<div class="row" style="margin-right : 15px">
+				<div class="row" style="margin-right: 15px">
 					<div class="col-12 px-0 mb-4">
 						<div class="box-right">
 							<div class="d-flex pb-2">
-								<p class="fw-bold h7">
-									<span class="textmuted">[[${product.paymentPkg}]]/</span>Publicnote
-								</p>
-								<p class="ms-auto p-blue">
-									<span class=" bg btn btn-primary fas fa-pencil-alt me-3"></span>
-									<span class=" bg btn btn-primary far fa-clone"></span>
+								<p class="fw-bold h2">
+									[[${product.title}]]/<span class="textmuted">[[${product.paymentPkg}]]</span>
 								</p>
 							</div>
 							<div class="bg-blue p-2">
@@ -165,6 +205,12 @@ input.card {
 							</div>
 						</div>
 					</div>
+					<div>
+						<h2>IAMPORT 결제 데모</h2>
+						<li>
+							<button id="iamportPayment" type="button">결제테스트</button>
+						</li>
+					</div>
 					<div class="col-12 mb-4">
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
@@ -172,6 +218,7 @@ input.card {
 								<p class="h1 fw-bold d-flex">
 									<span
 										class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>[[${product.b_price}]]
+									원(₩)
 									<!-- <span class="textmuted">.58</span> -->
 								</p>
 								<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
@@ -181,25 +228,32 @@ input.card {
 					<div class="col-12 px-0">
 						<div class="box-right">
 							<div class="d-flex mb-2">
-								<p class="fw-bold">Create new invoice</p>
-								<p class="ms-auto textmuted">
-									<span class="fas fa-times"></span>
-								</p>
+								<p class="fw-bold">구매자 정보</p>
 							</div>
 							<div class="d-flex mb-2">
 								<p class="h7">#AL2545</p>
 								<p class="ms-auto bg btn btn-primary p-blue h8">
-									<span class="far fa-clone pe-2"></span>COPY PAYMENT LINK
+									COPY PAYMENT LINK
 								</p>
 							</div>
 							<div class="row">
 								<div class="col-12 mb-2">
-									<p class="textmuted h8">Project / Description</p>
+									<p class="textmuted h8">성함 <p>
 									<input class="form-control" type="text"
-										placeholder="Legal Consulting">
+										placeholder="홍길동">
 								</div>
-								<div class="col-6">
-									<p class="textmuted h8">Issused on</p>
+								<div class="col-12 mb-2">
+									<p class="textmuted h8">이메일 <p>
+									<input class="form-control" type="text"
+										placeholder="@를 포함한 메일주소를 입력해 주세요">
+								</div>
+								<div class="col-12 mb-2">
+									<p class="textmuted h8">전화번호 <p>
+									<input class="form-control" type="text"
+										placeholder="010-1111-2222">
+								</div>
+								<!-- <div class="col-6">
+									<p class="textmuted h8">전화번호</p>
 									<input class="form-control" type="text"
 										placeholder="Oct 25, 2020">
 								</div>
@@ -207,7 +261,7 @@ input.card {
 									<p class="textmuted h8">Due on</p>
 									<input class="form-control" type="text"
 										placeholder="Oct 25, 2020">
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -288,5 +342,4 @@ input.card {
 		</div>
 	</div>
 </section>
-
 </html>

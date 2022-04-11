@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,14 +27,24 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Product;
+import com.mulcam.hier.dto.Review;
+import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.PostService;
+import com.mulcam.hier.service.ReviewService;
+import com.mulcam.hier.service.UserService;
 
 @RequestMapping("/post")
 @Controller
 public class PostController {
 	
 	@Autowired
+	UserService us;
+	
+	@Autowired
 	PostService postService;
+	
+	@Autowired
+	ReviewService reviewService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -47,10 +59,30 @@ public class PostController {
 		return mav;
 	}
 
-	@GetMapping("/write")
-	public ModelAndView write() {
-		ModelAndView mav = new ModelAndView("write");
-		return mav;
+	@GetMapping("/designWrite")
+	public String designWrite(Model model) throws Exception {
+		System.out.println((User) session.getAttribute("loginedUser"));
+		if ((User) session.getAttribute("loginedUser") != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User email = us.selectEmail(user_id);
+			model.addAttribute("email", email);
+			return "designWrite";
+		} else {
+			return "login";
+		}
+	}
+	
+	@GetMapping("/videoWrite")
+	public String videoWrite(Model model) throws Exception {
+		System.out.println((User) session.getAttribute("loginedUser"));
+		if ((User) session.getAttribute("loginedUser") != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User email = us.selectEmail(user_id);
+			model.addAttribute("email", email);
+			return "videoWrite";
+		} else {
+			return "login";
+		}
 	}
 	
 	private String fileupload(MultipartFile file) {
@@ -69,10 +101,9 @@ public class PostController {
 		return filename;
 	}
 	
-	@PostMapping("/write")
-	public String write(@ModelAttribute Product product) {
-		System.out.println("글쓰기경로!!!!!!!!!!");
-		System.out.println(product.getTitle());
+	@PostMapping("/videoWrite")
+	public String videoWrite(@ModelAttribute Product product) {
+		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));
@@ -90,6 +121,28 @@ public class PostController {
 		}	
 		return "/product-detail";
 	}
+	
+	@PostMapping("/designWrite")
+	public String write(@ModelAttribute Product product) {
+		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
+		try {
+			product.setFilename1(fileupload(product.getFile1()));
+			product.setFilename2(fileupload(product.getFile2()));
+			product.setFilename3(fileupload(product.getFile3()));
+			product.setFilename4(fileupload(product.getFile4()));
+			product.setFilename5(fileupload(product.getFile5()));
+			product.setFilename6(fileupload(product.getFile6()));
+			product.setFilename7(fileupload(product.getFile7()));
+			product.setFilename8(fileupload(product.getFile8()));
+			product.setIs_available(0); // 0:거래가능  1:거래중지
+			product.setSeller_id(10); //추후 세션에서 글쓴사람 아이디 얻어오는 코드로 수정 필요
+			postService.writePost(product);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		return "/product-detail"; //추후 게시판 페이지로 변경 
+	}
+
 
 	@ResponseBody
 	@PostMapping("/uploadImage")
@@ -137,14 +190,18 @@ public class PostController {
 	}
 	
 	@GetMapping("/detail/{pid}")
-	public ModelAndView accinfo(@PathVariable("pid") Integer pid) {
+	public ModelAndView detail(@PathVariable("pid") Integer pid, @ModelAttribute("params") Review params) {
 		ModelAndView mav = new ModelAndView("product-detail");
+		params.setProduct_id(pid);
+		params.setRecordsPerPage(2);
 		try {
-			Integer logined_userid = (Integer)session.getAttribute("id");
+			//Integer logined_userid = (Integer)session.getAttribute("id");
+			Integer logined_userid = 10; //추후 변경 필요
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
 			Integer likedNum = postService.likeNum(pid, logined_userid);
 			boolean isLike = postService.isLike(pid, logined_userid);
+			List<Review> reviews = reviewService.prodReviewList(params);
 			
 			Map<String, Object> likeInfo = new HashMap<String,Object>();
 			likeInfo.put("likeNum", likedNum);
@@ -153,10 +210,44 @@ public class PostController {
 			mav.addObject("likeInfo", likeInfo);
 			mav.addObject("product", product);
 			mav.addObject("priceInfo", priceInfo);
+			mav.addObject("reviews", reviews);
 		}	catch(Exception e) {
+			e.printStackTrace();
 			mav.addObject("err", e.getMessage());
 		}
 		return mav;
+	}
+	
+	//테스트용 : mav - model 차이?
+	@GetMapping("/detailPage")
+	public String prodDetail(Model model, @ModelAttribute("params") Review params) {
+		Integer pid = 4;
+		params.setProduct_id(pid);
+		params.setRecordsPerPage(2);
+		try {
+			//Integer logined_userid = (Integer)session.getAttribute("id");
+			Integer logined_userid = 10; //추후 변경 필요
+			Product product = postService.productDetail(pid);
+			Product priceInfo = postService.priceInfo(pid);
+			Integer likedNum = postService.likeNum(pid, logined_userid);
+			boolean isLike = postService.isLike(pid, logined_userid);
+			List<Review> reviews = reviewService.prodReviewList(params);
+			
+			System.out.println(reviews);
+			
+			Map<String, Object> likeInfo = new HashMap<String,Object>();
+			likeInfo.put("likeNum", likedNum);
+			likeInfo.put("isLike", isLike);
+			
+			model.addAttribute("likeInfo", likeInfo);
+			model.addAttribute("product", product);
+			model.addAttribute("priceInfo", priceInfo);
+			model.addAttribute("reviews", reviews);
+			
+		}	catch(Exception e) {
+			model.addAttribute("err", e.getMessage());
+		}
+		return "product-detail";
 	}
 	
 	@ResponseBody

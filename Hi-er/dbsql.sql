@@ -1,48 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mulcam.hier.dao.UserDAO">
-	<select id="login" resultType="User" parameterType="Map">
-		<![CDATA[
-			SELECT * FROM user where email = #{email} and password = #{password};
-		]]>
-	</select>
-
-
-
-	<select id="emailCheck" resultType="String" parameterType="String">
-		<![CDATA[
-			SELECT name FROM user where email = #{email}
-		]]>
-	</select>
-	
-	<select id="nicknameCheck" resultType="String" parameterType="String">
-		<![CDATA[
-			SELECT name FROM user where nickname = #{nickname}
-		]]>
-	</select>
-<!-- <select id="selectUser" resultType="User" parameterType="String">
-		<![CDATA[
-			select * from user where nickname = #{nickname};
-		]]>
-	</select>
-
-	<select id="getBestUserFive" resultType="User">
-		<![CDATA[
-			select * from user order by 인기 desc limit 5;
-		]]>
-	</select>
-	
-	<select id="getList" resultType="SelectP">
-		<![CDATA[
-			select product from product where category like = #{productName};
-		]]>
-	</select>
-	 -->
-</mapper>
-
-<!--  
-CREATE DATABASE if not exists `hier` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE if not exists `hire` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 DROP table if exists `image`;
 DROP table if exists `portfolio_src`;
 DROP table if exists `review`;
@@ -267,8 +223,8 @@ INSERT INTO `f_info` (`f_id`,`address`,`address2`,`introduction`,`switchAt`) VAL
 INSERT INTO `f_info` (`f_id`,`address`,`address2`,`introduction`,`switchAt`) VALUES (2,'서울 마포구 가양대로 1','11','학력: \r\n\r\n경력:\r\n\r\n자격증:\r\n\r\n사회활동:\r\n\r\n \r\n													\r\n','2022-04-07 22:09:31');
 
 /*
- Query: SELECT * FROM hier.review
- Date: 2022-04-08 16:48
+-- Query: SELECT * FROM hier.review
+-- Date: 2022-04-08 16:48
 */
 INSERT INTO `review` (`review_id`,`review_wid`,`product_id`,`seller_id`,`content`,`star_point`,`createdAt`) VALUES (1,1,1,4,'긴글테스트으~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',3,'2022-03-31 14:38:44');
 INSERT INTO `review` (`review_id`,`review_wid`,`product_id`,`seller_id`,`content`,`star_point`,`createdAt`) VALUES (2,3,3,4,'리뷰 테스트3',4,'2022-03-31 14:38:44');
@@ -347,4 +303,5 @@ INSERT INTO `review` (`review_id`,`review_wid`,`product_id`,`seller_id`,`content
 INSERT INTO `review` (`review_id`,`review_wid`,`product_id`,`seller_id`,`content`,`star_point`,`createdAt`) VALUES (77,1,29,4,'리뷰 별점 테스트으으으이ㅇ;ㅇ;ㅇ;윽',5,'2022-04-06 14:27:44');
 INSERT INTO `review` (`review_id`,`review_wid`,`product_id`,`seller_id`,`content`,`star_point`,`createdAt`) VALUES (79,1,29,4,'리뷰 별점 테스트으으으이ㅇ;ㅇ;ㅇ;윽',5,'2022-04-07 14:55:10');
 INSERT INTO `review` (`review_id`,`review_wid`,`product_id`,`seller_id`,`content`,`star_point`,`createdAt`) VALUES (80,1,29,4,'리뷰 별점 테스트으으으이ㅇ;ㅇ;ㅇ;윽',5,'2022-04-07 14:55:10');
- -->
+
+

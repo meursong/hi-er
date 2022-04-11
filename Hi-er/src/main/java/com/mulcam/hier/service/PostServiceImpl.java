@@ -21,7 +21,7 @@ public class PostServiceImpl implements PostService {
 		if(pid==null) pid = 1;
 		prod.setProduct_id(pid+1);
 		postDAO.insertProduct(prod);
-		postDAO.insertDesignPriceInfo(prod);
+		postDAO.insertPriceInfo(prod);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Product priceInfo(Integer pid) throws Exception {
-		Product priceInfo = postDAO.queryDesignPriceInfo(pid);
+		Product priceInfo = postDAO.queryPriceInfo(pid);
 		return priceInfo;
 	}
 
@@ -58,8 +58,8 @@ public class PostServiceImpl implements PostService {
 		Map<String, Object> likeInfo = new HashMap<String,Object>();
 		
 		Product product = postDAO.queryProduct(pid);
-		// Integer liked_userid = product.getSellerId();
-		Integer liked_userid = 10;
+		Integer liked_userid = product.getSeller_id();
+		//Integer liked_userid = 10;
 		
 		boolean isLike = postDAO.likeCheck(pid, like_userid).equals(1);
 		if (isLike == true) {

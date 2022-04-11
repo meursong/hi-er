@@ -21,11 +21,11 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation"com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0"
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-	
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	
+	//oauth2 추가
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {
