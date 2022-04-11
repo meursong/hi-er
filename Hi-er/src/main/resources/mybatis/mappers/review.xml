@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.hier.dao.ReviewDAO">
+
+	<select id="selectProdReview" resultType="Review" parameterType="Review">
+		<![CDATA[
+        select u.nickname, r.content, r.star_point, r.createdAt
+        from review r
+                 left join user u on u.user_id = r.review_wid
+        where r.product_id = #{product_id}
+        order by ${sort} desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+        ]]>
+	</select>
+	<select id="selectMaxCount" resultType="Integer" parameterType="Review">
+		<![CDATA[
+		select count(*) from review r where r.product_id=#{product_id};
+		]]>
+	</select>
+</mapper>
