@@ -76,7 +76,6 @@ public class UserController {
 		model.addAttribute("reviews", reviews);
 		
 		return "freelancerInfo";
-		
 	}
 	
 	@GetMapping("/login")

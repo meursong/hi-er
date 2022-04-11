@@ -1,9 +1,5 @@
 package com.mulcam.hier.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class PaginationInfo {
 
 	/** 페이징 계산에 필요한 파라미터들이 담긴 클래스 */
