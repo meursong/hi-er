@@ -158,7 +158,10 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public boolean introupdate(String intro) throws Exception {
 		
-		FreelancerUser freelancerUser=new FreelancerUser(1,null,null,intro);//첫번째에 세션아이디 받을거임 지금은 1
+	
+		FreelancerUser freelancerUser=new FreelancerUser();
+		freelancerUser.setF_id(1);
+		freelancerUser.setIntroduction(intro);
 		try {
 		mypageDAO.introupdate(freelancerUser);
 		return true;
@@ -171,7 +174,11 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public boolean addressupdate(String address, String address2) {
-		FreelancerUser freelancerUser=new FreelancerUser(1,address,address2,"1");//첫번째에 세션아이디 받을거임 지금은 1
+		
+		FreelancerUser freelancerUser=new FreelancerUser();
+		freelancerUser.setF_id(1);
+		freelancerUser.setAddress(address);
+		freelancerUser.setAddress(address2);
 		try {
 			mypageDAO.locationupdate(freelancerUser);
 			return true;
