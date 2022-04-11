@@ -53,18 +53,34 @@ public class PostController {
 		return mav;
 	}
 
+//	@GetMapping("/write")
+//	public String write(Model model) throws Exception {
+//		if ((User) session.getAttribute("loginedUser") == null) {
+//			return "login";
+//		} else {
+//			int type = ((User) session.getAttribute("loginedUser")).getType();
+//			if(type == 1) {
+//				int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+//				User email = us.selectEmail(user_id);
+//				model.addAttribute("email", email);
+//				return "freelancerForm";
+//			}else {
+//				return "write";
+//			}
+//			
+//		}
+//		
+//	}
+	
 	@GetMapping("/write")
-	public String write(Model model) throws Exception {
-		System.out.println((User) session.getAttribute("loginedUser"));
-		if ((User) session.getAttribute("loginedUser") != null) {
-			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-			User email = us.selectEmail(user_id);
-			model.addAttribute("email", email);
-			return "write";
-		} else {
+	public String write(Model model) throws Exception{
+		if((User) session.getAttribute("loginedUser")==null) {
 			return "login";
+		}else {
+			return "write";
 		}
 	}
+	
 	
 	private String fileupload(MultipartFile file) {
 		String filename = null;

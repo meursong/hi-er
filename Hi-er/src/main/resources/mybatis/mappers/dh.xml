@@ -8,7 +8,12 @@
 			select email from user where user_id=#{user_id}
 		]]>
 	</select>
-
+	
+	<select id="selectType" resultType="User" parameterType="Integer">
+		<![CDATA[
+			select type from user where user_id=#{user_id}
+		]]>
+	</select>
 	<select id="select_info_f" resultType="FreelancerUser"
 		parameterType="Integer">
 		<![CDATA[

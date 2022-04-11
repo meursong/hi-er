@@ -17,7 +17,7 @@ public interface UserDAO {
 	public User selectUSerEmail(int user_id) throws Exception;
     public FreelancerUser select_info_f(int user_id) throws Exception;
     public void insert_info_f(FreelancerForm f_info) throws Exception;
-
+    public User selectType(int user_id) throws Exception;
 	User login(Map<String, String> param) throws Exception;
 
 	String emailCheck(String useremail) throws Exception;

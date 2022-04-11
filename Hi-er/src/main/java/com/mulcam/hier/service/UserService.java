@@ -9,7 +9,7 @@ public interface UserService  {
 	FreelancerUser freelancerInfo(int user_id) throws Exception;
 	void insert_info(FreelancerForm free) throws Exception;
 	void update_type(int id) throws Exception;
-	
+	User selectType(int user_id) throws Exception;
 	
 	
 	User login(String email, String password) throws Exception;

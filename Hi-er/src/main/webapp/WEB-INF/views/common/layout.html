@@ -57,14 +57,42 @@
 			</form>
 			<!-- Topbar Navbar -->
 			<ul class="navbar-nav align-items-center ml-auto">
-				<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-					 th:href="@{/post/write}">
+				
+               <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications" th:if="${session.loginedUser != null}">
+                  <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
+					 th:href="@{/freelancerForm}" th:if="${session.loginedUser.type }==1">
 					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
 					</svg>
 					</a>
-				</li>
-				
+                  <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:unless="${session.loginedUser.type }==1" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
+					</svg>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
+                     <h6 class="dropdown-header dropdown-notifications-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell mr-2">
+                           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        상품 카테고리
+                     </h6>
+                     <a class="dropdown-item dropdown-notifications-item" th:href="@{/post/ITwrite}">
+                        <div class="dropdown-notifications-item-content">
+                           <div class="dropdown-notifications-item-content-text">IT 프로그래밍</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item dropdown-notifications-item" th:href="@{/post/write}">
+                        <div class="dropdown-notifications-item-content">
+                           <div class="dropdown-notifications-item-content-text">디자인</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item dropdown-notifications-item" href="#!">
+                        <div class="dropdown-notifications-item-content">
+                           <div class="dropdown-notifications-item-content-text">영상 사진 음향</div>
+                        </div>
+                     </a>
+               </li>
+
 					
 				<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
 					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
@@ -98,7 +126,7 @@
 						aria-labelledby="navbarDropdownUserImage">
 						<h6 class="dropdown-header d-flex align-items-center"
 							th:if="${session.loginedUser}">
-							<img class="dropdown-user-img"  th:src="@{images/user/NoProfile.png}" />
+							<img class="dropdown-user-img"  th:src="@{/images/user/NoProfile.png}" />
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
 									[[${session.loginedUser.name }]]</div>
@@ -109,7 +137,7 @@
 						<h6 th:unless="${session.loginedUser}" style="text-align:center;font-weight: 400; font-size: 15px;" >로그인 하세요 </h6>
 						<div class="dropdown-divider"></div>
 
-						<a class="dropdown-item" href="account.html"
+						<a class="dropdown-item" th:href="@{account}"
 							th:if="${session.loginedUser}">
 							<div class="dropdown-item-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -268,9 +296,13 @@
 						</div></li>
 				</ul>
 			</div>
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{freelancerForm}"> <i class="fa fa-fw fa-trophy"></i>
+			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">
+				<li class="nav-item">
+				<a class="nav-link"></a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto" th:unless="${session.loginedUser == null}">
+				<li class="nav-item" th:if="${session.loginedUser.type==1}">
+				<a class="nav-link" th:href="@{freelancerForm}" > <i class="fa fa-fw fa-trophy"></i>
 						<span>프리랜서 전환</span></a></li>
 			</ul>
 		</div>	
