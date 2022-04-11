@@ -30,8 +30,8 @@
 <section layout:fragment="contents">
 	<div style="margin:50px">
 	<div class="container">
-		<h1>영상편집 글쓰기</h1>
-		<form action="/post/write" method="post" enctype="multipart/form-data" id="form" name="board_write" >
+		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기- 영상편집</h2>
+		<form action="/post/videoWrite" method="post" enctype="multipart/form-data" id="form" name="board_write" >
 			<div class="form-group">
 				<label for="title">글 제목</label>
 				<div class="input-group mb-3">
@@ -43,43 +43,43 @@
 					class="form-control" placeholder="제목을 입력하세요 ">
                      </div>
 			</div>
-			<div class="form-group">
+			<div class="form-group"  style="display: flex; justify-content: center; padding-top: 20px;">
 				<label for="title">비디오 업로드</label>
 				<table>
 					<tr>
-						<td><img id="rep1" name="img1"
+						<td><video id="rep1" name="img1"
 							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img> <input type="file" id="file1"
-							name="file1" accept="image/*" style="display: none;" class="file"></td>
+							width="200px" height="200px"></video> <input type="file" id="file1"
+							name="file1" accept="video/*" style="display: none;" class="file"></td>
 						<td><img id="rep2" name="img2"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img><input type="file" id="file2"
+							width="200px" height="200px"></img><input type="file" id="file2"
 							name="file2" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep3" name="img3"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img><input type="file" id="file3"
+							width="200px" height="200px"></img><input type="file" id="file3"
 							name="file3" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep4" name="img4"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img><input type="file" id="file4"
+							width="200px" height="200px"></img><input type="file" id="file4"
 							name="file4" accept="image/*" style="display: none;" class="file"></td>
 					</tr>
 					<tr>
 						<td><img id="rep5" name="img5"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img><input type="file" id="file5"
+							width="200px" height="200px"></img><input type="file" id="file5"
 							name="file5" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep6" name="img6"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img><input type="file" id="file6"
+							width="200px" height="200px"></img><input type="file" id="file6"
 							name="file6" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep7" name="img7"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img><input type="file" id="file7"
+							width="200px" height="200px"></img><input type="file" id="file7"
 							name="file7" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep8" name="img8"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
-							width="270px" height="270px"></img><input type="file" id="file8"
+							width="200px" height="200px"></img><input type="file" id="file8"
 							name="file8" accept="image/*" style="display: none;" class="file"></td>
 					</tr>
 
