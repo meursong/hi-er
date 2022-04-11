@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.MypageDAO;
+import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.Paging;
 import com.mulcam.hier.dto.User;
 
@@ -154,4 +155,35 @@ public class MypageServiceImpl implements MypageService {
 		
 	}
 
+	@Override
+	public boolean introupdate(String intro) throws Exception {
+		
+	
+		FreelancerUser freelancerUser=new FreelancerUser();
+		freelancerUser.setF_id(1);
+		freelancerUser.setIntroduction(intro);
+		try {
+		mypageDAO.introupdate(freelancerUser);
+		return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}	
+	}
+
+	@Override
+	public boolean addressupdate(String address, String address2) {
+		
+		FreelancerUser freelancerUser=new FreelancerUser();
+		freelancerUser.setF_id(1);
+		freelancerUser.setAddress(address);
+		freelancerUser.setAddress(address2);
+		try {
+			mypageDAO.locationupdate(freelancerUser);
+			return true;
+			}catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+	}
 }

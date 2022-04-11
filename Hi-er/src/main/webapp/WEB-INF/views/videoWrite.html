@@ -24,33 +24,33 @@
 	width: 90%;
 	text-align: left;
 }
-
 </style>
 </head>
 
 <section layout:fragment="contents">
+	<div style="margin:50px">
 	<div class="container">
-		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기</h2>
-		<form action="/post/write" method="post" enctype="multipart/form-data" id="form" name="board_write" >
-			<div class="form-group" style="text-align: center;">
-				<label for="title" style="padding-top:15px;" ></label>
+		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기- 영상편집</h2>
+		<form action="/post/videoWrite" method="post" enctype="multipart/form-data" id="form" name="board_write" >
+			<div class="form-group">
+				<label for="title">글 제목</label>
 				<div class="input-group mb-3">
                         <div class="input-group-prepend">
-                           <button type="button" id="category" class="btn btn-outline-secondary">디자인</button>
-                           <input type="hidden" name="category" value="design">
+                           <button type="button" id="category" class="btn btn-outline-secondary">영상편집</button>
+                           <input type="hidden" name="category" value="video">
                         </div>
                         <input type="text" name="title"
 					class="form-control" placeholder="제목을 입력하세요 ">
                      </div>
 			</div>
-			<div class="form-group" style="display: flex; justify-content: center; padding-top: 20px;">
-				
+			<div class="form-group"  style="display: flex; justify-content: center; padding-top: 20px;">
+				<label for="title">비디오 업로드</label>
 				<table>
 					<tr>
-						<td><img id="rep1" name="img1"
+						<td><video id="rep1" name="img1"
 							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
-							width="200px" height="200px"></img> <input type="file" id="file1"
-							name="file1" accept="image/*" style="display: none;" class="file"></td>
+							width="200px" height="200px"></video> <input type="file" id="file1"
+							name="file1" accept="video/*" style="display: none;" class="file"></td>
 						<td><img id="rep2" name="img2"
 							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
 							width="200px" height="200px"></img><input type="file" id="file2"
@@ -86,7 +86,7 @@
 				</table>
 			</div>
 			<div class="form-group">
-				<label for="content">< 글 내용 ></label>
+				<label for="content">글 내용</label>
 				<textarea id="editor" name="content" class="form-control">
 					<b>서비스 설명을 작성해주세요</b>
 					<br>
@@ -97,7 +97,7 @@
 				</textarea>
 			</div>
 			<div id="packagesTable" class="table-package">
-			<label>< 가격 정보 ></label>
+			<label>가격 정보</label>
 				<!-- 가격 정보 -->
 				<table>
 					<colgroup>
@@ -130,26 +130,26 @@
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content">원본 이미지 제공</span>
+									<span class="fit-popover-content">자막 삽입</span>
 								</div>
 							</th>
 							<td><input type="radio" id="b_original_image"
 								name="b_original_image" value="true" 
-								checked="checked"><label> &nbsp;제공</label><br> <input type="radio"
+								checked="checked"><label> &nbsp;가능</label><br> <input type="radio"
 								id="b_original_image" name="b_original_image"
-								value="false"><label> &nbsp;미제공</label></td>
+								value="false"><label> &nbsp;불가능<label></td>
 							<td><input type="radio" id="s_original_image"
 								name="s_original_image" value="true"
-								checked="checked"><label> &nbsp;제공</label><br> <input
+								checked="checked"><label> &nbsp;가능</label><br> <input
 								type="radio" id="s_original_image"
 								name="s_original_image" value="false"><label>
-									&nbsp;미제공</label></td>
+									&nbsp;불가능</label></td>
 							<td><input type="radio" id="p_original_image"
 								name="p_original_image" value="true"
-								checked="checked"><label> &nbsp;제공</label><br> <input
+								checked="checked"><label> &nbsp;가능</label><br> <input
 								type="radio" id="p_original_image"
 								name="p_original_image" value="false"><label>
-									&nbsp;미제공</label></td>
+									&nbsp;불가능</label></td>
 						</tr>
 						<tr>
 							<th>
@@ -181,7 +181,7 @@
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content">SNS 이미지 키트 제공</span>
+									<span class="fit-popover-content">썸네일 제공</span>
 								</div>
 							</th>
 							<td><input type="radio" id="b_sns_Kit"
@@ -204,21 +204,21 @@
 							<th>
 								<div class="fit-popover fit-popover-top fit-tooltip"
 									data-position="top">
-									<span class="fit-popover-content">시안 개수</span>
+									<span class="fit-popover-content">러닝타임(초)</span>
 								</div>
 							</th>
 
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="b_draft" placeholder="개수">
+										name="b_draft" placeholder="(초)">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="s_draft" placeholder="개수">
+										name="s_draft" placeholder="(초)">
 								</div></td>
 							<td><div class="fake-radio-wrapper">
 									<input type="number" min="1" class="form-control"
-										name="p_draft" placeholder="개수">
+										name="p_draft" placeholder="(초)">
 								</div></td>
 						</tr>
 						<tr>
@@ -338,26 +338,24 @@
 				</table>
 				<table>
 					<tr class="policyTable">
-						<th>수정 및 재진행</th>
-						<td style="padding-right: 90px;"><textarea class="policyTableTA" name="revisionPolicy">수정 및 재진행 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;[수정 안내] · 수정 횟수는 주문 사양별 조건을 참조하시기 랍니다. · 각 상품 별 수정 제공 횟수 초과 시 별도의비용이 청구될 수 있습니다. · 기본 수정 범위 : 폰트,컬러, 배치, 간격 등 선택된 1개의 시안의 컨셉 범주 내에서 수정 가능합니다. · 원하시는 폰트 요청 시, 해당 폰트/저작권을 보유하고 계셔야 수정 가능합니다. · 시안확정 후에는 수정이 종료됩니다. (확정 후 수정 요청 시 별도의 비용이 청구될 수 있습니다.) · *작업 전 요청사항* 외에 새로운 컨셉 또는 방향을 제시하시는 경우 수정이 아닌 재작업으로 간주되어 별도의 비용이 청구될 수 있습니다. [인쇄 안내] 철자, 오타, 폰트 사이즈 등 꼼꼼하게 확인하시어 최종 컨펌해 주셔야 합니다. 합판 인쇄 (명함, 전단) 특성상 인쇄(CMYK) 컬러는 모니터(RGB)와 차이가 있습니다. 인쇄 시마다 컬러와 재단 오차가 상이할 수 있습니다.
+						<th style="text-align:left">수정 및 재진행</th>
+						<td><textarea class="policyTableTA" name="revisionPolicy">수정 및 재진행 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;[수정 안내] · 수정 횟수는 주문 사양별 조건을 참조하시기 랍니다. · 각 상품 별 수정 제공 횟수 초과 시 별도의비용이 청구될 수 있습니다. · 기본 수정 범위 : 폰트,컬러, 배치, 간격 등 선택된 1개의 시안의 컨셉 범주 내에서 수정 가능합니다. · 원하시는 폰트 요청 시, 해당 폰트/저작권을 보유하고 계셔야 수정 가능합니다. · 시안확정 후에는 수정이 종료됩니다. (확정 후 수정 요청 시 별도의 비용이 청구될 수 있습니다.) · *작업 전 요청사항* 외에 새로운 컨셉 또는 방향을 제시하시는 경우 수정이 아닌 재작업으로 간주되어 별도의 비용이 청구될 수 있습니다. [인쇄 안내] 철자, 오타, 폰트 사이즈 등 꼼꼼하게 확인하시어 최종 컨펌해 주셔야 합니다. 합판 인쇄 (명함, 전단) 특성상 인쇄(CMYK) 컬러는 모니터(RGB)와 차이가 있습니다. 인쇄 시마다 컬러와 재단 오차가 상이할 수 있습니다.
 						</textarea></td>
 					</tr>
 					<tr class="policyTable">
-						<th>취소 및 환불</th>
-						<td style="padding-right: 90px;"><textarea class="policyTableTA"  name="refundPolicy">취소 및 환불 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;01. 전문가와 의뢰인 간의 상호 협의 후 청약철회가 가능합니다. 02. 전문가의 귀책사유로 디자인작업을 시작하지 않았거나 혹은 이에 준하는 보편적인 관점에서 심각하게 잘못 이행한 경우 결제 금액 전체 환불이 가능합니다. 03. 전문가가 작업 기간 동안 지정된 서비스를 제공하지 못할 것이 확실한 경우 지급받은 서비스 비용을 일할 계산하여 작업물 개수와 작업 기간 일수만큼 공제하고 잔여 금액을 환불합니다. 04. 서비스 받은 항목을 공제하여 환불하며, 공제 비용은 정가 처리됩니다. 가. 소비자 피해 보상 규정에 의거하여 작업물 원본의 멸실 및 작업 기간 미이행 및 이에 상응하는 전문가 책임으로 인한 피해 발생 시, 전액 환불 나. 시안 작업 진행된 상품 차감 환불</textarea></td>
+						<th style="text-align:left">취소 및 환불</th>
+						<td><textarea class="policyTableTA"  name="refundPolicy">취소 및 환불 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;01. 전문가와 의뢰인 간의 상호 협의 후 청약철회가 가능합니다. 02. 전문가의 귀책사유로 디자인작업을 시작하지 않았거나 혹은 이에 준하는 보편적인 관점에서 심각하게 잘못 이행한 경우 결제 금액 전체 환불이 가능합니다. 03. 전문가가 작업 기간 동안 지정된 서비스를 제공하지 못할 것이 확실한 경우 지급받은 서비스 비용을 일할 계산하여 작업물 개수와 작업 기간 일수만큼 공제하고 잔여 금액을 환불합니다. 04. 서비스 받은 항목을 공제하여 환불하며, 공제 비용은 정가 처리됩니다. 가. 소비자 피해 보상 규정에 의거하여 작업물 원본의 멸실 및 작업 기간 미이행 및 이에 상응하는 전문가 책임으로 인한 피해 발생 시, 전액 환불 나. 시안 작업 진행된 상품 차감 환불</textarea></td>
 					</tr>
 					<tr class="policyTable">
-						<th>기타 안내 사항</th>
-						<td style="padding-right: 90px;"><textarea class="policyTableTA" name="otherInformation">기타안내사항을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;이런 분들은 의뢰를 다시 한번 생각해주세요. &#13;&#13;1.명령조의 언행, 타인에대한 배려가 없으신 분 &#13;2.구매자의 입장을 이용하여 조율이 아닌 일방적인 요구를 하시는 분&#13;3.이용사항을 충분히 숙지하지 않으신 분</textarea></td>
+						<th style="text-align:left">기타 안내 사항</th>
+						<td><textarea class="policyTableTA" name="otherInformation">기타안내사항을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;이런 분들은 의뢰를 다시 한번 생각해주세요. &#13;&#13;1.명령조의 언행, 타인에대한 배려가 없으신 분 &#13;2.구매자의 입장을 이용하여 조율이 아닌 일방적인 요구를 하시는 분&#13;3.이용사항을 충분히 숙지하지 않으신 분</textarea></td>
 					</tr>
 				</table>
 			</div>
-			<div style="padding-bottom: 30px; text-align: end;">
-			<input type="submit" value="작성 완료" class="c-btn c-fill-color-btn">
-			</div>
+			<input type="submit" value="작성 완료" class="btn btn-primary">
 		</form>
 	</div>
-
+	</div>
 	<!-- CK editor -->
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>

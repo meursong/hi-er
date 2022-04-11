@@ -1,8 +1,5 @@
 package com.mulcam.hier.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 
 public class PaginationInfo {
 

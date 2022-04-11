@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.ProductListDAO;
@@ -21,7 +22,7 @@ public class ProductListServiceImpl implements ProductListService {
 
 		List<ProductList> product = Collections.emptyList();
 
-		int totalCount = productListDAO.selectTotalCount();
+		int totalCount = productListDAO.selectTotalCount(params);
 
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(totalCount);

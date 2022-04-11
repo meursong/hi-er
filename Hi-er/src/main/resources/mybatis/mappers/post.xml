@@ -7,9 +7,9 @@
 			select * from product where product_id=#{id}
 		]]>
 	</select>
-	<select id="queryDesignPriceInfo" resultType="Product" parameterType="integer">
+	<select id="queryPriceInfo" resultType="Product" parameterType="integer">
 		<![CDATA[
-			select * from design_price_info where product_price_id=#{id}
+			select * from price_info where product_price_id=#{id}
 		]]>
 	</select>
 	<select id="getMaxProductId" resultType="integer">
@@ -59,9 +59,9 @@
 			                    )
 		]]> 
 	</insert> 
-	<insert id="insertDesignPriceInfo" parameterType="Product">
+	<insert id="insertPriceInfo" parameterType="Product">
 		<![CDATA[
-			insert into design_price_info (
+			insert into price_info (
 								 product_price_id,
 								 b_pkg_description,
 								 s_pkg_description,

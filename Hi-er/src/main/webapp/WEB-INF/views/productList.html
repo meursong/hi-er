@@ -44,6 +44,7 @@
 															</label>
 														</form>
 													</div>
+													<button id="test" th:onclick="test()">테스트버튼</button>
 												</div>
 											</div>
 										</div>
@@ -156,4 +157,11 @@
 		$("#productList").load(location.href + " #productList");
 		$("#")
 	};
+
+	function test() {
+		location.href = '/product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
+				searchKeyword;
+
+	}
+
 </script>

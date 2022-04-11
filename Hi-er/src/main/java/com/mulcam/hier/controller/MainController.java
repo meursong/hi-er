@@ -14,21 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mulcam.hier.dto.Product;
 import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.MainService;
-import com.mulcam.hier.service.ProductListService;
 
 @Controller
 public class MainController {
 
-	
-	@Autowired
-	ProductListService productListService;
+
 	@GetMapping({"", "/"})
 	public String mainPage() {
 		return "index";
 	}
 	@Autowired
 	HttpSession session;
-	
+
 	@Autowired
 	MainService mainService;
 
@@ -93,5 +90,5 @@ public class MainController {
 //		}
 //		return mav;
 //	}
-//	
+//
 }

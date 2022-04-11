@@ -1,28 +1,24 @@
 package com.mulcam.hier.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 public class FreelancerForm {
-	private int f_id;
+	private Integer user_id;
 	private String address;
 	private String address2;
 	private String introduction;
 	
-	public FreelancerForm(int f_id, String address, String address2, String introduction) {
-		this.f_id=f_id;
+	public FreelancerForm(Integer user_id, String address, String address2, String introduction) {
+		this.user_id=user_id;
 		this.address=address;
 		this.address2=address2;
 		this.introduction=introduction;
 	}
 
-	public int getF_id() {
-		return f_id;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setF_id(int f_id) {
-		this.f_id = f_id;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getAddress() {
