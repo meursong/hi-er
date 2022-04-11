@@ -28,12 +28,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Product;
 import com.mulcam.hier.dto.Review;
+import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.PostService;
 import com.mulcam.hier.service.ReviewService;
 
 @RequestMapping("/post")
 @Controller
 public class PostController {
+	
+	@Autowired
+	UserService us;
 	
 	@Autowired
 	PostService postService;
@@ -55,15 +59,29 @@ public class PostController {
 	}
 
 	@GetMapping("/designWrite")
-	public ModelAndView write() {
-		ModelAndView mav = new ModelAndView("designWrite");
-		return mav;
+	public String write(Model model) throws Exception {
+		System.out.println((User) session.getAttribute("loginedUser"));
+		if ((User) session.getAttribute("loginedUser") != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User email = us.selectEmail(user_id);
+			model.addAttribute("email", email);
+			return "designWrite";
+		} else {
+			return "login";
+		}
 	}
 	
 	@GetMapping("/videoWrite")
-	public ModelAndView videoWrite() {
-		ModelAndView mav = new ModelAndView("videoWrite");
-		return mav;
+	public String write(Model model) throws Exception {
+		System.out.println((User) session.getAttribute("loginedUser"));
+		if ((User) session.getAttribute("loginedUser") != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User email = us.selectEmail(user_id);
+			model.addAttribute("email", email);
+			return "videoWrite";
+		} else {
+			return "login";
+		}
 	}
 	
 	private String fileupload(MultipartFile file) {

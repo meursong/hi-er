@@ -1541,9 +1541,7 @@ Version: 1.0
      white-space: nowrap;
 }
  .table-package table td {
-     text-align: center;
-     padding-left: 16px;
-     padding-right: 16px;
+     padding-left: 90px;
 }
  .table-package table tr.package-type td {
      padding-top: 24px;

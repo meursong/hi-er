@@ -1,4 +1,3 @@
-@@ -1,52 +0,0 @@
 HELP.md
 .gradle
 build/
@@ -32,7 +31,7 @@ local.properties
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
+bin/main/application.oauth.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -51,6 +50,3 @@ out/
 
 ### VS Code ###
 .vscode/
-*.index
-.idea/workspace.xml
-

@@ -59,7 +59,7 @@
 			<ul class="navbar-nav align-items-center ml-auto">
 				<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
 					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-					 href="/write">
+					 th:href="@{/post/write}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
 					</svg>
 					</a>
@@ -98,7 +98,7 @@
 						aria-labelledby="navbarDropdownUserImage">
 						<h6 class="dropdown-header d-flex align-items-center"
 							th:if="${session.loginedUser}">
-							<img class="dropdown-user-img" src="images/user/s4.png" />
+							<img class="dropdown-user-img"  th:src="@{images/user/NoProfile.png}" />
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
 									[[${session.loginedUser.name }]]</div>
@@ -106,7 +106,7 @@
 									[[${session.loginedUser.email }]]</div>
 							</div>
 						</h6>
-						<h6 th:unless="${session.loginedUser}" style="text-align:center;font-weight: 400; font-size: 15px;" >로그인부터 진행해주세요</h6>
+						<h6 th:unless="${session.loginedUser}" style="text-align:center;font-weight: 400; font-size: 15px;" >로그인 하세요 </h6>
 						<div class="dropdown-divider"></div>
 
 						<a class="dropdown-item" href="account.html"
@@ -122,7 +122,7 @@
                     ></path>
                   </svg>
                 </div>
-                [[${session.loginedUser.name }]]님의 계정정보
+                [[${session.loginedUser.name }]]님의 계정 정보
               </a>
               <a
                 class="dropdown-item"
@@ -147,9 +147,33 @@
                     <line x1="21" y1="12" x2="9" y2="12"></line>
                   </svg>
                 </div>
-                Logout
+                로그아웃
               </a>
               <a
+                class="dropdown-item"
+                th:href="@{/login}"
+                th:unless="${session.loginedUser}"
+              >
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-login"
+                  >
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
+							</div> 로그인
+						</a>
+						<a
                 class="dropdown-item"
                 th:href="@{/signup}"
                 th:unless="${session.loginedUser}"
@@ -175,30 +199,6 @@
                 </div>
                 회원가입
               </a>
-              <a
-                class="dropdown-item"
-                th:href="@{/login}"
-                th:unless="${session.loginedUser}"
-              >
-                <div class="dropdown-item-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="feather feather-login"
-                  >
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                    <polyline points="16 17 21 12 16 7"></polyline>
-                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                  </svg>
-							</div> LogIn
-						</a>
 					</div>
 				</li>
 			</ul>
@@ -270,7 +270,7 @@
 			</div>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link"
-					href="freelancerForm"> <i class="fa fa-fw fa-trophy"></i>
+					th:href="@{freelancerForm}"> <i class="fa fa-fw fa-trophy"></i>
 						<span>프리랜서 전환</span></a></li>
 			</ul>
 		</div>	
