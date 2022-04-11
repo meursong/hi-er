@@ -27,7 +27,7 @@ public class Criteria {
     /**
      * 검색 키워드
      */
-    private String searchKeyword;
+    private String keyword;
 
     /**
      * 검색 유형
@@ -37,12 +37,14 @@ public class Criteria {
     //정렬방법
     private String sort;
 
+    private String category;
+
     public Criteria() {
         this.currentPageNo = 1;
         this.recordsPerPage = 12;
         this.pageSize = 5;
         this.sort = "product_id";
-        this.searchKeyword = "";
+        this.category="영상";
     }
 
     public String makeQueryString(int pageNo) {
@@ -53,7 +55,24 @@ public class Criteria {
                 .queryParam("recordsPerPage", recordsPerPage)
                 .queryParam("pageSize", pageSize)
 //                .queryParam("searchType", searchType)
-                .queryParam("searchKeyword", searchKeyword)
+                .queryParam("keyword", keyword)
+                .queryParam("category", category)
+                .build()
+                .encode();
+
+        return uriComponents.toUriString();
+    }
+
+    public String makeQueryString1(String sort1) {
+        setCategory(sort1);
+        UriComponents uriComponents = UriComponentsBuilder.newInstance()
+                .queryParam("sort", sort)
+                .queryParam("currentPageNo", currentPageNo)
+                .queryParam("recordsPerPage", recordsPerPage)
+                .queryParam("pageSize", pageSize)
+//                .queryParam("searchType", searchType)
+                .queryParam("keyword", keyword)
+                .queryParam("category", sort1)
                 .build()
                 .encode();
 
@@ -92,12 +111,12 @@ public class Criteria {
         this.pageSize = pageSize;
     }
 
-    public String getSearchKeyword() {
-        return searchKeyword;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setSearchKeyword(String searchKeyword) {
-        this.searchKeyword = searchKeyword;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public String getSearchType() {
@@ -114,5 +133,13 @@ public class Criteria {
 
     public void setSort(String sort) {
         this.sort = sort;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

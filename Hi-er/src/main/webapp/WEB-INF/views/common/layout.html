@@ -383,8 +383,8 @@
     function search() {
         const searchKeyword = $("input[id='searchKeyword']").val();
         location.href =
-            '/product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
-            searchKeyword;
+            '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+            searchKeyword + "&category=";
     }
 
     window.onpopstate = function (event) {
