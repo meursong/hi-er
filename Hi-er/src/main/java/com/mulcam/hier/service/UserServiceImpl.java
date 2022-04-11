@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.UserDAO;
-import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.User;
 
 @Service
@@ -46,7 +45,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Boolean nicknameCheck(String usernickname) throws Exception {
 		Boolean result = false;
-		String name = ud.emailCheck(usernickname);
+		String name = ud.nicknameCheck(usernickname);
 		if (name == null) {
 			result = true;
 		}
@@ -61,7 +60,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void insert_info(FreelancerForm free) throws Exception {
+	public void insert_info(FreelancerUser free) throws Exception {
 		ud.insert_info_f(free);
 	}
 
@@ -80,4 +79,9 @@ public class UserServiceImpl implements UserService{
 //		String name = ud.login(param);
 //		return name;
 //	}
+
+	@Override
+	public void signup(User user) throws Exception {
+		ud.insert_user(user);
+	}
 }

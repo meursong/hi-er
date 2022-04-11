@@ -8,6 +8,14 @@ public class User {
 	int user_id, type;
 	String email, password, job, nickname, name, profile_image, interest;
 	Date createdAt, updatedAt; 
+	
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", type=" + type + ", email=" + email + ", password=" + password + ", job="
+				+ job + ", nickname=" + nickname + ", name=" + name + ", profile_image=" + profile_image + ", interest="
+				+ interest + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+	
 	public int getUser_id() {
 		return user_id;
 	}
