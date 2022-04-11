@@ -69,6 +69,14 @@ public class UserServiceImpl implements UserService{
 		ud.update_type_f(user_id);
 		
 	}
+	
+	@Override
+	public User selectType(int user_id) throws Exception{
+		User user = ud.selectType(user_id);
+		if(user==null) throw new Exception("오류");
+		return user;
+		
+	}
 //	@Override
 //	public String signup(String name,String email, String password, String job ) throws Exception {
 //		Map<String, String> param = new HashMap<String, String>();

@@ -79,7 +79,7 @@ public class UserController {
 	@GetMapping("/login")
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("login");
-		if ((User) session.getAttribute("loginedUser") != null) {	
+		if ((User) session.getAttribute("loginedUser") != null) {
 			mav.setViewName("index");
 		}
 		return mav;
@@ -90,7 +90,6 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("index");
 		try {
 			User loginedUser = us.login(email, password);
-			System.out.println(loginedUser);
 			session.setAttribute("loginedUser", loginedUser);
 			if (loginedUser == null) {
 				mav.setViewName("login");
@@ -129,7 +128,7 @@ public class UserController {
 	public ModelAndView logout() {
 		ModelAndView mav = new ModelAndView("index");
 		session.invalidate();
-		// session.removeAttribute("loginedUser");
+//		 session.removeAttribute("loginedUser");
 
 		return mav;
 	}

@@ -17,7 +17,6 @@
 	</select>
 
 
-
 	<select id="emailCheck" resultType="String" parameterType="String">
 		<![CDATA[
 			SELECT name FROM user where email = #{email}
