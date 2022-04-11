@@ -104,6 +104,7 @@ public class PostController {
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
 		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
+		//Integer seller_id= (Integer)session.getAttribute("id");
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));
@@ -114,6 +115,7 @@ public class PostController {
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능  1:거래중지
+			//product.setSeller_id(seller_id); //추후 수정 필요
 			product.setSeller_id(10); //추후 수정 필요
 			postService.writePost(product);
 		} catch(Exception e) {
@@ -125,6 +127,7 @@ public class PostController {
 	@PostMapping("/designWrite")
 	public String write(@ModelAttribute Product product) {
 		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
+		Integer seller_id= (Integer)session.getAttribute("id");
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));
@@ -135,7 +138,7 @@ public class PostController {
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능  1:거래중지
-			product.setSeller_id(10); //추후 세션에서 글쓴사람 아이디 얻어오는 코드로 수정 필요
+			product.setSeller_id(seller_id); //추후 세션에서 글쓴사람 아이디 얻어오는 코드로 수정 필요
 			postService.writePost(product);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -195,12 +198,12 @@ public class PostController {
 		params.setProduct_id(pid);
 		params.setRecordsPerPage(2);
 		try {
-			//Integer logined_userid = (Integer)session.getAttribute("id");
-			Integer logined_userid = 10; //추후 변경 필요
+			User logined_user = (User)session.getAttribute("loginedUser");
+			//Integer logined_userid = 10; //추후 변경 필요
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
-			Integer likedNum = postService.likeNum(pid, logined_userid);
-			boolean isLike = postService.isLike(pid, logined_userid);
+			Integer likedNum = postService.likeNum(pid, logined_user.getUser_id());
+			boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 			List<Review> reviews = reviewService.prodReviewList(params);
 			
 			Map<String, Object> likeInfo = new HashMap<String,Object>();
