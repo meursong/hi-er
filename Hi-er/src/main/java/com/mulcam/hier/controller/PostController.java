@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +26,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Product;
+import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.PostService;
+import com.mulcam.hier.service.UserService;
 
 @RequestMapping("/post")
 @Controller
 public class PostController {
+	
+	@Autowired
+	UserService us;
 	
 	@Autowired
 	PostService postService;
@@ -48,9 +54,16 @@ public class PostController {
 	}
 
 	@GetMapping("/write")
-	public ModelAndView write() {
-		ModelAndView mav = new ModelAndView("write");
-		return mav;
+	public String write(Model model) throws Exception {
+		System.out.println((User) session.getAttribute("loginedUser"));
+		if ((User) session.getAttribute("loginedUser") != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User email = us.selectEmail(user_id);
+			model.addAttribute("email", email);
+			return "write";
+		} else {
+			return "login";
+		}
 	}
 	
 	private String fileupload(MultipartFile file) {
@@ -68,6 +81,7 @@ public class PostController {
 		}
 		return filename;
 	}
+	
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute Product product) {
