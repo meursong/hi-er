@@ -101,8 +101,6 @@ public class PostController {
 			return "videoWrite";
 		} else {
 			return "login";
-		}else {
-			return "write";
 		}
 	}
 	
