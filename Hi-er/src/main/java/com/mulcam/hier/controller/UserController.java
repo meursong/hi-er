@@ -34,7 +34,7 @@ public class UserController {
 
 	@GetMapping("/freelancerForm")
 	public String freelancer(Model model) throws Exception {
-		if (((User) session.getAttribute("loginedUser")) != null) {
+		if ((User) session.getAttribute("loginedUser") != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 			User email = us.selectEmail(user_id);
 			model.addAttribute("email", email);
@@ -42,6 +42,7 @@ public class UserController {
 		} else {
 			return "login";
 		}
+		
 	}
 
 	@PostMapping("freelancerForm")
@@ -74,13 +75,12 @@ public class UserController {
 		model.addAttribute("reviews", reviews);
 		
 		return "freelancerInfo";
-		
 	}
 	
 	@GetMapping("/login")
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("login");
-		if (((User) session.getAttribute("loginedUser")) != null) {
+		if ((User) session.getAttribute("loginedUser") != null) {	
 			mav.setViewName("index");
 		}
 		return mav;

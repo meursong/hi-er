@@ -185,4 +185,5 @@ public class MypageController {
 //		mav.addObject("page","3");
 //		return mav;
 //	}
+	
 }

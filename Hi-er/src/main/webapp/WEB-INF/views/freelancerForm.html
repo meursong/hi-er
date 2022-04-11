@@ -1,78 +1,77 @@
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{common/layout}">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
 <section layout:fragment="contents">
-    <div class="py-5">
-        <div class="container">
-            <div class="row">
-                <!-- Main Content -->
-                <aside class="col-md-4">
-                    <div
-                            class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
-                        <!-- 	<div class="py-4 px-3 border-bottom"> -->
-                        <img src="images/dh/freelancer.png" class="img-fluid mt-2"
-                             alt="Responsive image">
-                        <!-- </div> -->
-                        <!-- <div class="p-4">
+	<div class="py-5">
+		<div class="container">
+			<div class="row">
+				<!-- Main Content -->
+				<aside class="col-md-4">
+					<div
+						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
+						<!-- 	<div class="py-4 px-3 border-bottom"> -->
+						<img src="images/dh/freelancer.png" class="img-fluid mt-2"
+							alt="Responsive image">
+						<!-- </div> -->
+						<!-- <div class="p-4">
                         <label data-toggle="tooltip" data-placement="top" data-original-title="Upload New Picture" class="btn btn-info m-0" for="fileAttachmentBtn">
                         <i class="mdi mdi-image"></i> Upload
                         <input id="fileAttachmentBtn" name="file-attachment" type="file" class="d-none">
                         </label>
                         <button data-toggle="tooltip" data-placement="top" data-original-title="Delete" type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i> Delete</button>
                      </div> -->
-                    </div>
-                </aside>
+					</div>
+				</aside>
 
-                <main class="col-md-8">
-                    <div class="shadow-sm rounded bg-white mb-3">
-                        <div class="box-title border-bottom p-3">
-                            <h6 class="m-0">프리랜서 전환</h6>
-                            <p class="mb-0 mt-0 small">소개글, 주소를 작성해주세요</p>
-                        </div>
-                        <div class="box-body p-3">
+				<main class="col-md-8">
+					<div class="shadow-sm rounded bg-white mb-3">
+						<div class="box-title border-bottom p-3">
+							<h6 class="m-0" style="font-size:18px;">프리랜서 전환</h6>
+							<p class="mb-0 mt-0 small" style="font-size: 13px;">소개글, 주소를 작성해주세요</p>
+						</div>
+						<div class="box-body p-3">
 
-                            <form role="form" action="/freelancerForm" method="post"
-                                  class="js-validate" novalidate="novalidate">
-                                <div class="row">
-                                    <!-- Input -->
-                                    <div class="col-sm-6 mb-2">
-                                        <div class="js-form-message">
-                                            <label id="nameLabel" class="form-label"> 이메일 <span
-                                                    class="text-danger">*</span>
-                                            </label>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="email"
-                                                       name="email" th:value="${email.email}"
-                                                       aria-label="Enter your name" aria-describedby="nameLabel"
-                                                       data-msg="Please enter your name."
-                                                       data-error-class="u-has-error"
-                                                       data-success-class="u-has-success" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Input -->
-                                </div>
-                                <div class="row">
-                                    <!-- Input -->
-                                    <div class="col-sm-6 mb-2">
-                                        <div class="js-form-message">
-                                            <label id="organizationLabel" class="form-label"> 주소
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="form-group">
-                                                <input type="button" class="btn btn-success"
-                                                       onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
-                                                <input type="text" class="form-control" id="sample6_address"
-                                                       placeholder="주소" name="address"> <input type="text"
-                                                                                               class="form-control"
-                                                                                               id="sample6_detailAddress"
-                                                                                               placeholder="상세주소"
-                                                                                               name="address2">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Input -->
+							<form role="form" action="/freelancerForm" method="post"
+								class="js-validate" novalidate="novalidate">
+								<div class="row">
+									<!-- Input -->
+									<div class="col-sm-6 mb-2">
+										<div class="js-form-message">
+											<label id="nameLabel" class="form-label"> 이메일 <span
+												class="text-danger">*</span>
+											</label>
+											<div class="form-group">
+												<input type="text" class="form-control" id="email"
+													name="email" th:value="${email.email}"
+													aria-label="Enter your name" aria-describedby="nameLabel"
+													data-msg="Please enter your name."
+													data-error-class="u-has-error"
+													data-success-class="u-has-success" disabled>
+											</div>
+										</div>
+									</div>
+									<!-- End Input -->
+								</div>
+								<div class="row">
+									<!-- Input -->
+									<div class="col-sm-6 mb-2">
+										<div class="js-form-message">
+											<label id="organizationLabel" class="form-label"> 주소
+												<span class="text-danger">*</span>
+											</label>
+											<div class="form-group">
+												<input type="button" class="btn btn-success"
+													onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
+												<input type="text" class="form-control" id="sample6_address"
+													placeholder="주소" name="address"> <input type="text"
+													class="form-control" id="sample6_detailAddress"
+													placeholder="상세주소" name="address2">
+											</div>
+										</div>
+									</div>
+									<!-- End Input -->
 
                                 </div>
 

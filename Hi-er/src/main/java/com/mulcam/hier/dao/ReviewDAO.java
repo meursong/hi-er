@@ -6,12 +6,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.mulcam.hier.dto.Review;
+import com.mulcam.hier.dto.ReviewPagenation;
 
 @Mapper
 @Repository
 public interface ReviewDAO {
+	public List<Review> selectProdReview(Review review) throws Exception;
+	public List<ReviewPagenation> selectReviewList(ReviewPagenation pagenation);
+	public int selectBoardTotalCount(ReviewPagenation pagenation);
 	public List<Review> selectReview(Review review) throws Exception;
 	public int selectCount(Review review) throws Exception;
-
-
+	public Integer selectMaxCount(Review review) throws Exception;
 }
