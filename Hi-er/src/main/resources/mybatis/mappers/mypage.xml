@@ -65,6 +65,23 @@
 	]]>	
 	</update>
 	
+	
+	<!--소개 업데이트-->
+	<update id="introupdate" parameterType="freelancerUser">
+	<![CDATA[
+		update f_info set introduction=#{introduction} where f_id=#{f_id}
+	]]>	
+	</update>
+	
+	
+	
+	<!--주소 업데이트-->
+	<update id="locationupdate" parameterType="freelancerUser">
+	<![CDATA[
+		update f_info set address=#{address},address2=#{address2} where f_id=#{f_id}
+	]]>	
+	</update>
+	
 	<select id="countBoard2" resultType="int" parameterType="int">
 	<![CDATA[
 		select count(*)

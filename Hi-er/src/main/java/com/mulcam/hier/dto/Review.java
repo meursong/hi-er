@@ -12,7 +12,6 @@ public class Review extends Criteria {
 	private Date createdAt;
 	private String nickname;
 
-
 	public int getReview_wid() {
 		return review_wid;
 	}
@@ -60,20 +59,17 @@ public class Review extends Criteria {
 	public void setStar_point(int star_point) {
 		this.star_point = star_point;
 	}
-
+	public Date getcreatedAt() {
+		return createdAt;
+	}
+	public void setcreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 	public String getNickname() {
 		return nickname;
 	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
 	}
 }
