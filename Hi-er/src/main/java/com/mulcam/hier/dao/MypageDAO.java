@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.User;
 
 @Mapper
@@ -23,4 +24,6 @@ public interface MypageDAO {
 	public void nickupdate(User user)throws Exception;
 	public boolean passfind(User user)throws Exception;
 	public boolean passupdate(User user)throws Exception;
+	public boolean introupdate(FreelancerUser freelancerUser);
+	public boolean locationupdate(FreelancerUser freelancerUser);
 }

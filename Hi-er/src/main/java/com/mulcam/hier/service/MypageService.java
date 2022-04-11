@@ -15,4 +15,6 @@ public interface MypageService {
 	boolean nickOverlap(String nick) throws Exception;
 	void nickupdate(String nick) throws Exception;
 	boolean passfindupdate(String pass,String pass2) throws Exception;
+	boolean introupdate(String intro) throws Exception;
+	boolean addressupdate(String address, String address2);
 }

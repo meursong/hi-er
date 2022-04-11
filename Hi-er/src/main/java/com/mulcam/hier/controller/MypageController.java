@@ -86,6 +86,37 @@ public class MypageController {
 		
 	}
 	
+	@ResponseBody
+	@PostMapping("intromody")
+	public String intromody(@RequestParam(value = "intro") String intro) {
+		System.out.println("여기가 인트로 안임");
+		try {
+			if (true == mypageService.introupdate(intro)) {
+				return String.valueOf(true);
+			} else
+				return String.valueOf(false);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return String.valueOf(false);
+		}
+
+	}
+	
+	@ResponseBody
+	@PostMapping("locationmody")
+	public String locationmody(@RequestParam(value = "address") String address,@RequestParam(value = "address2") String address2) {
+		System.out.println("여기가 로케이션모디 안임");
+		try {
+			if (true == mypageService.addressupdate(address,address2)) {
+				return String.valueOf(true);
+			} else
+				return String.valueOf(false);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return String.valueOf(false);
+		}
+
+	}
 	
 	@GetMapping("mypage/{num}/{page2}")
 	public ModelAndView mypage1(@PathVariable String num,@PathVariable String page2) {
@@ -124,11 +155,14 @@ public class MypageController {
 		return mav;
 	}
 	
-	@PostMapping("/imageupload")
+	@PostMapping("imageupload")
 	public String imageupload() {
 		System.out.println("sssssssssssssssssssssssss");
 		return "account";
 	}
+	
+	
+	
 	
 	@GetMapping("mypage/{num}")
 	public ModelAndView memmodify(@PathVariable String num) {
@@ -185,5 +219,9 @@ public class MypageController {
 //		mav.addObject("page","3");
 //		return mav;
 //	}
+	
+	
+	
+	
 	
 }
