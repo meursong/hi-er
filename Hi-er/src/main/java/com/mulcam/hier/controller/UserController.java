@@ -34,20 +34,27 @@ public class UserController {
 
 	@GetMapping("/freelancerForm")
 	public String freelancer(Model model) throws Exception {
-		int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-		User email = us.selectEmail(user_id);
-		model.addAttribute("email", email);
-		return "freelancerForm";
+		if (((User) session.getAttribute("loginedUser")) != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User email = us.selectEmail(user_id);
+			model.addAttribute("email", email);
+			return "freelancerForm";
+		} else {
+			return "login";
+		}
 	}
 
 	@PostMapping("freelancerForm")
 	public String joinFreelancer(FreelancerForm form) throws Exception {
-		Integer user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-		form.setUser_id(user_id);
-		FreelancerForm freelancer = new FreelancerForm(form.getUser_id(), form.getAddress(), form.getAddress2(), form.getIntroduction());
-		us.update_type(user_id);
-		us.insert_info(freelancer);
-		return "redirect:/";
+		if (((User) session.getAttribute("loginedUser")) != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			FreelancerForm freelancer = new FreelancerForm(user_id, form.getAddress(), form.getAddress2(), form.getIntroduction());
+			us.insert_info(freelancer);
+			us.update_type(user_id);
+			return "redirect:/";
+		} else {
+			return "login";
+		}
 	}
 	
 	@GetMapping("/freelancerInfo")
@@ -59,7 +66,6 @@ public class UserController {
 		params.setSeller_id(seller_id); // 로그인시 세션에서 값 가져와서 넣는다
 
 		params.setRecordsPerPage(4);
-		/*params.setSeller_id(seller_id);*/
 		List<Review> reviews = reviewService.reviewList(params);
 
 		String address[] = freelancer.getAddress().split(" ");
@@ -74,8 +80,7 @@ public class UserController {
 	@GetMapping("/login")
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("login");
-		String name = ((User) session.getAttribute("loginedUser")).getName();
-		if (name != null) {
+		if (((User) session.getAttribute("loginedUser")) != null) {
 			mav.setViewName("index");
 		}
 		return mav;
