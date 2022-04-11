@@ -3,13 +3,15 @@ package com.mulcam.hier.dto;
 import java.sql.Date;
 
 public class Review {
+	private int review_id;
 	private int review_wid;
 	private int product_id;
 	private int seller_id;
 	private String content;
 	private int star_point;
-	private Date CreatedAt;
+	private Date createdAt;
 	private String nickname;
+	
 	public int getReview_wid() {
 		return review_wid;
 	}
@@ -40,17 +42,23 @@ public class Review {
 	public void setStar_point(int star_point) {
 		this.star_point = star_point;
 	}
-	public Date getCreatedAt() {
-		return CreatedAt;
+	public Date getcreatedAt() {
+		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
-		CreatedAt = createdAt;
+	public void setcreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public int getReview_id() {
+		return review_id;
+	}
+	public void setReview_id(int review_id) {
+		this.review_id = review_id;
 	}
 	
 	

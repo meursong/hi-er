@@ -3,6 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layout}">
 
+
 <section layout:fragment="contents">
 	<div class="py-5">
          <div class="container">
@@ -91,7 +92,7 @@
                
                <!-- ================================================================================================================================== -->
              
-               <main th:if="${page}=='0'" class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+               <main th:if="${page}=='0'" class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="d-flex box-title border-bottom p-3">
                         <h6 class="m-0 col-6">거래내역</h6>
@@ -109,6 +110,7 @@
                         			<th>구매유저닉네임</th>
                         			<th>상품제목</th>
                         			<th>판매자닉네임</th>
+                        			<th>리뷰달기</th>
                         		</tr>
                         		
                         		</thead>
@@ -118,7 +120,69 @@
                         			<td th:text="${order.nickname}"></td>
                         			<td th:text="${order.title}"></td>
                         			<td th:text="${order.nickname2}"></td>
-                        		</tr>
+											<td>
+												<div class="container">
+													<div class="row" style="margin-top: 0;">
+														<div class="col-md-12">
+															<div class="well well-sm">
+																<div class="text-right">
+																	<a class="btn btn-success btn-green"
+																		href="#reviews-anchor" id="open-review-box">리뷰 달기</a>
+																</div>
+
+																<div class="row" id="post-review-box"
+																	style="display: none;">
+																	<div class="col-md-12">
+																		<form accept-charset="UTF-8" action="" method="post">
+																			<input id="ratings-hidden" name="rating"
+																				type="hidden">
+																			<textarea class="form-control animated" cols="50"
+																				id="new-review" name="comment"
+																				placeholder="Enter your review here..." rows="5"></textarea>
+
+
+																			<div name="myform" id="myform">
+
+																				<fieldset>
+																					<legend>이모지 별점</legend>
+																					<input type="radio" name="rating" value="5"
+																						id="rate1"><label for="rate1">⭐</label> <input
+																						type="radio" name="rating" value="4" id="rate2"><label
+																						for="rate2">⭐</label> <input type="radio"
+																						name="rating" value="3" id="rate3"><label
+																						for="rate3">⭐</label> <input type="radio"
+																						name="rating" value="2" id="rate4"><label
+																						for="rate4">⭐</label> <input type="radio"
+																						name="rating" value="1" id="rate5"><label
+																						for="rate5">⭐</label>
+																				</fieldset>
+
+
+																			</div>
+
+
+
+
+																			<div class="text-right">
+
+																				<a class="btn btn-danger btn-lg" th:href="@{#}"
+																					id="close-review-box"
+																					style="display: none; margin-right: 10px;"> <span
+																					class="glyphicon glyphicon-remove"></span>Cancel
+																				</a>
+																				<button class="btn btn-success btn-lg" type="submit">Save</button>
+																			</div>
+																		</form>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+
+											</td>
+										</tr>
                         		</tbody>
                         	
                         	</table>
@@ -403,7 +467,11 @@
 												class="mdi mdi-image"></i> Upload <input
 												id="fileAttachmentBtn" name="file-attachment" type="file"
 												class="d-none">
+												
+
 											</label>
+											<div>dddddddddddddddddddddd</div>
+											
  										</form> 
 										<button data-toggle="tooltip" data-placement="top"
 											data-original-title="Delete" type="submit"
@@ -497,7 +565,8 @@
 										<form method="post" enctype="multipart/form-data" action="/imageupload"> 
 											<label data-toggle="tooltip" data-placement="top"
 												data-original-title="Upload New Picture"
-												class="btn btn-info m-0" for="fileAttachmentBtn"> <i
+												class="btn btn-info m-0" for="fileAttachmentBtn"> 
+												<i
 												class="mdi mdi-image"></i> Upload <input
 												id="fileAttachmentBtn" name="file-attachment" type="file"
 												class="d-none">
@@ -590,10 +659,13 @@
 								
 								<div class="col-md-5 mb-3">
 
-									<button class="btn btn-primary" id="passmody" type="submit">주소 수정</button>
-								</div>
-								
+									<button class="btn btn-primary" id="locationmody" type="submit">주소 수정</button>
+									</div>
+				
 							</form>
+							
+
+							
 							
 							<form class="needs-validation" novalidate="">
 								<div class="box-title border-bottom border-top p-3">
@@ -603,7 +675,7 @@
 									<div class="p-3">
 										<div class="form-group mb-4">
 											<div class="position-relative">
-												<textarea class="form-control" rows="8"
+												<textarea class="form-control" rows="8" id="intromody2"
 													placeholder="경력, 자격증 등 자유롭게 작성해주세요" name="introduction">학력:
 
 경력:
@@ -622,7 +694,7 @@
 
 								<div class="col-md-5 mb-3">
 
-									<button class="btn btn-primary" id="passmody" type="submit">소개글 수정</button>
+									<button class="btn btn-primary" id="intromody" type="submit">소개글 수정</button>
 								</div>
 
 							</form>
@@ -637,7 +709,10 @@
               
               <!-- ========================================================================================================== -->
               
-               <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
+              
+             <!--  ============================================어사이드================================================ -->
+              
+               <!-- <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="box-title border-bottom p-3">
                         <h6 class="m-0">Who viewed your profile</h6>
@@ -771,7 +846,7 @@
                         </div>
                      </div>
                   </a>
-               </aside>
+               </aside> -->
             </div>
          </div>
       </div>
@@ -879,62 +954,64 @@
     			}
     		});          		 
     	});
+    	
+    	
+    	//=============================인트로덕션모디================
+    	
+        $("#intromody").click(function() {
+    		let intro=$('#intromody2').val();
+    		console.log("intro");
+    		
+    		
+    		$.ajax({
+    			type:"post",
+    			dataType:"text",
+    			async:false,
+    			url:"http://localhost:8090/intromody",
+    			data:{intro:$('#intromody2').val()},
+    			success: function(data, textStatus) {
+    				if(data=='true') {
+    					alert('소개글이 수정되었습니다.');
+    				
+    				}else {
+    					alert('소개글 수정을 실패하였습니다.');
+    					
+    				}
+    			}
+    		});          		 
+    	});
+    	
+    	//=====================주소수정===========================
+        $("#locationmody").click(function() {
+    		
+    		
+    		$.ajax({
+    			type:"post",
+    			dataType:"text",
+    			async:false,
+    			url:"http://localhost:8090/locationmody",
+    			data:{address:$('#sample6_address').val(),address2:$('#sample6_detailAddress').val()},
+    			success: function(data, textStatus) {
+    				if(data=='true') {
+    					alert('주소가 수정되었습니다');
+    				
+    				}else {
+    					alert('주소 수정이 실패하였습니다.');
+    					
+    				}
+    			}
+    		});          		 
+    	});
+    	
+     
         
         
     });
     
     
     </script> 
-    <script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
-		function sample6_execDaumPostcode() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+   
 
-							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-							var addr = ''; // 주소 변수
-							var extraAddr = ''; // 참고항목 변수
-
-							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-								addr = data.roadAddress;
-							} else { // 사용자가 지번 주소를 선택했을 경우(J)
-								addr = data.jibunAddress;
-							}
-
-							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-							if (data.userSelectedType === 'R') {
-								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-								// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-								if (data.bname !== ''
-										&& /[동|로|가]$/g.test(data.bname)) {
-									extraAddr += data.bname;
-								}
-								// 건물명이 있고, 공동주택일 경우 추가한다.
-								if (data.buildingName !== ''
-										&& data.apartment === 'Y') {
-									extraAddr += (extraAddr !== '' ? ', '
-											+ data.buildingName
-											: data.buildingName);
-								}
-
-							} else {
-								document.getElementById("sample6_extraAddress").value = '';
-							}
-
-							//주소 정보를 해당 필드에 넣는다.
-							document.getElementById("sample6_address").value = addr;
-							// 커서를 상세주소 필드로 이동한다.
-							document.getElementById("sample6_detailAddress")
-									.focus();
-						}
-					}).open();
-		}
-	</script>
 </section>
 
 </html>
