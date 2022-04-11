@@ -31,307 +31,330 @@
 <link th:href="@{/vendor/select2/css/select2.min.css}" rel="stylesheet" />
 <!-- Custom styles for this template -->
 <link th:href="@{/css/style.css}" rel="stylesheet" />
-
-
-<link th:href="@{/css/style2.css}" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-#myform fieldset{
-    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-    border: 0; /* 필드셋 테두리 제거 */
-}
-#myform input[type=radio]{
-    display: none; /* 라디오박스 감춤 */
-}
-#myform label{
-    font-size: 2em; /* 이모지 크기 */
-    color: transparent; /* 기존 이모지 컬러 제거 */
-    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
-}
-#myform label:hover{
-    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
-}
-#myform label:hover ~ label{
-    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
-}
-#myform fieldset{
-    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-    direction: rtl; /* 이모지 순서 반전 */
-    border: 0; /* 필드셋 테두리 제거 */
-}
-#myform input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
-}
-</style>
-<link th:href="@{/netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
-<script th:src="@{/netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js}"></script>
-<script th:src="@{/code.jquery.com/jquery-1.11.1.min.js}"></script>
 <title>Hi-er</title>
 </head>
 <body>
-<!-- 내비바 -->
-<nav
-        class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0">
-    <div class="container">
-        <!-- Sidebar Toggle (Topbar) -->
-        <a class="navbar-brand" href="/"><img
-                th:src="@{/images/logo.png}" style="width:100%;" alt=""></a>
-        <!-- Topbar Search -->
-        <form
-                class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search" action="/search"
-                method="GET">
-            <div class="input-group">
-                <input id="searchKeyword" type="text" name="keyword" class="form-control bg-white small"
-                       placeholder="서비스를 검색하세요" aria-label="Search"
-                       aria-describedby="basic-addon2" style="width:400px;">
-                <div class="input-group-append">
-                    <button class="btn btn-success" type="button" th:onclick="search()">
-                        <i class="fa fa-search fa-sm"></i>
-                    </button>
+	<!-- 내비바 -->
+	<nav
+		class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0">
+		<div class="container">
+			<!-- Sidebar Toggle (Topbar) -->
+			<a class="navbar-brand" href="/"><img
+			 	th:src="@{/images/logo.png}" style="width:100%;" alt=""></a>
+			<!-- Topbar Search -->
+			<form
+				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search" action="/search" method="GET">
+				<div class="input-group">
+					<input type="text" name="keyword" class="form-control bg-white small"
+						placeholder="서비스를 검색하세요" aria-label="Search"
+						aria-describedby="basic-addon2" style="width:400px;">
+					<div class="input-group-append">
+						<button class="btn btn-success" type="button">
+							<i class="fa fa-search fa-sm"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+			<!-- Topbar Navbar -->
+			<ul class="navbar-nav align-items-center ml-auto">
+				
+               <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications" th:if="${session.loginedUser != null}">
+                  <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
+					 th:href="@{/freelancerForm}" th:unless="${session.loginedUser.type }==2">
+					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
+					</svg>
+					</a>
+                  <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:if="${session.loginedUser.type }==2" >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
+					</svg>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
+                     <h6 class="dropdown-header dropdown-notifications-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell mr-2">
+                           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        상품 카테고리
+                     </h6>
+                     <a class="dropdown-item dropdown-notifications-item" th:href="@{/post/ITwrite}">
+                        <div class="dropdown-notifications-item-content">
+                           <div class="dropdown-notifications-item-content-text">IT 프로그래밍</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item dropdown-notifications-item" th:href="@{/post/designWrite}">
+                        <div class="dropdown-notifications-item-content">
+                           <div class="dropdown-notifications-item-content-text">디자인</div>
+                        </div>
+                     </a>
+                     <a class="dropdown-item dropdown-notifications-item" th:href="@{/post/videoWrite}">
+                        <div class="dropdown-notifications-item-content">
+                           <div class="dropdown-notifications-item-content-text">영상 사진 음향</div>
+                        </div>
+                     </a>
+               </li>
+
+					
+				<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
+					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
+					href="/mail" > 
+     					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z"/></svg>
+				</a>
+					<div
+						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+						aria-labelledby="navbarDropdownMessages">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+								class="feather feather-mail mr-2">
+                           <path
+									d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                           <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+							
+						</a> 
+			
+					</div>
+				</li>
+				<li class="nav-item dropdown no-arrow no-caret dropdown-user">
+					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
+					id="navbarDropdownUserImage" href="javascript:void(0);"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><img class="img-fluid"
+						th:if="${session.loginedUser}"  th:src="@{/images/user/NoProfile.png}" style="width:21px; height: 21px;;"></a>
+					<div
+						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+						aria-labelledby="navbarDropdownUserImage">
+						<h6 class="dropdown-header d-flex align-items-center"
+							th:if="${session.loginedUser}">
+							<img class="dropdown-user-img"  th:src="@{/images/user/NoProfile.png}" />
+							<div class="dropdown-user-details">
+								<div class="dropdown-user-details-name">
+									[[${session.loginedUser.name }]]</div>
+								<div class="dropdown-user-details-email">
+									[[${session.loginedUser.email }]]</div>
+							</div>
+						</h6>
+						<h6 th:unless="${session.loginedUser}" style="text-align:center;font-weight: 400; font-size: 15px;" >로그인 하세요 </h6>
+						<div class="dropdown-divider"></div>
+
+						<a class="dropdown-item" th:href="@{mypage}"
+							th:if="${session.loginedUser}">
+							<div class="dropdown-item-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+									viewBox="0 0 24 24" fill="none" stroke="currentColor"
+									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+									class="feather feather-settings">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    ></path>
+                  </svg>
                 </div>
-            </div>
-        </form>
-        <!-- Topbar Navbar -->
-        <ul class="navbar-nav align-items-center ml-auto">
-            <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-                <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-                   href="/write">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512">
-                        <path d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/>
-                    </svg>
-                </a>
-            </li>
-
-
-            <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-                <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-                   href="/mail">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512">
-                        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                        <path d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z"/>
-                    </svg>
-                </a>
-                <div
-                        class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
-                        aria-labelledby="navbarDropdownMessages">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-mail mr-2">
-                        <path
-                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-
-                    </a>
-
+                [[${session.loginedUser.name }]]님의 계정 정보
+              </a>
+              <a
+                class="dropdown-item"
+                th:href="@{/logout}"
+                th:if="${session.loginedUser}"
+              >
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-log-out"
+                  >
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
                 </div>
-            </li>
-            <li class="nav-item dropdown no-arrow no-caret dropdown-user">
-                <a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-                   id="navbarDropdownUserImage" href="javascript:void(0);"
-                   role="button" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"><img class="img-fluid"
-                                              th:if="${session.loginedUser}" th:src="@{/images/user/NoProfile.png}"
-                                              style="width:21px; height: 21px;;"></a>
-                <div
-                        class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
-                        aria-labelledby="navbarDropdownUserImage">
-                    <h6 class="dropdown-header d-flex align-items-center"
-                        th:if="${session.loginedUser}">
-                        <img class="dropdown-user-img" src="images/user/s4.png"/>
-                        <div class="dropdown-user-details">
-                            <div class="dropdown-user-details-name">
-                                [[${session.loginedUser.name }]]
-                            </div>
-                            <div class="dropdown-user-details-email">
-                                [[${session.loginedUser.email }]]
-                            </div>
-                        </div>
-                    </h6>
-                    <h6 th:unless="${session.loginedUser}" style="text-align:center;font-weight: 400; font-size: 15px;">
-                        로그인부터 진행해주세요</h6>
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item" href="account.html"
-                       th:if="${session.loginedUser}">
-                        <div class="dropdown-item-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                 class="feather feather-settings">
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <path
-                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                                ></path>
-                            </svg>
-                        </div>
-                        [[${session.loginedUser.name }]]님의 계정정보
-                    </a>
-                    <a
-                            class="dropdown-item"
-                            th:href="@{/logout}"
-                            th:if="${session.loginedUser}"
-                    >
-                        <div class="dropdown-item-icon">
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="feather feather-log-out"
-                            >
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                <polyline points="16 17 21 12 16 7"></polyline>
-                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg>
-                        </div>
-                        Logout
-                    </a>
-                    <a
-                            class="dropdown-item"
-                            th:href="@{/signup}"
-                            th:unless="${session.loginedUser}"
-                    >
-                        <div class="dropdown-item-icon">
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="feather feather-settings"
-                            >
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <path
-                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                                ></path>
-                            </svg>
-                        </div>
-                        회원가입
-                    </a>
-                    <a
-                            class="dropdown-item"
-                            th:href="@{/login}"
-                            th:unless="${session.loginedUser}"
-                    >
-                        <div class="dropdown-item-icon">
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="feather feather-login"
-                            >
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                <polyline points="16 17 21 12 16 7"></polyline>
-                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg>
-                        </div>
-                        LogIn
-                    </a>
+                로그아웃
+              </a>
+              <a
+                class="dropdown-item"
+                th:href="@{/login}"
+                th:unless="${session.loginedUser}"
+              >
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-login"
+                  >
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
+							</div> 로그인
+						</a>
+						<a
+                class="dropdown-item"
+                th:href="@{/signup}"
+                th:unless="${session.loginedUser}"
+              >
+                <div class="dropdown-item-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-settings"
+                  >
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    ></path>
+                  </svg>
                 </div>
-            </li>
-        </ul>
-    </div>
-</nav>
-<!-- Navigation -->
-<nav
-        class="navbar navbar-expand-lg navbar-light bg-white osahan-nav-mid px-0 border-top shadow-sm">
-    <div class="container">
-        <button class="navbar-toggler navbar-toggler-right" type="button"
-                data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span> <span
-                style="font-size: 18px; font-weight: 500; padding-top:5.5px;">전체 카테고리</span></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav">
-                <div style="color:#b9b9b9; font-weight:600; padding-top:12px;">비즈니스</div>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/product/category/1"
-                       style="font-size:15px; font-weight: 600;">디자인</a>
-                </li>
+                회원가입
+              </a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Navigation -->
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-white osahan-nav-mid px-0 border-top shadow-sm">
+		<div class="container">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation" >
+				<span class="navbar-toggler-icon"></span> <span style="font-size: 18px; font-weight: 500; padding-top:5.5px;">전체 카테고리</span></button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav">
+					<div style="color:#b9b9b9; font-weight:600; padding-top:12px;">비즈니스</div>
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownPortfolio" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">디자인</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownPortfolio">
+							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">디자인</div>
+							
+							<a class="dropdown-item" th:href="@{/cate/1}">로고 브랜딩</a> 
+							<a class="dropdown-item" th:href="@{/cate/2}">상세 이벤트 페이지</a> 
+							<a class="dropdown-item" th:href="@{/cate/3}">명함 인쇄 홍보물</a>
+							<a class="dropdown-item" th:href="@{/cate/4}">웹 모바일 디자인</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">일러스트 캐리커처</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">웹툰 캐릭터 이모티콘</a>
+						</div></li>
+							<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownPortfolio" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">영상 · 사진 · 음향</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownPortfolio">
+							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">영상 · 사진 · 음향</div>
+							
+							<a class="dropdown-item" th:href="@{/cate/1}">영상촬영 편집</a> 
+							<a class="dropdown-item" th:href="@{/cate/2}">인터뷰 영상 </a> 
+							<a class="dropdown-item" th:href="@{/cate/3}">교육 영상</a>
+							<a class="dropdown-item" th:href="@{/cate/4}">유튜브 제작</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">애니메이션</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">영상 자막</a>
+						<a class="dropdown-item" th:href="@{/cate/3}">사진촬영 </a>
+							<a class="dropdown-item" th:href="@{/cate/4}">사진 영상 보정</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">성우</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">음악 사운드</a>
+						
+						</div></li>
+	<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownPortfolio" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownPortfolio">
+							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">IT · 프로그래밍</div>
+							
+							<a class="dropdown-item" th:href="@{/cate/1}">웹</a> 
+							<a class="dropdown-item" th:href="@{/cate/2}">모바일 앱</a> 
+							<a class="dropdown-item" th:href="@{/cate/3}">보안</a>
+							<a class="dropdown-item" th:href="@{/cate/4}">챗봇</a> 
+							<a class="dropdown-item" th:href="@{/cate/5}">블록체인</a> 
+							<a class="dropdown-item" th:href="@{/cate/6}">쇼핑몰·커머스</a>
+						</div></li>
+				</ul>
+			</div>
+			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">
+				<li class="nav-item">
+				<a class="nav-link"></a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto" th:unless="${session.loginedUser == null}">
+				<li class="nav-item" th:if="${session.loginedUser.type==0}">
+				<a class="nav-link" th:href="@{freelancerForm}" > <i class="fa fa-fw fa-trophy"></i>
+						<span>프리랜서 전환</span></a></li>
+			</ul>
+		</div>	
+		</nav>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/product/category/2"
-                       style="font-size:15px; font-weight: 600;">영상</a>
-                </li>
-                <a class="nav-link dropdown-toggle" href="/product/category/3"
-                   style="font-size:15px; font-weight: 600;">IT</a>
-                </li>
-            </ul>
-        </div>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link"
-                                    href="freelancerForm"> <i class="fa fa-fw fa-trophy"></i>
-                <span>프리랜서 전환</span></a></li>
-        </ul>
-    </div>
-</nav>
+    <section layout:fragment="contents"></section>
 
-<section layout:fragment="contents"></section>
-
-<footer class="bg-white">
-    <div class="container">
+    <footer class="bg-white">
+      <div class="container">
         <div class="d-flex justify-content-between">
-            <div style="width: 540px">
-                <h2 style="padding-top: 15px; font-weight: 800">
-                    고객센터 1588-1234
-                    <p
-                            style="
+          <div style="width: 540px">
+            <h2 style="padding-top: 15px; font-weight: 800">
+              고객센터 1588-1234
+              <p
+                style="
                   color: #c5c7c9;
                   padding-top: 10px;
                   font-size: 12px;
                   font-weight: 500;
                 "
-                    >
-                        10:30~18:00(점심시간 13:00~14:00) <br/>주말,공휴일 휴무
-                    </p>
-                    <a href="/문의" class="c-btn c-fill-color-btn">1:1문의하기</a>
-                </h2>
-                <div></div>
-            </div>
-            <div class="footer-list">
-                <h2>Hi-er</h2>
-                <ul class="list">
-                    <li><a href="#">Main</a></li>
-                    <li><a href="#">introduction</a></li>
-                    <li><a href="#">About the developer</a></li>
-                </ul>
-            </div>
-            <div class="footer-list">
-                <h2>Categories</h2>
-                <ul class="list">
-                    <li><a href="#">Design</a></li>
-                    <li><a href="#">IT · Programing</a></li>
-                    <li><a href="#">Video · Photo · Music</a></li>
-                </ul>
-            </div>
-            <div class="footer-list">
-                <h2>Support</h2>
-                <ul class="list">
-                    <li><a href="#">Help &amp; Support</a></li>
-                    <li><a href="#">Trust &amp; Safety</a></li>
-                    <li><a href="#">Selling on Hi-er </a></li>
-                    <li><a href="#">Buying on Hi-er </a></li>
-                </ul>
-            </div>
+              >
+                10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
+              </p>
+              <a href="/문의" class="c-btn c-fill-color-btn">1:1문의하기</a>
+            </h2>
+            <div></div>
+          </div>
+          <div class="footer-list">
+            <h2>Hi-er</h2>
+            <ul class="list">
+              <li><a href="#">Main</a></li>
+              <li><a href="#">introduction</a></li>
+              <li><a href="#">About the developer</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Categories</h2>
+            <ul class="list">
+              <li><a href="#">Design</a></li>
+              <li><a href="#">IT · Programing</a></li>
+              <li><a href="#">Video · Photo · Music</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Support</h2>
+            <ul class="list">
+              <li><a href="#">Help &amp; Support</a></li>
+              <li><a href="#">Trust &amp; Safety</a></li>
+              <li><a href="#">Selling on Hi-er </a></li>
+              <li><a href="#">Buying on Hi-er </a></li>
+            </ul>
+          </div>
         </div>
         <div class="copyright">
           <div class="logo">
@@ -358,37 +381,36 @@
             </li>
           </ul>
         </div>
-    </div>
-</footer>
-</body>
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- Contact form JavaScript -->
-<!-- Slick -->
-<script
-        th:src="@{/vendor/slick-master/slick/slick.js}"
-        type="text/javascript"
-        charset="utf-8"
-></script>
-<!-- lightgallery -->
-<script
-        th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"
-></script>
-<!-- select2 Js -->
-<script th:src="@{/vendor/select2/js/select2.min.js}"></script>
-<!-- Custom -->
-<script th:src="@{/js/custom.js}"></script>
-<script th:src="@{/js/star.js}"></script>
-<script>
+      </div>
+    </footer>
+  </body>
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- Contact form JavaScript -->
+  <!-- Slick -->
+  <script
+    th:src="@{/vendor/slick-master/slick/slick.js}"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <!-- lightgallery -->
+  <script
+    th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"
+  ></script>
+  <!-- select2 Js -->
+  <script th:src="@{/vendor/select2/js/select2.min.js}"></script>
+  <!-- Custom -->
+  <script th:src="@{/js/custom.js}"></script>
+  <script>
     function search() {
-        const searchKeyword = $("input[id='searchKeyword']").val();
-        location.href =
-            '/product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
-            searchKeyword;
+      const searchKeyword = $("input[id='searchKeyword']").val();
+      location.href =
+        'product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
+        searchKeyword;
     }
 
     window.onpopstate = function (event) {
-        $('#productList').load(location.href + ' #productList');
+      $('#productList').load(location.href + ' #productList');
     };
-</script>
+  </script>
 </html>
