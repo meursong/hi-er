@@ -158,6 +158,7 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public boolean introupdate(String intro) throws Exception {
 		
+	
 		FreelancerUser freelancerUser=new FreelancerUser();
 		freelancerUser.setF_id(1);
 		freelancerUser.setIntroduction(intro);
@@ -172,6 +173,7 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public boolean addressupdate(String address, String address2) {
+		
 		FreelancerUser freelancerUser=new FreelancerUser();
 		freelancerUser.setF_id(1);
 		freelancerUser.setAddress(address);
