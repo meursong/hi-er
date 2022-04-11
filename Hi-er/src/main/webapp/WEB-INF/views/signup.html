@@ -42,9 +42,8 @@
 					<div class="osahan-login py-4">
 						<div class="text-center mb-4">
 							<a th:href="@{/index.html}"><img th:src="@{images/titlelogo.ico}" alt=""></a>
-							<h5 class="font-weight-bold mt-3">회원가입</h5>
+							<h5 class="font-weight-bold mt-3" th:text="${errMsg} ? ${errMsg} : '회원가입'"></h5>
 						</div>
-
 						<form method="post" th:action="@{/signup}"  oninput='password2.setCustomValidity(password2.value != password.value ? "비밀번호가 달라요~~" : "")'>
 							<div class="form-group">
 								<label class="mb-1">이름</label>
@@ -87,6 +86,7 @@
 									<i class="mdi mdi-key-variant position-absolute"></i> <input
 										type="password" id="password2" class="form-control" required>
 								</div>
+								<div id="checkpassword"></div>
 							</div>
 
 							<div class="form-group">
@@ -181,6 +181,49 @@
 	*/
 	</script>
 	<script>
+		
+		
+	
+	
+	$('#password').focusout(function(){
+		let password1 = $('#password').val();
+		if(password1 == "") {
+			$("#checkpassword").html('비밀번호를 입력하세요.');
+			$("#checkpassword").css('color','red');
+			$('#signUpBtn').text('비밀번호를 입력하세요!!');
+			$('#signUpBtn').attr('disabled', true);
+		} else if (password1.length < 8 || password1.length > 20) {
+			$("#checkpassword").html('8자리 ~ 20자리 이내로 입력해주세요..');
+			$("#checkpassword").css('color','red');
+			$('#signUpBtn').text('8자리 ~ 20자리 이내로 입력해주세요.!');
+			$('#signUpBtn').attr('disabled', true);
+		} else if (password1.search(/\s/) != -1) {
+			$("#checkpassword").html('비밀번호는 공백 없이 입력해주세요.');
+			$("#checkpassword").css('color','red');
+			$('#signUpBtn').text('비밀번호는 공백 없이 입력해주세요..!');
+			$('#signUpBtn').attr('disabled', true);
+		} else {
+			$("#checkpassword").html('사용 가능한 비밀번호입니다.');
+			$("#checkpassword").css('color','green');
+			$('#signUpBtn').text('가입하기');
+			$('#signUpBtn').attr('disabled', false);
+		}
+	})
+	$('#password2').focusout(function(){
+		let password1 = $('#password').val();
+		let password2 = $('#password2').val();
+		if (password1 != password2) {
+			$("#checkpassword").html('두 비밀번호가 틀립니다.');
+			$("#checkpassword").css('color','red');
+			$('#signUpBtn').text('두 비밀번호가 틀려!!');
+			$('#signUpBtn').attr('disabled', true);
+		} else {
+			$("#checkpassword").html('두 비밀번호가 같습니다.');
+			$("#checkpassword").css('color','green');
+			$('#signUpBtn').text('가입하기');
+			$('#signUpBtn').attr('disabled', false);
+		}
+	})
 	$('#email').focusout(function(){
 		let useremail = $('#email').val();
 		
@@ -193,11 +236,13 @@
 				if(result){
 					$("#checkemail").html('사용할 수 있는 이메일입니다.');
 					$("#checkemail").css('color','green');
+					$('#signUpBtn').text('가입하기');
+					$('#signUpBtn').attr('disabled', false);
 				} else{
 					$("#checkemail").html('중복된 이메일입니다.');
 					$("#checkemail").css('color','red');
 					$('#signUpBtn').text('사용할 수 없는 이메일이라잖아!!!');
-					$('#signUpBtn').attr('disabled', "true");
+					$('#signUpBtn').attr('disabled', true);
 				}
 			},
 			error : function(){
@@ -208,7 +253,7 @@
 	</script>
 	<script>
 	$('#nickname').focusout(function(){
-		let userNicknamel = $('#nickname').val();
+		let usernickname = $('#nickname').val();
 		
 		$.ajax({
 			url : "/nicknamecheck",
@@ -217,13 +262,15 @@
 			dataType : 'json',
 			success : function(result){
 				if(result){
-					$("#checnickname").html('사용할 수 있는 닉네임입니다.');
-					$("#checnickname").css('color','green');
+					$("#checknickname").html('사용할 수 있는 닉네임입니다.');
+					$("#checknickname").css('color','green');
+					$('#signUpBtn').text('가입하기');
+					$('#signUpBtn').attr('disabled', false);
 				} else{
-					$("#checnickname").html('사용할 수 없는 닉네임입니다.');
-					$("#checnickname").css('color','red');
+					$("#checknickname").html('사용할 수 없는 닉네임입니다.');
+					$("#checknickname").css('color','red');
 					$('#signUpBtn').text('사용할 수 없는 닉네임이라잖아!!!');
-					$('#signUpBtn').attr('disabled', "true");
+					$('#signUpBtn').attr('disabled', true);
 				}
 			},
 			error : function(){

@@ -16,7 +16,7 @@
 		]]>
 	</select>
 
-	<insert id="insert_info_f" parameterType="FreelancerForm">
+	<insert id="insert_info_f" parameterType="FreelancerUser">
 		<![CDATA[
 			insert into f_info (f_id, address, address2, introduction) value(#{user_id}, #{address}, #{address2}, #{introduction});
 		]]>
