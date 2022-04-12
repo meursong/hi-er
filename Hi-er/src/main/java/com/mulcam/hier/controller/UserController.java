@@ -2,6 +2,7 @@ package com.mulcam.hier.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +46,10 @@ public class UserController {
 	}
 
 	@PostMapping("freelancerForm")
-	public String joinFreelancer(FreelancerUser form) throws Exception {
+	public String joinFreelancer(FreelancerForm form) throws Exception {
 		if (((User) session.getAttribute("loginedUser")) != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-			FreelancerUser freelancer = new FreelancerUser(user_id, form.getAddress(), form.getIntroduction());
+			FreelancerForm freelancer = new FreelancerForm(user_id, form.getAddress(), form.getAddress2(), form.getIntroduction());
 			us.insert_info(freelancer);
 			us.update_type(user_id);
 			return "redirect:/";

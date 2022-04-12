@@ -3,6 +3,7 @@ package com.mulcam.hier.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.FreelancerUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void insert_info(FreelancerUser free) throws Exception {
+	public void insert_info(FreelancerForm free) throws Exception {
 		ud.insert_info_f(free);
 	}
 

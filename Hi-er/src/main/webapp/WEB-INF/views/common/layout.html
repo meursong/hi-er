@@ -46,10 +46,10 @@
 				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search" action="/search" method="GET">
 				<div class="input-group">
 					<input type="text" name="keyword" class="form-control bg-white small"
-						placeholder="서비스를 검색하세요" aria-label="Search"
+						placeholder="서비스를 검색하세요" id="searchKeyword" aria-label="Search"
 						aria-describedby="basic-addon2" style="width:400px;">
 					<div class="input-group-append">
-						<button class="btn btn-success" type="button">
+						<button class="btn btn-success"  th:onclick="search()" type="button">
 							<i class="fa fa-search fa-sm"></i>
 						</button>
 					</div>
@@ -92,8 +92,6 @@
                         </div>
                      </a>
                </li>
-
-
 				<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
 					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
 					href="/mail" >
