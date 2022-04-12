@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.mulcam.hier.dto.FreelancerUser;
+import com.mulcam.hier.dto.Orders;
+import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 
 @Mapper
@@ -26,4 +28,6 @@ public interface MypageDAO {
 	public boolean passupdate(User user)throws Exception;
 	public boolean introupdate(FreelancerUser freelancerUser);
 	public boolean locationupdate(FreelancerUser freelancerUser);
+	public Orders findorder(int order_id);
+	public void insertreview(Review review);
 }

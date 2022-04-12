@@ -52,6 +52,9 @@ public class MypageController {
 		return String.valueOf(overlap);
 	}
 	
+	
+	
+	
 	@ResponseBody
 	@PostMapping("nickupdate")
 	public String nickupdate(@RequestParam(value="nick")String nick) {
@@ -116,6 +119,24 @@ public class MypageController {
 			return String.valueOf(false);
 		}
 
+	}
+	
+	@ResponseBody
+	@PostMapping("review")
+	public String review(@RequestParam(value="content")String content,@RequestParam(value="rating")int star_point,@RequestParam(value="order_id")int order_id) {
+		System.out.println("들ddddddddddddddddddddddddddd어옴");
+		System.out.println("들ddddddddddddddddddddddddddd어옴");
+		System.out.println("들ddddddddddddddddddddddddddd어옴");
+		System.out.println("들ddddddddddddddddddddddddddd어옴");
+		System.out.println("들ddddddddddddddddddddddddddd어옴");
+		System.out.println("들ddddddddddddddddddddddddddd어옴");
+		boolean review=false;
+		try {
+			review=mypageService.reviewWrite(content,star_point,order_id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(review);
 	}
 	
 	@GetMapping("mypage/{num}/{page2}")

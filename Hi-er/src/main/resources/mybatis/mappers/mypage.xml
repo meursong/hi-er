@@ -10,6 +10,27 @@
 	
 	</select>
 	
+	<!-- 주문번호로 주문을 조회함 -->
+	<select id="findorder" resultType="Orders" parameterType="int">
+	<![CDATA[
+		select * from Orders where order_id=#{order_id}
+		limit 1
+	]]>	
+	
+	</select>
+	
+	<!-- 리뷰를 삽입함-->
+	<insert id="insertreview" parameterType="review">
+	<![CDATA[
+		insert into review 
+		(review_wid,product_id,seller_id,content,star_point)
+		values(#{review_wid},#{product_id},#{seller_id},#{content},#{star_point})
+	]]>	
+	
+	</insert>
+	
+	
+	
 <!-- 	<select id="queryOrderss" resultType="Map" parameterType="int">
 	<![CDATA[
 		select * from Orders where buyer_id=#{id}
@@ -21,7 +42,7 @@
 	<select id="queryOrdersss" resultType="Map" parameterType="int">
 	<![CDATA[
 		
-		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id
 		from user u join user us join product p join orders o
 		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
 		, (SELECT @rownum:=0) TMP

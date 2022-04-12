@@ -157,7 +157,7 @@
 
 																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
 																	<div class="col-md-12">
-																		<form accept-charset="UTF-8" action="" method="post">
+																		<form>
 																			<input id="ratings-hidden" name="rating"
 																				type="hidden">
 																			<textarea class="form-control animated" cols="50"
@@ -169,15 +169,15 @@
 
 																				<fieldset>
 																					<legend>★★★별점★★★</legend>
-																					<input type="radio" name="rating" value="5"
+																					<input type="radio" th:class="'rating'+${order.order_id}" name="rating" value="5"
 																						th:id="'rate1'+${order.order_id}"><label th:for="'rate1'+${order.order_id}">⭐</label> <input
-																						type="radio" name="rating" value="4" th:id="'rate2'+${order.order_id}"><label
+																						type="radio" th:class="'rating'+${order.order_id}" name="rating" value="4" th:id="'rate2'+${order.order_id}"><label
 																						th:for="'rate2'+${order.order_id}">⭐</label> <input type="radio"
-																						name="rating" value="3" th:id="'rate3'+${order.order_id}"><label
+																						th:class="'rating'+${order.order_id}" name="rating" value="3" th:id="'rate3'+${order.order_id}"><label
 																						th:for="'rate3'+${order.order_id}">⭐</label> <input type="radio"
-																						name="rating" value="2" th:id="'rate4'+${order.order_id}"><label
+																						th:class="'rating'+${order.order_id}" name="rating" value="2" th:id="'rate4'+${order.order_id}"><label
 																						th:for="'rate4'+${order.order_id}">⭐</label> <input type="radio"
-																						name="rating" value="1" th:id="'rate5'+${order.order_id}"><label
+																						th:class="'rating'+${order.order_id}" name="rating" value="1" th:id="'rate5'+${order.order_id}"><label
 																						th:for="'rate5'+${order.order_id}">⭐</label>
 																				</fieldset> 
 
@@ -194,7 +194,7 @@
 																					style="display: none; margin-right: 10px;"> <span
 																					class="glyphicon glyphicon-remove"></span>Cancel
 																				</a>
-																				<button class="btn btn-success btn-lg" type="submit">Save</button>
+																				<button class="btn btn-success btn-lg review" th:id="${order.order_id}" type="button">Save</button>
 																			</div>
 																		</form>
 																	</div>
@@ -929,6 +929,43 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(function() {
+			$(".review").click(function(e){
+				let id=e.currentTarget.id;
+				var rating1='.rating'+id+':checked';
+				var rating2=$(rating1).val();//내가 선택한 별점
+				var content = $('#new-review' + id).val();
+				
+				console.log(id);
+				console.log(rating1);
+				console.log(rating2);
+				console.log(content);
+				if(rating2===undefined){
+					alert('별점을 입력하세요');
+				}
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/review",
+					data : {
+						"order_id" : id, "rating":rating2, "content":content
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('리뷰를 등록했습니다.');
+							
+						} else {
+							alert('오류가 발생했습니다');
+							
+						}
+					},
+					/* complete: function() {
+						alert("a");
+					} */
+				});
+				
+			});
+			
 			$("#validationCustom02").click(function() {
 
 				let nick = $('#validationCustom01').val();

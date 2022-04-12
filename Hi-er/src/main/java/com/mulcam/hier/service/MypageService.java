@@ -17,4 +17,5 @@ public interface MypageService {
 	boolean passfindupdate(String pass,String pass2) throws Exception;
 	boolean introupdate(String intro) throws Exception;
 	boolean addressupdate(String address, String address2);
+	boolean reviewWrite(String content, int star_point,int order_id);
 }

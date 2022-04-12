@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.MypageDAO;
 import com.mulcam.hier.dto.FreelancerUser;
+import com.mulcam.hier.dto.Orders;
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 
 @Service
@@ -188,6 +190,29 @@ public class MypageServiceImpl implements MypageService {
 			}
 	
 	}
+
+	@Override
+	public boolean reviewWrite(String content, int star_point,int order_id) {
+		Review review=new Review();
+		Orders order=mypageDAO.findorder(order_id);
+	
+		review.setReview_wid(1);//내가쓴거임
+		review.setProduct_id(order.getProduct_id());
+		review.setSeller_id(order.getSeller_id());
+		review.setContent(content);
+		review.setStar_point(star_point);
+		try {
+			mypageDAO.insertreview(review);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;//에러뜨면 펄스 반환
+		}
+		//컨텐츠 쓴사람아이디 스타포인트
+		//상품아이디 생성시간 판매자아이디
+		return true;//정상적으로 하면 트루 반환함
+	}
+	
+	
 	
 	
 	
