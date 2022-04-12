@@ -199,10 +199,11 @@ input.card {
 								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
 							</div>
 							<div class="bg-blue p-2">
-								<P class="h8 textmuted">제품 한줄 소개
-								<p class="p-blue bg btn btn-primary h8">제품 상세 보기(뒤로가기 구현)</p>
+								<p class="h6">제품 한줄 소개</p>
+								<P class="h6 textmuted" th:if="${product.paymentPkg}=='Basic'" th:text="${product.b_pkg_description}"></p>
+								<P class="h6 textmuted" th:if="${product.paymentPkg}=='Standard'" th:text="${product.s_pkg_description}"></p>
+								<P class="h6 textmuted" th:if="${product.paymentPkg}=='Premium'" th:text="${product.p_pkg_description}"></p>
 								<p>[[${product.seller_id}]]</p>
-								</P>
 							</div>
 						</div>
 					</div>

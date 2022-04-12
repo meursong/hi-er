@@ -28,4 +28,5 @@ public interface UserDAO {
   	public void insert_info_f(FreelancerUser f_info) throws Exception;
   	public void update_type_f(int user_id) throws Exception;
 	public void insert_user(User user) throws Exception;
+	public FreelancerUser sellet_seller(int seller_id) throws Exception;
 }
