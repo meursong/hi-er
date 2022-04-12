@@ -48,13 +48,13 @@ public class ProductListController {
     @GetMapping("/search")
     public String searchPage(@ModelAttribute("params") ProductList params, Model model)
             throws Exception {
-
+//        params.setCategory(category);
         List<ProductList> selectProductDate = productListService.selectProductTotal(params);
         model.addAttribute("productList", selectProductDate);
         return "productListSearch";
     }
 
-    @GetMapping("/search/category")
+/*    @GetMapping("/search/category")
     public String searchPage1(@ModelAttribute("params") ProductList params, Model model, @RequestParam(value="category", required = false) String category)
             throws Exception {
         params.setCategory(category);
@@ -62,7 +62,7 @@ public class ProductListController {
         List<ProductList> selectProductDate = productListService.selectProductTotal(params);
         model.addAttribute("productList", selectProductDate);
         return "productListSearch";
-    }
+    }*/
 
 
     @PostMapping("/product/category/{id}")
@@ -97,14 +97,14 @@ public class ProductListController {
         return "/productListSearch :: #productList";
     }
 
-    @PostMapping("/search/category")
+/*    @PostMapping("/search/category")
     public String productLisCategory(@RequestParam String value, @ModelAttribute("params") ProductList params,
                                     Model model) throws Exception {
         params.setCategory(value);
         List<ProductList> sortProduct = productListService.selectProductTotal(params);
         model.addAttribute("productList", sortProduct);
         return "/productListSearch :: #productList";
-    }
+    }*/
 
 
 }
