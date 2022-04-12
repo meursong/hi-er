@@ -15,14 +15,11 @@
 	$(function() {
 		$('#iamportPayment').click(function() {
 			console.log("결제버튼클릭");
-
-			var params = {
-				name : $("#name").val()
-			}
-			$.ajax({
+			iamport(); //메서드 호출	
+			/* $.ajax({
 				type : "POST",
 				url : "/order",
-				data : params, // Json
+				data : formData, 
 				success : function(res) {
 					alert(res.code);
 					iamport(); //메서드 호출	
@@ -30,7 +27,7 @@
 				error : function(XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 					alert("통신 실패.")
 				}
-			});
+			}); */
 
 		});
 	});
@@ -56,6 +53,17 @@
 				msg += '상점 거래ID : ' + rsp.merchant_uid;
 				msg += '결제 금액 : ' + rsp.paid_amount;
 				msg += '카드 승인번호 : ' + rsp.apply_num;
+				$.ajax({
+					type : "POST",
+					url : "/order",
+					data : formData,  //formData를 못찾는데? 여기서 데이터를 json 객체화시켜서 넘겨야하나?
+					success : function(res) {
+						alert(res.code);
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+						alert("통신 실패.")
+					}
+				});
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;

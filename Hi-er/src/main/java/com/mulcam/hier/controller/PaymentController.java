@@ -22,9 +22,10 @@ public class PaymentController {
 	@PostMapping("/order") 
 	public int order(Orders order){ 
 		int orderNumber = 0;
+		System.out.println("결제컨트롤러에 도착했다~@!#!@#~#~");
 		try {
-			orderNumber = orderService.makeOrder(order) ;
-			System.out.println(orderNumber);
+			//orderNumber = orderService.makeOrder(order) ;
+			//System.out.println(orderNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
