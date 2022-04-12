@@ -12,7 +12,7 @@
 					<div
 						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
 						<!-- 	<div class="py-4 px-3 border-bottom"> -->
-						<img src="images/dh/freelancer.png" class="img-fluid mt-2"
+						<img th:src="@{images/dh/freelancer.png}" class="img-fluid mt-2"
 							alt="Responsive image">
 						<!-- </div> -->
 						<!-- <div class="p-4">
@@ -52,6 +52,7 @@
 											</div>
 										</div>
 									</div>
+
 									<!-- End Input -->
 								</div>
 								<div class="row">
@@ -62,15 +63,23 @@
 												<span class="text-danger">*</span>
 											</label>
 											<div class="form-group">
+												<div style="padding-bottom: 10px;">
 												<input type="button" class="btn btn-success"
-													onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
+													onclick="sample6_execDaumPostcode()" value="주소 찾기"	><br>
+												</div>
+												<div style="padding-bottom: 10px;">
 												<input type="text" class="form-control" id="sample6_address"
-													placeholder="주소" name="address"> <input type="text"
+													placeholder="주소" name="address"> 
+												</div>
+												<div style="padding-bottom: 10px;">
+													<input type="text"
 													class="form-control" id="sample6_detailAddress"
 													placeholder="상세주소" name="address2">
+												</div>
 											</div>
 										</div>
 									</div>
+
 									<!-- End Input -->
 
                                 </div>

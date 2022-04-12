@@ -130,7 +130,7 @@
                   />
                 </a>
                 <a th:if="${product.category=='video'}" th:href="@{/upload/} + ${product.filename1}">
-                  <video class="img-fluid" height="400px" width="650px"  th:src="@{/upload/} + ${product.filename1}" th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}">
+                  <video class="img-fluid" height="400px" width="650px" th:src="@{/upload/} + ${product.filename1}" th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" controls muted>
                   </video>
                 </a>
                 <a th:href="@{/upload/} + ${product.filename2}">

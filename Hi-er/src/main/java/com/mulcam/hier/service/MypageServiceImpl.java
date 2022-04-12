@@ -168,8 +168,7 @@ public class MypageServiceImpl implements MypageService {
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
-		}
-		
+		}	
 	}
 
 	@Override
@@ -186,10 +185,5 @@ public class MypageServiceImpl implements MypageService {
 				e.printStackTrace();
 				return false;
 			}
-	
 	}
-	
-	
-	
-
 }

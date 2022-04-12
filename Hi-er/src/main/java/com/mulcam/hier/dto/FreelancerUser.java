@@ -9,10 +9,25 @@ public class FreelancerUser extends User {
 	private String introduction;
 	private Date switchAt;
 
-	public FreelancerUser() {
+	
 
+	public FreelancerUser(int f_id, String address, float avg_star_point, String introduction, Date switchAt) {
+		super();
+		this.f_id = f_id;
+		this.address = address;
+		this.avg_star_point = avg_star_point;
+		this.introduction = introduction;
+		this.switchAt = switchAt;
 	}
-
+	public FreelancerUser(int f_id, String address, String introduction) {
+		super();
+		this.f_id = f_id;
+		this.address = address;
+		this.introduction = introduction;
+	}
+	public FreelancerUser() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getF_id() {
 		return f_id;
 	}
