@@ -3,12 +3,12 @@ package com.mulcam.hier.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.FreelancerUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.UserDAO;
-import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.User;
 
 @Service
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Boolean nicknameCheck(String usernickname) throws Exception {
 		Boolean result = false;
-		String name = ud.emailCheck(usernickname);
+		String name = ud.nicknameCheck(usernickname);
 		if (name == null) {
 			result = true;
 		}
@@ -70,6 +70,14 @@ public class UserServiceImpl implements UserService{
 		ud.update_type_f(user_id);
 		
 	}
+	
+	@Override
+	public User selectType(int user_id) throws Exception{
+		User user = ud.selectType(user_id);
+		if(user==null) throw new Exception("오류");
+		return user;
+		
+	}
 //	@Override
 //	public String signup(String name,String email, String password, String job ) throws Exception {
 //		Map<String, String> param = new HashMap<String, String>();
@@ -80,4 +88,15 @@ public class UserServiceImpl implements UserService{
 //		String name = ud.login(param);
 //		return name;
 //	}
+
+	@Override
+	public void signup(User user) throws Exception {
+		ud.insert_user(user);
+	}
+
+	@Override
+	public FreelancerUser sellerInfo(int seller_id) throws Exception {
+		FreelancerUser seller_info = ud.sellet_seller(seller_id);
+		return seller_info;
+	}
 }

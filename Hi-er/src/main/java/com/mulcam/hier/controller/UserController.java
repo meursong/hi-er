@@ -2,19 +2,15 @@ package com.mulcam.hier.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.UserService;
@@ -58,15 +54,15 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/freelancerInfo")
-	public String freelancerInfo(Model model, @ModelAttribute("params") Review params) throws Exception {
+	@GetMapping("/freelancerInfo/{id}")
+	public String freelancerInfo(@PathVariable("id") String id, Model model, @ModelAttribute("params") Review params) throws Exception {
 		// seller_id는 임시
 		int seller_id = 1;
 
 		FreelancerUser freelancer = us.freelancerInfo(seller_id);
 		params.setSeller_id(seller_id); // 로그인시 세션에서 값 가져와서 넣는다
 
-		params.setRecordsPerPage(4);
+		// params.setRecordsPerPage(4);
 		List<Review> reviews = reviewService.reviewList(params);
 
 		String address[] = freelancer.getAddress().split(" ");
@@ -80,7 +76,7 @@ public class UserController {
 	@GetMapping("/login")
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("login");
-		if ((User) session.getAttribute("loginedUser") != null) {	
+		if ((User) session.getAttribute("loginedUser") != null) {
 			mav.setViewName("index");
 		}
 		return mav;
@@ -91,7 +87,6 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("index");
 		try {
 			User loginedUser = us.login(email, password);
-			System.out.println(loginedUser);
 			session.setAttribute("loginedUser", loginedUser);
 			if (loginedUser == null) {
 				mav.setViewName("login");
@@ -106,7 +101,9 @@ public class UserController {
 	public ModelAndView joinPage() {
 		// 로그인 된 상태에서 들어가지 못하게 만들기
 		ModelAndView mav = new ModelAndView("signup");
-
+		if ((User) session.getAttribute("loginedUser") != null) {	
+			mav.setViewName("index");
+		}
 		return mav;
 	}
 
@@ -115,8 +112,10 @@ public class UserController {
 		System.out.println(user.toString());
 		ModelAndView mav = new ModelAndView("login");
 		try {
-
+			us.signup(user);
 		} catch (Exception e) {
+			mav.setViewName("signup");
+			mav.addObject("errMsg", "회원가입 중 오류가 발생했습니다.");
 			e.printStackTrace();
 		}
 		return mav;
@@ -126,7 +125,7 @@ public class UserController {
 	public ModelAndView logout() {
 		ModelAndView mav = new ModelAndView("index");
 		session.invalidate();
-		// session.removeAttribute("loginedUser");
+//		 session.removeAttribute("loginedUser");
 
 		return mav;
 	}
