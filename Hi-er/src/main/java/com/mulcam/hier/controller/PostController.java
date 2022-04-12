@@ -37,22 +37,22 @@ import com.mulcam.hier.service.UserService;
 @RequestMapping("/post")
 @Controller
 public class PostController {
-	
+
 	@Autowired
 	UserService us;
-	
+
 	@Autowired
 	PostService postService;
-	
+
 	@Autowired
 	ReviewService reviewService;
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	ServletContext servletContext;
-	
+
 	@Autowired
 	HttpSession session;
 
@@ -81,7 +81,7 @@ public class PostController {
 //		}
 //		
 //	}
-	
+
 	@GetMapping("/designWrite")
 	public String designWrite(Model model) throws Exception {
 		System.out.println((User) session.getAttribute("loginedUser"));
@@ -94,7 +94,7 @@ public class PostController {
 			return "login";
 		}
 	}
-	
+
 	@GetMapping("/videoWrite")
 	public String videoWrite(Model model) throws Exception {
 		System.out.println((User) session.getAttribute("loginedUser"));
@@ -107,15 +107,14 @@ public class PostController {
 			return "login";
 		}
 	}
-	
-	
+
 	private String fileupload(MultipartFile file) {
 		String filename = null;
 		try {
 			String path = servletContext.getRealPath("/upload/");
 			String time = Long.valueOf(new Date().getTime()).toString();
 			if (file != null && !file.isEmpty()) {
-				filename = file.getOriginalFilename()+time;
+				filename = file.getOriginalFilename() + time;
 				File destFile = new File(path + filename);
 				file.transferTo(destFile);
 			}
@@ -124,7 +123,7 @@ public class PostController {
 		}
 		return filename;
 	}
-	
+
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
 		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
@@ -138,15 +137,15 @@ public class PostController {
 			product.setFilename6(fileupload(product.getFile6()));
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
-			product.setIs_available(0); // 0:거래가능  1:거래중지
-			product.setSeller_id(seller_id); //추후 수정 필요
+			product.setIs_available(0); // 0:거래가능 1:거래중지
+			product.setSeller_id(seller_id); // 추후 수정 필요
 			postService.writePost(product);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 		return "/product-detail";
 	}
-	
+
 	@PostMapping("/designWrite")
 	public String write(@ModelAttribute Product product) {
 		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
@@ -160,15 +159,14 @@ public class PostController {
 			product.setFilename6(fileupload(product.getFile6()));
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
-			product.setIs_available(0); // 0:거래가능  1:거래중지
+			product.setIs_available(0); // 0:거래가능 1:거래중지
 			product.setSeller_id(seller_id);
 			postService.writePost(product);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		return "/"; //추후 게시판 페이지로 변경 
+		}
+		return "redirect:/product/category/1"; // 추후 게시판 페이지로 변경
 	}
-
 
 	@ResponseBody
 	@PostMapping("/uploadImage")
@@ -214,113 +212,119 @@ public class PostController {
 		}
 		return result;
 	}
-	
+
 	@GetMapping("/detail/{pid}")
 	public ModelAndView detail(@PathVariable("pid") Integer pid, @ModelAttribute("params") Review params) {
 		ModelAndView mav = new ModelAndView("product-detail");
 		params.setProduct_id(pid);
 		params.setRecordsPerPage(2);
 		try {
-			User logined_user = (User)session.getAttribute("loginedUser");
-			Product product = postService.productDetail(pid);
-			Product priceInfo = postService.priceInfo(pid);
-			Integer likedNum = postService.likeNum(pid, logined_user.getUser_id());
-			boolean isLike = postService.isLike(pid, logined_user.getUser_id());
-			List<Review> reviews = reviewService.prodReviewList(params);
-			System.out.println(product.getSeller_id());
-			FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
-			System.out.println(sellerInfo.getAddress());
-			Map<String, Object> likeInfo = new HashMap<String,Object>();
-			likeInfo.put("likeNum", likedNum);
-			likeInfo.put("isLike", isLike);
-			
-			mav.addObject("likeInfo", likeInfo);
-			mav.addObject("product", product);
-			mav.addObject("priceInfo", priceInfo);
-			mav.addObject("reviews", reviews);
-			mav.addObject("sellerInfo", sellerInfo);
-		}	catch(Exception e) {
+			User logined_user = (User) session.getAttribute("loginedUser");
+			if (logined_user != null) {
+				Product product = postService.productDetail(pid);
+				Product priceInfo = postService.priceInfo(pid);
+				Integer likedNum = postService.likeNum(pid, logined_user.getUser_id());
+				boolean isLike = postService.isLike(pid, logined_user.getUser_id());
+				List<Review> reviews = reviewService.prodReviewList(params);
+				System.out.println(product.getSeller_id());
+				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
+				System.out.println(sellerInfo.getAddress());
+				Map<String, Object> likeInfo = new HashMap<String, Object>();
+				likeInfo.put("likeNum", likedNum);
+				likeInfo.put("isLike", isLike);
+
+				mav.addObject("likeInfo", likeInfo);
+				mav.addObject("product", product);
+				mav.addObject("priceInfo", priceInfo);
+				mav.addObject("reviews", reviews);
+				mav.addObject("sellerInfo", sellerInfo);
+			} else {
+				mav.setViewName("login");
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			mav.addObject("err", e.getMessage());
 		}
 		return mav;
 	}
-	
-	//테스트용 : mav - model 차이?
+
+	// 테스트용 : mav - model 차이?
 	@GetMapping("/detailPage")
 	public String prodDetail(Model model, @ModelAttribute("params") Review params) {
 		Integer pid = 10;
 		params.setProduct_id(pid);
 		params.setRecordsPerPage(2);
 		try {
-			Integer logined_userid = (Integer)session.getAttribute("id");
+			Integer logined_userid = (Integer) session.getAttribute("id");
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
 			Integer likedNum = postService.likeNum(pid, logined_userid);
 			boolean isLike = postService.isLike(pid, logined_userid);
 			List<Review> reviews = reviewService.prodReviewList(params);
-			
+
 			System.out.println(reviews);
-			
-			Map<String, Object> likeInfo = new HashMap<String,Object>();
+
+			Map<String, Object> likeInfo = new HashMap<String, Object>();
 			likeInfo.put("likeNum", likedNum);
 			likeInfo.put("isLike", isLike);
-			
+
 			model.addAttribute("likeInfo", likeInfo);
 			model.addAttribute("product", product);
 			model.addAttribute("priceInfo", priceInfo);
 			model.addAttribute("reviews", reviews);
-			
-		}	catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("err", e.getMessage());
 		}
 		return "product-detail";
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/report")
-	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid, @RequestParam("reported_userid") Integer reported_userid) {
+	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid,
+			@RequestParam("reported_userid") Integer reported_userid) {
 		String result;
-		//Integer report_userid = (Integer)session.getAttribute("id");
-		Integer report_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
+		// Integer report_userid = (Integer)session.getAttribute("id");
+		Integer report_userid = (Integer) session.getAttribute("id"); // 추후에 바꿔줘야함
 		try {
 			postService.reportPost(reason, pid, reported_userid, report_userid);
 			result = "신고완료";
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			result = "오류~";
 		}
 		return result;
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/like")
 	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
-		Map<String, Object> result = new HashMap<String,Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			//Integer like_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
-			Integer like_userid = 100; //추후에 바꿔줘야함
+			// Integer like_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
+			Integer like_userid = 100; // 추후에 바꿔줘야함
 			result = postService.like(pid, like_userid);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result; 
+		return result;
 	}
-	
-	//결제하기 테스트
+
+	// 결제하기 테스트
 	@PostMapping("/payment")
-	public ModelAndView pay(Product product) { //mav로
+	public ModelAndView pay(@ModelAttribute Product product, @ModelAttribute FreelancerUser freelancerUser) { // mav로
 		ModelAndView mav = new ModelAndView("payment");
 		System.out.println(product.getB_commercial());
 		System.out.println(product.getPaymentPkg());
 		System.out.println(product.getS_commercial());
 		System.out.println(product.getTitle());
 		System.out.println(product.getSeller_id());
-		// 
+		//
 		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
 		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
 		// a
-		return mav; //결제페이지로 이동
+		return mav; // 결제페이지로 이동
 	}
 }
