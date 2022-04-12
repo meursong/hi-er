@@ -12,6 +12,7 @@
                u.job,
                p.title,
                pi.b_price,
+               p.filename1,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
