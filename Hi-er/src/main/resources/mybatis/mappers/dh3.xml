@@ -10,7 +10,6 @@
                u.nickname,
                u.job,
                p.title,
-               p.commission,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
@@ -38,14 +37,13 @@
                u.nickname,
                u.job,
                p.title,
-               p.commission,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-        where p.category = '디자인'
+        where p.category = 'design'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
@@ -59,14 +57,13 @@
                u.nickname,
                u.job,
                p.title,
-               p.commission,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-        where p.category = '영상'
+        where p.category = 'video'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
@@ -80,7 +77,6 @@
                u.nickname,
                u.job,
                p.title,
-               p.commission,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
@@ -112,7 +108,7 @@
 		<![CDATA[
         select count(*)
         from product
-        where category = '디자인';
+        where category = 'design';
         ]]>
 	</select>
 
@@ -120,7 +116,7 @@
 		<![CDATA[
         select count(*)
         from product
-        where category = '영상';
+        where category = 'video';
         ]]>
 	</select>
 
