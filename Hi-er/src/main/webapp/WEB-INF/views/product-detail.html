@@ -246,7 +246,7 @@
                 <div class="right">
                   <div class="profile-name">
                     <span class="user-status">
-                      <a href="/freelancerInfo" class="seller-link"
+                      <a  th:href="@{/freelancerInfo/{id}(id=${product.seller_id})}" class="seller-link"
                         >[[${sellerInfo.nickname}]]</a
                       >
                     </span>
