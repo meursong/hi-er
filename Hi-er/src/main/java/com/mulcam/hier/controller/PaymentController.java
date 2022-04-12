@@ -24,6 +24,7 @@ public class PaymentController {
 		int orderNumber = 0;
 		try {
 			orderNumber = orderService.makeOrder(order) ;
+			System.out.println(orderNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
