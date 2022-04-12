@@ -316,16 +316,50 @@ public class PostController {
 	@PostMapping("/payment")
 	public ModelAndView pay(@ModelAttribute Product product, @ModelAttribute FreelancerUser freelancerUser) { // mav로
 		ModelAndView mav = new ModelAndView("payment");
-		//mav.addObject(null, mav);
-		System.out.println(product.getB_commercial());
 		System.out.println(product.getPaymentPkg());
-		System.out.println(product.getS_commercial());
-		System.out.println(product.getTitle());
-		System.out.println(product.getSeller_id());
+		System.out.println(product.getB_price());
 		//
 		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
 		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
 		// a
+		String pkg = product.getPaymentPkg();
+		int price = product.getB_price();
+		System.out.println(pkg);
+		System.out.println(price);
+		if(pkg.equals("Basic")) {
+			mav.addObject("price", product.getB_price());
+			mav.addObject("additional_price", product.getB_additional_price());
+			mav.addObject("commercial", product.getB_commercial());
+			mav.addObject("default_delivery", product.getB_default_delivery());
+			mav.addObject("draft", product.getB_draft());
+			mav.addObject("minimum_delivery", product.getB_minimum_delivery());
+			mav.addObject("original_image", product.getB_original_image());
+			mav.addObject("pkg_description", product.getB_pkg_description());
+			mav.addObject("revision", product.getB_revision());
+			mav.addObject("sns_Kit", product.getB_sns_Kit());
+		} else if(pkg.equals("Standard")) {
+			mav.addObject("price", product.getS_price());
+			mav.addObject("additional_price", product.getS_additional_price());
+			mav.addObject("commercial", product.getS_commercial());
+			mav.addObject("default_delivery", product.getS_default_delivery());
+			mav.addObject("draft", product.getS_draft());
+			mav.addObject("minimum_delivery", product.getS_minimum_delivery());
+			mav.addObject("original_image", product.getS_original_image());
+			mav.addObject("pkg_description", product.getS_pkg_description());
+			mav.addObject("revision", product.getS_revision());
+			mav.addObject("sns_Kit", product.getS_sns_Kit());
+		} else if(pkg.equals("Premium")) {
+			mav.addObject("price", product.getP_price());
+			mav.addObject("additional_price", product.getP_additional_price());
+			mav.addObject("commercial", product.getP_commercial());
+			mav.addObject("default_delivery", product.getP_default_delivery());
+			mav.addObject("draft", product.getP_draft());
+			mav.addObject("minimum_delivery", product.getP_minimum_delivery());
+			mav.addObject("original_image", product.getP_original_image());
+			mav.addObject("pkg_description", product.getP_pkg_description());
+			mav.addObject("revision", product.getP_revision());
+			mav.addObject("sns_Kit", product.getP_sns_Kit());
+		}
 		return mav; // 결제페이지로 이동
 	}
 }
