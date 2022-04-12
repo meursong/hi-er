@@ -246,7 +246,7 @@
                 <div class="right">
                   <div class="profile-name">
                     <span class="user-status">
-                      <a href="/freelancerInfo" class="seller-link"
+                      <a  th:href="@{/freelancerInfo/{id}(id=${product.seller_id})}" class="seller-link"
                         >[[${sellerInfo.nickname}]]</a
                       >
                     </span>
@@ -295,7 +295,8 @@
                 	<input type="hidden" name="title" th:value="${product.title}">
                 	<input type="hidden" name="category" th:value="${product.category}">
                 	<input type="hidden" name="seller_id" th:value="${product.seller_id}">
-                	<input type="hidden" name="seller_nickname" th:value="${sellerInfo.nickname}">
+                	<input type="hidden" name="nickname" th:value="${sellerInfo.nickname}">
+                	<input type="hidden" name="name" th:value="${sellerInfo.name}">
                 	<input type="hidden" name="b_price" th:value="${priceInfo.b_price}">
                 	<input type="hidden" name="s_price" th:value="${priceInfo.s_price}">
                 	<input type="hidden" name="p_price" th:value="${priceInfo.p_price}">

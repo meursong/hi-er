@@ -136,7 +136,6 @@
 
 			success : function(data) {
 				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]");
-				console.log([[${sort}]]);
 			},
 
 		}).done(function(fragment) {
