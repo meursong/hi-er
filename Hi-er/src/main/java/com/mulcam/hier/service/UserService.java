@@ -18,6 +18,7 @@ public interface UserService  {
 
 	Boolean nicknameCheck(String usernickname) throws Exception;
 	void signup(User user) throws Exception;
+	FreelancerUser sellerInfo(int seller_id) throws Exception;
  
 //	String signup(String name, String email, String password, String job) throws Exception;
 

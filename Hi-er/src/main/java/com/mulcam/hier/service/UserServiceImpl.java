@@ -93,4 +93,10 @@ public class UserServiceImpl implements UserService{
 	public void signup(User user) throws Exception {
 		ud.insert_user(user);
 	}
+
+	@Override
+	public FreelancerUser sellerInfo(int seller_id) throws Exception {
+		FreelancerUser seller_info = ud.sellet_seller(seller_id);
+		return seller_info;
+	}
 }
