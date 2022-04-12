@@ -310,7 +310,7 @@ public class PostController {
 	
 	//결제하기 테스트
 	@PostMapping("/payment")
-	public ModelAndView pay(Product product) { //mav로
+	public ModelAndView pay(@ModelAttribute Product product,@ModelAttribute FreelancerUser freelancerUser) { //mav로
 		ModelAndView mav = new ModelAndView("payment");
 		System.out.println(product.getB_commercial());
 		System.out.println(product.getPaymentPkg());

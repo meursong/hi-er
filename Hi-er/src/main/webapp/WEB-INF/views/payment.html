@@ -203,15 +203,9 @@ input.card {
 								<P class="h6 textmuted" th:if="${product.paymentPkg}=='Basic'" th:text="${product.b_pkg_description}"></p>
 								<P class="h6 textmuted" th:if="${product.paymentPkg}=='Standard'" th:text="${product.s_pkg_description}"></p>
 								<P class="h6 textmuted" th:if="${product.paymentPkg}=='Premium'" th:text="${product.p_pkg_description}"></p>
-								<p>[[${product.seller_id}]]</p>
+								<p>[[${freelancerUser.nickname}]]</p>
 							</div>
 						</div>
-					</div>
-					<div>
-						<h2>IAMPORT 결제 데모</h2>
-						<li>
-							
-						</li>
 					</div>
 					<div class="col-12 mb-4">
 						<div class="row box-right">
