@@ -44,7 +44,7 @@
 		
 		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id
 		from user u join user us join product p join orders o
-		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=p.seller_id and o.buyer_id=#{user_id}
 		, (SELECT @rownum:=0) TMP
 		order by o.createdAt desc limit 5
 	]]>	
@@ -56,17 +56,34 @@
 	<![CDATA[
 		select l.clicked_date, u.nickname,p.title,us.nickname as nickname2
 		from user u join user us join product p join likepost l
-		on p.product_id=l.product_id and u.user_id=#{id} and us.user_id=l.clicked_user
+		on p.product_id=l.product_id and u.user_id=#{user_id} and us.user_id=l.clicked_user
 		order by l.clicked_date desc limit 5
 	]]>	
 	</select>
 	
 	<!--총 거래관리 게시글 갯수 출력-->
-	<select id="countBoard" resultType="int" parameterType="int">
+	<!-- <select id="countBoard" resultType="int" parameterType="int">
 	<![CDATA[
 		select count(*)
 		from user u join user us join product p join orders o
-		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+		on p.product_id=o.product_id and u.user_id=#{user_id} and us.user_id=o.seller_id
+	]]>	
+	</select> -->
+	<!--총 거래관리 게시글 갯수 출력-->
+	<select id="countBoard" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from orders
+		where buyer_id=#{user_id}
+	]]>	
+	</select>
+	
+	<!--총 찜 게시글 갯수 출력-->
+	<select id="countBoard2" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from likepost
+		where click_user=#{user_id}
 	]]>	
 	</select>
 	
@@ -103,13 +120,7 @@
 	]]>	
 	</update>
 	
-	<select id="countBoard2" resultType="int" parameterType="int">
-	<![CDATA[
-		select count(*)
-		from user u join user us join product p join likepost l
-		on p.product_id=l.product_id and u.user_id=1 and us.user_id=l.clicked_user
-	]]>	
-	</select>
+	
 	
 	<!--패스워드 파인드-->
 	<select id="passfind" resultType="boolean" parameterType="user">
@@ -139,13 +150,25 @@
 	</select>
 	
 	<!--거래내역 자세히 눌렀을때 리스트 가져옴-->
+	<!-- <select id="selectBoardList" resultType="Map" parameterType="int">
+	<![CDATA[
+		select *
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2,t.order_id,t.product_id
+				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,p.product_id
+					from user u join user us join product p join orders o 
+		on p.product_id=o.product_id and u.user_id=#{user_id} and us.user_id=o.seller_id order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
+		where ROWNUM between #{startrow} and #{startrow}+4;    
+	]]>	
+	</select> -->
+	
+	<!--거래내역 자세히 눌렀을때 리스트 가져옴수정-->
 	<select id="selectBoardList" resultType="Map" parameterType="int">
 	<![CDATA[
 		select *
 		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2,t.order_id,t.product_id
 				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,p.product_id
 					from user u join user us join product p join orders o 
-		on p.product_id=o.product_id and u.user_id=1 and us.user_id=o.seller_id order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
+		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=o.seller_id and o.buyer_id=#{user_id} order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    
 	]]>	
 	</select>
@@ -158,7 +181,7 @@
 		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.clicked_date,t.nickname,t.title,t.nickname2
 				from((select l.clicked_date, u.nickname,p.title,us.nickname as nickname2
 					from user u join user us join product p join likepost l
-		on p.product_id=l.product_id and u.user_id=1 and us.user_id=l.clicked_user order by l.clicked_date desc)t,(SELECT @rownum:=0) TMP))t
+		on p.product_id=l.product_id and u.user_id=l.click_user and us.user_id=l.clicked_user and l.click_user=#{user_id} order by l.clicked_date desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    
 	]]>	
 	</select>

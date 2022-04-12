@@ -15,9 +15,9 @@
 						<div class="py-4 px-3 border-bottom">
 							<img th:src="@{/images/user/s4.png}"
 								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep
-								Osahan</h5>
-							<p class="mb-0 text-muted">UI / UX Designer</p>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
 						</div>
 						<div class="d-flex">
 							<div class="col-6 border-right p-3">
@@ -35,8 +35,8 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
-									내정보수정 </a>
+								<a class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+									프리내정보수정 </a>
 							</div>
 						</div>
 
@@ -152,9 +152,10 @@
 									</div>
 								</div>
 								<div class="col-6 p-3">
-									<h5 class="font-weight-bold text-dark mb-1 mt-4">JongHoon@gmail.com</h5>
-									<p class="mb-0 text-muted">백종훈 닉네임</p>
-									<p class="mb-0 text-muted">직업</p>
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
+								
 								</div>
 
 

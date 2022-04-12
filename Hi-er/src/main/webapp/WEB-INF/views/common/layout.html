@@ -174,7 +174,7 @@
 						<h6 th:unless="${session.loginedUser}" style="text-align:center;font-weight: 400; font-size: 15px;" >로그인 하세요 </h6>
 						<div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" href="account.html"
+                    <a class="dropdown-item" th:href="@{/mypage}"
                        th:if="${session.loginedUser}">
                         <div class="dropdown-item-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -398,6 +398,7 @@
   <script th:src="@{/vendor/select2/js/select2.min.js}"></script>
   <!-- Custom -->
   <script th:src="@{/js/custom.js}"></script>
+  <script th:src="@{/js/star.js}"></script>
   <script>
     function search() {
         const searchKeyword = $("input[id='searchKeyword']").val();
