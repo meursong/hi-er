@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.Product;
 import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
@@ -45,6 +46,9 @@ public class PostController {
 	
 	@Autowired
 	ReviewService reviewService;
+
+	@Autowired
+	UserService userService;
 	
 	@Autowired
 	ServletContext servletContext;
@@ -124,7 +128,7 @@ public class PostController {
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
 		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
-		//Integer seller_id= (Integer)session.getAttribute("id");
+		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));
@@ -135,8 +139,7 @@ public class PostController {
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능  1:거래중지
-			//product.setSeller_id(seller_id); //추후 수정 필요
-			product.setSeller_id(10); //추후 수정 필요
+			product.setSeller_id(seller_id); //추후 수정 필요
 			postService.writePost(product);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -147,7 +150,7 @@ public class PostController {
 	@PostMapping("/designWrite")
 	public String write(@ModelAttribute Product product) {
 		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
-		Integer seller_id= (Integer)session.getAttribute("id");
+		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
 			product.setFilename2(fileupload(product.getFile2()));
@@ -158,12 +161,12 @@ public class PostController {
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능  1:거래중지
-			product.setSeller_id(seller_id); //추후 세션에서 글쓴사람 아이디 얻어오는 코드로 수정 필요
+			product.setSeller_id(seller_id);
 			postService.writePost(product);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
-		return "/product-detail"; //추후 게시판 페이지로 변경 
+		return "/"; //추후 게시판 페이지로 변경 
 	}
 
 
@@ -219,13 +222,14 @@ public class PostController {
 		params.setRecordsPerPage(2);
 		try {
 			User logined_user = (User)session.getAttribute("loginedUser");
-			//Integer logined_userid = 10; //추후 변경 필요
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
 			Integer likedNum = postService.likeNum(pid, logined_user.getUser_id());
 			boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 			List<Review> reviews = reviewService.prodReviewList(params);
-			
+			System.out.println(product.getSeller_id());
+			FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
+			System.out.println(sellerInfo.getAddress());
 			Map<String, Object> likeInfo = new HashMap<String,Object>();
 			likeInfo.put("likeNum", likedNum);
 			likeInfo.put("isLike", isLike);
@@ -234,6 +238,7 @@ public class PostController {
 			mav.addObject("product", product);
 			mav.addObject("priceInfo", priceInfo);
 			mav.addObject("reviews", reviews);
+			mav.addObject("sellerInfo", sellerInfo);
 		}	catch(Exception e) {
 			e.printStackTrace();
 			mav.addObject("err", e.getMessage());
