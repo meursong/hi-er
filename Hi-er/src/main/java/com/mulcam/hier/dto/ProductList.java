@@ -6,15 +6,25 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductList extends Criteria {
 	
 	//게시글 이미지 필요
+	private int product_id;
 	private String category;
 	private String nickname;
-	private MultipartFile profile_image;
+	private MultipartFile filename1;
 	private String job;
 	private String title;
 	private int commission;
 	private float avg_star_point;
 	private int review_count;
 	private String createdAt;
+
+
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
 
 	public String getCategory() {
 		return category;
@@ -30,14 +40,6 @@ public class ProductList extends Criteria {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public MultipartFile getProfile_image() {
-		return profile_image;
-	}
-
-	public void setProfile_image(MultipartFile profile_image) {
-		this.profile_image = profile_image;
 	}
 
 	public String getJob() {
@@ -86,5 +88,13 @@ public class ProductList extends Criteria {
 
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public MultipartFile getFilename1() {
+		return filename1;
+	}
+
+	public void setFilename1(MultipartFile filename1) {
+		this.filename1 = filename1;
 	}
 }

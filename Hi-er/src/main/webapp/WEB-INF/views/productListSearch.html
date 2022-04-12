@@ -34,7 +34,7 @@
 													<div class="fake-radio-wrapper">
 
 														<form name="filter" method="post">
-															<label class="fake-radio"><input type="radio"
+															<label id= "didi" class="fake-radio"><input type="radio"
 																name="filter" value="product_id" checked><span
 																class="radio-img"></span><span>최신순</span> </label> <label
 																class="fake-radio"><input type="radio"
@@ -52,7 +52,39 @@
 							</div>
 						</div>
 					</div>
-					<div class="right"></div>
+					<div class="sorting d-flex align-items-center">
+						<div class="dropdown-filters d-flex">
+							<div class="dropdown ml-4">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+										 data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">카테고리</button>
+								<div class="dropdown-menu delivery" aria-labelledby="delivery">
+									<div class="options">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="fake-radio-wrapper">
+
+													<form name="category" method="post">
+														<label class="fake-radio"><input type="radio"
+																						 name="category" value="디자인"><span
+																class="radio-img"></span><span>디자인</span> </label> <label
+															class="fake-radio"><input type="radio"
+																					  name="category" value="영상"><span class="radio-img"></span><span>영상</span>
+													</label> <label class="fake-radio"><input type="radio"
+																							  name="category" value="it"><span class="radio-img"></span><span>it</span>
+													</label>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="right">
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -70,7 +102,7 @@
 			<div class="container">
 				<div class="row">
 					<div th:each="productList : ${productList}" class="col-md-3">
-						<a th:href="@{/post/detail/{pid}(pid = ${productList.product_id})}"> <img class="img-fluid"
+						<a href="product-detail.html"> <img class="img-fluid"
 							th:src="@{/images/list/v1.png}" />
 						</a>
 						<div class="inner-slider">
@@ -125,7 +157,7 @@
 </html>
 
 <script>
-	$("input[type=radio]").change(function updateProductList() {
+	$("input[name=filter]").change(function updateProductList() {
 
 		const value = $(this).val()
 		$.ajax({
@@ -135,17 +167,44 @@
 			},
 
 			success : function(data) {
-				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]");
-				console.log([[${sort}]]);
-			},
+				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category=[[${params.category}]]");
+
+				console.log("[[${params.sort}]]")},
 
 		}).done(function(fragment) {
 
 			$('#productList').replaceWith(fragment);
 
+
 		});
-		console.log(value);
+		// console.log(value);
 		/*  $("form[name='filter']").submit(); */
+	})
+
+	$("input[name=category]").change(function updateProductList() {
+		const value = $(this).val();
+		$.ajax({
+			type : "POST",
+			url : "/search/category",
+			data : {
+				"value" : value
+			},
+
+			success : function(data) {
+				history.pushState({}, null, "?sort="+"[[${params.sort}]]"+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+value);
+
+				console.log(data);
+				console.log("[[${params.sort}]]");
+				console.log(value);
+			},
+
+
+		}).done(function(fragment) {
+
+			$('#productList').load(location.href+ " #productList");
+
+
+		});
 	})
 
 	function movePage(uri, queryString) {
@@ -154,8 +213,10 @@
 	}
 	window.onpopstate = function(event) {
 		$("#productList").load(location.href + " #productList");
-		$("#")
+
 	};
+
+
 
 
 </script>
