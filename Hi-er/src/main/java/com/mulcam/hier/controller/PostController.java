@@ -316,6 +316,7 @@ public class PostController {
 	@PostMapping("/payment")
 	public ModelAndView pay(@ModelAttribute Product product, @ModelAttribute FreelancerUser freelancerUser) { // mav로
 		ModelAndView mav = new ModelAndView("payment");
+		//mav.addObject(null, mav);
 		System.out.println(product.getB_commercial());
 		System.out.println(product.getPaymentPkg());
 		System.out.println(product.getS_commercial());
