@@ -142,8 +142,8 @@
 	<select id="selectBoardList" resultType="Map" parameterType="int">
 	<![CDATA[
 		select *
-		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2
-				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2,t.order_id,t.product_id
+				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,p.product_id
 					from user u join user us join product p join orders o 
 		on p.product_id=o.product_id and u.user_id=1 and us.user_id=o.seller_id order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    
