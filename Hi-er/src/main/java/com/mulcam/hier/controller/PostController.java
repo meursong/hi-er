@@ -244,12 +244,11 @@ public class PostController {
 	//테스트용 : mav - model 차이?
 	@GetMapping("/detailPage")
 	public String prodDetail(Model model, @ModelAttribute("params") Review params) {
-		Integer pid = 4;
+		Integer pid = 10;
 		params.setProduct_id(pid);
 		params.setRecordsPerPage(2);
 		try {
-			//Integer logined_userid = (Integer)session.getAttribute("id");
-			Integer logined_userid = 10; //추후 변경 필요
+			Integer logined_userid = (Integer)session.getAttribute("id");
 			Product product = postService.productDetail(pid);
 			Product priceInfo = postService.priceInfo(pid);
 			Integer likedNum = postService.likeNum(pid, logined_userid);
@@ -268,6 +267,7 @@ public class PostController {
 			model.addAttribute("reviews", reviews);
 			
 		}	catch(Exception e) {
+			e.printStackTrace();
 			model.addAttribute("err", e.getMessage());
 		}
 		return "product-detail";
