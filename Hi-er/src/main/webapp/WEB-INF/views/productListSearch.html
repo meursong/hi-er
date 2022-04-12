@@ -185,7 +185,7 @@
 		const value = $(this).val();
 		$.ajax({
 			type : "POST",
-			url : "/search",
+			url : "/search/category",
 			data : {
 				"value" : value
 			},
@@ -193,30 +193,18 @@
 			success : function(data) {
 				history.pushState({}, null, "?sort="+"[[${params.sort}]]"+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+value);
 
-				console.log("[[${params.sort}]]")
+				console.log(data);
+				console.log("[[${params.sort}]]");
 				console.log(value);
 			},
 
 
 		}).done(function(fragment) {
 
-			$('#productList').replaceWith(fragment);
+			$('#productList').load(location.href+ " #productList");
 
 
 		});
-		// console.log(value)
-		// history.pushState({}, null, "?sort="+"[[${params.sort}]]"+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category=1");
-
-		/*// history.pushState({}, null, "all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+category);
-		const queryString = '[[${params.makeQueryString1("디자인")}]]';
-		const queryString1=queryString.replace(/&amp;/gi, "&")
-		// history.pushState({}, null, queryString1);
-		console.log(queryString1);
-		location.href= queryString1;
-		// $("#productList").load(queryString1 + " #productList");
-		// history.pushState({}, null, queryString);
-		// $("#productList").load("all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+category + " #productList");*/
-
 	})
 
 	function movePage(uri, queryString) {

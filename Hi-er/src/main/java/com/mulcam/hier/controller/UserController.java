@@ -8,11 +8,7 @@ import com.mulcam.hier.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Review;
@@ -58,8 +54,8 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/freelancerInfo")
-	public String freelancerInfo(Model model, @ModelAttribute("params") Review params) throws Exception {
+	@GetMapping("/freelancerInfo/{id}")
+	public String freelancerInfo(@PathVariable("id") String id, Model model, @ModelAttribute("params") Review params) throws Exception {
 		// seller_id는 임시
 		int seller_id = 1;
 

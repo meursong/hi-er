@@ -44,7 +44,7 @@ public class Criteria {
         this.recordsPerPage = 12;
         this.pageSize = 5;
         this.sort = "product_id";
-        this.category="영상";
+        this.category="";
     }
 
     public String makeQueryString(int pageNo) {

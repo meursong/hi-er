@@ -70,7 +70,7 @@
 			<div class="container">
 				<div class="row">
 					<div th:each="productList : ${productList}" class="col-md-3">
-						<a th:href="@{/post/detail/{id}(id = ${productList.product_id})}"> <img class="img-fluid"
+						<a th:href="@{/post/detail/{pid}(pid = ${productList.product_id})}"> <img class="img-fluid"
 							th:src="@{/images/list/v1.png}" />
 						</a>
 						<div class="inner-slider">

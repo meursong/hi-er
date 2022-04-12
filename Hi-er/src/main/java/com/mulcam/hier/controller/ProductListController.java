@@ -89,9 +89,18 @@ public class ProductListController {
     }
 
     @PostMapping("/search")
-    public String productLisSortAll(@RequestParam String value, @ModelAttribute("params") ProductList params,
+    public String productLisSort(@RequestParam String value, @ModelAttribute("params") ProductList params,
                                     Model model) throws Exception {
         params.setSort(value);
+        List<ProductList> sortProduct = productListService.selectProductTotal(params);
+        model.addAttribute("productList", sortProduct);
+        return "/productListSearch :: #productList";
+    }
+
+    @PostMapping("/search/category")
+    public String productLisCategory(@RequestParam String value, @ModelAttribute("params") ProductList params,
+                                    Model model) throws Exception {
+        params.setCategory(value);
         List<ProductList> sortProduct = productListService.selectProductTotal(params);
         model.addAttribute("productList", sortProduct);
         return "/productListSearch :: #productList";
