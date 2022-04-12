@@ -15,7 +15,25 @@
 	$(function() {
 		$('#iamportPayment').click(function() {
 			console.log("결제버튼클릭");
-			iamport(); //메서드 호출	
+			
+			var params = {  name : $("#name").val(), 
+							sex : $("#sex").val(), 
+							age : $("#age").val(), 
+							tellPh : $("#tellPh").val()
+          				 }
+           $.ajax({
+               type : "POST",           
+               url : "/order",    
+               data : params,            // Json
+               success : function(res){ 
+                   alert(res.code);
+                   iamport(); //메서드 호출	
+               },
+               error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                   alert("통신 실패.")
+               }
+           });
+			
 		});
 	});
 	function iamport() {
@@ -310,7 +328,9 @@ input.card {
 						</div>
 						<div class="">
 							<form>
-								
+								<input type="hidden" name="title" th:value="${price}">
+								<input type="hidden" name="title" th:value="${additional_price}">
+								<input type="hidden" name="title" th:value="${commercial}">
 								<div style="width: 100%; margin: auto;">
 									<button class="btn btn-primary d-block h8"
 										style="width: 400px; margin: auto; display: block;"
