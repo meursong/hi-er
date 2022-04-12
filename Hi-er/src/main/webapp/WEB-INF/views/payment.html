@@ -193,9 +193,10 @@ input.card {
 					<div class="col-12 px-0 mb-4">
 						<div class="box-right">
 							<div class="d-flex pb-2">
-								<p class="fw-bold h2">
-									[[${product.title}]]/<span class="textmuted">[[${product.paymentPkg}]]</span>
+								<p class="fw-bold h1">
+									[[${product.title}]]
 								</p>
+								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
 							</div>
 							<div class="bg-blue p-2">
 								<P class="h8 textmuted">제품 한줄 소개
@@ -208,7 +209,7 @@ input.card {
 					<div>
 						<h2>IAMPORT 결제 데모</h2>
 						<li>
-							<button id="iamportPayment" type="button">결제테스트</button>
+							
 						</li>
 					</div>
 					<div class="col-12 mb-4">
@@ -331,9 +332,8 @@ input.card {
 								</div>
 								<p class="p-blue h8 fw-bold mb-3">MORE PAYMENT METHODS</p>
 							</div>
-							<div class="btn btn-primary d-block h8">
-								PAY <span class="fas fa-dollar-sign ms-2"></span>1400<span
-									class="ms-3 fas fa-arrow-right"></span>
+							<div style="width:100%; margin:auto;">
+								<button class="btn btn-primary d-block h8" style="width:400px; margin:auto; display:block;" id="iamportPayment" type="button">결제테스트</button>
 							</div>
 						</div>
 					</div>
