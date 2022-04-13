@@ -46,12 +46,11 @@
 				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search"
 				action="/search" method="GET">
 				<div class="input-group">
-					<input type="text" name="keyword"
-						class="form-control bg-white small" placeholder="서비스를 검색하세요"
-						aria-label="Search" aria-describedby="basic-addon2"
-						style="width: 400px;">
+					<input type="text" name="keyword" class="form-control bg-white small"
+						placeholder="서비스를 검색하세요" aria-label="Search"
+						aria-describedby="basic-addon2" style="width:400px;" id="searchKeyword1">
 					<div class="input-group-append">
-						<button class="btn btn-success" type="button">
+						<button class="btn btn-success" type="button" th:onclick="search1()">
 							<i class="fa fa-search fa-sm"></i>
 						</button>
 					</div>
@@ -235,17 +234,25 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav">
-					<div style="color: #b9b9b9; font-weight: 600; padding-top: 12px;">비즈니스</div>
-					<li class="nav-item dropdown"><a class="nav-link "
-						th:href="@{/product/category/1}" id="navbarDropdownPortfolio"
-						aria-haspopup="true" aria-expanded="false"
-						style="font-size: 15px; font-weight: 600;">디자인</a>
+					<div style="color:#b9b9b9; font-weight:600; padding-top:12px;">비즈니스</div>
+					<li class="nav-item dropdown">
+					<a class="nav-link " th:href="@{/product/category/1}"
+						id="navbarDropdownPortfolio"
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">디자인</a>
 						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownPortfolio"></li>
-					<li class="nav-item dropdown"><a class="nav-link "
-						th:href="@{/product/category/2}" id="navbarDropdownPortfolio"
-						aria-haspopup="true" aria-expanded="false"
-						style="font-size: 15px; font-weight: 600;">영상 · 사진 · 음향</a>
+							aria-labelledby="navbarDropdownPortfolio">
+							</li>
+							<li class="nav-item dropdown">
+					<a class="nav-link " th:href="@{/product/category/2}"
+						id="navbarDropdownPortfolio"
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">영상 · 사진 · 음향</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownPortfolio">
+							</li>
+	<li class="nav-item dropdown">
+					<a class="nav-link " th:href="@{/product/category/3}"
+						id="navbarDropdownPortfolio"
+						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio"></li>
 					<li class="nav-item dropdown"><a class="nav-link "
@@ -270,89 +277,112 @@
 
 	<section layout:fragment="contents"></section>
 
-	<footer class="bg-white">
-		<div class="container">
-			<div class="d-flex justify-content-between">
-				<div style="width: 540px">
-					<h2 style="padding-top: 15px; font-weight: 800">
-						고객센터 1588-1234
-						<p
-							style="color: #c5c7c9; padding-top: 10px; font-size: 12px; font-weight: 500;">
-							10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
-						</p>
-						<a href="/문의" class="c-btn c-fill-color-btn">1:1문의하기</a>
-					</h2>
-					<div></div>
-				</div>
-				<div class="footer-list">
-					<h2>Hi-er</h2>
-					<ul class="list">
-						<li><a href="#">Main</a></li>
-						<li><a href="#">introduction</a></li>
-						<li><a href="#">About the developer</a></li>
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>Categories</h2>
-					<ul class="list">
-						<li><a href="#">Design</a></li>
-						<li><a href="#">IT · Programing</a></li>
-						<li><a href="#">Video · Photo · Music</a></li>
-					</ul>
-				</div>
-				<div class="footer-list">
-					<h2>Support</h2>
-					<ul class="list">
-						<li><a href="#">Help &amp; Support</a></li>
-						<li><a href="#">Trust &amp; Safety</a></li>
-						<li><a href="#">Selling on Hi-er </a></li>
-						<li><a href="#">Buying on Hi-er </a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="copyright">
-				<div class="logo">
-					<a href="index.html"><img th:src="@{/images/logo.png}" /> </a>
-				</div>
-				<p>© Copyright 2022 Hi-er. All Rights Reserved</p>
-				<ul class="social">
-					<li><a href="#"><i class="fa fa-facebook"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-linkedin"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-pinterest-p"
-							aria-hidden="true"></i></a></li>
-					<li><a href="#"><i class="fa fa-instagram"
-							aria-hidden="true"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</footer>
-</body>
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- Contact form JavaScript -->
-<!-- Slick -->
-<script th:src="@{/vendor/slick-master/slick/slick.js}"
-	type="text/javascript" charset="utf-8"></script>
-<!-- lightgallery -->
-<script
-	th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"></script>
-<!-- select2 Js -->
-<script th:src="@{/vendor/select2/js/select2.min.js}"></script>
-<!-- Custom -->
-<script th:src="@{/js/custom.js}"></script>
-<script>
-	function search() {
-		const searchKeyword = $("input[id='searchKeyword']").val();
-		location.href = 'product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword='
-				+ searchKeyword;
-	}
-
-	window.onpopstate = function(event) {
-		$('#productList').load(location.href + ' #productList');
-	};
-</script>
+    <footer class="bg-white">
+      <div class="container">
+        <div class="d-flex justify-content-between">
+          <div style="width: 540px">
+            <h2 style="padding-top: 15px; font-weight: 800">
+              고객센터 1588-1234
+              <p
+                style="
+                  color: #c5c7c9;
+                  padding-top: 10px;
+                  font-size: 12px;
+                  font-weight: 500;
+                "
+              >
+                10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
+              </p>
+              <a href="/문의" class="c-btn c-fill-color-btn">1:1문의하기</a>
+            </h2>
+            <div></div>
+          </div>
+          <div class="footer-list">
+            <h2>Hi-er</h2>
+            <ul class="list">
+              <li><a href="#">Main</a></li>
+              <li><a href="#">introduction</a></li>
+              <li><a href="#">About the developer</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Categories</h2>
+            <ul class="list">
+              <li><a href="#">Design</a></li>
+              <li><a href="#">IT · Programing</a></li>
+              <li><a href="#">Video · Photo · Music</a></li>
+            </ul>
+          </div>
+          <div class="footer-list">
+            <h2>Support</h2>
+            <ul class="list">
+              <li><a href="#">Help &amp; Support</a></li>
+              <li><a href="#">Trust &amp; Safety</a></li>
+              <li><a href="#">Selling on Hi-er </a></li>
+              <li><a href="#">Buying on Hi-er </a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <div class="logo">
+            <a href="index.html"><img th:src="@{/images/logo.png}" /> </a>
+          </div>
+          <p>© Copyright 2022 Hi-er. All Rights Reserved</p>
+          <ul class="social">
+            <li>
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fa fa-pinterest-p" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- Contact form JavaScript -->
+  <!-- Slick -->
+  <script
+    th:src="@{/vendor/slick-master/slick/slick.js}"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- lightgallery -->
+  <script
+    th:src="@{/vendor/lightgallery-master/dist/js/lightgallery-all.min.js}"
+  ></script>
+  <!-- select2 Js -->
+  <script th:src="@{/vendor/select2/js/select2.min.js}"></script>
+  <!-- Custom -->
+  <script th:src="@{/js/custom.js}"></script>
+  <script>
+    function search1() {
+        const searchKeyword = $("input[id='searchKeyword1']").val();
+        if(searchKeyword=="") {
+            swal("알림","검색어를 입력해주세요.");
+        }
+        else {
+            location.href =
+                '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+                searchKeyword + "&category=";
+        }
+    }
+    window.onpopstate = function (event) {
+      $('#productList').load(location.href + ' #productList');
+    };
+  </script>
 </html>
