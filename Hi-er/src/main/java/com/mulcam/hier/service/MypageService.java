@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.User;
 
 public interface MypageService {
 //	List<Orders> history(int id) throws Exception;
@@ -13,6 +14,7 @@ public interface MypageService {
 	List<Map<String,Object>> getBoardList(int page, Paging pageInfo) throws Exception;
 	List<Map<String,Object>> getBoardList2(int page, Paging pageInfo) throws Exception;
 	boolean nickOverlap(String nick) throws Exception;
+	User selectNickname(int user_id) throws Exception;
 	void nickupdate(String nick) throws Exception;
 	boolean passfindupdate(String pass,String pass2) throws Exception;
 	boolean introupdate(String intro) throws Exception;

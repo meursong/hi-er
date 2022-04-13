@@ -17,6 +17,7 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired
 	MypageDAO mypageDAO;
 	
+	
 //	@Override
 //	public List<Orders> history(int id) throws Exception {
 //		System.out.println("서비스임플 안이다다다다다다");
@@ -186,4 +187,13 @@ public class MypageServiceImpl implements MypageService {
 				return false;
 			}
 	}
+
+	@Override
+	public User selectNickname(int user_id) throws Exception {
+		User user = mypageDAO.selectNickname(user_id);
+		
+		return user;
+	}
+	
+	
 }

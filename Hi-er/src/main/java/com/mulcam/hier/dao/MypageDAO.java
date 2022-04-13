@@ -26,4 +26,6 @@ public interface MypageDAO {
 	public boolean passupdate(User user)throws Exception;
 	public boolean introupdate(FreelancerUser freelancerUser);
 	public boolean locationupdate(FreelancerUser freelancerUser);
+	public User selectNickname(int user_id) throws Exception;
+
 }

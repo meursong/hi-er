@@ -3,6 +3,8 @@ package com.mulcam.hier.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.MypageService;
 
 @Controller
@@ -20,7 +23,9 @@ public class MypageController {
 	
 	@Autowired
 	MypageService mypageService;
-	
+	@Autowired
+	HttpSession session;
+
 	@GetMapping("mypage")
 	public ModelAndView mypage() {
 		ModelAndView mav = new ModelAndView("account");
@@ -29,8 +34,11 @@ public class MypageController {
 			System.out.println("트라이 안이다다다다다다");
 			List<Map<String,Object>> ord=mypageService.history2(1);
 			List<Map<String,Object>> likepost=mypageService.history3(1);
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User nickname = mypageService.selectNickname(user_id);
 			System.out.println(ord);
 			System.out.println(likepost);
+			mav.addObject("nickname",nickname);
 			mav.addObject("orders",ord);
 			mav.addObject("likeposts",likepost);
 			mav.addObject("page","0");

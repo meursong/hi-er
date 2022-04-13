@@ -245,55 +245,24 @@
 				<ul class="navbar-nav">
 					<div style="color:#b9b9b9; font-weight:600; padding-top:12px;">비즈니스</div>
 					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#"
+					<a class="nav-link" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">디자인</a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownPortfolio">
-							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">디자인</div>
-							
-							<a class="dropdown-item" th:href="@{/cate/1}">로고 브랜딩</a> 
-							<a class="dropdown-item" th:href="@{/cate/2}">상세 이벤트 페이지</a> 
-							<a class="dropdown-item" th:href="@{/cate/3}">명함 인쇄 홍보물</a>
-							<a class="dropdown-item" th:href="@{/cate/4}">웹 모바일 디자인</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">일러스트 캐리커처</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">웹툰 캐릭터 이모티콘</a>
-						</div></li>
+						</li>
 							<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownPortfolio" data-toggle="dropdown"
+					<a class="nav-link " href="#"
+						id="navbarDropdownPortfolio"
 						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">영상 · 사진 · 음향</a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio">
-							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">영상 · 사진 · 음향</div>
-							
-							<a class="dropdown-item" th:href="@{/cate/1}">영상촬영 편집</a> 
-							<a class="dropdown-item" th:href="@{/cate/2}">인터뷰 영상 </a> 
-							<a class="dropdown-item" th:href="@{/cate/3}">교육 영상</a>
-							<a class="dropdown-item" th:href="@{/cate/4}">유튜브 제작</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">애니메이션</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">영상 자막</a>
-						<a class="dropdown-item" th:href="@{/cate/3}">사진촬영 </a>
-							<a class="dropdown-item" th:href="@{/cate/4}">사진 영상 보정</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">성우</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">음악 사운드</a>
-						
-						</div></li>
+							</li>
 	<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownPortfolio" data-toggle="dropdown"
+					<a class="nav-link " href="#"
+						id="navbarDropdownPortfolio"
 						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio">
-							<div style="padding-left:20px; color:#b9b9b9; font-weight:600; font-size:13px;">IT · 프로그래밍</div>
-							
-							<a class="dropdown-item" th:href="@{/cate/1}">웹</a> 
-							<a class="dropdown-item" th:href="@{/cate/2}">모바일 앱</a> 
-							<a class="dropdown-item" th:href="@{/cate/3}">보안</a>
-							<a class="dropdown-item" th:href="@{/cate/4}">챗봇</a> 
-							<a class="dropdown-item" th:href="@{/cate/5}">블록체인</a> 
-							<a class="dropdown-item" th:href="@{/cate/6}">쇼핑몰·커머스</a>
-						</div></li>
+							</li>
 				</ul>
 			</div>
 			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">
@@ -301,7 +270,7 @@
 				<a class="nav-link"></a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto" th:unless="${session.loginedUser == null}">
-				<li class="nav-item" th:if="${session.loginedUser.type==0}">
+				<li class="nav-item" th:if="${session.loginedUser.type!=2	}">
 				<a class="nav-link" th:href="@{freelancerForm}" > <i class="fa fa-fw fa-trophy"></i>
 						<span>프리랜서 전환</span></a></li>
 			</ul>
