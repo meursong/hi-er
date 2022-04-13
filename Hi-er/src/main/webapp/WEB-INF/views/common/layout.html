@@ -149,8 +149,8 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						th:if="${session.loginedUser}"
-						th:src="@{/images/user/NoProfile.png}"
+						
+						th:src="@{/images/user/default.png}"
 						style="width: 21px; height: 21px;"></a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
@@ -158,7 +158,7 @@
 						<h6 class="dropdown-header d-flex align-items-center"
 							th:if="${session.loginedUser}">
 							<img class="dropdown-user-img"
-								th:src="@{/images/user/NoProfile.png}" />
+								th:src="@{/images/user/defualt.png}" />
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
 									[[${session.loginedUser.name }]]</div>
@@ -259,8 +259,8 @@
 						id="navbarDropdownPortfolio"
 						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
 						<div class="dropdown-menu"
-							 aria-labelledby="navbarDropdownPortfolio"></div></li>
-
+							aria-labelledby="navbarDropdownPortfolio">
+							</li>
 				</ul>
 			</div>
 			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">
@@ -300,17 +300,17 @@
           <div class="footer-list">
             <h2>Hi-er</h2>
             <ul class="list">
-              <li><a href="#">Main</a></li>
+              <li><a th:href="@{/}">Main</a></li>
               <li><a href="#">introduction</a></li>
-              <li><a href="#">About the developer</a></li>
+              <li><a th:href="@{about}">About the developer</a></li>
             </ul>
           </div>
           <div class="footer-list">
             <h2>Categories</h2>
             <ul class="list">
-              <li><a href="#">Design</a></li>
-              <li><a href="#">IT · Programing</a></li>
-              <li><a href="#">Video · Photo · Music</a></li>
+              <li><a th:href="@{/product/category/1}">Design</a></li>
+              <li><a th:href="@{/product/category/2}">IT · Programing</a></li>
+              <li><a th:href="@{/product/category/3}">Video · Photo · Music</a></li>
             </ul>
           </div>
           <div class="footer-list">
@@ -325,7 +325,7 @@
         </div>
         <div class="copyright">
           <div class="logo">
-            <a href="index.html"><img th:src="@{/images/logo.png}" /> </a>
+            <a th:href="@{/}"><img th:src="@{/images/logo.png}" /> </a>
           </div>
           <p>© Copyright 2022 Hi-er. All Rights Reserved</p>
           <ul class="social">
@@ -381,5 +381,6 @@
                 searchKeyword + "&category=";
         }
     }
-</script>
+   
+  </script>
 </html>

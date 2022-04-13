@@ -1,0 +1,118 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+      <!--    header -->
+      <section layout:fragment="contents">
+
+
+      <!-- Inner Header -->
+      <section class="py-5 bg-dark inner-header">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12 text-center">
+                  <h1 class="mt-0 mb-3 text-white">About Us</h1>
+                  <div class="breadcrumbs">
+                     <p class="mb-0 text-white"><a class="text-white" th:href="@{/}">Home</a>  /  <span class="text-success">About Us</span></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- End Inner Header -->
+      <!-- About -->
+      <section class="py-5 bg-white">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="pl-4 col-lg-5 col-md-5 pr-4">
+                  <img class="rounded img-fluid" src="images/logo.png" alt="Card image cap">
+               </div>
+               <div class="col-lg-6 col-md-6 pl-5 pr-5">
+                  <h2 class="mb-5" style="font-size:28px; text-align: center; margin-bottom: 2rem!important;">프리랜서 전문가에게 수익을
+								<br>의뢰인에게 비즈니스 성공을
+                  </h2>
+                  <h5 class="mt-2" style="text-align: center;">Our Vision</h5>
+                  <p style="font-size: 14px; text-align: center;">왜 일하는가? 이것은 우리 일의 시작점이며 목적지입니다.<br>
+사람들이 행복하게 일하는 세상을 만들자 이것이 우리 업의 본질입니다.<br>
+당장 눈에 보이는 이익과 그를 취하려 하는 액션은 찰나의 과정에 지나지 않습니다.<br>
+결과를 통해 세상에 긍정적인 영향을 미치는 것, 그것이 Hi-er가 가야 할 방향입니다.</p>
+                  <h5 class="mt-4" style="text-align: center;;">Our Goal</h5>
+                  <p style="font-size: 14px; text-align: center;">혼자 개발하던 Hi-er에서, <br>많은 사람들이 내 일을 찾고 있습니다. <br>행복하게 일하는 내일을 <br>만들어가기 위해 나아가겠습니다.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- End About -->
+      <!-- What We Provide -->
+     
+      <!-- End What We Provide -->
+      <!-- Trusted Agents -->
+      <section class="py-5 bg-white">
+         <div class="section-title text-center mb-5">
+            <h2>About the developer</h2>
+            
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-4 col-md-4">
+                  <div class="agents-card text-center">
+                     <img class="img-fluid mb-4" src="images/user/s1.png" alt="">
+                     <p class="mb-4">개발자 소개글</p>
+                     <h6 class="mb-0 text-success">- 신동혁</h6>
+                     <small>팀장</small>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-4">
+                  <div class="agents-card text-center">
+                     <img class="img-fluid mb-4" src="images/user/s2.png" alt="">
+                     <p class="mb-4">개발자 소개글</p>
+                     <h6 class="mb-0 text-success">- 김기덕</h6>
+                     <small>팀원</small>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-4">
+                  <div class="agents-card text-center">
+                     <img class="img-fluid mb-4" src="images/user/s3.png" alt="">
+                     <p class="mb-4">개발자 소개글</p>
+                     <h6 class="mb-0 text-success">- 백종훈</h6>
+                     <small>팀원</small>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-4">
+                  <div class="agents-card text-center"  style="padding-top:20px;">
+                     <img class="img-fluid mb-4" src="images/user/s2.png" alt="">
+                     <p class="mb-4">개발자 소개글</p>
+                     <h6 class="mb-0 text-success">- 송성욱</h6>
+                     <small>팀원</small>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-md-4" style="padding-top:20px;">
+                  <div class="agents-card text-center">
+                     <img class="img-fluid mb-4" src="images/user/s2.png" alt="">
+                     <p class="mb-4">개발자 소개글</p>
+                     <h6 class="mb-0 text-success">- 유예찬</h6>
+                     <small>팀원</small>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- End Trusted Agents -->
+      
+      </section>
+      <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Contact form JavaScript -->
+      <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+      <script src="js/jqBootstrapValidation.js"></script>
+      <script src="js/contact_me.js"></script>
+      <!-- Slick -->
+      <script src="vendor/slick-master/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+      <!-- lightgallery -->
+      <script src="vendor/lightgallery-master/dist/js/lightgallery-all.min.js"></script>
+      <!-- select2 Js -->
+      <script src="vendor/select2/js/select2.min.js"></script>
+      <!-- Custom -->
+      <script src="js/custom.js"></script>
+</html>
