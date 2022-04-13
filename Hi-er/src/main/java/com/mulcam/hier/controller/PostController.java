@@ -323,7 +323,7 @@ public class PostController {
 			@RequestParam("reported_userid") Integer reported_userid) {
 		String result;
 		// Integer report_userid = (Integer)session.getAttribute("id");
-		Integer report_userid = (Integer) session.getAttribute("id"); // 추후에 바꿔줘야함
+		Integer report_userid = ((User) session.getAttribute("loginedUser")).getUser_id(); // 추후에 바꿔줘야함
 		try {
 			postService.reportPost(reason, pid, reported_userid, report_userid);
 			result = "신고완료";
