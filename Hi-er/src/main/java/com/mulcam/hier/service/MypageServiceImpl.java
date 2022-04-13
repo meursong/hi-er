@@ -1,5 +1,6 @@
 package com.mulcam.hier.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public List<Map<String, Object>> getBoardList(int page, Paging pageInfo,int user_id) throws Exception {
-
+		HashMap<String,Integer>map=new HashMap<>();
 		int listCount = mypageDAO.countBoard(user_id);
 
 		// 내가 가진 게시글 수가 100개라면 반환된 값이 100임 ->listCount=100
@@ -66,13 +67,15 @@ public class MypageServiceImpl implements MypageService {
 		pageInfo.setNowPage(page);
 		// pageInfo.setListCount(listCount);
 		int startrow = (page - 1) * 5 + 1;
-		return mypageDAO.selectBoardList(startrow);
+		map.put("startrow", startrow);
+		map.put("user_id", user_id);
+		return mypageDAO.selectBoardList(map);
 
 	}
 
 	@Override
 	public List<Map<String, Object>> getBoardList2(int page, Paging pageInfo,int user_id) throws Exception {
-
+		HashMap<String,Integer>map=new HashMap<>();
 		int listCount = mypageDAO.countBoard2(user_id);
 		// 지금은 1로 해놨음 나중에 겟세션아이디로 가능하면 바꿔야함 int
 		// listCount=mypageDAO.countBoard(getSessionid??)
@@ -97,7 +100,9 @@ public class MypageServiceImpl implements MypageService {
 		pageInfo.setNowPage(page);
 		// pageInfo.setListCount(listCount);
 		int startrow = (page - 1) * 5 + 1;
-		return mypageDAO.selectBoardList2(startrow);
+		map.put("startrow", startrow);
+		map.put("user_id", user_id);
+		return mypageDAO.selectBoardList2(map);
 
 	}
 
@@ -183,5 +188,18 @@ public class MypageServiceImpl implements MypageService {
 		// 상품아이디 생성시간 판매자아이디
 		return true;// 정상적으로 하면 트루 반환함
 	}
+
+	@Override
+	public boolean heartremove(int like_id) {
+		try {
+			mypageDAO.deletelike(like_id);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 
 }

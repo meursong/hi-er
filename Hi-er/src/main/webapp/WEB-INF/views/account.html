@@ -122,7 +122,7 @@
 							<h6 class="m-0 col-6">거래내역</h6>
 
 							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/1/1}'|">자세히보기</button>
+								th:onclick="|location.href='@{/mypage/1/1}'|">모든정보보기</button>
 
 						</div>
 
@@ -132,9 +132,12 @@
 									<thead>
 										<tr>
 											<th>시간</th>
-											<th>구매유저닉네임</th>
+											
 											<th>상품제목</th>
-											<th>판매자닉네임</th>
+											<th>판매자</th>
+											<th>구매수량</th>
+											<th>총가격</th>
+											<th>상태</th>
 											<th>리뷰달기</th>
 										</tr>
 
@@ -143,7 +146,7 @@
 										<tr th:each="order: ${orders}">
 											
 											<td th:text="${order.createdAt}"></td>
-											<td th:text="${order.nickname}"></td>
+											
 											<td th:text="${order.title}"></td>
 											<td th:text="${order.nickname2}"></td>
 											<td>
@@ -221,7 +224,7 @@
 							<h6 class="m-0 col-6">찜한 게시물</h6>
 
 							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/2/1}'|">자세히보기</button>
+								th:onclick="|location.href='@{/mypage/2/1}'|">모든정보보기</button>
 
 						</div>
 						<div class="box-body p-3">
@@ -230,17 +233,21 @@
 									<thead>
 										<tr>
 											<th>시간</th>
-											<th>찜누른닉네임</th>
-											<th>찜당한포스트제목</th>
-											<th>판매자닉네임</th>
+											<!-- <th>찜누른닉네임</th> -->
+											<th>제목</th>
+											<th>판매자</th>
 										</tr>
 									</thead>
 									<tbody>
+									
 										<tr th:each="likepost: ${likeposts}">
-											<td th:text="${likepost.clicked_date}"></td>
+											<td th:text="${likepost.createdAt}"></td>
+											<!-- <td th:text="${likepost.nickname}"></td> -->
+											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
 											<td th:text="${likepost.nickname}"></td>
-											<td th:text="${likepost.title}"></td>
-											<td th:text="${likepost.nickname2}"></td>
+											<td><a class="navbar-brand"><img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt=""></a></td>
+											
+											
 										</tr>
 									</tbody>
 								</table>
@@ -251,7 +258,7 @@
 						<div class="d-flex box-title border-bottom p-3">
 							<h6 class="m-0 col-6">쪽지</h6>
 							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/3}'|">자세히보기</button>
+								th:onclick="|location.href='@{/mypage/3}'|">모든정보보기</button>
 						</div>
 						<div class="box-body p-3">
 							<div>
@@ -365,9 +372,65 @@
 
 						}
 					},
-				/* complete: function() {
-					alert("a");
-				} */
+
+				});
+
+			});
+			
+			
+			$(".heart").click(function(e) {
+				let id = e.currentTarget.id;
+		
+			
+
+				console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/heartremove",
+					data : {
+						"like_id" : id,
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('좋아요 삭제 성공');
+							location.reload();
+
+						} else {
+							alert('좋아요 삭제 실패');
+
+						}
+					},
+
+				});
+
+			});
+			
+			$(".titttle").click(function(e) {
+				let id = e.currentTarget.id;//포스트 아이디
+		
+			
+
+				console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/clicktitle",
+					data : {
+						"id" : id,
+					},
+					success : function(data, textStatus) {
+						
+							location.reload();
+							location.replace(data)
+					},
+
 				});
 
 			});

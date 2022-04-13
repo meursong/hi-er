@@ -1,5 +1,6 @@
 package com.mulcam.hier.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,8 @@ public interface MypageDAO {
 	public List<Map<String,Object>> queryLikepost(int id)throws Exception;
 	public int countBoard(int id)throws Exception;
 	public int countBoard2(int id)throws Exception;
-	public List<Map<String,Object>> selectBoardList(int startrow) throws Exception;
-	public List<Map<String,Object>> selectBoardList2(int startrow) throws Exception;
+	public List<Map<String,Object>> selectBoardList(HashMap<String, Integer> map) throws Exception;
+	public List<Map<String,Object>> selectBoardList2(HashMap<String, Integer> map) throws Exception;
 	public int queryNick(String nick)throws Exception;
 	public void nickupdate(User user)throws Exception;
 	public boolean passfind(User user)throws Exception;
@@ -30,4 +31,5 @@ public interface MypageDAO {
 	public boolean locationupdate(FreelancerUser freelancerUser);
 	public Orders findorder(int order_id);
 	public void insertreview(Review review);
+	public void deletelike(int like_id);
 }

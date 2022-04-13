@@ -100,11 +100,16 @@ public class MypageController {
 	@PostMapping("nickupdate")
 	public String nickupdate(@RequestParam(value = "nick") String nick) {
 		System.out.println("여기 닉네임업데이트");
-		int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+		
+		User  user = (User) session.getAttribute("loginedUser");
 		// boolean nickupdate=false;
+		
 		try {
 			System.out.println("트라이 안");
-			mypageService.nickupdate(nick,user_id);
+			mypageService.nickupdate(nick,user.getUser_id());
+			user.setNickname(nick);
+			session.invalidate();
+			session.setAttribute("loginedUser", user);
 			return String.valueOf(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,10 +123,11 @@ public class MypageController {
 	@PostMapping("passupdate")
 	public String passupdate(@RequestParam(value = "pass") String pass, @RequestParam(value = "pass2") String pass2) {
 		System.out.println("여기 패스워드 업데이트");
-		int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+		User  user = (User) session.getAttribute("loginedUser");
+		
 		try {
 
-			if (true == mypageService.passfindupdate(pass, pass2,user_id)) {
+			if (true == mypageService.passfindupdate(pass, pass2,user.getUser_id())) {
 				return String.valueOf(true);
 			} else
 				return String.valueOf(false);
@@ -137,9 +143,14 @@ public class MypageController {
 	@PostMapping("intromody")
 	public String intromody(@RequestParam(value = "intro") String intro) {
 		System.out.println("여기가 인트로 안임");
-		int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+		User  user = (User) session.getAttribute("loginedUser");
+		
 		try {
-			if (true == mypageService.introupdate(intro,user_id)) {
+			if (true == mypageService.introupdate(intro,user.getUser_id())) {
+				/*
+				 * user.setNickname(nick); session.invalidate();
+				 * session.setAttribute("loginedUser", user);
+				 */
 				return String.valueOf(true);
 			} else
 				return String.valueOf(false);
@@ -207,5 +218,27 @@ public class MypageController {
 		return null;
 
 	}
+	
+	// 하트 리무브
+		@ResponseBody
+		@PostMapping("heartremove")
+		public String heartremove(@RequestParam(value = "like_id") int like_id) {
+			boolean like = false;
+			
+			try {
+				like = mypageService.heartremove(like_id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return String.valueOf(like);
+		}
+		
+		@ResponseBody
+		@PostMapping("clicktitle")
+		public String clicktitle(@RequestParam(value = "id") String id) {
+			String value="http://localhost:8090/post/detail/"+id;
+			return String.valueOf(value);
+		}
+		
 
 }

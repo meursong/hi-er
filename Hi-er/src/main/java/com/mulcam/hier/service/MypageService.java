@@ -16,4 +16,6 @@ public interface MypageService {
 	boolean introupdate(String intro,int user_id) throws Exception;
 	boolean addressupdate(String address, String address2,int user_id);
 	boolean reviewWrite(String content, int star_point,int order_id,int user_id);
+	
+	boolean heartremove(int like_id);
 }
