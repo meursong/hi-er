@@ -2,8 +2,7 @@ package com.mulcam.hier.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.mulcam.hier.dto.FreelancerForm;
-import com.mulcam.hier.dto.FreelancerUser;
+import com.mulcam.hier.dto.*;
 import com.mulcam.hier.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mulcam.hier.dto.Review;
-import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.UserService;
 
 import java.util.List;
@@ -48,6 +45,7 @@ public class UserController {
 			FreelancerForm freelancer = new FreelancerForm(user_id, form.getAddress(), form.getAddress2(), form.getIntroduction());
 			us.insert_info(freelancer);
 			us.update_type(user_id);
+			((User) session.getAttribute("loginedUser")).setType(2);
 			return "redirect:/";
 		} else {
 			return "login";
@@ -62,7 +60,7 @@ public class UserController {
 		FreelancerUser freelancer = us.freelancerInfo(id);
 		params.setSeller_id(id);
 
-		// params.setRecordsPerPage(4);
+		 params.setRecordsPerPage(4);
 		List<Review> reviews = reviewService.reviewList(params);
 
 		String address[] = freelancer.getAddress().split(" ");
@@ -71,6 +69,18 @@ public class UserController {
 		model.addAttribute("reviews", reviews);
 		
 		return "freelancerInfo";
+	}
+
+	@PostMapping("/freelancerInfo/{id}")
+	public String ReviewLisSort(@RequestParam String value, @ModelAttribute("params") Review params,
+								Model model, @PathVariable int id) throws Exception {
+		params.setSeller_id(id);
+		params.setSort(value);
+		params.setRecordsPerPage(4);
+				List<Review> sortReview = reviewService.reviewList(params);
+				model.addAttribute("reviews", sortReview);
+
+		return "/freelancerInfo :: #rv";
 	}
 	
 	@GetMapping("/login")
