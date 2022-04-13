@@ -879,7 +879,7 @@
                   <div class="header">
                     <h3>
                       <b class="title">베이직</b
-                      ><span class="price">[[${priceInfo.b_price}]]원</span>
+                      ><span class="price" th:text="${#numbers.formatInteger(priceInfo.b_price, 3, 'COMMA')}">원</span>
                     </h3>
                     <p>[[${priceInfo.b_pkg_description}]]</p>
                   </div>
