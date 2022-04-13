@@ -152,7 +152,7 @@ public class PostController {
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
-			product.setSeller_id(seller_id); // 추후 수정 필요
+			product.setSeller_id(seller_id); 
 			postService.writePost(product);
 		} catch (Exception e) {
 			e.printStackTrace();
