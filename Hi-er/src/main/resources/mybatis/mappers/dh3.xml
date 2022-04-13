@@ -3,72 +3,56 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.ProductListDAO">
 
-<!--    <select id="selectProductSearch" resultType="ProductList"
-            parameterType="ProductList">
-		<![CDATA[
-        select p.product_id,
-               u.nickname,
-               u.job,
-               p.title,
-               p.commission,
-               avg(r.star_point)  as avg_star_point,
-               count(r.review_id) as review_count,
-               p.createdAt
-        from product p
-                 left join user u on u.user_id = p.seller_id
-                 left join review r on p.product_id = r.product_id
-        WHERE REPLACE(p.title, ' ', '') like '%${searchKeyword}%'
-           or p.title like '%${searchKeyword}%'
-           or REPLACE(p.content, ' ', '') like '%${searchKeyword}%'
-           or p.content like '%${searchKeyword}%'
-
-        group by p.product_id
-        order by ${sort} desc
-        limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
-        ]]>
-	</select>-->
-
     <select id="selectProductTotal" resultType="ProductList"
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+               p.seller_id,
                u.nickname,
                u.job,
                p.title,
-               p.commission,
+               pi.b_price,
+               p.filename1,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-
-		WHERE REPLACE(p.title, ' ', '') like '%${searchKeyword}%'
-		   or p.title like '%${searchKeyword}%'
-		   or REPLACE(p.content, ' ', '') like '%${searchKeyword}%'
-		   or p.content like '%${searchKeyword}%'
+        		left join price_info pi on p.product_id = pi.product_price_id
+		WHERE (REPLACE(p.title, ' ', '') like '%${keyword}%'
+		   or p.title like '%${keyword}%'
+		   or REPLACE(p.content, ' ', '') like '%${keyword}%'
+		   or p.content like '%${keyword}%')
+		  ]]>
+		<if test="category != ''">
+			and category= '${category}'
+		</if>
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
-        ]]>
 	</select>
 
     <select id="selectProduct1" resultType="ProductList"
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+               p.seller_id,
                p.category,
                u.nickname,
                u.job,
                p.title,
-               p.commission,
+			   pi.b_price,
+               p.filename1,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-        where p.category = '디자인'
+				 left join price_info pi on p.product_id = pi.product_price_id
+
+        where p.category = 'design'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
@@ -79,17 +63,19 @@
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+			   p.seller_id,
                u.nickname,
                u.job,
                p.title,
-               p.commission,
+			   pi.product_price_id,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-        where p.category = '영상'
+				 left join price_info pi on p.product_id = pi.product_price_id
+        where p.category = 'video'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
@@ -100,51 +86,44 @@
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+			   p.seller_id,
                u.nickname,
                u.job,
                p.title,
-               p.commission,
+               pi.product_price_id,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
+				 left join price_info pi on p.product_id = pi.product_price_id
         where p.category = 'it'
         group by p.product_id
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>
 	</select>
-
-<!--    <select id="selectSearchCount" resultType="ProductList"
-            parameterType="ProductList">
-		<![CDATA[
-        select count(*)
-        from product
-        WHERE REPLACE(title, ' ', '') like '%${searchKeyword}%'
-           or title like '%#{searchKeyword}%'
-           or REPLACE(content, ' ', '') like '%${searchKeyword}%'
-           or content like '%${searchKeyword}%';
-        ]]>
-	</select>-->
-
+	
     <select id="selectTotalCount" resultType="Integer">
 		<![CDATA[
         select count(*)
         from product p
-		WHERE REPLACE(p.title, ' ', '') like '%${searchKeyword}%'
-		   or p.title like '%${searchKeyword}%'
-		   or REPLACE(p.content, ' ', '') like '%${searchKeyword}%'
-		   or p.content like '%${searchKeyword}%';
-        ]]>
+		WHERE (REPLACE(p.title, ' ', '') like '%${keyword}%'
+		   or p.title like '%${keyword}%'
+		   or REPLACE(p.content, ' ', '') like '%${keyword}%'
+		   or p.content like '%${keyword}%')
+  ]]>
+		<if test="category != ''">
+			and category= '${category}'
+		</if>
 	</select>
 
     <select id="selectCount1" resultType="Integer">
 		<![CDATA[
         select count(*)
         from product
-        where category = '디자인';
+        where category = 'design';
         ]]>
 	</select>
 
@@ -152,7 +131,7 @@
 		<![CDATA[
         select count(*)
         from product
-        where category = '영상';
+        where category = 'video';
         ]]>
 	</select>
 

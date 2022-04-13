@@ -6,15 +6,34 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductList extends Criteria {
 	
 	//게시글 이미지 필요
+	private int product_id;
+	private int seller_id;
 	private String category;
 	private String nickname;
-	private MultipartFile profile_image;
+	private String filename1;
 	private String job;
 	private String title;
-	private int commission;
+	private int b_price;
 	private float avg_star_point;
 	private int review_count;
 	private String createdAt;
+
+
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
+
+	public int getSeller_id() {
+		return seller_id;
+	}
+
+	public void setSeller_id(int seller_id) {
+		this.seller_id = seller_id;
+	}
 
 	public String getCategory() {
 		return category;
@@ -30,14 +49,6 @@ public class ProductList extends Criteria {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public MultipartFile getProfile_image() {
-		return profile_image;
-	}
-
-	public void setProfile_image(MultipartFile profile_image) {
-		this.profile_image = profile_image;
 	}
 
 	public String getJob() {
@@ -56,12 +67,12 @@ public class ProductList extends Criteria {
 		this.title = title;
 	}
 
-	public int getCommission() {
-		return commission;
+	public int getB_price() {
+		return b_price;
 	}
 
-	public void setCommission(int commission) {
-		this.commission = commission;
+	public void setB_price(int b_price) {
+		this.b_price = b_price;
 	}
 
 	public float getAvg_star_point() {
@@ -87,4 +98,13 @@ public class ProductList extends Criteria {
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public String getFilename1() {
+		return filename1;
+	}
+
+	public void setFilename1(String filename1) {
+		this.filename1 = filename1;
+	}
+
 }

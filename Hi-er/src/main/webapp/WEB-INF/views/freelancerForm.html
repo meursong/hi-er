@@ -34,7 +34,7 @@
 						<div class="box-body p-3">
 
 							<form role="form" action="/freelancerForm" method="post"
-								class="js-validate" novalidate="novalidate">
+								class="js-validate" novalidate="novalidate" name="freelancerInfo">
 								<div class="row">
 									<!-- Input -->
 									<div class="col-sm-6 mb-2">
@@ -188,6 +188,9 @@
                     }
                 }).open();
         }
+		if($('#sample6_address').val() ==null) {
+			focus($('#sample6_address'));
+		}
     </script>
 
 </section>

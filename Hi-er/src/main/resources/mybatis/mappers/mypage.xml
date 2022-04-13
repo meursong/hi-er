@@ -10,20 +10,41 @@
 	
 	</select>
 	
-	<select id="queryOrderss" resultType="Map" parameterType="int">
+	<!-- 주문번호로 주문을 조회함 -->
+	<select id="findorder" resultType="Orders" parameterType="int">
+	<![CDATA[
+		select * from Orders where order_id=#{order_id}
+		limit 1
+	]]>	
+	
+	</select>
+	
+	<!-- 리뷰를 삽입함-->
+	<insert id="insertreview" parameterType="review">
+	<![CDATA[
+		insert into review 
+		(review_wid,product_id,seller_id,content,star_point)
+		values(#{review_wid},#{product_id},#{seller_id},#{content},#{star_point})
+	]]>	
+	
+	</insert>
+	
+	
+	
+<!-- 	<select id="queryOrderss" resultType="Map" parameterType="int">
 	<![CDATA[
 		select * from Orders where buyer_id=#{id}
 		order by createdAt desc limit 5
 	]]>	
-	</select>
+	</select> -->
 	
 	<!--거래관리 5개 출력-->
 	<select id="queryOrdersss" resultType="Map" parameterType="int">
 	<![CDATA[
 		
-		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id
 		from user u join user us join product p join orders o
-		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=p.seller_id and o.buyer_id=#{user_id}
 		, (SELECT @rownum:=0) TMP
 		order by o.createdAt desc limit 5
 	]]>	
@@ -31,21 +52,49 @@
 	</select>
 	
 	<!--찜한게시물 5개 출력-->
-	<select id="queryLikepost" resultType="Map" parameterType="int">
+	<!-- <select id="queryLikepost" resultType="Map" parameterType="int">
 	<![CDATA[
 		select l.clicked_date, u.nickname,p.title,us.nickname as nickname2
 		from user u join user us join product p join likepost l
-		on p.product_id=l.product_id and u.user_id=#{id} and us.user_id=l.clicked_user
+		on p.product_id=l.product_id and u.user_id=#{user_id} and us.user_id=l.clicked_user
 		order by l.clicked_date desc limit 5
 	]]>	
-	</select>
+	</select> -->
 	
+	<select id="queryLikepost" resultType="Map" parameterType="int">
+	<![CDATA[
+		select l.createdAt, p.title,u.nickname,l.like_id,l.product_id
+		from user u join product p join likes l
+		on p.product_id=l.product_id and p.seller_id=u.user_id and l.like_userid=#{user_id}
+		order by l.createdAt desc limit 5
+	]]>	
+	</select>
+	<!-- clicked_user=seller_id and seller_id=user_id and click_user=12
+	l.product_id=p.product_id and p.seller_id=u.user_id and l.click_user=12 -->
+	
+	<!--총 거래관리 게시글 갯수 출력-->
+	<!-- <select id="countBoard" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from user u join user us join product p join orders o
+		on p.product_id=o.product_id and u.user_id=#{user_id} and us.user_id=o.seller_id
+	]]>	
+	</select> -->
 	<!--총 거래관리 게시글 갯수 출력-->
 	<select id="countBoard" resultType="int" parameterType="int">
 	<![CDATA[
 		select count(*)
-		from user u join user us join product p join orders o
-		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
+		from orders
+		where buyer_id=#{user_id}
+	]]>	
+	</select>
+	
+	<!--총 찜 게시글 갯수 출력-->
+	<select id="countBoard2" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from likes
+		where like_userid=#{user_id}
 	]]>	
 	</select>
 	
@@ -89,13 +138,7 @@
 	]]>	
 	</update>
 	
-	<select id="countBoard2" resultType="int" parameterType="int">
-	<![CDATA[
-		select count(*)
-		from user u join user us join product p join likepost l
-		on p.product_id=l.product_id and u.user_id=1 and us.user_id=l.clicked_user
-	]]>	
-	</select>
+	
 	
 	<!--패스워드 파인드-->
 	<select id="passfind" resultType="boolean" parameterType="user">
@@ -113,40 +156,57 @@
 	]]>	
 	</update>
 
-	<select id="selectBoardList111" resultType="Map" parameterType="int">
-	<![CDATA[
-		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2
-		from user u join user us join product p join orders o
-		on p.product_id=o.product_id and u.user_id=#{id} and us.user_id=o.seller_id
-		, (SELECT @rownum:=0) TMP
-		where @ROWNUM between #{startrow} and #{startrow}+4
-		order by o.createdAt desc limit 5
-	]]>	
-	</select>
+
 	
 	<!--거래내역 자세히 눌렀을때 리스트 가져옴-->
-	<select id="selectBoardList" resultType="Map" parameterType="int">
+	<!-- <select id="selectBoardList" resultType="Map" parameterType="int">
 	<![CDATA[
 		select *
-		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2
-				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2,t.order_id,t.product_id
+				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,p.product_id
 					from user u join user us join product p join orders o 
-		on p.product_id=o.product_id and u.user_id=1 and us.user_id=o.seller_id order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
+		on p.product_id=o.product_id and u.user_id=#{user_id} and us.user_id=o.seller_id order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
+		where ROWNUM between #{startrow} and #{startrow}+4;    
+	]]>	
+	</select> -->
+	
+	<!--거래내역 자세히 눌렀을때 리스트 가져옴수정-->
+	<select id="selectBoardList" resultType="Map" parameterType="hashmap">
+	<![CDATA[
+		select *
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2,t.order_id,t.product_id
+				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,p.product_id
+					from user u join user us join product p join orders o 
+		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=o.seller_id and o.buyer_id=#{user_id} order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    
 	]]>	
 	</select>
+	
+	<delete id="deletelike" parameterType="int">
+	<![CDATA[
+		delete from likes where like_id=#{like_id}  
+	]]>	
+	</delete>
+	
 	
 	
 	<!--찜 자세히 눌렀을때 리스트 가져옴-->
 	<select id="selectBoardList2" resultType="Map" parameterType="int">
 	<![CDATA[
 		select *
-		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.clicked_date,t.nickname,t.title,t.nickname2
-				from((select l.clicked_date, u.nickname,p.title,us.nickname as nickname2
-					from user u join user us join product p join likepost l
-		on p.product_id=l.product_id and u.user_id=1 and us.user_id=l.clicked_user order by l.clicked_date desc)t,(SELECT @rownum:=0) TMP))t
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.title,t.nickname,t.like_id,t.product_id
+				from((select l.createdAt, u.nickname,p.title,l.like_id,l.product_id
+					from user u join product p join likes l
+		on p.product_id=l.product_id and p.seller_id=u.user_id and l.like_userid=#{user_id} order by l.createdAt desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    
 	]]>	
 	</select>
-	
+	<!-- select l.clicked_date, p.title,u.nickname,l.like_id
+		from user u join product p join likepost l
+		on p.product_id=l.product_id and p.seller_id=u.user_id and l.click_user=#{user_id}
+		order by l.clicked_date desc limit 5 -->
+		
+		
+		
+		
 </mapper>
