@@ -4,10 +4,9 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layout}">
 <head>
-
 <!-- JQuery -->
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
@@ -30,48 +29,57 @@
 			}); */
 
 		});
+		function iamport() {
+			//가맹점 식별코드
+			IMP.init('imp57611856');
+			IMP.request_pay({
+				pg : 'kakaopay.TC0ONETIME',
+				pay_method : 'card',
+				merchant_uid : 'merchant_' + new Date().getTime(),
+				name : $("#seller_id").val(), //결제창에서 보여질 이름 
+				amount : 3000, //실제 결제되는 가격
+				buyer_email : 'iamport1@siot.do',
+				buyer_name : '구매자이름', 
+				buyer_tel : '010-1234-5678',
+				buyer_addr : '서울 강남구 도곡동',
+				buyer_postcode : '123-456'
+			}, function(rsp) {
+				console.log(rsp);
+				if (rsp.success) {
+					var msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					var formData = new FormData(form);
+					$.ajax({
+						type : "POST",
+						url : "/order",
+						async : false, //동기  
+						data : formData, 
+						processData:false,
+						contentType:false,
+						success : function(res) {
+							alert(res);
+							alert("결제 성공");
+							location.href='/mypage';
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("통신 실패.")
+						}
+					}); 
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+				}
+				alert(msg);
+			});
+		} 
 	});
-	function iamport() {
-		//가맹점 식별코드
-		IMP.init('imp57611856');
-		IMP.request_pay({
-			pg : 'kakaopay.TC0ONETIME',
-			pay_method : 'card',
-			merchant_uid : 'merchant_' + new Date().getTime(),
-			name : '상품1', //결제창에서 보여질 이름
-			amount : 100, //실제 결제되는 가격
-			buyer_email : 'iamport@siot.do',
-			buyer_name : '구매자이름',
-			buyer_tel : '010-1234-5678',
-			buyer_addr : '서울 강남구 도곡동',
-			buyer_postcode : '123-456'
-		}, function(rsp) {
-			console.log(rsp);
-			if (rsp.success) {
-				var msg = '결제가 완료되었습니다.';
-				msg += '고유ID : ' + rsp.imp_uid;
-				msg += '상점 거래ID : ' + rsp.merchant_uid;
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				msg += '카드 승인번호 : ' + rsp.apply_num;
-				$.ajax({
-					type : "POST",
-					url : "/order",
-					data : formData,  //formData를 못찾는데? 여기서 데이터를 json 객체화시켜서 넘겨야하나?
-					success : function(res) {
-						alert(res.code);
-					},
-					error : function(XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-						alert("통신 실패.")
-					}
-				});
-			} else {
-				var msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + rsp.error_msg;
-			}
-			alert(msg);
-		});
-	}
+	
+	
 </script>
+
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -216,6 +224,7 @@ input.card {
 }
 </style>
 </head>
+<body>
 <section layout:fragment="contents">
 	<div class="containerPay">
 		<div class="row m-0">
@@ -226,7 +235,7 @@ input.card {
 							<div class="d-flex pb-2">
 								<p class="fw-bold h1">[[${product.title}]]</p>
 								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
-							</div>
+							</div> 
 							<div class="bg-blue p-2">
 								<p class="h6">제품 한줄 소개</p>
 								<P class="h6 textmuted" th:text="${pkg_description}"></p>
@@ -330,10 +339,10 @@ input.card {
 						<div class="h8 mb-5"></div>
 					</div>
 					<div class="">
-						<form>
-							<input type="hidden" name="title" th:value="${price}"> <input
-								type="hidden" name="title" th:value="${additional_price}">
-							<input type="hidden" name="title" th:value="${commercial}">
+						<form id='form' action='/order' method='post'>
+							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
+							<input type="hidden" id="seller_id" name="seller_id" th:value="${product.seller_id}"> 
+							<!-- <input type="hidden" name="buyer_id" th:value="${session.loginedUser.user_id}">  -->
 							<div style="width: 100%; margin: auto;">
 								<button class="btn btn-primary d-block h8"
 									style="width: 400px; margin: auto; display: block;"
@@ -345,4 +354,7 @@ input.card {
 			</div>
 		</div>
 </section>
+</body>
+
+
 </html>

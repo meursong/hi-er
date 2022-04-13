@@ -15,11 +15,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Integer makeOrder(Orders order) throws Exception {
 		Integer orderId = orderDAO.getMaxOrderId();
-		if(orderId==null) orderId = 1;
-		order.setOrder_id(orderId+1);
+		if(orderId==null) orderId = 0;
+		orderId++;
+		order.setOrder_id(orderId);
 		orderDAO.insertOrder(order);
-		return orderId+1;
-		
+		return orderId;
 	}
 
 }

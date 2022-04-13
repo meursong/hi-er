@@ -2,6 +2,7 @@ package com.mulcam.hier.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody; 
 
@@ -20,9 +21,10 @@ public class PaymentController {
 	
 	@ResponseBody
 	@PostMapping("/order") 
-	public int order(Orders order){ 
+	public int order(@ModelAttribute Orders order){ 
 		int orderNumber = 0;
 		System.out.println("결제컨트롤러에 도착했다~@!#!@#~#~");
+		System.out.println(order.getOrder_price());
 		try {
 			//orderNumber = orderService.makeOrder(order) ;
 			//System.out.println(orderNumber);
