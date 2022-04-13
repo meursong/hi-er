@@ -293,6 +293,9 @@
                 <form action="/post/payment" method="post">
                		 <!-- 결제페이지로 넘길 정보들  -->
                 	<input type="hidden" name="title" th:value="${product.title}">
+                	<input type="hidden" name="product_id" th:value="${product.product_id}">
+                	<input type="hidden" name="filename1" th:value="${product.filename1}">
+                	<input type="hidden" name="filename2" th:value="${product.filename2}">
                 	<input type="hidden" name="category" th:value="${product.category}">
                 	<input type="hidden" name="seller_id" th:value="${product.seller_id}">
                 	<input type="hidden" name="nickname" th:value="${sellerInfo.nickname}">
@@ -319,6 +322,15 @@
                 	<input type="hidden" name="b_revision" th:value="${priceInfo.b_revision}">
                 	<input type="hidden" name="s_revision" th:value="${priceInfo.s_revision}">
                 	<input type="hidden" name="p_revision" th:value="${priceInfo.p_revision}">
+                	<input type="hidden" name="b_default_delivery" th:value="${priceInfo.b_default_delivery}">
+                	<input type="hidden" name="s_default_delivery" th:value="${priceInfo.s_default_delivery}">
+                	<input type="hidden" name="p_default_delivery" th:value="${priceInfo.p_default_delivery}">
+                	<input type="hidden" name="b_minimum_delivery" th:value="${priceInfo.b_minimum_delivery}">
+                	<input type="hidden" name="s_minimum_delivery" th:value="${priceInfo.s_minimum_delivery}">
+                	<input type="hidden" name="p_minimum_delivery" th:value="${priceInfo.p_minimum_delivery}">
+                	<input type="hidden" name="b_additional_price" th:value="${priceInfo.b_additional_price}">
+                	<input type="hidden" name="s_additional_price" th:value="${priceInfo.s_additional_price}">
+                	<input type="hidden" name="p_additional_price" th:value="${priceInfo.p_additional_price}">
                   <table>
                     <colgroup>
                       <col />

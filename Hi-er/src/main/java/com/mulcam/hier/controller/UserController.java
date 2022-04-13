@@ -55,12 +55,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/freelancerInfo/{id}")
-	public String freelancerInfo(@PathVariable("id") String id, Model model, @ModelAttribute("params") Review params) throws Exception {
+	public String freelancerInfo(@PathVariable("id") int id, Model model, @ModelAttribute("params") Review params) throws Exception {
 		// seller_id는 임시
-		int seller_id = 1;
+//		int seller_id = 1;
 
-		FreelancerUser freelancer = us.freelancerInfo(seller_id);
-		params.setSeller_id(seller_id); // 로그인시 세션에서 값 가져와서 넣는다
+		FreelancerUser freelancer = us.freelancerInfo(id);
+		params.setSeller_id(id);
 
 		// params.setRecordsPerPage(4);
 		List<Review> reviews = reviewService.reviewList(params);
