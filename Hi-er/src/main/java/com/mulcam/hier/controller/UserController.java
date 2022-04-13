@@ -73,12 +73,14 @@ public class UserController {
 
 	@PostMapping("/freelancerInfo/{id}")
 	public String ReviewLisSort(@RequestParam String value, @ModelAttribute("params") Review params,
-								 Model model) throws Exception {
-				params.setSort(value);
+								Model model, @PathVariable int id) throws Exception {
+		params.setSeller_id(id);
+		params.setSort(value);
+		params.setRecordsPerPage(4);
 				List<Review> sortReview = reviewService.reviewList(params);
-				model.addAttribute("sortReview", sortReview);
+				model.addAttribute("reviews", sortReview);
 
-		return "/freelancerInfo :: #review";
+		return "/freelancerInfo :: #rv";
 	}
 	
 	@GetMapping("/login")

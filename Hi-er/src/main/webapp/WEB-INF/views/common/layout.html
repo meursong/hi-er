@@ -54,7 +54,7 @@
 						placeholder="서비스를 검색하세요" id="searchKeyword1" aria-label="Search"
 						aria-describedby="basic-addon2" style="width:400px;">
 					<div class="input-group-append">
-						<button class="btn btn-success"  th:onclick="search1()" type="button">
+						<button class="btn btn-success" th:onclick="search1()" type="button">
 							<i class="fa fa-search fa-sm"></i>
 						</button>
 					</div>
@@ -96,7 +96,7 @@
                            <div class="dropdown-notifications-item-content-text">영상 사진 음향</div>
                         </div>
                      </a>
-               </li>
+                  </div></li>
 				<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
 					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
 					href="/mail" >
@@ -377,9 +377,5 @@
                 searchKeyword + "&category=";
         }
     }
-
-    window.onpopstate = function (event) {
-        $('#productList').load(location.href + ' #productList');
-    };
 </script>
 </html>
