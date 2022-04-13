@@ -152,7 +152,7 @@ public class PostController {
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
-			product.setSeller_id(seller_id); // 추후 수정 필요
+			product.setSeller_id(seller_id); 
 			postService.writePost(product);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -339,8 +339,7 @@ public class PostController {
 	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			// Integer like_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
-			Integer like_userid = 100; // 추후에 바꿔줘야함
+			Integer like_userid = ((User) session.getAttribute("loginedUser")).getUser_id();
 			result = postService.like(pid, like_userid);
 		} catch (Exception e) {
 			e.printStackTrace();
