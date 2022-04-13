@@ -149,8 +149,8 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						th:if="${session.loginedUser}"
-						th:src="@{/images/user/NoProfile.png}"
+						
+						th:src="@{/images/user/default.png}"
 						style="width: 21px; height: 21px;"></a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
@@ -158,7 +158,7 @@
 						<h6 class="dropdown-header d-flex align-items-center"
 							th:if="${session.loginedUser}">
 							<img class="dropdown-user-img"
-								th:src="@{/images/user/NoProfile.png}" />
+								th:src="@{/images/user/defualt.png}" />
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
 									[[${session.loginedUser.name }]]</div>
@@ -381,9 +381,6 @@
                 searchKeyword + "&category=";
         }
     }
-    window.onpopstate = function (event) {
-      $('#productList').load(location.href + ' #productList');
-    };
-    
+   
   </script>
 </html>
