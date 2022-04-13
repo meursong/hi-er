@@ -10,6 +10,7 @@ public interface MypageService {
 	List<Map<String,Object>> history3(int user_id)throws Exception;
 	List<Map<String,Object>> getBoardList(int page, Paging pageInfo,int user_id) throws Exception;
 	List<Map<String,Object>> getBoardList2(int page, Paging pageInfo,int user_id) throws Exception;
+	Map<String,Object> count(int user_id) throws Exception;
 	boolean nickOverlap(String nick) throws Exception;
 	void nickupdate(String nick,int user_id) throws Exception;
 	boolean passfindupdate(String pass,String pass2,int user_id) throws Exception;

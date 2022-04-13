@@ -34,8 +34,15 @@ public class MypageController {
 		try {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();// 세션에서 유저의 아이디를 가져옴
 			System.out.println(user_id);
+			Map<String,Object> statistics1=mypageService.count(user_id);
+			
+			//List<Map<String, Object>> count = null;
+			//count.add(count1);
+			//listMapInsert.add(map);
 			List<Map<String, Object>> ord = mypageService.history2(user_id);// 유저의 아이디로 거래내역을 가져옴
 			List<Map<String, Object>> likepost = mypageService.history3(user_id);// 유저의 아이디로 찜한 목록을 가져옴
+			//System.out.println(count+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			mav.addObject("statistics", statistics1);// 가져온 ord를 orders로 프론트로 내려보낼거임
 			mav.addObject("orders", ord);// 가져온 ord를 orders로 프론트로 내려보낼거임
 			mav.addObject("likeposts", likepost);
 			mav.addObject("page", "0");// 페이지0으로 들어갈거임 마이페이지 홈

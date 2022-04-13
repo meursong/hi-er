@@ -132,18 +132,26 @@
 									<thead>
 										<tr>
 											<th>시간</th>
-											<th>구매유저닉네임</th>
 											<th>상품제목</th>
-											<th>판매자닉네임</th>
+											<th>판매자</th>
+											<th>구매수량</th>
+											<th>총가격</th>
+											<th>상태</th>
+											<th>리뷰달기</th>
 										</tr>
 
 									</thead>
-									<tbody>
+									<tbody class="likepost">
 										<tr th:each="order: ${orders}">
 											<td th:text="${order.createdAt}"></td>
-											<td th:text="${order.nickname}"></td>
-											<td th:text="${order.title}"></td>
-											<td th:text="${order.nickname2}"></td>
+										
+											
+											
+											<td class="titttle" th:id="${order.product_id}" th:text="${order.title}" style="cursor:pointer"></td>
+											<td class="selller" th:id="${order.seller_id}" th:text="${order.nickname2}" style="cursor:pointer"></td>
+											<td th:text="${order.order_qty}"></td>
+											<td th:text="${order.order_price}"></td>
+											<td th:text="${order.order_status}"></td>
 											<td>
 												<div class="container">
 													<div class="row" style="margin-top: 0;">
@@ -303,6 +311,58 @@
 					} */
 				});
 				
+			});
+			
+			$(".titttle").click(function(e) {
+				let id = e.currentTarget.id;//포스트 아이디
+		
+			
+
+				console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/clicktitle",
+					data : {
+						"id" : id,
+					},
+					success : function(data, textStatus) {
+						
+							location.reload();
+							location.replace(data)
+					},
+
+				});
+
+			});
+			
+			$(".selller").click(function(e) {
+				let id = e.currentTarget.id;//포스트 아이디
+		
+			
+
+				console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/clickname",
+					data : {
+						"id" : id,
+					},
+					success : function(data, textStatus) {
+						
+							location.reload();
+							location.replace(data)
+					},
+
+				});
+
 			});
 			
 			
