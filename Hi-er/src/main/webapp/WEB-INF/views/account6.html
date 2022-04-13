@@ -15,9 +15,9 @@
 						<div class="py-4 px-3 border-bottom">
 							<img th:src="@{/images/user/s4.png}"
 								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep
+								Osahan</h5>
+							<p class="mb-0 text-muted">UI / UX Designer</p>
 						</div>
 						<div class="d-flex">
 							<div class="col-6 border-right p-3">
@@ -35,10 +35,8 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a th:if=${session.loginedUser.type}==0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+								<a class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
-								<a th:if=${session.loginedUser.type}==1 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
-									프리내정보수정 </a>	
 							</div>
 						</div>
 
@@ -115,14 +113,14 @@
 
 				<!-- ================================================================================================================================== -->
 
-				<main th:if="${page}=='0'"
+
+				<main th:if="${page}=='6'"
 					class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
-							<h6 class="m-0 col-6">거래내역</h6>
+							<h6 class="m-0 col-6">내가 쓴 리뷰</h6>
 
-							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/1/1}'|">모든정보보기</button>
 
 						</div>
 
@@ -132,21 +130,16 @@
 									<thead>
 										<tr>
 											<th>시간</th>
-											
+											<th>별점</th>
 											<th>상품제목</th>
-											<th>판매자</th>
-											<th>구매수량</th>
-											<th>총가격</th>
-											<th>상태</th>
-											<th>리뷰달기</th>
+											<th>판매자닉네임</th>
 										</tr>
 
 									</thead>
 									<tbody>
 										<tr th:each="order: ${orders}">
-											
 											<td th:text="${order.createdAt}"></td>
-											
+											<td th:text="${order.nickname}"></td>
 											<td th:text="${order.title}"></td>
 											<td th:text="${order.nickname2}"></td>
 											<td>
@@ -219,115 +212,48 @@
 
 						</div>
 					</div>
-					<div class="box shadow-sm rounded bg-white mb-3">
-						<div class="d-flex box-title border-bottom p-3">
-							<h6 class="m-0 col-6">찜한 게시물</h6>
+					<div class="footer-pagination text-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
 
-							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/2/1}'|">모든정보보기</button>
+								<li class="page-item"><a th:if="${pageInfo.nowPage}>='2'"
+									class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage-1}"
+									aria-label="Previous"> <span aria-hidden="true"><i
+											class="fa fa-chevron-left" aria-hidden="true"></i></span>
+								</a> <th:block th:unless="${pageInfo.nowPage}=='1'"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo.nowPage-1}"
+										aria-label="Previous">
+										<span aria-hidden="true"></span>
+									</th:block></li>
 
-						</div>
-						<div class="box-body p-3">
-							<div>
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>시간</th>
-											<!-- <th>찜누른닉네임</th> -->
-											<th>제목</th>
-											<th>판매자</th>
-										</tr>
-									</thead>
-									<tbody>
-									
-										<tr th:each="likepost: ${likeposts}">
-											<td th:text="${likepost.createdAt}"></td>
-											<!-- <td th:text="${likepost.nickname}"></td> -->
-											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
-											<td th:text="${likepost.nickname}"></td>
-											<td><a class="navbar-brand"><img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt=""></a></td>
-											
-											
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="box shadow-sm rounded bg-white mb-3">
-						<div class="d-flex box-title border-bottom p-3">
-							<h6 class="m-0 col-6">쪽지</h6>
-							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/3}'|">모든정보보기</button>
-						</div>
-						<div class="box-body p-3">
-							<div>
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>시간</th>
-											<th>보낸사람닉네임</th>
-											<th>관련포스트제목</th>
-											<th>받은사람닉넹미</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="order: ${orders}">
-											<td th:text="${order.createdAt}"></td>
-											<td th:text="${order.nickname}"></td>
-											<td th:text="${order.title}"></td>
-											<td th:text="${order.nickname2}"></td>
-										</tr>
-									</tbody>
+								<th:block
+									th:each="num: ${#numbers.sequence({pageInfo.startPage},{pageInfo.endPage})}">
+									<li class="page-item"><a class="page-link"
+										th:href="@{/mypage/1/}+${num}" th:text="${num}"></a></li>
+								</th:block>
+								<th:block th:text="${pageInfo.nowPage}"></th:block>
 
-								</table>
-							</div>
-						</div>
-					</div>
 
-					<div class="box shadow-sm rounded bg-white mb-3">
-						<div class="box-title border-bottom p-3">
-							<h6 class="m-0">Education</h6>
-						</div>
-						<div class="box-body p-3 border-bottom">
-							<div class="d-flex align-items-top job-item-header pb-2">
-								<div class="mr-2">
-									<h6 class="font-weight-bold text-dark mb-0">Stanford
-										University</h6>
-									<div class="text-truncate text-primary">Master’s
-										programmes</div>
-									<div class="small text-gray-500">Oct 2020 - Present (4
-										year 7 month)</div>
-								</div>
-								<img class="img-fluid ml-auto mb-auto"
-									th:src="@{/images/e1.png}" alt="">
-							</div>
-							<p class="mb-0">Find the most qualified people in the most
-								unexpected places. Information for applicants to consider when
-								applying for local positions.</p>
-						</div>
-						<div class="box-body p-3">
-							<div class="d-flex align-items-top job-item-header pb-2">
-								<div class="mr-2">
-									<h6 class="font-weight-bold text-dark mb-0">Harvard
-										University</h6>
-									<div class="text-truncate text-primary">Maths and science
-										education</div>
-									<div class="small text-gray-500">Oct 2020 - Present (4
-										year 7 month)</div>
-								</div>
-								<img class="img-fluid ml-auto mb-auto"
-									th:src="@{/images/e2.png}" alt="">
-							</div>
-							<p class="mb-0">Wualified people in the most unexpected
-								places. Information for applicants to consider when applying for
-								local positions.</p>
-						</div>
+								<li class="page-item"><a
+									th:if="${pageInfo.nowPage}<${pageInfo.lastPage}"
+									class="page-link"
+									th:href="@{/mypage/1/}+(${pageInfo.nowPage+1})"
+									aria-label="Next"> <span aria-hidden="true"><i
+											class="fa fa-chevron-right" aria-hidden="true"></i></span>
+
+								</a> <th:block th:unless="${pageInfo.nowPage}==${pageInfo.lastPage}"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo.nowPage+1}"
+										aria-label="Next">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+							</ul>
+						</nav>
 					</div>
 				</main>
 
 				
-
 
 
 				<!-- ========================================================================================================== -->
@@ -340,17 +266,17 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(function() {
-			$(".review").click(function(e) {
-				let id = e.currentTarget.id;
-				var rating1 = '.rating' + id + ':checked';
-				var rating2 = $(rating1).val();//내가 선택한 별점
+			$(".review").click(function(e){
+				let id=e.currentTarget.id;
+				var rating1='.rating'+id+':checked';
+				var rating2=$(rating1).val();//내가 선택한 별점
 				var content = $('#new-review' + id).val();
-
+				
 				console.log(id);
 				console.log(rating1);
 				console.log(rating2);
 				console.log(content);
-				if (rating2 === undefined) {
+				if(rating2===undefined){
 					alert('별점을 입력하세요');
 				}
 				$.ajax({
@@ -359,82 +285,25 @@
 					async : false,
 					url : "http://localhost:8090/review",
 					data : {
-						"order_id" : id,
-						"rating" : rating2,
-						"content" : content
+						"order_id" : id, "rating":rating2, "content":content
 					},
 					success : function(data, textStatus) {
 						if (data == 'true') {
 							alert('리뷰를 등록했습니다.');
-
+							
 						} else {
 							alert('오류가 발생했습니다');
-
+							
 						}
 					},
-
+					/* complete: function() {
+						alert("a");
+					} */
 				});
-
+				
 			});
 			
 			
-			$(".heart").click(function(e) {
-				let id = e.currentTarget.id;
-		
-			
-
-				console.log(id);
-				
-				
-				$.ajax({
-					type : "post",
-					dataType : "text",
-					async : false,
-					url : "http://localhost:8090/heartremove",
-					data : {
-						"like_id" : id,
-					},
-					success : function(data, textStatus) {
-						if (data == 'true') {
-							alert('좋아요 삭제 성공');
-							location.reload();
-
-						} else {
-							alert('좋아요 삭제 실패');
-
-						}
-					},
-
-				});
-
-			});
-			
-			$(".titttle").click(function(e) {
-				let id = e.currentTarget.id;//포스트 아이디
-		
-			
-
-				console.log(id);
-				
-				
-				$.ajax({
-					type : "post",
-					dataType : "text",
-					async : false,
-					url : "http://localhost:8090/clicktitle",
-					data : {
-						"id" : id,
-					},
-					success : function(data, textStatus) {
-						
-							location.reload();
-							location.replace(data)
-					},
-
-				});
-
-			});
-
 		});
 	</script>
 
