@@ -18,7 +18,7 @@
 						</h5>
 					</div>
 					<div class="homepage-search-form">
-						<form class="form-noborder" action="/search" method="GET">
+						<form class="form-noborder">
 							<div class="form-row">
 								<div class="col-lg-3 col-md-3 col-sm-12 form-group" style="padding-left:400px;">
 									<div class="location-dropdown">
@@ -30,7 +30,7 @@
 										class="form-control border-0 form-control-lg shadow-sm" id="searchKeyword2">
 								</div>
 								<div class="col-lg-2 col-md-2 col-sm-12 form-group">
-									<button type="submit"
+									<button type="button"
 										class="btn btn-success btn-block btn-lg btn-gradient shadow-sm" th:onclick="search2()">
 										<i class="fa fa-search"></i>
 									</button>
@@ -81,9 +81,9 @@
 								<div>
 								<h5>
 								평점:[[${user.avg_star_point}]]
+								</h5>
 								</div>
 								<p style="padding-top:10px;"></p>
-							</h5>
 							</div>
 						</div>
 					</div>
@@ -244,18 +244,17 @@
 	
 </section>
 </html>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    function search2() {
-        const searchKeyword = $("input[id='searchKeyword2']").val();
-        if(searchKeyword=="") {
-            swal("알림","검색어를 입력해주세요.");
-        }
-        else {
-            location.href =
-                '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
-                searchKeyword + "&category=";
-        }
-    };
-  </script>
+	function search2() {
+		const searchKeyword2 = $("input[id='searchKeyword2']").val();
+		if(searchKeyword2=="") {
+			swal("알림","검색어를 입력해주세요.");
+		}
+		else {
+			location.href =
+					'/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+					searchKeyword2 + "&category=";
+		}
+	}
+</script>
