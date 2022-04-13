@@ -45,9 +45,9 @@ public class MainController {
 		return mav;
 	}
 
-	@GetMapping("/messages")
-	public ModelAndView messagesPage() {
-		ModelAndView mav = new ModelAndView("messages");
+	@GetMapping("/about")
+	public ModelAndView aboutView() {
+		ModelAndView mav = new ModelAndView("about");
 		return mav;
 	}
 	

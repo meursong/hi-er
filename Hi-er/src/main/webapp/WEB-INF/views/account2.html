@@ -35,9 +35,9 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a th:if=${session.loginedUser.type}==0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
-								<a th:if=${session.loginedUser.type}==1 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
 									프리내정보수정 </a>	
 							</div>
 						</div>

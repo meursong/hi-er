@@ -35,9 +35,9 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a th:if=${session.loginedUser.type}!=0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
-								<a th:if=${session.loginedUser.type}==2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
 									프리내정보수정 </a>	
 							</div>
 						</div>
@@ -119,10 +119,10 @@
 					class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
-							<h6 class="m-0 col-6">거래내역</h6>
+							<h6 class="m-0 col-6">거래 내역</h6>
 
 							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/1/1}'|">모든정보보기</button>
+								th:onclick="|location.href='@{/mypage/1/1}'|">모든 정보 보기</button>
 
 						</div>
 
@@ -133,12 +133,12 @@
 										<tr>
 											<th>시간</th>
 											
-											<th>상품제목</th>
+											<th>상품 제목</th>
 											<th>판매자</th>
 											<th>구매수량</th>
-											<th>총가격</th>
+											<th>총 가격</th>
 											<th>상태</th>
-											<th>리뷰달기</th>
+											<th>리뷰 달기</th>
 										</tr>
 
 									</thead>
@@ -224,7 +224,7 @@
 							<h6 class="m-0 col-6">찜한 게시물</h6>
 
 							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/2/1}'|">모든정보보기</button>
+								th:onclick="|location.href='@{/mypage/2/1}'|">모든 정보 보기</button>
 
 						</div>
 						<div class="box-body p-3">
@@ -258,7 +258,7 @@
 						<div class="d-flex box-title border-bottom p-3">
 							<h6 class="m-0 col-6">쪽지</h6>
 							<button type="button" class="btn btn-light btn-sm col-6"
-								th:onclick="|location.href='@{/mypage/3}'|">모든정보보기</button>
+								th:onclick="|location.href='@{/mypage/3}'|">모든 정보 보기</button>
 						</div>
 						<div class="box-body p-3">
 							<div>
@@ -266,9 +266,9 @@
 									<thead>
 										<tr>
 											<th>시간</th>
-											<th>보낸사람닉네임</th>
-											<th>관련포스트제목</th>
-											<th>받은사람닉넹미</th>
+											<th>보낸 사람 닉네임</th>
+											<th>상품명</th>
+											<th>받은 사람 닉네임</th>
 										</tr>
 									</thead>
 									<tbody>

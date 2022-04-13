@@ -166,7 +166,7 @@
 							하세요</h6>
 						<div class="dropdown-divider"></div>
 
-						<a class="dropdown-item" th:href="@{mypage}"
+						<a class="dropdown-item" th:href="@{/mypage}"
 							th:if="${session.loginedUser}">
 							<div class="dropdown-item-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -254,13 +254,8 @@
 						id="navbarDropdownPortfolio"
 						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
 						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownPortfolio"></li>
-					<li class="nav-item dropdown"><a class="nav-link "
-						th:href="@{/product/category/3}" id="navbarDropdownPortfolio"
-						aria-haspopup="true" aria-expanded="false"
-						style="font-size: 15px; font-weight: 600;">IT · 프로그래밍</a>
-						<div class="dropdown-menu"
-							aria-labelledby="navbarDropdownPortfolio"></li>
+							aria-labelledby="navbarDropdownPortfolio">
+							</li>
 				</ul>
 			</div>
 			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">
@@ -300,17 +295,17 @@
           <div class="footer-list">
             <h2>Hi-er</h2>
             <ul class="list">
-              <li><a href="#">Main</a></li>
+              <li><a th:href="@{/}">Main</a></li>
               <li><a href="#">introduction</a></li>
-              <li><a href="#">About the developer</a></li>
+              <li><a th:href="@{about}">About the developer</a></li>
             </ul>
           </div>
           <div class="footer-list">
             <h2>Categories</h2>
             <ul class="list">
-              <li><a href="#">Design</a></li>
-              <li><a href="#">IT · Programing</a></li>
-              <li><a href="#">Video · Photo · Music</a></li>
+              <li><a th:href="@{/product/category/1}">Design</a></li>
+              <li><a th:href="@{/product/category/2}">IT · Programing</a></li>
+              <li><a th:href="@{/product/category/3}">Video · Photo · Music</a></li>
             </ul>
           </div>
           <div class="footer-list">
@@ -325,7 +320,7 @@
         </div>
         <div class="copyright">
           <div class="logo">
-            <a href="index.html"><img th:src="@{/images/logo.png}" /> </a>
+            <a th:href="@{/}"><img th:src="@{/images/logo.png}" /> </a>
           </div>
           <p>© Copyright 2022 Hi-er. All Rights Reserved</p>
           <ul class="social">
@@ -384,5 +379,6 @@
     window.onpopstate = function (event) {
       $('#productList').load(location.href + ' #productList');
     };
+    
   </script>
 </html>
