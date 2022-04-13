@@ -41,7 +41,7 @@
 				<div class="col-lg-4 mx-auto">
 					<div class="osahan-login py-4">
 						<div class="text-center mb-4">
-							<a th:href="@{/index.html}"><img th:src="@{images/titlelogo.ico}" alt=""></a>
+							<a th:href="@{/}"><img th:src="@{images/titlelogo.ico}" alt=""></a>
 							<h5 class="font-weight-bold mt-3" th:text="${errMsg} ? ${errMsg} : '회원가입'"></h5>
 						</div>
 						<form method="post" th:action="@{/signup}"  oninput='password2.setCustomValidity(password2.value != password.value ? "비밀번호가 달라요~~" : "")'>

@@ -19,31 +19,29 @@ import com.mulcam.hier.service.MainService;
 public class MainController {
 
 
-	@GetMapping({"", "/"})
-	public String mainPage() {
-		return "index";
-	}
 	@Autowired
 	HttpSession session;
 
 	@Autowired
 	MainService mainService;
 
-	@RequestMapping("/")
+	@GetMapping({"", "/","/index"})
 	public ModelAndView mainView() {
 		ModelAndView mav = new ModelAndView("index");
 		try {
 //			List<User> userList = mainService.getBestUserFive();
-//			List<Board> boardList = mainService.getBestBoardFive();
 			List<Product> bestProduct = mainService.getBestProducts();
-
+//			for (Product p : bestProduct) {
+//				System.out.println(p.getTitle());
+//			}
+			System.out.println(bestProduct);
 			mav.addObject("bestProduct", bestProduct);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		List<User> userList = new ArrayList<User>();
-
-		mav.addObject("bestUserList", userList);
+//		List<User> userList = new ArrayList<User>();
+		
+//		mav.addObject("bestUserList", userList);
 		return mav;
 	}
 

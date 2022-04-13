@@ -19,7 +19,6 @@ public class MypageServiceImpl implements MypageService {
 
 	@Autowired
 	MypageDAO mypageDAO;
-
 	@Override
 	public List<Map<String, Object>> history2(int user_id) throws Exception {
 		System.out.println("서비스임플 안이다다다다다다");

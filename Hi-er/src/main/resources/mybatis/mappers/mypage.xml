@@ -114,6 +114,13 @@
 	]]>	
 	</update>
 	
+	<select id="selectNickname" resultType="String" parameterType="int">
+	<![CDATA[
+		select nickname
+		from user
+		where user_id=#{user_id}
+	]]>	
+	</select>
 	
 	<!--소개 업데이트-->
 	<update id="introupdate" parameterType="freelancerUser">
