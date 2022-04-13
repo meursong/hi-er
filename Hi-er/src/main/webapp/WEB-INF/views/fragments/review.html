@@ -1,44 +1,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="review" class="box-title border-bottom p-3">
-    <div class="review-section">
-        <div class="d-flex align-items-center justify-content-between mb-4">
-            <h4 class="m-0">
-                리뷰<small><span class="star-rating-s15"></span></small>
-            </h4>
-            <select
-                    class="custom-select custom-select-sm border-0 shadow-sm ml-2">
-                <option value="newest">최신순</option>
-                <option value="star">별점순</option>
-                <option>디자인</option>
-                <option>영상</option>
-                <option>IT</option>
-            </select>
-        </div>
-<!--        <div class="breakdown">
-            디자인<small style="margin-right: 15px"> <span
-                class="star-rating-s15"></span> <span
-                class="total-rating-out-five">5</span>
-        </small>
-
-            영상 <small style="margin-right: 15px"> <span
-                class="star-rating-s15"></span> <span
-                class="total-rating-out-five">5</span>
-        </small>
-
-            IT<small> <span
-                class="star-rating-s15"></span> <span
-                class="total-rating-out-five">5</span>
-        </small>
-
-        </div>-->
-    </div>
     <div class="review-list">
         <ul th:each="review : ${reviews}">
             <li>
                 <div class="d-flex">
                     <div class="left">
-						<span> <img src="images/user/s6.png"
-                                    class="profile-pict-img img-fluid" alt="">
+						<span> <img th:src="@{/images/user/s6.png}" 
+                                    class="profile-pict-img img-fluid" alt=""> <!-- 추후 유저사진으로 변경 -->
 						</span>
                     </div>
                     <div th:switch="${review.star_point}" class="right">
