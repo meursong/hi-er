@@ -59,10 +59,10 @@ public class Review extends Criteria {
 	public void setStar_point(int star_point) {
 		this.star_point = star_point;
 	}
-	public Date getcreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public void setcreatedAt(Date createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 	public String getNickname() {

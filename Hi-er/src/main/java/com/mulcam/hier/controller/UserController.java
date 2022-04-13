@@ -2,16 +2,13 @@ package com.mulcam.hier.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.hier.dto.Review;
@@ -45,10 +42,10 @@ public class UserController {
 	}
 
 	@PostMapping("freelancerForm")
-	public String joinFreelancer(FreelancerUser form) throws Exception {
+	public String joinFreelancer(FreelancerForm form) throws Exception {
 		if (((User) session.getAttribute("loginedUser")) != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-			FreelancerUser freelancer = new FreelancerUser(user_id, form.getAddress(), form.getIntroduction());
+			FreelancerForm freelancer = new FreelancerForm(user_id, form.getAddress(), form.getAddress2(), form.getIntroduction());
 			us.insert_info(freelancer);
 			us.update_type(user_id);
 			return "redirect:/";
@@ -57,8 +54,8 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/freelancerInfo")
-	public String freelancerInfo(Model model, @ModelAttribute("params") Review params) throws Exception {
+	@GetMapping("/freelancerInfo/{id}")
+	public String freelancerInfo(@PathVariable("id") String id, Model model, @ModelAttribute("params") Review params) throws Exception {
 		// seller_id는 임시
 		int seller_id = 1;
 
@@ -79,7 +76,7 @@ public class UserController {
 	@GetMapping("/login")
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("login");
-		if ((User) session.getAttribute("loginedUser") != null) {	
+		if ((User) session.getAttribute("loginedUser") != null) {
 			mav.setViewName("index");
 		}
 		return mav;
@@ -90,7 +87,6 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("index");
 		try {
 			User loginedUser = us.login(email, password);
-			System.out.println(loginedUser);
 			session.setAttribute("loginedUser", loginedUser);
 			if (loginedUser == null) {
 				mav.setViewName("login");
@@ -129,7 +125,7 @@ public class UserController {
 	public ModelAndView logout() {
 		ModelAndView mav = new ModelAndView("index");
 		session.invalidate();
-		// session.removeAttribute("loginedUser");
+//		 session.removeAttribute("loginedUser");
 
 		return mav;
 	}
