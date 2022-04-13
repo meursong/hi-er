@@ -18,7 +18,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public void writePost(Product prod) throws Exception {
 		Integer pid = postDAO.getMaxProductId();
-		if(pid==null) pid = 1;
+		if(pid==null) pid = 0;
 		prod.setProduct_id(pid+1);
 		postDAO.insertProduct(prod);
 		postDAO.insertPriceInfo(prod);

@@ -4,10 +4,9 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layout}">
 <head>
-
 <!-- JQuery -->
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
@@ -16,38 +15,71 @@
 		$('#iamportPayment').click(function() {
 			console.log("결제버튼클릭");
 			iamport(); //메서드 호출	
+			/* $.ajax({
+				type : "POST",
+				url : "/order",
+				data : formData, 
+				success : function(res) {
+					alert(res.code);
+					iamport(); //메서드 호출	
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			}); */
+
 		});
+		function iamport() {
+			//가맹점 식별코드
+			IMP.init('imp57611856');
+			IMP.request_pay({
+				pg : 'kakaopay.TC0ONETIME',
+				pay_method : 'card',
+				merchant_uid : 'merchant_' + new Date().getTime(),
+				name : $("#seller_id").val(), //결제창에서 보여질 이름 
+				amount : 3000, //실제 결제되는 가격
+				buyer_email : 'iamport1@siot.do',
+				buyer_name : '구매자이름', 
+				buyer_tel : '010-1234-5678',
+				buyer_addr : '서울 강남구 도곡동',
+				buyer_postcode : '123-456'
+			}, function(rsp) {
+				console.log(rsp);
+				if (rsp.success) {
+					var msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					var formData = new FormData(form);
+					$.ajax({
+						type : "POST",
+						url : "/order",
+						async : false, //동기  
+						data : formData, 
+						processData:false,
+						contentType:false,
+						success : function(res) {
+							alert(res);
+							alert("결제 성공");
+							location.href='/mypage';
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("통신 실패.")
+						}
+					}); 
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+				}
+				alert(msg);
+			});
+		} 
 	});
-	function iamport() {
-		//가맹점 식별코드
-		IMP.init('imp57611856');
-		IMP.request_pay({
-			pg : 'kakaopay.TC0ONETIME',
-			pay_method : 'card',
-			merchant_uid : 'merchant_' + new Date().getTime(),
-			name : '상품1', //결제창에서 보여질 이름
-			amount : 100, //실제 결제되는 가격
-			buyer_email : 'iamport@siot.do',
-			buyer_name : '구매자이름',
-			buyer_tel : '010-1234-5678',
-			buyer_addr : '서울 강남구 도곡동',
-			buyer_postcode : '123-456'
-		}, function(rsp) {
-			console.log(rsp);
-			if (rsp.success) {
-				var msg = '결제가 완료되었습니다.';
-				msg += '고유ID : ' + rsp.imp_uid;
-				msg += '상점 거래ID : ' + rsp.merchant_uid;
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				msg += '카드 승인번호 : ' + rsp.apply_num;
-			} else {
-				var msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + rsp.error_msg;
-			}
-			alert(msg);
-		});
-	}
+	
+	
 </script>
+
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -192,6 +224,7 @@ input.card {
 }
 </style>
 </head>
+<body>
 <section layout:fragment="contents">
 	<div class="containerPay">
 		<div class="row m-0">
@@ -202,7 +235,7 @@ input.card {
 							<div class="d-flex pb-2">
 								<p class="fw-bold h1">[[${product.title}]]</p>
 								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
-							</div>
+							</div> 
 							<div class="bg-blue p-2">
 								<p class="h6">제품 한줄 소개</p>
 								<P class="h6 textmuted" th:text="${pkg_description}"></p>
@@ -213,113 +246,117 @@ input.card {
 					<div class="col-12 mb-4">
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
-								<img class="img-fluid" width="600px" th:src="@{/upload/} + ${product.filename2}"/>
+								<img class="img-fluid" width="600px"
+									th:src="@{/upload/} + ${product.filename2}" />
 							</div>
 						</div>
 					</div>
 					<div class="col-12 mb-4">
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
-								<div >
-									<div width="400px" >
+								<div>
+									<div width="400px">
 										<div class="header">
 											<h3>
 												<b class="title" th:text="${product.paymentPkg}"></b>
 											</h3>
 										</div>
-											<div class="d-flex">
-												<b class="delivery"><i
-													class="fa fa-clock-o" aria-hidden="true"></i>
-													[[${default_delivery}]] 작업일</b> <b
-													class="delivery ml-3"><i
-													class="fa fa-refresh" aria-hidden="true"></i> 수정
-													[[${revision}]] 회</b>
-											</div>
-											<ul class="features">
-												<li
-													th:attr="class=${original_image == 'true' ? 'feature included' : 'feature'}">
-													<i class="fa fa-check" aria-hidden="true"></i>원본 파일 제공
-												</li>
-												<li
-													th:attr="class=${commercial == 'true' ? 'feature included' : 'feature'}">
-													<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
-												</li>
-												<li
-													th:attr="class=${sns_Kit == 'true' ? 'feature included' : 'feature'}">
-													<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
-												</li>
-												<li class="feature included"><i class="fa fa-check"
-													aria-hidden="true"></i>시안 개수 : [[${draft}]]</li>
-											</ul>
+										<div class="d-flex">
+											<b class="delivery"><i class="fa fa-clock-o"
+												aria-hidden="true"></i> [[${default_delivery}]] 작업일</b> <b
+												class="delivery ml-3"><i class="fa fa-refresh"
+												aria-hidden="true"></i> 수정 [[${revision}]] 회</b>
+										</div>
+										<ul class="features">
+											<li
+												th:attr="class=${original_image == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>원본 파일 제공
+											</li>
+											<li
+												th:attr="class=${commercial == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
+											</li>
+											<li
+												th:attr="class=${sns_Kit == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
+											</li>
+											<li class="feature included"><i class="fa fa-check"
+												aria-hidden="true"></i>시안 개수 : [[${draft}]]</li>
+										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="col-md-5 col-12 ps-md-5 p-0 ">
-					<div class="box-left">
-						<p class="h4">결제상세</p>
-						<p class="fw-bold h7" >[[${price}]]</p>
-						<p class="textmuted h8">주문자 성함 :
-							[[${session.loginedUser.name}]]</p>
-						<p class="textmuted h8 mb-2">주문자 이메일 :
-							[[${session.loginedUser.email}]]</p>
-						<div class="h8">
-							<div class="row m-0 border mb-3">
-								<div class="col-6 h8 pe-0 ps-2">
-									<p class="textmuted py-2">상품명</p>
-									<span class="d-block py-2 border-bottom cut"
-										th:text="${product.paymentPkg}"></span> <span
-										class="d-block py-2">쿠폰 할인</span>
-								</div>
-								<div class="col-2 text-center p-0">
-									<p class="textmuted p-2">수량</p>
-									<span class="d-block p-2 border-bottom">1</span> <span
-										class="d-block p-2">0</span>
-								</div>
-								<div class="col-2 p-0 text-center h8 border-end">
-									<p class="textmuted p-2">가격</p>
-									<span class="d-block border-bottom py-2"><span
-										class="fas fa-dollar-sign" th:text="${price}"></span></span>
-									<span class="d-block py-2 "><span
-										class="fas fa-dollar-sign"></span>0</span>
-								</div>
-								<div class="col-2 p-0 text-center">
-									<p class="textmuted p-2">총 금액</p>
-									<span class="d-block py-2 border-bottom"><span
-										class="fas fa-dollar-sign" th:text="${price}"></span></span>
-									<span class="d-block py-2"><span
-										class="fas fa-dollar-sign"></span>0</span>
-								</div>
+				<div class="box-left">
+					<p class="h4">결제상세</p>
+					<p class="fw-bold h7">[[${price}]]</p>
+					<p class="textmuted h8">주문자 성함 :
+						[[${session.loginedUser.name}]]</p>
+					<p class="textmuted h8 mb-2">주문자 이메일 :
+						[[${session.loginedUser.email}]]</p>
+					<div class="h8">
+						<div class="row m-0 border mb-3">
+							<div class="col-6 h8 pe-0 ps-2">
+								<p class="textmuted py-2">상품명</p>
+								<span class="d-block py-2 border-bottom cut"
+									th:text="${product.paymentPkg}"></span> <span
+									class="d-block py-2">쿠폰 할인</span>
 							</div>
-							<br>
-							<div class="col-md-8 ps-0 ">
-								<p class="ps-3 textmuted fw-bold h6 mb-0">결제 금액</p>
-								<p class="h1 fw-bold d-flex">
-									<span
-										class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>[[${price}]]
-									원(₩)
-									<!-- <span class="textmuted">.58</span> -->
-								</p>
-								<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
+							<div class="col-2 text-center p-0">
+								<p class="textmuted p-2">수량</p>
+								<span class="d-block p-2 border-bottom">1</span> <span
+									class="d-block p-2">0</span>
 							</div>
-							<div class="h8 mb-5"></div>
+							<div class="col-2 p-0 text-center h8 border-end">
+								<p class="textmuted p-2">가격</p>
+								<span class="d-block border-bottom py-2"><span
+									class="fas fa-dollar-sign" th:text="${price}"></span></span> <span
+									class="d-block py-2 "><span class="fas fa-dollar-sign"></span>0</span>
+							</div>
+							<div class="col-2 p-0 text-center">
+								<p class="textmuted p-2">총 금액</p>
+								<span class="d-block py-2 border-bottom"><span
+									class="fas fa-dollar-sign" th:text="${price}"></span></span> <span
+									class="d-block py-2"><span class="fas fa-dollar-sign"></span>0</span>
+							</div>
 						</div>
-						<div class="">
-							<form>
-								
-								<div style="width: 100%; margin: auto;">
-									<button class="btn btn-primary d-block h8"
-										style="width: 400px; margin: auto; display: block;"
-										id="iamportPayment" type="button">결제테스트</button>
-								</div>
-							</form>
+						<br>
+						<div class="col-md-8 ps-0 ">
+							<p class="ps-3 textmuted fw-bold h6 mb-0">결제 금액</p>
+							<p class="h1 fw-bold d-flex">
+								<span
+									class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>[[${price}]]
+								원(₩)
+								<!-- <span class="textmuted">.58</span> -->
+							</p>
+							<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
 						</div>
+						<div class="h8 mb-5"></div>
+					</div>
+					<div class="">
+						<form id='form' action='/order' method='post'>
+							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
+							<input type="hidden" id="seller_id" name="seller_id" th:value="${product.seller_id}"> 
+							<input type="hidden" id="buyer_id" name="buyer_id" th:value="${session.loginedUser.user_id}"> 
+							<input type="hidden" id="product_id" name="product_id" th:value="${product.product_id}"> 
+							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
+							<div style="width: 100%; margin: auto;">
+								<button class="btn btn-primary d-block h8"
+									style="width: 400px; margin: auto; display: block;"
+									id="iamportPayment" type="button">결제테스트</button>
+							</div>
+						</form>
 					</div>
 				</div>
+			</div>
 		</div>
 </section>
+</body>
+
+
 </html>
