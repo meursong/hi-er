@@ -1,0 +1,422 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+<head>
+<style type="text/css">
+.imgUpload {
+	border: 4px solid grey;
+	border-radius: 7px;
+}
+
+.ck.ck-editor {
+	max-width: 100%;
+}
+
+.ck-editor__editable {
+	min-height: 400px;
+}
+.policyTable {
+	height: 200px;
+}
+.policyTableTA {
+	height: 150px;
+	width: 90%;
+	text-align: left;
+}
+
+</style>
+</head>
+
+<section layout:fragment="contents">
+	<div style="margin:50px">
+	<div class="container">
+		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기- IT</h2>
+		<form action="/post/itWrite" method="post" enctype="multipart/form-data" id="form" name="board_write" >
+			<div class="form-group" style="text-align: center;">
+				<label for="title" style="padding-top:15px;" ></label>
+				<div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                           <button type="button" id="category" class="btn btn-outline-secondary">IT</button>
+                           <input type="hidden" name="category" value="design">
+                        </div>
+                        <input type="text" name="title"
+					class="form-control" placeholder="제목을 입력하세요 ">
+                     </div>
+			</div>
+			<div class="form-group" style="display: flex; justify-content: center; padding-top: 20px;">
+				
+				<table>
+					<tr>
+						<td><img id="rep1" name="img1"
+							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img> <input type="file" id="file1"
+							name="file1" accept="image/*" style="display: none;" class="file"></td>
+						<td><img id="rep2" name="img2"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img><input type="file" id="file2"
+							name="file2" accept="image/*" style="display: none;" class="file"></td>
+						<td><img id="rep3" name="img3"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img><input type="file" id="file3"
+							name="file3" accept="image/*" style="display: none;" class="file"></td>
+						<td><img id="rep4" name="img4"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img><input type="file" id="file4"
+							name="file4" accept="image/*" style="display: none;" class="file"></td>
+					</tr>
+					<tr>
+						<td><img id="rep5" name="img5"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img><input type="file" id="file5"
+							name="file5" accept="image/*" style="display: none;" class="file"></td>
+						<td><img id="rep6" name="img6"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img><input type="file" id="file6"
+							name="file6" accept="image/*" style="display: none;" class="file"></td>
+						<td><img id="rep7" name="img7"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img><input type="file" id="file7"
+							name="file7" accept="image/*" style="display: none;" class="file"></td>
+						<td><img id="rep8" name="img8"
+							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							width="200px" height="200px"></img><input type="file" id="file8"
+							name="file8" accept="image/*" style="display: none;" class="file"></td>
+					</tr>
+
+				</table>
+			</div>
+			<div class="form-group">
+				<label for="content">< 글 내용 ></label>
+				<textarea id="editor" name="content" class="form-control">
+					<b>서비스 설명을 작성해주세요</b>
+					<br>
+					<i>&lt; 예 &gt;</i>
+					<p>내 서비스 최고</p>
+					
+					<p>그냥 최고</p>
+				</textarea>
+			</div>
+			<div id="packagesTable" class="table-package">
+			<label>< 가격 정보 ></label>
+				<!-- 가격 정보 -->
+				<table>
+					<colgroup>
+						<col>
+						<col>
+						<col>
+						<col>
+					</colgroup>
+					<tbody>
+						<tr class="package-type">
+							<th>패키지</th>
+							<td><b class="type">Basic</b><b class="title">패키지 설명</b></td>
+							<td><b class="type">Standard</b><b class="title">패키지 설명</b></td>
+							<td><b class="type">Premium</b><b class="title">패키지 설명 </b>
+							</td>
+						</tr>
+						<tr class="description">
+							<th></th>
+							<td><textarea rows="3" th:type="text" th:maxlength="50"
+									class="desc1" name="b_pkg_description" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+								<div id="test_cnt1">(0 / 50)</div></td>
+							<td><textarea rows="3" th:type="text" th:maxlength="50"
+									class="desc2" name="s_pkg_description" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+								<div id="test_cnt2">(0 / 50)</div></td>
+							<td><textarea rows="3" th:type="text" th:maxlength="50"
+									class="desc3" name="p_pkg_description" placeholder="패키지에 대한 설명을 적어주세요(50자 이내)"></textarea>
+								<div id="test_cnt3">(0 / 50)</div></td>
+						</tr>
+						<tr>
+							<th>
+								<div class="fit-popover fit-popover-top fit-tooltip"
+									data-position="top">
+									<span class="fit-popover-content">소스 코드 제공</span>
+								</div>
+							</th>
+							<td><input type="radio" id="b_original_image"
+								name="b_original_image" value="true" 
+								checked="checked"><label> &nbsp;제공</label><br> <input type="radio"
+								id="b_original_image" name="b_original_image"
+								value="false"><label> &nbsp;미제공</label></td>
+							<td><input type="radio" id="s_original_image"
+								name="s_original_image" value="true"
+								checked="checked"><label> &nbsp;제공</label><br> <input
+								type="radio" id="s_original_image"
+								name="s_original_image" value="false"><label>
+									&nbsp;미제공</label></td>
+							<td><input type="radio" id="p_original_image"
+								name="p_original_image" value="true"
+								checked="checked"><label> &nbsp;제공</label><br> <input
+								type="radio" id="p_original_image"
+								name="p_original_image" value="false"><label>
+									&nbsp;미제공</label></td>
+						</tr>
+						<tr>
+							<th>
+								<div class="fit-popover fit-popover-top fit-tooltip"
+									data-position="top">
+									<span class="fit-popover-content">콘텐츠 업로드</span>
+								</div>
+							</th>
+							<td><input type="radio" id="b_commercial"
+								name="b_commercial" value="true"
+								checked="checked"><label> &nbsp;가능</label><br> <input
+								type="radio" id="b_commercial"
+								name="b_commercial" value="false"><label>
+									&nbsp;불가능</label></td>
+							<td><input type="radio" id="s_commercial"
+								name="s_commercial" value="true"
+								checked="checked"><label> &nbsp;가능</label><br> <input
+								type="radio" id="s_commercial"
+								name="s_commercial" value="false"><label>
+									&nbsp;불가능</label></td>
+							<td><input type="radio" id="p_commercial"
+								name="p_commercial" value="true"
+								checked="checked"><label> &nbsp;가능</label><br> <input
+								type="radio" id="p_commercial"
+								name="p_commercial" value="false"><label>
+									&nbsp;불가능</label></td>
+						</tr>
+						<tr>
+							<th>
+								<div class="fit-popover fit-popover-top fit-tooltip"
+									data-position="top">
+									<span class="fit-popover-content">반응형 웹</span>
+								</div>
+							</th>
+							<td><input type="radio" id="b_sns_Kit"
+								name="b_sns_Kit" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="b_sns_Kit"
+								name="b_sns_Kit" value="false"><label>
+									&nbsp;미제공</label></td>
+							<td><input type="radio" id="s_sns_Kit"
+								name="s_sns_Kit" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="s_sns_Kit" 
+									name="s_sns_Kit" value="false"><label> 
+									&nbsp;미제공</label></td>
+							<td><input type="radio" id="p_sns_Kit"
+								name="p_sns_Kit" value="true" checked="checked"><label>
+									&nbsp;제공</label><br> <input type="radio" id="p_sns_Kit"
+								name="p_sns_Kit" value="false"><label>
+									&nbsp;미제공</label></td>
+						</tr>
+						<tr>
+							<th>
+								<div class="fit-popover fit-popover-top fit-tooltip"
+									data-position="top">
+									<span class="fit-popover-content">페이지 수</span>
+								</div>
+							</th>
+
+							<td><div class="fake-radio-wrapper">
+									<input type="number" min="1" class="form-control"
+										name="b_draft" placeholder="개수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" min="1" class="form-control"
+										name="s_draft" placeholder="개수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" min="1" class="form-control"
+										name="p_draft" placeholder="개수">
+								</div></td>
+						</tr>
+						<tr>
+							<th>
+								<div class="fit-popover fit-popover-top fit-tooltip"
+									data-position="top">
+									<span class="fit-popover-content">수정 횟수</span>
+								</div>
+							</th>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" min="0" class="form-control"
+										name="b_revision" placeholder="횟수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" min="0" class="form-control"
+										name="s_revision" placeholder="횟수">
+								</div></td>
+							<td><div class="fake-radio-wrapper">
+									<input type="number" min="0" class="form-control"
+										name="p_revision" placeholder="횟수">
+								</div></td>
+						</tr>
+						<tr class="delivery-time">
+							<th>기본 작업일</th>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"><input type="number" min="1"
+										class="form-control" name="b_default_delivery"
+										id="b_default_delivery" placeholder="기본 작업일"> </label>
+								</div>
+							</td>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"><input type="number" min="1"
+										class="form-control" name="s_default_delivery"
+										id="s_default_delivery" placeholder="기본 작업일">
+									</label>
+								</div>
+							</td>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"><input type="number" min="1"
+										class="form-control" name="p_default_delivery"
+										id="p_default_delivery" placeholder="기본 작업일">
+									</label>
+								</div>
+							</td>
+						</tr>
+						<tr class="delivery-time">
+							<th>단축 작업일(+추가요금)</th>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"> <label class="fake-radio">
+											<p>단축 작업 소요일</p> <input type="number" min="1" class="form-control"
+											name="b_minimum_delivery"
+											id="b_minimum_delivery" placeholder="일(days)">
+											<br>
+											<p>작업 단축 추가요금</p> <input type="number" min="1"
+											class="form-control" name="b_additional_price"
+											id="b_additional_price" placeholder="추가요금(₩)">
+											</p>
+									</label>
+								</div>
+							</td>
+
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"> <label class="fake-radio">
+											<p>단축 작업 소요일</p> <input type="number" min="1" class="form-control"
+											name="s_minimum_delivery"
+											id="s_minimum_delivery" placeholder="일(days)">
+											<br>
+											<p>작업 단축 추가요금</p> <input type="number" min="1"
+											class="form-control" name="s_additional_price"
+											id="s_additional_price" placeholder="추가요금(₩)">
+											</p>
+									</label>
+								</div>
+							</td>
+							<td>
+								<div class="fake-radio-wrapper">
+									<label class="fake-radio"> <label class="fake-radio">
+											<p>단축 작업 소요일</p> <input type="number" min="1" class="form-control"
+											name="p_minimum_delivery"
+											id="p_minimum_delivery" placeholder="일(days)">
+											<br>
+											<p>작업 단축 추가요금</p> <input type="number" min="1"
+											class="form-control" name="p_additional_price"
+											id="p_additional_price" placeholder="추가요금(₩)">
+											</p>
+									</label>
+								</div>
+							</td>
+						</tr>
+						<tr class="select-package">
+							<th>기본 금액</th>
+							<td>
+								<p class="price-label">
+									<input type="number" min="1" class="form-control" name="b_price"
+										id="b_price" placeholder="기본요금(₩)">
+								</p>
+							</td>
+							<td>
+								<p class="price-label">
+									<input type="number" min="1" class="form-control" name="s_price"
+										id="s_price" placeholder="기본요금(₩)">
+								</p>
+							</td>
+							<td>
+								<p class="price-label">
+									<input type="number" min="1" class="form-control" name="p_price"
+										id="p_price" placeholder="기본요금(₩)">
+								</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<tr class="policyTable">
+						<th>수정 및 재진행</th>
+						<td style="padding-right: 90px;"><textarea class="policyTableTA" name="revisionPolicy">수정 및 재진행 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;[수정 안내] · 수정 횟수는 주문 사양별 조건을 참조하시기 랍니다. · 각 상품 별 수정 제공 횟수 초과 시 별도의비용이 청구될 수 있습니다. · 기본 수정 범위 : 폰트,컬러, 배치, 간격 등 선택된 1개의 시안의 컨셉 범주 내에서 수정 가능합니다. · 원하시는 폰트 요청 시, 해당 폰트/저작권을 보유하고 계셔야 수정 가능합니다. · 시안확정 후에는 수정이 종료됩니다. (확정 후 수정 요청 시 별도의 비용이 청구될 수 있습니다.) · *작업 전 요청사항* 외에 새로운 컨셉 또는 방향을 제시하시는 경우 수정이 아닌 재작업으로 간주되어 별도의 비용이 청구될 수 있습니다. [인쇄 안내] 철자, 오타, 폰트 사이즈 등 꼼꼼하게 확인하시어 최종 컨펌해 주셔야 합니다. 합판 인쇄 (명함, 전단) 특성상 인쇄(CMYK) 컬러는 모니터(RGB)와 차이가 있습니다. 인쇄 시마다 컬러와 재단 오차가 상이할 수 있습니다.
+						</textarea></td>
+					</tr>
+					<tr class="policyTable">
+						<th>취소 및 환불</th>
+						<td style="padding-right: 90px;"><textarea class="policyTableTA"  name="refundPolicy">취소 및 환불 약관을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;01. 전문가와 의뢰인 간의 상호 협의 후 청약철회가 가능합니다. 02. 전문가의 귀책사유로 디자인작업을 시작하지 않았거나 혹은 이에 준하는 보편적인 관점에서 심각하게 잘못 이행한 경우 결제 금액 전체 환불이 가능합니다. 03. 전문가가 작업 기간 동안 지정된 서비스를 제공하지 못할 것이 확실한 경우 지급받은 서비스 비용을 일할 계산하여 작업물 개수와 작업 기간 일수만큼 공제하고 잔여 금액을 환불합니다. 04. 서비스 받은 항목을 공제하여 환불하며, 공제 비용은 정가 처리됩니다. 가. 소비자 피해 보상 규정에 의거하여 작업물 원본의 멸실 및 작업 기간 미이행 및 이에 상응하는 전문가 책임으로 인한 피해 발생 시, 전액 환불 나. 시안 작업 진행된 상품 차감 환불</textarea></td>
+					</tr>
+					<tr class="policyTable">
+						<th>기타 안내 사항</th>
+						<td style="padding-right: 90px;"><textarea class="policyTableTA" name="otherInformation">기타안내사항을 작성해주세요&#13;&#13;&#10;&lt; 예 &gt;&#13;&#10;&#13;이런 분들은 의뢰를 다시 한번 생각해주세요. &#13;&#13;1.명령조의 언행, 타인에대한 배려가 없으신 분 &#13;2.구매자의 입장을 이용하여 조율이 아닌 일방적인 요구를 하시는 분&#13;3.이용사항을 충분히 숙지하지 않으신 분</textarea></td>
+					</tr>
+				</table>
+			</div>
+			<div style="padding-bottom: 30px; text-align: end;">
+			<input type="submit" value="작성 완료" class="c-btn c-fill-color-btn">
+			</div>
+		</form>
+	</div>
+	</div>
+	<!-- CK editor -->
+	<script
+		src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+	<!-- CK editor 호출 -->
+	<script>
+		var myEditor;
+	    ClassicEditor
+	        .create( document.querySelector( '#editor' ), {
+	        	ckfinder: {
+	        		uploadUrl: '/post/uploadImage'
+        		}
+	        }).then( editor => {
+		        myEditor = editor;
+		    })
+	        .catch( error => {
+	            console.error(error);
+	        } );
+	</script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+	$(function(){
+        $('.desc1').keyup(function() {
+        	 $('#test_cnt1').html("("+$(this).val().length+" / 50)");
+        	 if($(this).val().length > 50) {
+                 $(this).val($(this).val().substring(0, 50));
+                 $('#test_cnt1').html("(50 / 50)");
+             }
+        });
+        $('.desc2').keyup(function() {
+       	 $('#test_cnt2').html("("+$(this).val().length+" / 50)");
+       	 if($(this).val().length > 50) {
+                $(this).val($(this).val().substring(0, 50));
+                $('#test_cnt2').html("(50 / 50)");
+            }
+       });
+        $('.desc3').keyup(function() {
+       	 $('#test_cnt3').html("("+$(this).val().length+" / 50)");
+       	 if($(this).val().length > 50) {
+                $(this).val($(this).val().substring(0, 50));
+                $('#test_cnt3').html("(50 / 50)");
+            }
+       });
+    });
+	$(function() {
+		$('.imgUpload').click(function() {
+			$(this).next().click(); /* NEXT는 다음 형제 - img와 input태그 사이 다른 태그 넣으면 안됨 */
+			
+		});
+		$(".file").change(function(event) {
+			const img = $(this).prev();  /* 미리등록 */
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				img.attr("src", e.target.result);	 /* 이 메서드가 실행될때의 THIS는 달라지기 때문에  */
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		}); 
+	});
+	</script>
+</section>
+</html>
+
