@@ -32,6 +32,11 @@
 <!-- Custom styles for this template -->
 <link th:href="@{/css/style.css}" rel="stylesheet" />
 <title>Hi-er</title>
+    <style>
+        .swal-button {
+            background-color: #2cdd9b;
+        }
+    </style>
 </head>
 <body>
 	<!-- 내비바 -->
@@ -46,10 +51,10 @@
 				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search" action="/search" method="GET">
 				<div class="input-group">
 					<input type="text" name="keyword" class="form-control bg-white small"
-						placeholder="서비스를 검색하세요" id="searchKeyword" aria-label="Search"
+						placeholder="서비스를 검색하세요" id="searchKeyword1" aria-label="Search"
 						aria-describedby="basic-addon2" style="width:400px;">
 					<div class="input-group-append">
-						<button class="btn btn-success"  th:onclick="search()" type="button">
+						<button class="btn btn-success"  th:onclick="search1()" type="button">
 							<i class="fa fa-search fa-sm"></i>
 						</button>
 					</div>
@@ -344,6 +349,7 @@
   </body>
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
   <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Contact form JavaScript -->
   <!-- Slick -->
   <script
@@ -360,11 +366,16 @@
   <!-- Custom -->
   <script th:src="@{/js/custom.js}"></script>
   <script>
-    function search() {
-        const searchKeyword = $("input[id='searchKeyword']").val();
-        location.href =
-            '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
-            searchKeyword + "&category=";
+    function search1() {
+        const searchKeyword = $("input[id='searchKeyword1']").val();
+        if(searchKeyword=="") {
+            swal("알림","검색어를 입력해주세요.");
+        }
+        else {
+            location.href =
+                '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+                searchKeyword + "&category=";
+        }
     }
 
     window.onpopstate = function (event) {
