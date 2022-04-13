@@ -293,6 +293,7 @@
                 <form action="/post/payment" method="post">
                		 <!-- 결제페이지로 넘길 정보들  -->
                 	<input type="hidden" name="title" th:value="${product.title}">
+                	<input type="hidden" name="product_id" th:value="${product.product_id}">
                 	<input type="hidden" name="filename1" th:value="${product.filename1}">
                 	<input type="hidden" name="filename2" th:value="${product.filename2}">
                 	<input type="hidden" name="category" th:value="${product.category}">
