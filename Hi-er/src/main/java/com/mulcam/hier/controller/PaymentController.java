@@ -25,6 +25,10 @@ public class PaymentController {
 		int orderNumber = 0;
 		System.out.println("결제컨트롤러에 도착했다~@!#!@#~#~");
 		System.out.println(order.getOrder_price());
+		System.out.println(order.getSeller_id());
+		System.out.println(order.getBuyer_id());
+		System.out.println(order.getProduct_id());
+		System.out.println(order.getOrder_pkg());
 		try {
 			//orderNumber = orderService.makeOrder(order) ;
 			//System.out.println(orderNumber);
