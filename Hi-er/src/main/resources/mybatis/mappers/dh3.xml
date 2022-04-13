@@ -7,15 +7,19 @@
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+               p.seller_id,
                u.nickname,
                u.job,
                p.title,
+               pi.b_price,
+               p.filename1,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
+        		left join price_info pi on p.product_id = pi.product_price_id
 		WHERE (REPLACE(p.title, ' ', '') like '%${keyword}%'
 		   or p.title like '%${keyword}%'
 		   or REPLACE(p.content, ' ', '') like '%${keyword}%'
@@ -33,16 +37,21 @@
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+               p.seller_id,
                p.category,
                u.nickname,
                u.job,
                p.title,
+			   pi.b_price,
+               p.filename1,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
+				 left join price_info pi on p.product_id = pi.product_price_id
+
         where p.category = 'design'
         group by p.product_id
         order by ${sort} desc
@@ -54,15 +63,18 @@
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+			   p.seller_id,
                u.nickname,
                u.job,
                p.title,
+			   pi.product_price_id,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
+				 left join price_info pi on p.product_id = pi.product_price_id
         where p.category = 'video'
         group by p.product_id
         order by ${sort} desc
@@ -74,15 +86,18 @@
             parameterType="ProductList">
 		<![CDATA[
         select p.product_id,
+			   p.seller_id,
                u.nickname,
                u.job,
                p.title,
+               pi.product_price_id,
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
+				 left join price_info pi on p.product_id = pi.product_price_id
         where p.category = 'it'
         group by p.product_id
         order by ${sort} desc
