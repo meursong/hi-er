@@ -107,6 +107,20 @@ public class PostController {
 			return "login";
 		}
 	}
+	
+	@GetMapping("/ITwrite")
+	public String itWrite(Model model) throws Exception {
+		System.out.println((User) session.getAttribute("loginedUser"));
+		if ((User) session.getAttribute("loginedUser") != null) {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+			User email = us.selectEmail(user_id);
+			model.addAttribute("email", email);
+			return "itWrite";
+		} else {
+			return "login";
+		}
+	}
+
 
 	private String fileupload(MultipartFile file) {
 		String filename = null;
@@ -138,12 +152,12 @@ public class PostController {
 			product.setFilename7(fileupload(product.getFile7()));
 			product.setFilename8(fileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
-			product.setSeller_id(seller_id); // 추후 수정 필요
+			product.setSeller_id(seller_id); 
 			postService.writePost(product);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/product-detail";
+		return "redirect:/product/category/2";
 	}
 
 	@PostMapping("/designWrite")
@@ -168,6 +182,28 @@ public class PostController {
 		return "redirect:/product/category/1"; // 추후 게시판 페이지로 변경
 	}
 
+	@PostMapping("/itWrite")
+	public String itWrite(@ModelAttribute Product product) {
+		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
+		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+		try {
+			product.setFilename1(fileupload(product.getFile1()));
+			product.setFilename2(fileupload(product.getFile2()));
+			product.setFilename3(fileupload(product.getFile3()));
+			product.setFilename4(fileupload(product.getFile4()));
+			product.setFilename5(fileupload(product.getFile5()));
+			product.setFilename6(fileupload(product.getFile6()));
+			product.setFilename7(fileupload(product.getFile7()));
+			product.setFilename8(fileupload(product.getFile8()));
+			product.setIs_available(0); // 0:거래가능 1:거래중지
+			product.setSeller_id(seller_id);
+			postService.writePost(product);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/product/category/3"; // 추후 게시판 페이지로 변경
+	}
+	
 	@ResponseBody
 	@PostMapping("/uploadImage")
 	public String uploadImage(HttpServletRequest request, HttpServletResponse response,
@@ -287,7 +323,7 @@ public class PostController {
 			@RequestParam("reported_userid") Integer reported_userid) {
 		String result;
 		// Integer report_userid = (Integer)session.getAttribute("id");
-		Integer report_userid = (Integer) session.getAttribute("id"); // 추후에 바꿔줘야함
+		Integer report_userid = ((User) session.getAttribute("loginedUser")).getUser_id(); // 추후에 바꿔줘야함
 		try {
 			postService.reportPost(reason, pid, reported_userid, report_userid);
 			result = "신고완료";
@@ -303,8 +339,7 @@ public class PostController {
 	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			// Integer like_userid = (Integer)session.getAttribute("id"); //추후에 바꿔줘야함
-			Integer like_userid = 100; // 추후에 바꿔줘야함
+			Integer like_userid = ((User) session.getAttribute("loginedUser")).getUser_id();
 			result = postService.like(pid, like_userid);
 		} catch (Exception e) {
 			e.printStackTrace();

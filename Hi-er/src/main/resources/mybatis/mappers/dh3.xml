@@ -28,7 +28,7 @@
 		<if test="category != ''">
 			and category= '${category}'
 		</if>
-        group by p.product_id
+        group by p.product_id,b_price
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
 	</select>
@@ -53,7 +53,7 @@
 				 left join price_info pi on p.product_id = pi.product_price_id
 
         where p.category = 'design'
-        group by p.product_id
+        group by p.product_id,b_price
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>

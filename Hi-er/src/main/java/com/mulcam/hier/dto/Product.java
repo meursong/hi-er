@@ -5,6 +5,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 public class Product {
+	private String nickname;
+	private int review_count;
+	private float avg_star_point;
+	private String profile_image;
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public int getReview_count() {
+		return review_count;
+	}
+
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
 
 	int product_id;
 	
@@ -563,6 +582,22 @@ public class Product {
 
 	public void setPaymentPkg(String paymentPkg) {
 		this.paymentPkg = paymentPkg;
+	}
+
+	public float getAvg_star_point() {
+		return avg_star_point;
+	}
+
+	public void setAvg_star_point(float avg_star_point) {
+		this.avg_star_point = avg_star_point;
+	}
+
+	public String getProfile_image() {
+		return profile_image;
+	}
+
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
 	}
 	
 

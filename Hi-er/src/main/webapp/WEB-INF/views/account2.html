@@ -1,0 +1,293 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+
+
+<section layout:fragment="contents">
+	<div class="py-5">
+		<div class="container">
+			<div class="row">
+				<!-- Main Content -->
+				<aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
+					<div
+						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
+						<div class="py-4 px-3 border-bottom">
+							<img th:src="@{/images/user/s4.png}"
+								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
+						</div>
+						<div class="d-flex">
+							<div class="col-6 border-right p-3">
+								<h6 class="font-weight-bold text-dark mb-1">358</h6>
+								<p class="mb-0 text-black-50 small">Connections</p>
+							</div>
+							<div class="col-6 p-3">
+								<h6 class="font-weight-bold text-dark mb-1">85</h6>
+								<p class="mb-0 text-black-50 small">Views</p>
+							</div>
+						</div>
+						<div class="d-flex">
+							<div class="col-6 p-3 overflow-hidden border-top border-right">
+								<a class="font-weight-bold p-2 d-block" th:href="@{/logout}">
+									로그아웃 </a>
+							</div>
+							<div class="col-6 p-3 overflow-hidden border-top">
+								<a th:if=${session.loginedUser.type}==0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+									내정보수정 </a>
+								<a th:if=${session.loginedUser.type}==1 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+									프리내정보수정 </a>	
+							</div>
+						</div>
+
+					</div>
+					<div class="box shadow-sm  rounded bg-white mb-3">
+						<div class="box-title border-bottom p-3">
+							<h6 class="m-0">Skills & Endorsements</h6>
+						</div>
+						<div class="box-body">
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l4.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Character Concept <span class="badge badge-dark ml-1">1</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">You and 1 connection</span> have
+										given endorsements for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l8.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Digital Painting <span class="badge badge-danger ml-1">6</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Ask</span> has given an endorsement
+										for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l5.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Adobe Photoshop <span class="badge badge-info ml-1">3</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Julia Cox</span> has given an
+										endorsement for this skill
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+						<img th:src="@{/images/job1.png}" class="img-fluid"
+							alt="Responsive image">
+						<div class="p-3 border-bottom">
+							<h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
+							<p class="mb-0 text-muted">Looking for talent?</p>
+						</div>
+						<div class="p-3">
+							<button type="button" class="btn btn-outline-success pl-4 pr-4">
+								POST A JOB</button>
+						</div>
+					</div>
+				</aside>
+
+
+
+
+
+				<main th:if="${page}=='2'"
+					class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+		
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">찜한 게시물</h6>
+						</div>
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>시간</th>
+											
+											<th>제목</th>
+											<th>판매자</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="likepost: ${likeposts}">
+											<td th:text="${likepost.createdAt}"></td>
+											
+											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
+											<td th:text="${likepost.nickname}"></td>
+											<td><a class="navbar-brand"><img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt=""></a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="footer-pagination text-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+
+								<li class="page-item"><a th:if="${pageInfo2.nowPage}>='2'"
+									class="page-link"
+									th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}"
+									aria-label="Previous"> <span aria-hidden="true"><i
+											class="fa fa-chevron-left" aria-hidden="true"></i></span>
+								</a> <th:block th:unless="${pageInfo2.nowPage}=='1'"
+										class="page-link"
+										th:href="@{/mypage/2/}+${pageInfo2.nowPage-1}"
+										aria-label="Previous">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+
+								<th:block
+									th:each="num: ${#numbers.sequence({pageInfo2.startPage},{pageInfo2.endPage})}">
+									<li class="page-item"><a class="page-link"
+										th:href="@{/mypage/2/}+${num}" th:text="${num}"></a></li>
+								</th:block>
+								<th:block th:text="${pageInfo2.nowPage}"></th:block>
+
+
+								<li class="page-item"><a
+									th:if="${pageInfo2.nowPage}<${pageInfo2.lastPage}"
+									class="page-link"
+									th:href="@{/mypage/2/}+(${pageInfo2.nowPage+1})"
+									aria-label="Next"> <span aria-hidden="true"><i
+											class="fa fa-chevron-right" aria-hidden="true"></i></span>
+
+								</a> <th:block
+										th:unless="${pageInfo2.nowPage}==${pageInfo2.lastPage}"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo2.nowPage+1}"
+										aria-label="Next">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+
+
+
+
+
+								<!-- 
+                  <li class="page-item">
+                     <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+                                           <span class="sr-only"></span>
+                     </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                     <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+                                           <span class="sr-only"></span>
+                     </a>
+                  </li> -->
+							</ul>
+						</nav>
+					</div>
+				</main>
+
+
+
+				<!-- ========================================================================================================== -->
+
+
+			
+			</div>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function() {
+			
+			
+			
+			$(".heart").click(function(e) {
+				let id = e.currentTarget.id;
+		
+			
+
+				console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/heartremove",
+					data : {
+						"like_id" : id,
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('좋아요 삭제 성공');
+							location.reload();
+
+						} else {
+							alert('좋아요 삭제 실패');
+
+						}
+					},
+
+				});
+
+			});
+			
+			
+			$(".titttle").click(function(e) {
+				let id = e.currentTarget.id;//포스트 아이디
+		
+			
+
+				console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/clicktitle",
+					data : {
+						"id" : id,
+					},
+					success : function(data, textStatus) {
+						
+							location.reload();
+							location.replace(data)
+					},
+
+				});
+
+			});
+
+		});
+	</script>
+
+
+</section>
+
+</html>
+

@@ -340,11 +340,14 @@ input.card {
 					</div>
 					<div class="">
 						<form id='form' action='/order' method='post'>
-							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
-							<input type="hidden" id="seller_id" name="seller_id" th:value="${product.seller_id}"> 
 							<input type="hidden" id="buyer_id" name="buyer_id" th:value="${session.loginedUser.user_id}"> 
+							<input type="hidden" id="seller_id" name="seller_id" th:value="${product.seller_id}"> 
 							<input type="hidden" id="product_id" name="product_id" th:value="${product.product_id}"> 
 							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
+							<input type="hidden" id="delivery_date" name="delivery_date" th:value="${default_delivery}"> 
+							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
+							<input type="hidden" id="order_qty" name="order_qty" th:value="1"> 
+							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
 							<div style="width: 100%; margin: auto;">
 								<button class="btn btn-primary d-block h8"
 									style="width: 400px; margin: auto; display: block;"
