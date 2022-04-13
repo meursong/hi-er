@@ -240,5 +240,14 @@ public class MypageController {
 			return String.valueOf(value);
 		}
 		
+		@ResponseBody
+		@PostMapping("clickname")
+		public String clickname(@RequestParam(value = "id") String id) {
+	
+
+			String value="http://localhost:8090/freelancerInfo/"+id;
+			return String.valueOf(value);
+		}
+		
 
 }

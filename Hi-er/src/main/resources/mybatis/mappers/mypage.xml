@@ -63,7 +63,7 @@
 	
 	<select id="queryLikepost" resultType="Map" parameterType="int">
 	<![CDATA[
-		select l.createdAt, p.title,u.nickname,l.like_id,l.product_id
+		select l.createdAt, p.title,u.nickname,l.like_id,l.product_id,l.liked_userid
 		from user u join product p join likes l
 		on p.product_id=l.product_id and p.seller_id=u.user_id and l.like_userid=#{user_id}
 		order by l.createdAt desc limit 5
@@ -187,8 +187,8 @@
 	<select id="selectBoardList2" resultType="Map" parameterType="int">
 	<![CDATA[
 		select *
-		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.title,t.nickname,t.like_id,t.product_id
-				from((select l.createdAt, u.nickname,p.title,l.like_id,l.product_id
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.title,t.nickname,t.like_id,t.product_id,t.liked_userid
+				from((select l.createdAt, u.nickname,p.title,l.like_id,l.product_id,l.liked_userid
 					from user u join product p join likes l
 		on p.product_id=l.product_id and p.seller_id=u.user_id and l.like_userid=#{user_id} order by l.createdAt desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    

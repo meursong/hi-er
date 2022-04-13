@@ -37,7 +37,7 @@
 							<div class="col-6 p-3 overflow-hidden border-top">
 								<a th:if=${session.loginedUser.type}==0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
-								<a th:if=${session.loginedUser.type}==1 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+								<a th:if=${session.loginedUser.type}==2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
 									프리내정보수정 </a>	
 							</div>
 						</div>
@@ -238,13 +238,14 @@
 											<th>판매자</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody class="likepost">
 									
 										<tr th:each="likepost: ${likeposts}">
 											<td th:text="${likepost.createdAt}"></td>
 											<!-- <td th:text="${likepost.nickname}"></td> -->
 											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
-											<td th:text="${likepost.nickname}"></td>
+											<td class="selller" th:id="${likepost.liked_userid}" th:text="${likepost.nickname}" style="cursor:pointer"></td>
+								
 											<td><a class="navbar-brand"><img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt=""></a></td>
 											
 											
@@ -422,6 +423,32 @@
 					dataType : "text",
 					async : false,
 					url : "http://localhost:8090/clicktitle",
+					data : {
+						"id" : id,
+					},
+					success : function(data, textStatus) {
+						
+							location.reload();
+							location.replace(data)
+					},
+
+				});
+
+			});
+			
+			$(".selller").click(function(e) {
+				let id = e.currentTarget.id;//포스트 아이디
+		
+			
+
+				console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/clickname",
 					data : {
 						"id" : id,
 					},
