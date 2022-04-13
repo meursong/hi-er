@@ -30,8 +30,8 @@ public class PaymentController {
 		System.out.println(order.getProduct_id());
 		System.out.println(order.getOrder_pkg());
 		try {
-			//orderNumber = orderService.makeOrder(order) ;
-			//System.out.println(orderNumber);
+			orderNumber = orderService.makeOrder(order) ;
+			System.out.println(orderNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
