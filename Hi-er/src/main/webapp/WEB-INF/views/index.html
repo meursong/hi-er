@@ -18,7 +18,7 @@
 						</h5>
 					</div>
 					<div class="homepage-search-form">
-						<form class="form-noborder" action="/search" method="POST">
+						<form class="form-noborder" action="/search" method="GET">
 							<div class="form-row">
 								<div class="col-lg-3 col-md-3 col-sm-12 form-group" style="padding-left:400px;">
 									<div class="location-dropdown">
@@ -27,11 +27,11 @@
 								</div>
 								<div class="col-lg-7 col-md-7 col-sm-12 form-group">
 									<input type="text" name="keyword" placeholder="서비스를 검색하세요"
-										class="form-control border-0 form-control-lg shadow-sm" id="searchKeyword1">
+										class="form-control border-0 form-control-lg shadow-sm" id="searchKeyword2">
 								</div>
 								<div class="col-lg-2 col-md-2 col-sm-12 form-group">
 									<button type="submit"
-										class="btn btn-success btn-block btn-lg btn-gradient shadow-sm" th:onclick="search1()">
+										class="btn btn-success btn-block btn-lg btn-gradient shadow-sm" th:onclick="search2()">
 										<i class="fa fa-search"></i>
 									</button>
 								</div>
@@ -132,7 +132,7 @@
 										<div class="footer">
 											<i class="fa fa-heart" aria-hidden="true"></i>
 											<div class="price">
-												<a th:href="@{판매자 상세페이지}"> Starting At <span>&nbsp[[${product.b_price}]]</span>
+												<a th:href="@{판매자 상세페이지}"> Starting At <span>&nbsp [[${#numbers.formatInteger(product.b_price, 0, 'COMMA')}]]</span>
 												</a>
 											</div>
 										</div>
@@ -154,35 +154,35 @@
 			<h2 style="font-size: 25px;">Hi-er에서 가장 인기있어요!</h2>
 			<div class="row service-slider">
 				<div class="col">
-				<a th:href="@{/category/logo}">
+				<a th:href="@{/product/category/1}">
 					<div class="service">
 						<img src="images/로고브랜딩.jpg">
 					</div>
 				</a>
 				</div>
 				<div class="col">
-			 	<a th:href="@{/category/web}">
+			 	<a th:href="@{/product/category/3}">
 					<div class="service">
 						<img src="images/웹.jpg">
 					</div>
 			 	</a>
 				</div>
 				<div class="col">
-					<a th:href="@{/category/it}">
+					<a th:href="@{/product/category/3}">
 					<div class="service">
 						<img src="images/쇼핑몰.jpg">
 					</div>
 					</a>
 				</div>
 				<div class="col">
-				<a th:href="@{/category/video}">
+				<a th:href="@{/product/category/2}">
 					<div class="service">
 						<img src="images/동영상.jpg">
 					</div>
 				</a>
 				</div>
 				<div class="col">
-				<a th:href="@{/category/디자인}">
+				<a th:href="@{/product/category/1}">
 					<div class="service">
 						<img src="images/앱 디자인.jpg">
 					</div>
@@ -200,7 +200,7 @@
 			</h2>
 			<div class="row" style="padding-top:10px;">
 				<div class="col-md-4">
-					<a th:href="@{/guide}" class="guide" target='_blank'> <img src="images/메뉴얼.jpg">
+					<a  class="guide" target='_blank'> <img src="images/메뉴얼.jpg">
 						<div class="content" style="padding-left:3px;">
 							<h6>Hi-er 전문가 가이드</h6>
 							<p>전문가 인증부터 정산까지 크몽 전문가 등록의 모든 것</p>
@@ -208,18 +208,16 @@
 					</a>
 				</div>
 				<div class="col-md-4">
-					<a th:href="@{/guide}" class="guide" target='_blank'> <img height="233px;" src="images/업무.jpg">
+					<a  class="guide" target='_blank'> <img height="233px;" src="images/업무.jpg">
 						<div class="content" style="padding-left:3px;">
 							<h6>마켓? 엔터프라이즈?</h6>
 							<p >내 프로젝트에 더 맞느 서비스를 쉽게 고르는 방법</p>
 						</div>
 					</a>
-					<div style="text-align: center; padding-top:15px;">
-				<a th:href="@{/프리랜서 전환페이지}" target="_blank" class="c-btn c-fill-color-btn">더보러가기</a>
-				</div>
+					
 				</div>
 				<div class="col-md-4">
-					<a  th:href="@{/guide}" class="guide" target='_blank'> <img height="233px;" src="images/전문가소개.png">
+					<a   class="guide" target='_blank'> <img height="233px;" src="images/전문가소개.png">
 						<div class="content" style="padding-left:3px;">
 							<h6>4월 신규 전문가 소개</h6>
 							<p>카테고리 매니저가 추천하는 라이징 전문가</p>
@@ -236,15 +234,21 @@
 			<div class="content" style="text-align: center;">
 				<h2>Hi-er 전문가로 등록하고, <br> 수익을 창출해보세요! </h2>
 				<p>Hi-er에서는 누구나 전문가가 될 수 있습니다. <br>당신의 전문성을 필요로하는 사람, Hi-er에 다 모여있어요.</p>
-				<a th:href="@{freelancerForm}" class="c-btn c-fill-color-btn">전문가 등록하기</a>
+				<div th:if="${session.loginedUser != null}">
+				<a th:if="${session.loginedUser.type != 2}" th:href="@{freelancerForm}" class="c-btn c-fill-color-btn">전문가 등록하기</a>
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- get started -->
+	
 </section>
- <script>
-    function search1() {
-        const searchKeyword = $("input[id='searchKeyword1']").val();
+</html>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function search2() {
+        const searchKeyword = $("input[id='searchKeyword2']").val();
         if(searchKeyword=="") {
             swal("알림","검색어를 입력해주세요.");
         }
@@ -253,10 +257,5 @@
                 '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
                 searchKeyword + "&category=";
         }
-    }
-    window.onpopstate = function (event) {
-      $('#productList').load(location.href + ' #productList');
     };
-    
   </script>
-</html>

@@ -51,26 +51,26 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping("/search")
-	public ModelAndView getSearch(String keyword) {
-		ModelAndView mav = new ModelAndView("404");
-		try {
-			
-			List<Product> ResultList = mainService.searchProduct(keyword);
-			if(!ResultList.isEmpty()) {
-				mav.addObject("ResultList", ResultList);
-				for(Product p: ResultList) {
-					System.out.println(p.getTitle());
-				}
-			} else {
-				mav.addObject("SearchCheck", "empty");
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
-	}
+//	@RequestMapping("/search")
+//	public ModelAndView getSearch(String keyword) {
+//		ModelAndView mav = new ModelAndView("404");
+//		try {
+//			
+//			List<Product> ResultList = mainService.searchProduct(keyword);
+//			if(!ResultList.isEmpty()) {
+//				mav.addObject("ResultList", ResultList);
+//				for(Product p: ResultList) {
+//					System.out.println(p.getTitle());
+//				}
+//			} else {
+//				mav.addObject("SearchCheck", "empty");
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return mav;
+//	}
 //	@GetMapping("cate/{id}")
 //	public ModelAndView catePage(@PathVariable("id") String id) {
 //		System.out.println(id);
