@@ -1,6 +1,11 @@
 package com.mulcam.hier.dto;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+
+
+
 public class FreelancerForm {
+
 	private Integer user_id;
 	private String address;
 	private String address2;

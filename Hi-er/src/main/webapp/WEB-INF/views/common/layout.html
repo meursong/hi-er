@@ -32,6 +32,11 @@
 <!-- Custom styles for this template -->
 <link th:href="@{/css/style.css}" rel="stylesheet" />
 <title>Hi-er</title>
+    <style>
+        .swal-button {
+            background-color: #2cdd9b;
+        }
+    </style>
 </head>
 <body>
 	<!-- 내비바 -->
@@ -344,6 +349,7 @@
   </body>
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
   <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Contact form JavaScript -->
   <!-- Slick -->
   <script
@@ -362,9 +368,14 @@
   <script>
     function search1() {
         const searchKeyword = $("input[id='searchKeyword1']").val();
-        location.href =
-            '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
-            searchKeyword + "&category=";
+        if(searchKeyword=="") {
+            swal("알림","검색어를 입력해주세요.");
+        }
+        else {
+            location.href =
+                '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+                searchKeyword + "&category=";
+        }
     }
 
     window.onpopstate = function (event) {
