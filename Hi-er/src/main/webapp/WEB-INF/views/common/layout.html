@@ -46,10 +46,10 @@
 				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search" action="/search" method="GET">
 				<div class="input-group">
 					<input type="text" name="keyword" class="form-control bg-white small"
-						placeholder="서비스를 검색하세요" id="searchKeyword" aria-label="Search"
+						placeholder="서비스를 검색하세요" id="searchKeyword1" aria-label="Search"
 						aria-describedby="basic-addon2" style="width:400px;">
 					<div class="input-group-append">
-						<button class="btn btn-success"  th:onclick="search()" type="button">
+						<button class="btn btn-success"  th:onclick="search1()" type="button">
 							<i class="fa fa-search fa-sm"></i>
 						</button>
 					</div>
@@ -360,8 +360,8 @@
   <!-- Custom -->
   <script th:src="@{/js/custom.js}"></script>
   <script>
-    function search() {
-        const searchKeyword = $("input[id='searchKeyword']").val();
+    function search1() {
+        const searchKeyword = $("input[id='searchKeyword1']").val();
         location.href =
             '/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
             searchKeyword + "&category=";
