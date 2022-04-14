@@ -120,8 +120,8 @@
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
 							<h6 class="m-0 col-6">거래 내역</h6>
-
-							<button type="button" class="btn btn-light btn-sm col-6"
+							<div class="col-4"></div>
+							<button type="button" class="btn btn-light btn-sm col-2"
 								th:onclick="|location.href='@{/mypage/1/1}'|">모든 정보 보기</button>
 
 						</div>
@@ -245,7 +245,10 @@
 											<!-- <td th:text="${likepost.nickname}"></td> -->
 											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
 											<td th:text="${likepost.nickname}"></td>
-											<td><a class="navbar-brand"><img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt=""></a></td>
+											<td><a class="navbar-brand" th:id="${likepost.like_id}">
+											<!--<img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt="">-->
+											<i class="fa fa-heart heart" th:id="${likepost.like_id}" style="cursor: pointer; color:#2cdd9b;" ></i>
+											</a></td>
 											
 											
 										</tr>
@@ -337,6 +340,7 @@
 			</div>
 		</div>
 	</div>
+	  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(function() {
@@ -396,12 +400,10 @@
 					},
 					success : function(data, textStatus) {
 						if (data == 'true') {
-							alert('좋아요 삭제 성공');
-							location.reload();
+							swal("알림","검색어를 입력해주세요.");							location.reload();
 
 						} else {
-							alert('좋아요 삭제 실패');
-
+							swal("검색어를 입력해주세요.");
 						}
 					},
 
