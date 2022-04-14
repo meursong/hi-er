@@ -63,25 +63,6 @@ public class PostController {
 		return mav;
 	}
 
-//	@GetMapping("/write")
-//	public String write(Model model) throws Exception {
-//		if ((User) session.getAttribute("loginedUser") == null) {
-//			return "login";
-//		} else {
-//			int type = ((User) session.getAttribute("loginedUser")).getType();
-//			if(type == 1) {
-//				int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-//				User email = us.selectEmail(user_id);
-//				model.addAttribute("email", email);
-//				return "freelancerForm";
-//			}else {
-//				return "write";
-//			}
-//			
-//		}
-//		
-//	}
-
 	@GetMapping("/designWrite")
 	public String designWrite(Model model) throws Exception {
 		System.out.println((User) session.getAttribute("loginedUser"));
@@ -262,9 +243,7 @@ public class PostController {
 				Integer likedNum = postService.likeNum(pid, logined_user.getUser_id());
 				boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 				List<Review> reviews = reviewService.prodReviewList(params);
-				System.out.println(product.getSeller_id());
 				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
-				System.out.println(sellerInfo.getAddress());
 				Map<String, Object> likeInfo = new HashMap<String, Object>();
 				likeInfo.put("likeNum", likedNum);
 				likeInfo.put("isLike", isLike);
@@ -285,45 +264,12 @@ public class PostController {
 		return mav;
 	}
 
-	// 테스트용 : mav - model 차이?
-	@GetMapping("/detailPage")
-	public String prodDetail(Model model, @ModelAttribute("params") Review params) {
-		Integer pid = 10;
-		params.setProduct_id(pid);
-		params.setRecordsPerPage(2);
-		try {
-			Integer logined_userid = (Integer) session.getAttribute("id");
-			Product product = postService.productDetail(pid);
-			Product priceInfo = postService.priceInfo(pid);
-			Integer likedNum = postService.likeNum(pid, logined_userid);
-			boolean isLike = postService.isLike(pid, logined_userid);
-			List<Review> reviews = reviewService.prodReviewList(params);
-
-			System.out.println(reviews);
-
-			Map<String, Object> likeInfo = new HashMap<String, Object>();
-			likeInfo.put("likeNum", likedNum);
-			likeInfo.put("isLike", isLike);
-
-			model.addAttribute("likeInfo", likeInfo);
-			model.addAttribute("product", product);
-			model.addAttribute("priceInfo", priceInfo);
-			model.addAttribute("reviews", reviews);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("err", e.getMessage());
-		}
-		return "product-detail";
-	}
-
 	@ResponseBody
 	@PostMapping("/report")
 	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid,
 			@RequestParam("reported_userid") Integer reported_userid) {
 		String result;
-		// Integer report_userid = (Integer)session.getAttribute("id");
-		Integer report_userid = ((User) session.getAttribute("loginedUser")).getUser_id(); // 추후에 바꿔줘야함
+		Integer report_userid = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			postService.reportPost(reason, pid, reported_userid, report_userid);
 			result = "신고완료";
@@ -359,8 +305,6 @@ public class PostController {
 		// a
 		String pkg = product.getPaymentPkg();
 		int price = product.getB_price();
-		System.out.println(pkg);
-		System.out.println(price);
 		if(pkg.equals("Basic")) {
 			mav.addObject("price", product.getB_price());
 			mav.addObject("additional_price", product.getB_additional_price());
