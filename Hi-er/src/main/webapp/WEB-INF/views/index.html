@@ -123,14 +123,14 @@
 							</svg></h3>
 						<div class="view recent-slider recommended-slider">
 							<div class="col" th:each="product: ${bestProduct}">
-								<a th:href="@{/post/detail/{pid}(pid = ${product.product_id})}"> <img class="img-fluid" th:src="@{/upload/} + ${product.filename1}" onerror="this.src='/images/titlelogo.png'">
+								<a th:href="@{/post/detail/{pid}(pid = ${product.product_id})}"> <img class="img-fluid" th:src="@{/upload/} + ${product.filename1}" onerror="this.src='/images/상품준비중.jpg'">
 								</a>
 								<div class="inner-slider">
 									<div class="inner-wrapper">
 										<div class="d-flex align-items-center">
-											<span class="seller-image"> <img class="img-fluid"
-													th:src="@{images/user/default.png}" alt='' />
-											</span> <span class="seller-name"> <a
+											<span class="seller-image"> 						
+											<img class="img-fluid" th:src="@{/upload/} + ${product.profile_image}" onerror="this.src='/images/user/default.jpg'">
+											</span> <span class="seller-name" > <a
 													th:href="@{판매자 프로필 상세}">[[${product.title}]]</a> <span
 													class="level hint--top level-one-seller">
 													</span>
