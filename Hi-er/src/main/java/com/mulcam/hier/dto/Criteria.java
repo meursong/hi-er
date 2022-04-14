@@ -63,21 +63,6 @@ public class Criteria {
         return uriComponents.toUriString();
     }
 
-    public String makeQueryString1(String sort1) {
-        setCategory(sort1);
-        UriComponents uriComponents = UriComponentsBuilder.newInstance()
-                .queryParam("sort", sort)
-                .queryParam("currentPageNo", currentPageNo)
-                .queryParam("recordsPerPage", recordsPerPage)
-                .queryParam("pageSize", pageSize)
-//                .queryParam("searchType", searchType)
-                .queryParam("keyword", keyword)
-                .queryParam("category", sort1)
-                .build()
-                .encode();
-
-        return uriComponents.toUriString();
-    }
 
     public PaginationInfo getPaginationInfo() {
         return paginationInfo;
