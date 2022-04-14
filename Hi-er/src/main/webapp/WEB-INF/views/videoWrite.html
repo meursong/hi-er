@@ -24,6 +24,9 @@
 	width: 90%;
 	text-align: left;
 }
+.fileTable tr td {
+	padding:8px;
+}
 </style>
 </head>
 
@@ -44,15 +47,20 @@
                      </div>
 			</div>
 			<div class="form-group"  style="display: flex; justify-content: center; padding-top: 20px;">
-				<label for="title">비디오 업로드</label>
-				<table>
+				<table class="fileTable">
+				<!-- 	<tr>
+						<td><h5>↓비디오 업로드</h5></td>
+						<td><h5>↓썸네일</h5></td>
+						<td></td>
+						<td></td>
+					</tr> -->
 					<tr>
 						<td><video id="rep1" name="img1"
-							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
+							th:src="@{/images/videoUploadDefault.mp4}" class="imgUpload"
 							width="200px" height="200px"></video> <input type="file" id="file1"
 							name="file1" accept="video/*" style="display: none;" class="file"></td>
 						<td><img id="rep2" name="img2"
-							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							th:src="@{/images/ImageUploadThumbnail.png}" class="imgUpload"
 							width="200px" height="200px"></img><input type="file" id="file2"
 							name="file2" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep3" name="img3"
