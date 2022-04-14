@@ -1,6 +1,9 @@
 package com.mulcam.hier.dto;
 
+import com.mulcam.hier.Time;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Date;
 
 
 public class ProductList extends Criteria {
@@ -95,8 +98,8 @@ public class ProductList extends Criteria {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = Time.calculateTime(createdAt);
 	}
 
 	public String getFilename1() {
