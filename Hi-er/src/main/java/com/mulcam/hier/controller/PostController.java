@@ -272,16 +272,28 @@ public class PostController {
 				Integer likedNum = postService.likeNum(pid, logined_user.getUser_id());
 				boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 				List<Review> reviews = reviewService.prodReviewList(params);
+				Integer maxReviewCnt = reviewService.maxReviewCnt(pid);
+				List<Map<String,Integer>> reviewCount = reviewService.reviewCount(pid);
 				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
 				Map<String, Object> likeInfo = new HashMap<String, Object>();
+				
+				/*
+				 * int sumReviewCnt = 0; for (int i=0; i<reviewCount.size(); i++) { Integer t =
+				 * reviewCount.get(i).get("count"); sumReviewCnt+=t; }
+				 * System.out.println(sumReviewCnt);
+				 */
+				
+				System.out.println(maxReviewCnt);
 				likeInfo.put("likeNum", likedNum);
 				likeInfo.put("isLike", isLike);
-
+				
 				mav.addObject("likeInfo", likeInfo);
 				mav.addObject("product", product);
 				mav.addObject("priceInfo", priceInfo);
 				mav.addObject("reviews", reviews);
 				mav.addObject("sellerInfo", sellerInfo);
+				mav.addObject("reviewCounts", reviewCount);
+				mav.addObject("maxReviewCnt", maxReviewCnt);
 			} else {
 				mav.setViewName("login");
 			}

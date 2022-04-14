@@ -14,12 +14,8 @@ public class Review extends Criteria {
 	private Date createdAt;
 	private String nickname;
 
-	private int review_count;
-	private int review_5count;
-	private int review_4count;
-	private int review_3count;
-	private int review_2count;
-	private int review_1count;
+	private int count;
+	
 	
 	public int getReview_wid() {
 		return review_wid;
@@ -81,4 +77,14 @@ public class Review extends Criteria {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
 }
