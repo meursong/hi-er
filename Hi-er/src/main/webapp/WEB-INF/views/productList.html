@@ -103,7 +103,7 @@
 									<!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
 									<span th:text="${productList.createdAt}"></span>
 									<div class="price">
-										Basic <span th:text="'₩'+${productList.b_price}">
+										Basic <span th:text="'₩'+${#numbers.formatInteger(productList.b_price, 0, 'COMMA')}">
 											₩비용</span>
 
 									</div>
