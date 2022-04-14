@@ -3,7 +3,26 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layout}">
 <head>
-<style></style>
+<style>
+.modal {
+                text-align: center;
+            }
+
+            @media screen and (min-width: 768px) {
+                .modal:before {
+                    display: inline-block;
+                    vertical-align: middle;
+                    content: " ";
+                    height: 100%;
+                }
+            }
+
+            .modal-dialog {
+                display: inline-block;
+                text-align: left;
+                vertical-align: middle;
+            }
+</style>
 </head>
 
 <section layout:fragment="contents">
@@ -183,7 +202,12 @@
 											</span>
 										</div> <span class="total-rating-out-five"></span> <span
 										class="total-rating">(리뷰)([[${sellerInfo.avg_star_point}]])</span>
-									</span> <a href="#">쪽지보내기(클릭시 쪽지 모달창 출력)</a>
+									</span> 
+									<div class="buttons-wrapper" style="padding-top:10px">
+                                		<button type="button" data-toggle="modal" data-target="#exampleModal"
+                                        	class="c-btn c-fill-color-btn">쪽지보내기
+                                		</button>
+                           			 </div>
 								</div>
 							</div>
 						</div>
@@ -841,7 +865,12 @@
 							</div>
 						</div>
 						<div class="contact-seller-wrapper">
-							<a class="fit-button" href="#">판매자에게 쪽지 보내기(쪽지 모달창 팝업)</a>
+							<a class="fit-button">판매자에게 쪽지 보내기(쪽지 모달창 팝업)</a>
+							<div class="buttons-wrapper">
+                                <button type="button" data-toggle="modal" data-target="#exampleModal"
+                                        class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">판매자에게 쪽지 보내기
+                                </button>
+                            </div>
 						</div>
 					</div>
 					</form>
@@ -849,7 +878,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- 신고모달창 -->
+	<!-- 메세지 모달창 -->
+	<div th:replace="fragments/message :: message_modal"></div>
+	<!-- 신고 모달창 -->
 	<div class="modal fade" id="reportModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
