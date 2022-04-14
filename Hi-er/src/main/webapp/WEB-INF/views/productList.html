@@ -84,7 +84,7 @@
 										class="level hint--top level-one-seller"> 직업 </span>
 									</span>
 								</div>
-								<h3 th:text="${productList.title}">제목</h3>
+								<a th:href="@{/post/detail/{pid}(pid = ${productList.product_id})}"><h3 th:text="${productList.title}" style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bolder">제목</h3></a>
 								<div class="content-info">
 									<div class="rating-wrapper">
 										<span class="gig-rating text-body-2"> <svg
