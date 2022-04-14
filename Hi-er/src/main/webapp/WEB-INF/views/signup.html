@@ -41,7 +41,7 @@
 				<div class="col-lg-4 mx-auto">
 					<div class="osahan-login py-4">
 						<div class="text-center mb-4">
-							<a th:href="@{/index.html}"><img th:src="@{images/titlelogo.ico}" alt=""></a>
+							<a th:href="@{/}"><img th:src="@{images/titlelogo.ico}" alt=""></a>
 							<h5 class="font-weight-bold mt-3" th:text="${errMsg} ? ${errMsg} : '회원가입'"></h5>
 						</div>
 						<form method="post" th:action="@{/signup}"  oninput='password2.setCustomValidity(password2.value != password.value ? "비밀번호가 달라요~~" : "")'>
@@ -93,12 +93,12 @@
 								<label class="mb-1">직업</label> <select name="job"
 									class="form-control form-control-lg" required>
 									<option selected value="" disabled>직업을 선택해 주세요.</option>
-									<option value="fl">프리랜서</option>
-									<option value="ow">직장인</option>
-									<option value="sbo">소상공인</option>
-									<option value="su">스타트업</option>
-									<option value="us">대학(원)생</option>
-									<option value="js">취업준비생</option>
+									<option value="프리랜서">프리랜서</option>
+									<option value="직장인">직장인</option>
+									<option value="소상공인">소상공인</option>
+									<option value="스타트업">스타트업</option>
+									<option value="대학생">대학(원)생</option>
+									<option value="취준생">취업준비생</option>
 								</select>
 							</div>
 
@@ -106,12 +106,12 @@
 								<label class="mb-1">관심분야</label> <select name="interest"
 									class="form-control form-control-lg" required>
 									<option selected value="" disabled>관심분야를 선택해 주세요.</option>
-									<option value="de">디자인</option>
-									<option value="pr">IT∙프로그래밍</option>
-									<option value="vps">영상∙사진∙음향</option>
-									<option value="ma">마케팅</option>
-									<option value="ti">번역∙통역</option>
-									<option value="dw">문서∙글쓰기</option>
+									<option value="디자인">디자인</option>
+									<option value="IT∙프로그래밍">IT∙프로그래밍</option>
+									<option value="영상∙사진∙음향">영상∙사진∙음향</option>
+									<option value="마케팅">마케팅</option>
+									<option value="번역∙통역">번역∙통역</option>
+									<option value="문서∙글쓰기">문서∙글쓰기</option>
 								</select>
 							</div>
 
@@ -140,9 +140,9 @@
 								</div>
 							</div>
 							<div class="py-3 d-flex align-item-center">
-								<a href="forgot-password.html">Forgot password?</a> <span
-									class="ml-auto"> Already on Maer? <a th:href="@{/login}">Sign
-										in</a></span>
+								<a href="forgot-password.html">아이디/비밀번호 찾기</a> <span
+									class="ml-auto"> 이미 계정이 있나요? <a th:href="@{/login}">로그인
+									</a></span>
 							</div>
 						</form>
 					</div>

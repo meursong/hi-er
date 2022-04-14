@@ -90,12 +90,10 @@ public class UserController {
 		ModelAndView mav = new ModelAndView("index");
 		try {
 			User loginedUser = us.login(email, password);
-			System.out.println(loginedUser);
 			session.setAttribute("loginedUser", loginedUser);
-			if (loginedUser == null) {
-				mav.setViewName("login");
-			}
 		} catch (Exception e) {
+			mav.setViewName("login");
+			mav.addObject("LoginFailedMsg", e.getMessage());
 			e.printStackTrace();
 		}
 		return mav;

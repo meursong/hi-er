@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.mulcam.hier.dao.UserDAO;
 import com.mulcam.hier.dto.User;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.throwsSpec_return;
+
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService{
 		param.put("email", email);
 		param.put("password",password);
 		User user = ud.login(param);
+		if (user == null) {
+			throw new Exception("이메일 또는 비밀번호를 확인해주세요.");
+		}
 		user.setPassword("안가르쳐주지");
 		return user;
 	}
