@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.hier.dao.OrderDAO">
+	<select id="getMaxOrderId" resultType="integer">
+		<![CDATA[
+			select max(order_id) from orders
+		]]> 	
+	</select>
+	<insert id="insertOrder" parameterType="Orders">
+		<![CDATA[
+			insert into orders(
+			order_id,
+			product_id,
+			seller_id,
+			buyer_id,
+			order_status,
+			order_pkg,
+			delivery_date,
+			order_qty,
+			order_price,
+			createdAt
+			) values(
+			#{order_id},
+			#{product_id},
+			#{seller_id},
+			#{buyer_id},
+			#{order_status},
+			#{order_pkg},
+			#{delivery_date},
+			#{order_qty},
+			#{order_price},
+			now()
+			)
+		]]> 
+	</insert>
+</mapper>

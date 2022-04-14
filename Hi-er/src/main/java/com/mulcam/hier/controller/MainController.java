@@ -19,60 +19,58 @@ import com.mulcam.hier.service.MainService;
 public class MainController {
 
 
-	@GetMapping({"", "/"})
-	public String mainPage() {
-		return "index";
-	}
 	@Autowired
 	HttpSession session;
 
 	@Autowired
 	MainService mainService;
 
-	@RequestMapping("/")
+	@GetMapping({"", "/","/index"})
 	public ModelAndView mainView() {
 		ModelAndView mav = new ModelAndView("index");
 		try {
 //			List<User> userList = mainService.getBestUserFive();
-//			List<Board> boardList = mainService.getBestBoardFive();
 			List<Product> bestProduct = mainService.getBestProducts();
-
+//			for (Product p : bestProduct) {
+//				System.out.println(p.getTitle());
+//			}
+			System.out.println(bestProduct);
 			mav.addObject("bestProduct", bestProduct);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		List<User> userList = new ArrayList<User>();
-
-		mav.addObject("bestUserList", userList);
+//		List<User> userList = new ArrayList<User>();
+		
+//		mav.addObject("bestUserList", userList);
 		return mav;
 	}
 
-	@GetMapping("/messages")
-	public ModelAndView messagesPage() {
-		ModelAndView mav = new ModelAndView("messages");
+	@GetMapping("/about")
+	public ModelAndView aboutView() {
+		ModelAndView mav = new ModelAndView("about");
 		return mav;
 	}
 	
-	@RequestMapping("/search")
-	public ModelAndView getSearch(String keyword) {
-		ModelAndView mav = new ModelAndView("404");
-		try {
-			
-			List<Product> ResultList = mainService.searchProduct(keyword);
-			if(!ResultList.isEmpty()) {
-				mav.addObject("ResultList", ResultList);
-				for(Product p: ResultList) {
-					System.out.println(p.getTitle());
-				}
-			} else {
-				mav.addObject("SearchCheck", "empty");
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return mav;
-	}
+//	@RequestMapping("/search")
+//	public ModelAndView getSearch(String keyword) {
+//		ModelAndView mav = new ModelAndView("404");
+//		try {
+//			
+//			List<Product> ResultList = mainService.searchProduct(keyword);
+//			if(!ResultList.isEmpty()) {
+//				mav.addObject("ResultList", ResultList);
+//				for(Product p: ResultList) {
+//					System.out.println(p.getTitle());
+//				}
+//			} else {
+//				mav.addObject("SearchCheck", "empty");
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return mav;
+//	}
 //	@GetMapping("cate/{id}")
 //	public ModelAndView catePage(@PathVariable("id") String id) {
 //		System.out.println(id);

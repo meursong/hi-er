@@ -11,5 +11,6 @@
 		<mapper resource="mybatis/mappers/dh3.xml"/>
 		<mapper resource="mybatis/mappers/post.xml"/>
 		<mapper resource="mybatis/mappers/review.xml"/>
+		<mapper resource="mybatis/mappers/order.xml"/>
 	</mappers>
 </configuration>

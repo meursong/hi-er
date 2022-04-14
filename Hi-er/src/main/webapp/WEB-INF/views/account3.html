@@ -1,0 +1,142 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+
+
+<section layout:fragment="contents">
+	<div class="py-5">
+		<div class="container">
+			<div class="row">
+				<!-- Main Content -->
+				<aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
+					<div
+						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
+						<div class="py-4 px-3 border-bottom">
+							<img th:src="@{/images/user/s4.png}"
+								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
+						</div>
+						<div class="d-flex">
+							<div class="col-6 border-right p-3">
+								<h6 class="font-weight-bold text-dark mb-1">358</h6>
+								<p class="mb-0 text-black-50 small">Connections</p>
+							</div>
+							<div class="col-6 p-3">
+								<h6 class="font-weight-bold text-dark mb-1">85</h6>
+								<p class="mb-0 text-black-50 small">Views</p>
+							</div>
+						</div>
+						<div class="d-flex">
+							<div class="col-6 p-3 overflow-hidden border-top border-right">
+								<a class="font-weight-bold p-2 d-block" th:href="@{/logout}">
+									로그아웃 </a>
+							</div>
+							<div class="col-6 p-3 overflow-hidden border-top">
+								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+									내정보수정 </a>
+								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+									프리내정보수정 </a>	
+									
+							</div>
+						</div>
+
+					</div>
+					<div class="box shadow-sm  rounded bg-white mb-3">
+						<div class="box-title border-bottom p-3">
+							<h6 class="m-0">Skills & Endorsements</h6>
+						</div>
+						<div class="box-body">
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l4.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Character Concept <span class="badge badge-dark ml-1">1</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">You and 1 connection</span> have
+										given endorsements for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l8.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Digital Painting <span class="badge badge-danger ml-1">6</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Ask</span> has given an endorsement
+										for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l5.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Adobe Photoshop <span class="badge badge-info ml-1">3</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Julia Cox</span> has given an
+										endorsement for this skill
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+						<img th:src="@{/images/job1.png}" class="img-fluid"
+							alt="Responsive image">
+						<div class="p-3 border-bottom">
+							<h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
+							<p class="mb-0 text-muted">Looking for talent?</p>
+						</div>
+						<div class="p-3">
+							<button type="button" class="btn btn-outline-success pl-4 pr-4">
+								POST A JOB</button>
+						</div>
+					</div>
+				</aside>
+
+
+
+
+
+				<main th:if="${page}=='3'"
+					class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지쪽지
+				</main>
+
+		
+
+
+				<!-- ========================================================================================================== -->
+
+
+			
+			</div>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+	
+	</script>
+
+
+</section>
+
+</html>
+

@@ -4,50 +4,82 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{common/layout}">
 <head>
-
 <!-- JQuery -->
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script>
-$(function() {
-	$('#iamportPayment').click(function() {
-		console.log("결제버튼클릭");
-		iamport(); //메서드 호출	
+	$(function() {
+		$('#iamportPayment').click(function() {
+			console.log("결제버튼클릭");
+			iamport(); //메서드 호출	
+			/* $.ajax({
+				type : "POST",
+				url : "/order",
+				data : formData, 
+				success : function(res) {
+					alert(res.code);
+					iamport(); //메서드 호출	
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			}); */
+
 		});
-});
-function iamport(){
-	//가맹점 식별코드
-	IMP.init('imp57611856');
-	IMP.request_pay({
-	    pg : 'kakaopay.TC0ONETIME',
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '상품1' , //결제창에서 보여질 이름
-	    amount : 100, //실제 결제되는 가격
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울 강남구 도곡동',
-	    buyer_postcode : '123-456'
-	}, function(rsp) {
-		console.log(rsp);
-	    if ( rsp.success ) {
-	    	var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	    } else {
-	    	 var msg = '결제에 실패하였습니다.';
-	         msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
+		function iamport() {
+			//가맹점 식별코드
+			IMP.init('imp57611856');
+			IMP.request_pay({
+				pg : 'kakaopay.TC0ONETIME',
+				pay_method : 'card',
+				merchant_uid : 'merchant_' + new Date().getTime(),
+				name : $("#seller_id").val(), //결제창에서 보여질 이름 
+				amount : 3000, //실제 결제되는 가격
+				buyer_email : 'iamport1@siot.do',
+				buyer_name : '구매자이름', 
+				buyer_tel : '010-1234-5678',
+				buyer_addr : '서울 강남구 도곡동',
+				buyer_postcode : '123-456'
+			}, function(rsp) {
+				console.log(rsp);
+				if (rsp.success) {
+					var msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					var formData = new FormData(form);
+					$.ajax({
+						type : "POST",
+						url : "/order",
+						async : false, //동기  
+						data : formData, 
+						processData:false,
+						contentType:false,
+						success : function(res) {
+							alert(res);
+							alert("결제 성공");
+							location.href='/mypage';
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							alert("통신 실패.")
+						}
+					}); 
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+				}
+				alert(msg);
+			});
+		} 
 	});
-}
+	
+	
 </script>
+
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -183,8 +215,16 @@ input.card {
 		font-size: 10px
 	}
 }
+
+.cut {
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 </style>
 </head>
+<body>
 <section layout:fragment="contents">
 	<div class="containerPay">
 		<div class="row m-0">
@@ -193,153 +233,133 @@ input.card {
 					<div class="col-12 px-0 mb-4">
 						<div class="box-right">
 							<div class="d-flex pb-2">
-								<p class="fw-bold h2">
-									[[${product.title}]]/<span class="textmuted">[[${product.paymentPkg}]]</span>
-								</p>
-							</div>
+								<p class="fw-bold h1">[[${product.title}]]</p>
+								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
+							</div> 
 							<div class="bg-blue p-2">
-								<P class="h8 textmuted">제품 한줄 소개
-								<p class="p-blue bg btn btn-primary h8">제품 상세 보기(뒤로가기 구현)</p>
-								<p>[[${product.seller_id}]]</p>
-								</P>
+								<p class="h6">제품 한줄 소개</p>
+								<P class="h6 textmuted" th:text="${pkg_description}"></p>
+								<p>[[${freelancerUser.nickname}]]</p>
 							</div>
 						</div>
-					</div>
-					<div>
-						<h2>IAMPORT 결제 데모</h2>
-						<li>
-							<button id="iamportPayment" type="button">결제테스트</button>
-						</li>
 					</div>
 					<div class="col-12 mb-4">
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
-								<p class="ps-3 textmuted fw-bold h6 mb-0">결제 금액</p>
-								<p class="h1 fw-bold d-flex">
-									<span
-										class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>[[${product.b_price}]]
-									원(₩)
-									<!-- <span class="textmuted">.58</span> -->
-								</p>
-								<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
+								<img class="img-fluid" width="600px"
+									th:src="@{/upload/} + ${product.filename2}" />
 							</div>
 						</div>
 					</div>
-					<div class="col-12 px-0">
-						<div class="box-right">
-							<div class="d-flex mb-2">
-								<p class="fw-bold">구매자 정보</p>
-							</div>
-							<div class="d-flex mb-2">
-								<p class="h7">#AL2545</p>
-								<p class="ms-auto bg btn btn-primary p-blue h8">
-									COPY PAYMENT LINK
-								</p>
-							</div>
-							<div class="row">
-								<div class="col-12 mb-2">
-									<p class="textmuted h8">성함 <p>
-									<input class="form-control" type="text"
-										placeholder="홍길동">
+					<div class="col-12 mb-4">
+						<div class="row box-right">
+							<div class="col-md-8 ps-0 ">
+								<div>
+									<div width="400px">
+										<div class="header">
+											<h3>
+												<b class="title" th:text="${product.paymentPkg}"></b>
+											</h3>
+										</div>
+										<div class="d-flex">
+											<b class="delivery"><i class="fa fa-clock-o"
+												aria-hidden="true"></i> [[${default_delivery}]] 작업일</b> <b
+												class="delivery ml-3"><i class="fa fa-refresh"
+												aria-hidden="true"></i> 수정 [[${revision}]] 회</b>
+										</div>
+										<ul class="features">
+											<li
+												th:attr="class=${original_image == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>원본 파일 제공
+											</li>
+											<li
+												th:attr="class=${commercial == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
+											</li>
+											<li
+												th:attr="class=${sns_Kit == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
+											</li>
+											<li class="feature included"><i class="fa fa-check"
+												aria-hidden="true"></i>시안 개수 : [[${draft}]]</li>
+										</ul>
+									</div>
 								</div>
-								<div class="col-12 mb-2">
-									<p class="textmuted h8">이메일 <p>
-									<input class="form-control" type="text"
-										placeholder="@를 포함한 메일주소를 입력해 주세요">
-								</div>
-								<div class="col-12 mb-2">
-									<p class="textmuted h8">전화번호 <p>
-									<input class="form-control" type="text"
-										placeholder="010-1111-2222">
-								</div>
-								<!-- <div class="col-6">
-									<p class="textmuted h8">전화번호</p>
-									<input class="form-control" type="text"
-										placeholder="Oct 25, 2020">
-								</div>
-								<div class="col-6">
-									<p class="textmuted h8">Due on</p>
-									<input class="form-control" type="text"
-										placeholder="Oct 25, 2020">
-								</div> -->
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 			<div class="col-md-5 col-12 ps-md-5 p-0 ">
 				<div class="box-left">
-					<p class="textmuted h8">Invoice</p>
-					<p class="fw-bold h7">Alex Parkinson</p>
-					<p class="textmuted h8">3897 Hickroy St, salt Lake city</p>
-					<p class="textmuted h8 mb-2">Utah, United States 84104</p>
+					<p class="h4">결제상세</p>
+					<p class="fw-bold h7">[[${price}]]</p>
+					<p class="textmuted h8">주문자 성함 :
+						[[${session.loginedUser.name}]]</p>
+					<p class="textmuted h8 mb-2">주문자 이메일 :
+						[[${session.loginedUser.email}]]</p>
 					<div class="h8">
 						<div class="row m-0 border mb-3">
 							<div class="col-6 h8 pe-0 ps-2">
-								<p class="textmuted py-2">Items</p>
-								<span class="d-block py-2 border-bottom">Legal Advising</span> <span
-									class="d-block py-2">Expert Consulting</span>
+								<p class="textmuted py-2">상품명</p>
+								<span class="d-block py-2 border-bottom cut"
+									th:text="${product.paymentPkg}"></span> <span
+									class="d-block py-2">쿠폰 할인</span>
 							</div>
 							<div class="col-2 text-center p-0">
-								<p class="textmuted p-2">Qty</p>
-								<span class="d-block p-2 border-bottom">2</span> <span
-									class="d-block p-2">1</span>
+								<p class="textmuted p-2">수량</p>
+								<span class="d-block p-2 border-bottom">1</span> <span
+									class="d-block p-2">0</span>
 							</div>
 							<div class="col-2 p-0 text-center h8 border-end">
-								<p class="textmuted p-2">Price</p>
+								<p class="textmuted p-2">가격</p>
 								<span class="d-block border-bottom py-2"><span
-									class="fas fa-dollar-sign"></span>500</span> <span
-									class="d-block py-2 "><span class="fas fa-dollar-sign"></span>400</span>
+									class="fas fa-dollar-sign" th:text="${price}"></span></span> <span
+									class="d-block py-2 "><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 							<div class="col-2 p-0 text-center">
-								<p class="textmuted p-2">Total</p>
+								<p class="textmuted p-2">총 금액</p>
 								<span class="d-block py-2 border-bottom"><span
-									class="fas fa-dollar-sign"></span>1000</span> <span
-									class="d-block py-2"><span class="fas fa-dollar-sign"></span>400</span>
+									class="fas fa-dollar-sign" th:text="${price}"></span></span> <span
+									class="d-block py-2"><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 						</div>
-						<div class="d-flex h7 mb-2">
-							<p class="">Total Amount</p>
-							<p class="ms-auto">
-								<span class="fas fa-dollar-sign"></span>1400
+						<br>
+						<div class="col-md-8 ps-0 ">
+							<p class="ps-3 textmuted fw-bold h6 mb-0">결제 금액</p>
+							<p class="h1 fw-bold d-flex">
+								<span
+									class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>[[${price}]]
+								원(₩)
+								<!-- <span class="textmuted">.58</span> -->
 							</p>
+							<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
 						</div>
-						<div class="h8 mb-5">
-							<p class="textmuted">Lorem ipsum dolor sit amet elit.
-								Adipisci ea harum sed quaerat tenetur</p>
-						</div>
+						<div class="h8 mb-5"></div>
 					</div>
 					<div class="">
-						<p class="h7 fw-bold mb-1">Pay this Invoice</p>
-						<p class="textmuted h8 mb-2">Make payment for this invoice by
-							filling in the details</p>
-						<div class="form">
-							<div class="row">
-								<div class="col-12">
-									<div class="card border-0">
-										<input class="form-control ps-5" type="text"
-											placeholder="Card number"> <span
-											class="far fa-credit-card"></span>
-									</div>
-								</div>
-								<div class="col-6">
-									<input class="form-control my-3" type="text"
-										placeholder="MM/YY">
-								</div>
-								<div class="col-6">
-									<input class="form-control my-3" type="text" placeholder="cvv">
-								</div>
-								<p class="p-blue h8 fw-bold mb-3">MORE PAYMENT METHODS</p>
+						<form id='form' action='/order' method='post'>
+							<input type="hidden" id="buyer_id" name="buyer_id" th:value="${session.loginedUser.user_id}"> 
+							<input type="hidden" id="seller_id" name="seller_id" th:value="${product.seller_id}"> 
+							<input type="hidden" id="product_id" name="product_id" th:value="${product.product_id}"> 
+							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
+							<input type="hidden" id="delivery_date" name="delivery_date" th:value="${default_delivery}"> 
+							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
+							<input type="hidden" id="order_qty" name="order_qty" th:value="1"> 
+							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
+							<div style="width: 100%; margin: auto;">
+								<button class="btn btn-primary d-block h8"
+									style="width: 400px; margin: auto; display: block;"
+									id="iamportPayment" type="button">결제테스트</button>
 							</div>
-							<div class="btn btn-primary d-block h8">
-								PAY <span class="fas fa-dollar-sign ms-2"></span>1400<span
-									class="ms-3 fas fa-arrow-right"></span>
-							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </section>
+</body>
+
+
 </html>

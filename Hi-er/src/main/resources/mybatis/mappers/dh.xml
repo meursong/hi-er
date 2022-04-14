@@ -8,11 +8,16 @@
 			select email from user where user_id=#{user_id}
 		]]>
 	</select>
-
+	
+	<select id="selectType" resultType="User" parameterType="Integer">
+		<![CDATA[
+			select type from user where user_id=#{user_id}
+		]]>
+	</select>
 	<select id="select_info_f" resultType="FreelancerUser"
 		parameterType="Integer">
 		<![CDATA[
-			select u.nickname, u.job, avg(r.star_point)as avg_star_point, f.address, f.switchAt, f.introduction from user u left join f_info f on user_id=f_id left join review r on seller_id = user_id where u.type=2 and u.user_id=#{user_id} group by user_id;
+			select f.f_id, u.nickname, u.job, avg(r.star_point)as avg_star_point, f.address, f.switchAt, f.introduction from user u left join f_info f on user_id=f_id left join review r on seller_id = user_id where u.type=2 and u.user_id=#{user_id} group by user_id;
 		]]>
 	</select>
 

@@ -4,11 +4,11 @@
 	layout:decorate="~{common/layout}">
 <section layout:fragment="contents">
 	<!-- Inner Header -->
-	<section class="py-5">
+	<section class="py-5" style="padding-top: 2rem!important; padding-bottom: 2rem!important;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<img th:src="@{/images/dh/productposter.png}">
+					<img th:src="@{/images/홈배너.jpg}" width="100%">
 				</div>
 			</div>
 		</div>
@@ -44,7 +44,6 @@
 															</label>
 														</form>
 													</div>
-													<button id="test" th:onclick="test()">테스트버튼</button>
 												</div>
 											</div>
 										</div>
@@ -63,7 +62,7 @@
 			<div class="container">
 				<div
 					class="sorting-div d-flex align-items-center justify-content-between">
-					<p class="mb-2">[[${productList.size()}]]</p>
+					
 					
 				</div>
 				<h3 >전체</h3>
@@ -71,8 +70,8 @@
 			<div class="container">
 				<div class="row">
 					<div th:each="productList : ${productList}" class="col-md-3">
-						<a href="product-detail.html"> <img class="img-fluid"
-							th:src="@{/images/list/v1.png}" />
+						<a th:href="@{/post/detail/{pid}(pid = ${productList.product_id})}"> <img class="img-fluid"
+							th:src="@{/upload/} + ${productList.filename1}" onerror="this.src='/images/list/v1.png'">
 						</a>
 						<div class="inner-slider">
 							<div class="inner-wrapper">
@@ -80,7 +79,7 @@
 									<span class="seller-image"> <img class="img-fluid"
 										th:src="@{/images/user/s3.png}" alt='' />
 									</span> <span class="seller-name"> <a
-										th:text="${productList.nickname}" href="#">닉네임</a> <span
+										th:text="${productList.nickname}" th:href="@{/freelancerInfo/{id}(id = ${productList.seller_id})}">닉네임</a> <span
 										th:text="${productList.job}"
 										class="level hint--top level-one-seller"> 직업 </span>
 									</span>
@@ -104,7 +103,7 @@
 									<!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
 									<span th:text="${productList.createdAt}"></span>
 									<div class="price">
-										Basic <span th:text="'₩'+${productList.commission}">
+										Basic <span th:text="'₩'+${#numbers.formatInteger(productList.b_price, 0, 'COMMA')}">
 											₩비용</span>
 
 									</div>
@@ -136,8 +135,7 @@
 			},
 
 			success : function(data) {
-				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=[[${params.searchKeyword}]]");
-				console.log([[${sort}]]);
+				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]");
 			},
 
 		}).done(function(fragment) {
@@ -155,13 +153,8 @@
 	}
 	window.onpopstate = function(event) {
 		$("#productList").load(location.href + " #productList");
-		$("#")
+
 	};
 
-	function test() {
-		location.href = '/product/category/all?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&searchKeyword=' +
-				searchKeyword;
-
-	}
 
 </script>

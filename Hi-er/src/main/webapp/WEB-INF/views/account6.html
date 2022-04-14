@@ -1,0 +1,316 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+
+
+<section layout:fragment="contents">
+	<div class="py-5">
+		<div class="container">
+			<div class="row">
+				<!-- Main Content -->
+				<aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
+					<div
+						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
+						<div class="py-4 px-3 border-bottom">
+							<img th:src="@{/images/user/s4.png}"
+								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep
+								Osahan</h5>
+							<p class="mb-0 text-muted">UI / UX Designer</p>
+						</div>
+						<div class="d-flex">
+							<div class="col-6 border-right p-3">
+								<h6 class="font-weight-bold text-dark mb-1">358</h6>
+								<p class="mb-0 text-black-50 small">Connections</p>
+							</div>
+							<div class="col-6 p-3">
+								<h6 class="font-weight-bold text-dark mb-1">85</h6>
+								<p class="mb-0 text-black-50 small">Views</p>
+							</div>
+						</div>
+						<div class="d-flex">
+							<div class="col-6 p-3 overflow-hidden border-top border-right">
+								<a class="font-weight-bold p-2 d-block" th:href="@{/logout}">
+									로그아웃 </a>
+							</div>
+							<div class="col-6 p-3 overflow-hidden border-top">
+								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+									내정보수정 </a>
+								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+									프리내정보수정 </a>	
+							</div>
+						</div>
+
+					</div>
+					<div class="box shadow-sm  rounded bg-white mb-3">
+						<div class="box-title border-bottom p-3">
+							<h6 class="m-0">Skills & Endorsements</h6>
+						</div>
+						<div class="box-body">
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l4.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Character Concept <span class="badge badge-dark ml-1">1</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">You and 1 connection</span> have
+										given endorsements for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l8.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Digital Painting <span class="badge badge-danger ml-1">6</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Ask</span> has given an endorsement
+										for this skill
+									</div>
+								</div>
+							</div>
+							<div
+								class="d-flex align-items-center osahan-post-header p-3 people-list">
+								<div class="dropdown-list-image mr-3">
+									<img class="rounded-circle" th:src="@{/images/l5.png}" alt="">
+								</div>
+								<div class="font-weight-bold">
+									<div class="text-truncate">
+										Adobe Photoshop <span class="badge badge-info ml-1">3</span>
+									</div>
+									<div class="small text-muted">
+										<span class="text-primary">Julia Cox</span> has given an
+										endorsement for this skill
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+						<img th:src="@{/images/job1.png}" class="img-fluid"
+							alt="Responsive image">
+						<div class="p-3 border-bottom">
+							<h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
+							<p class="mb-0 text-muted">Looking for talent?</p>
+						</div>
+						<div class="p-3">
+							<button type="button" class="btn btn-outline-success pl-4 pr-4">
+								POST A JOB</button>
+						</div>
+					</div>
+				</aside>
+
+
+
+
+				<!-- ================================================================================================================================== -->
+
+
+				<main th:if="${page}=='6'"
+					class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6">내가 쓴 리뷰</h6>
+
+
+						</div>
+
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>시간</th>
+											<th>별점</th>
+											<th>상품 제목</th>
+											<th>판매자 닉네임</th>
+										</tr>
+
+									</thead>
+									<tbody>
+										<tr th:each="order: ${orders}">
+											<td th:text="${order.createdAt}"></td>
+											<td th:text="${order.nickname}"></td>
+											<td th:text="${order.title}"></td>
+											<td th:text="${order.nickname2}"></td>
+											<td>
+												<div class="container">
+													<div class="row" style="margin-top: 0;">
+														<div class="col-md-12">
+															<div class="well well-sm">
+																
+																<div class="text-right">
+																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
+																		href="#">리뷰 달기</a>
+																</div>
+
+																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
+																	<div class="col-md-12">
+																		<form>
+																			<input id="ratings-hidden" name="rating"
+																				type="hidden">
+																			<textarea class="form-control animated" cols="50"
+																				th:id="'new-review'+${order.order_id}" name="comment"
+																				placeholder="리뷰를 입력해주세요" rows="5"></textarea>
+
+
+																			<div name="myform" class="myform" >
+
+																				<fieldset>
+																					<legend>★★★별점★★★</legend>
+																					<input type="radio" th:class="'rating'+${order.order_id}" name="rating" value="5"
+																						th:id="'rate1'+${order.order_id}"><label th:for="'rate1'+${order.order_id}">⭐</label> <input
+																						type="radio" th:class="'rating'+${order.order_id}" name="rating" value="4" th:id="'rate2'+${order.order_id}"><label
+																						th:for="'rate2'+${order.order_id}">⭐</label> <input type="radio"
+																						th:class="'rating'+${order.order_id}" name="rating" value="3" th:id="'rate3'+${order.order_id}"><label
+																						th:for="'rate3'+${order.order_id}">⭐</label> <input type="radio"
+																						th:class="'rating'+${order.order_id}" name="rating" value="2" th:id="'rate4'+${order.order_id}"><label
+																						th:for="'rate4'+${order.order_id}">⭐</label> <input type="radio"
+																						th:class="'rating'+${order.order_id}" name="rating" value="1" th:id="'rate5'+${order.order_id}"><label
+																						th:for="'rate5'+${order.order_id}">⭐</label>
+																				</fieldset> 
+
+
+																			</div>
+
+
+
+
+																			<div class="text-right">
+
+																				<a class="btn btn-danger btn-lg close-review-box" th:href="@{#}"
+																					th:id="'close-review-box'+${order.order_id}"
+																					style="display: none; margin-right: 10px;"> <span
+																					class="glyphicon glyphicon-remove"></span>Cancel
+																				</a>
+																				<button class="btn btn-success btn-lg review" th:id="${order.order_id}" type="button">Save</button>
+																			</div>
+																		</form>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
+					</div>
+					<div class="footer-pagination text-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+
+								<li class="page-item"><a th:if="${pageInfo.nowPage}>='2'"
+									class="page-link" th:href="@{/mypage/1/}+${pageInfo.nowPage-1}"
+									aria-label="Previous"> <span aria-hidden="true"><i
+											class="fa fa-chevron-left" aria-hidden="true"></i></span>
+								</a> <th:block th:unless="${pageInfo.nowPage}=='1'"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo.nowPage-1}"
+										aria-label="Previous">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+
+								<th:block
+									th:each="num: ${#numbers.sequence({pageInfo.startPage},{pageInfo.endPage})}">
+									<li class="page-item"><a class="page-link"
+										th:href="@{/mypage/1/}+${num}" th:text="${num}"></a></li>
+								</th:block>
+								<th:block th:text="${pageInfo.nowPage}"></th:block>
+
+
+								<li class="page-item"><a
+									th:if="${pageInfo.nowPage}<${pageInfo.lastPage}"
+									class="page-link"
+									th:href="@{/mypage/1/}+(${pageInfo.nowPage+1})"
+									aria-label="Next"> <span aria-hidden="true"><i
+											class="fa fa-chevron-right" aria-hidden="true"></i></span>
+
+								</a> <th:block th:unless="${pageInfo.nowPage}==${pageInfo.lastPage}"
+										class="page-link"
+										th:href="@{/mypage/1/}+${pageInfo.nowPage+1}"
+										aria-label="Next">
+										<span aria-hidden="true"></span>
+									</th:block></li>
+							</ul>
+						</nav>
+					</div>
+				</main>
+
+				
+
+
+				<!-- ========================================================================================================== -->
+
+
+			
+			</div>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function() {
+			$(".review").click(function(e){
+				let id=e.currentTarget.id;
+				var rating1='.rating'+id+':checked';
+				var rating2=$(rating1).val();//내가 선택한 별점
+				var content = $('#new-review' + id).val();
+				
+				console.log(id);
+				console.log(rating1);
+				console.log(rating2);
+				console.log(content);
+				if(rating2===undefined){
+					alert('별점을 입력하세요');
+				}
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/review",
+					data : {
+						"order_id" : id, "rating":rating2, "content":content
+					},
+					success : function(data, textStatus) {
+						if (data == 'true') {
+							alert('리뷰를 등록했습니다.');
+							
+						} else {
+							alert('오류가 발생했습니다');
+							
+						}
+					},
+					/* complete: function() {
+						alert("a");
+					} */
+				});
+				
+			});
+			
+			
+		});
+	</script>
+
+
+</section>
+
+</html>
+

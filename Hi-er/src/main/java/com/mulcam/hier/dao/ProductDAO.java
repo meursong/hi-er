@@ -13,5 +13,7 @@ public interface ProductDAO {
 	public List<Product> getBestProducts() throws Exception;
 
 	public List<Product> searchProduct(String keyword) throws Exception;
+
+	public List<Product> getProducts()  throws Exception;
 	
 }

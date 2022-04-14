@@ -3,6 +3,7 @@ package com.mulcam.hier.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mulcam.hier.dto.FreelancerForm;
 import com.mulcam.hier.dto.FreelancerUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,13 +66,21 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void insert_info(FreelancerUser free) throws Exception {
+	public void insert_info(FreelancerForm free) throws Exception {
 		ud.insert_info_f(free);
 	}
 
 	@Override
 	public void update_type(int user_id) throws Exception {
 		ud.update_type_f(user_id);
+		
+	}
+	
+	@Override
+	public User selectType(int user_id) throws Exception{
+		User user = ud.selectType(user_id);
+		if(user==null) throw new Exception("오류");
+		return user;
 		
 	}
 //	@Override
@@ -88,5 +97,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void signup(User user) throws Exception {
 		ud.insert_user(user);
+	}
+
+	@Override
+	public FreelancerUser sellerInfo(int seller_id) throws Exception {
+		FreelancerUser seller_info = ud.sellet_seller(seller_id);
+		return seller_info;
 	}
 }
