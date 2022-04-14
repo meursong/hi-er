@@ -24,7 +24,7 @@ public interface UserDAO {
 
 	String nicknameCheck(String usernickname) throws Exception;
 
-	public List<User> getBestUserFive() throws Exception;
+	public List<User> getBestUser() throws Exception;
 	public List <SelectP> getList() throws Exception;
 	public User selectUser(int user_id) throws Exception;
   	public void update_type_f(int user_id) throws Exception;

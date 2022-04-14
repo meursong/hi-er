@@ -1,23 +1,31 @@
 package com.mulcam.hier.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.Product;
+import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.MainService;
+import com.mulcam.hier.service.PostService;
+import com.mulcam.hier.service.UserService;
 
 @Controller
 public class MainController {
-
+    @Autowired
+    PostService postService;
 
 	@Autowired
 	HttpSession session;
@@ -25,68 +33,49 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 
+	@Autowired
+	UserService userService;
+	
 	@GetMapping({"", "/","/index"})
 	public ModelAndView mainView() {
 		ModelAndView mav = new ModelAndView("index");
 		try {
-//			List<User> userList = mainService.getBestUserFive();
+			List<User> bestUser = mainService.getBestUser();
 			List<Product> bestProduct = mainService.getBestProducts();
-//			for (Product p : bestProduct) {
-//				System.out.println(p.getTitle());
-//			}
 			System.out.println(bestProduct);
 			mav.addObject("bestProduct", bestProduct);
+			mav.addObject("bestUser", bestUser);
+			User user = (User) session.getAttribute("loginedUser");
+			List<Boolean> isLikeList = new ArrayList<>();
+			
+			if (user != null) {
+				for(Product p : bestProduct) {
+					int pid = p.getProduct_id();
+					boolean isLike = postService.isLike(pid, user.getUser_id());
+					isLikeList.add(isLike);
+				}
+			}
+			System.out.println(isLikeList.size());
+			mav.addObject("isLikeList", isLikeList);
+			
+			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-//		List<User> userList = new ArrayList<User>();
 		
-//		mav.addObject("bestUserList", userList);
 		return mav;
 	}
-
+	
+	
 	@GetMapping("/about")
 	public ModelAndView aboutView() {
 		ModelAndView mav = new ModelAndView("about");
 		return mav;
 	}
 	
-//	@RequestMapping("/search")
-//	public ModelAndView getSearch(String keyword) {
-//		ModelAndView mav = new ModelAndView("404");
-//		try {
-//			
-//			List<Product> ResultList = mainService.searchProduct(keyword);
-//			if(!ResultList.isEmpty()) {
-//				mav.addObject("ResultList", ResultList);
-//				for(Product p: ResultList) {
-//					System.out.println(p.getTitle());
-//				}
-//			} else {
-//				mav.addObject("SearchCheck", "empty");
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return mav;
-//	}
-//	@GetMapping("cate/{id}")
-//	public ModelAndView catePage(@PathVariable("id") String id) {
-//		System.out.println(id);
-//		ModelAndView mav = new ModelAndView("gitTest");
-//		switch(id) {
-//			case "1":
-//				mav.addObject("cate", "<i>aaaaa</i>");
-//				break;
-//			case "2":
-//				mav.addObject("cate", "dudtkd");
-//				break;
-//			case "3":
-//				mav.addObject("cate", "it");
-//				break;
-//		}
-//		return mav;
-//	}
-//
+	@GetMapping("/Contact")
+	public ModelAndView ContactUsView() {
+		ModelAndView mav = new ModelAndView("contact");
+		return mav;
+	}
 }

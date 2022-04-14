@@ -18,9 +18,9 @@ public class MainServiceImpl implements MainService{
 	UserDAO userDAO;
 	
 	@Override
-	public List<User> getBestUserFive() throws Exception {
-		List<User> userList = userDAO.getBestUserFive();
-		return userList;
+	public List<User> getBestUser() throws Exception {
+		List<User> bestUser = userDAO.getBestUser();
+		return bestUser;
 	}
 	
 	@Autowired
