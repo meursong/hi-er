@@ -71,15 +71,7 @@
 							<span class="total-rating" th:if="${product.category}=='video'">영상편집</span>
 							<span class="total-rating" th:if="${product.category}=='it'">IT</span>
 						</div>
-						<!-- <div class="user-info d-flex">
-                <span class="user-info-rating d-flex">
-                  <div class="star-rating-s15-wrapper">
-                    <span class="star-rating-s15 rate-10"> </span>
-                  </div>
-                  <span class="total-rating-out-five">${평점}5.0 평점</span>
-                  <span class="total-rating">(${리뷰수})</span>
-                </span>
-              </div> -->
+						
 					</div>
 					<!--  이미지 -->
 					<div class="slider mt-4">
@@ -552,7 +544,7 @@
 						<div id="reviews" class="review-section">
 							<div
 								class="d-flex align-items-center justify-content-between mb-4">
-								<h4 class="m-0">리뷰 (리뷰 개수)</h4>
+								<h4 class="m-0">[[${maxReviewCnt}]] 개의 평가</h4>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
@@ -569,11 +561,11 @@
 													<div
 														class="fit-progressbar fit-progressbar-bar star-progress-bar">
 														<div class="fit-progressbar-background">
-															<span class="progress-fill" style="width: 97.2973%"></span>
+															<span class="progress-fill" style="width: ${reviewCount.count}"></span>
 														</div>
 													</div>
 												</td>
-												<td class="star-num" th:text="${reviewCount.count}"></td>
+												<td class="star-num" th:text="${reviewCount.count} + 개"></td>
 											</tr>
 											<!-- <tr class="">
 												<td><span>
