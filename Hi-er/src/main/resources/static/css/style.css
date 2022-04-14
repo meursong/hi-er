@@ -1711,7 +1711,7 @@ Version: 1.0
      right: -5px;
 }
  .recommended a img.img-fluid {
-     height: 190px;
+     height: 220px;
      object-fit: cover;
      margin: auto;
      width: 100%;

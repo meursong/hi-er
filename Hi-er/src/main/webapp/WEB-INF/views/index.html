@@ -79,7 +79,7 @@
 				<div class="col" th:each="user: ${bestUser}">
 					<div class="freelancer">
 					<a style="font-size:15px; font-weight: 500; color: black;" th:href="@{/freelancerInfo/{id}(id=${user.seller_id})}">
-						<img src="images/user/default.jpg">
+						<img class="img-fluid" th:src="@{/upload/} + ${user.profile_image}" onerror="this.src='/images/user/default.jpg'">
 					</a>
 						<div class="freelancer-footer">
 							<div>
@@ -123,7 +123,7 @@
 							</svg></h3>
 						<div class="view recent-slider recommended-slider">
 							<div class="col" th:each="product: ${bestProduct}">
-								<a th:href="@{/post/detail/{pid}(pid = ${product.product_id})}"> <img class="img-fluid" src="images/list/v1.png" />
+								<a th:href="@{/post/detail/{pid}(pid = ${product.product_id})}"> <img class="img-fluid" th:src="@{/upload/} + ${product.filename1}" onerror="this.src='/images/titlelogo.png'">
 								</a>
 								<div class="inner-slider">
 									<div class="inner-wrapper">
