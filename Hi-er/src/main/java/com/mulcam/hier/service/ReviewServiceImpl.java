@@ -3,7 +3,7 @@ package com.mulcam.hier.service;
 import java.util.Collections;
 import java.util.List;
 
-import com.mulcam.hier.dto.PaginationInfo;
+import com.mulcam.hier.others.PaginationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

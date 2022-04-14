@@ -1,5 +1,7 @@
 package com.mulcam.hier.dto;
 
+import com.mulcam.hier.others.Criteria;
+
 import java.sql.Date;
 
 public class Review extends Criteria {
