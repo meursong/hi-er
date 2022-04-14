@@ -1,7 +1,7 @@
 package com.mulcam.hier.dto;
 
-import com.mulcam.hier.Time;
-import org.springframework.web.multipart.MultipartFile;
+import com.mulcam.hier.others.Time;
+import com.mulcam.hier.others.Criteria;
 
 import java.util.Date;
 
