@@ -558,11 +558,12 @@
 								<div class="col-md-6">
 									<table class="stars-counters">
 										<tbody>
-											<tr class="">
+											<tr th:each="reviewCount: ${reviewCounts}" class="">
 												<td><span>
 														<button
-															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
+															th:text="${reviewCount.star_point} + 점">
+															</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -572,13 +573,13 @@
 														</div>
 													</div>
 												</td>
-												<td class="star-num">(36)</td>
+												<td class="star-num" th:text="${reviewCount.count}"></td>
 											</tr>
-											<tr class="">
+											<!-- <tr class="">
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															4점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -594,7 +595,7 @@
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															3점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -610,7 +611,7 @@
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															2점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -626,7 +627,7 @@
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															1점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -637,7 +638,7 @@
 													</div>
 												</td>
 												<td class="star-num">(0)</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 								</div>
