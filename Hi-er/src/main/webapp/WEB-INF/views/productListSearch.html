@@ -167,7 +167,7 @@
 			success : function(data) {
 				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category=[[${params.category}]]");
 
-				console.log("[[${params.sort}]]")},
+				},
 
 		}).done(function(fragment) {
 
@@ -188,25 +188,33 @@
 			},
 
 			success : function(data) {
-				history.pushState({}, null, "?sort="+"[[${params.sort}]]"+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+value);
+				const sch= location.search;
+				const params = new URLSearchParams(sch);
+				const sort = params.get("sort");
+				console.log(sort);
+				history.pushState({}, null, "?sort="+sort+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+value);
 
-				console.log(data);
-				console.log("[[${params.sort}]]");
-				console.log(value);
+				// console.log(data);
+
+				// console.log(value);
 			},
 
 
 		}).done(function(fragment) {
 
-			$('#productList').replaceWith(fragment);
+			$('#productList').load(location.href + " #productList");
 
 
 		});
 	})
 
 	function movePage(uri, queryString) {
-		history.pushState({}, null, queryString);
-		$("#productList").load(uri + queryString + " #productList");
+		const sch= location.search;
+		const params = new URLSearchParams(sch);
+		const category = params.get("category");
+		console.log(category);
+		history.pushState({}, null, queryString+category);
+		$("#productList").load(uri + queryString + category + " #productList");
 	}
 	window.onpopstate = function(event) {
 		$("#productList").load(location.href + " #productList");
