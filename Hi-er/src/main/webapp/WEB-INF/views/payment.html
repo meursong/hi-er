@@ -237,9 +237,9 @@ input.card {
 								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
 							</div> 
 							<div class="bg-blue p-2">
-								<p class="h6">제품 한줄 소개</p>
-								<P class="h6 textmuted" th:text="${pkg_description}"></p>
-								<p>[[${freelancerUser.nickname}]]</p>
+								<p class="h6 textmuted">제품 한줄 소개</p>
+								<P class="h5" th:text="${pkg_description}"></p>
+								<p class="h7">판매자 : [[${freelancerUser.nickname}]]</p>
 							</div>
 						</div>
 					</div>
@@ -293,11 +293,10 @@ input.card {
 			</div>
 			<div class="col-md-5 col-12 ps-md-5 p-0 ">
 				<div class="box-left">
-					<p class="h4">결제상세</p>
-					<p class="fw-bold h7">[[${price}]]</p>
-					<p class="textmuted h8">주문자 성함 :
+					<p class="h3">결제상세</p>
+					<p class="textmuted h6">주문자 성함 :
 						[[${session.loginedUser.name}]]</p>
-					<p class="textmuted h8 mb-2">주문자 이메일 :
+					<p class="textmuted h6 mb-2">주문자 이메일 :
 						[[${session.loginedUser.email}]]</p>
 					<div class="h8">
 						<div class="row m-0 border mb-3">
@@ -315,13 +314,13 @@ input.card {
 							<div class="col-2 p-0 text-center h8 border-end">
 								<p class="textmuted p-2">가격</p>
 								<span class="d-block border-bottom py-2"><span
-									class="fas fa-dollar-sign" th:text="${price}"></span></span> <span
+									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(price,0, 'COMMA')}"></span></span> <span
 									class="d-block py-2 "><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 							<div class="col-2 p-0 text-center">
 								<p class="textmuted p-2">총 금액</p>
 								<span class="d-block py-2 border-bottom"><span
-									class="fas fa-dollar-sign" th:text="${price}"></span></span> <span
+									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(price,0, 'COMMA')}"></span></span> <span
 									class="d-block py-2"><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 						</div>
@@ -330,8 +329,8 @@ input.card {
 							<p class="ps-3 textmuted fw-bold h6 mb-0">결제 금액</p>
 							<p class="h1 fw-bold d-flex">
 								<span
-									class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>[[${price}]]
-								원(₩)
+									class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>
+									[[${#numbers.formatInteger(price,0, 'COMMA')}]] 원
 								<!-- <span class="textmuted">.58</span> -->
 							</p>
 							<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>

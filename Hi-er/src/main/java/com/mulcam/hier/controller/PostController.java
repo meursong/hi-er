@@ -1,5 +1,7 @@
 package com.mulcam.hier.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,25 +65,6 @@ public class PostController {
 		ModelAndView mav = new ModelAndView("product-detail");
 		return mav;
 	}
-
-//	@GetMapping("/write")
-//	public String write(Model model) throws Exception {
-//		if ((User) session.getAttribute("loginedUser") == null) {
-//			return "login";
-//		} else {
-//			int type = ((User) session.getAttribute("loginedUser")).getType();
-//			if(type == 1) {
-//				int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-//				User email = us.selectEmail(user_id);
-//				model.addAttribute("email", email);
-//				return "freelancerForm";
-//			}else {
-//				return "write";
-//			}
-//			
-//		}
-//		
-//	}
 
 	@GetMapping("/designWrite")
 	public String designWrite(Model model) throws Exception {
@@ -137,6 +121,32 @@ public class PostController {
 		}
 		return filename;
 	}
+	
+	private String resizeFileupload(MultipartFile file) {
+		String filename = null;
+		try {
+			String path = servletContext.getRealPath("/upload/");
+			String time = Long.valueOf(new Date().getTime()).toString();
+			int width=730, height=450;
+			if (file != null && !file.isEmpty()) {
+				filename = file.getOriginalFilename() + time;
+				File destFile = new File(path + filename);
+				BufferedImage inputImage = ImageIO.read(file.getInputStream());
+				BufferedImage outputImage = new BufferedImage(width,height,inputImage.getType());
+				
+				Graphics2D graphics2D = outputImage.createGraphics();
+				graphics2D.drawImage(inputImage, 0, 0, width, height, null);
+				graphics2D.dispose();
+				String fileName = file.getOriginalFilename();
+				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);			
+				ImageIO.write(outputImage, ext, destFile);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return filename;
+	}
+	
 
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
@@ -144,13 +154,13 @@ public class PostController {
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(fileupload(product.getFile2()));
-			product.setFilename3(fileupload(product.getFile3()));
-			product.setFilename4(fileupload(product.getFile4()));
-			product.setFilename5(fileupload(product.getFile5()));
-			product.setFilename6(fileupload(product.getFile6()));
-			product.setFilename7(fileupload(product.getFile7()));
-			product.setFilename8(fileupload(product.getFile8()));
+			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename3(resizeFileupload(product.getFile3()));
+			product.setFilename4(resizeFileupload(product.getFile4()));
+			product.setFilename5(resizeFileupload(product.getFile5()));
+			product.setFilename6(resizeFileupload(product.getFile6()));
+			product.setFilename7(resizeFileupload(product.getFile7()));
+			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
 			product.setSeller_id(seller_id); 
 			postService.writePost(product);
@@ -165,14 +175,14 @@ public class PostController {
 		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
-			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(fileupload(product.getFile2()));
-			product.setFilename3(fileupload(product.getFile3()));
-			product.setFilename4(fileupload(product.getFile4()));
-			product.setFilename5(fileupload(product.getFile5()));
-			product.setFilename6(fileupload(product.getFile6()));
-			product.setFilename7(fileupload(product.getFile7()));
-			product.setFilename8(fileupload(product.getFile8()));
+			product.setFilename1(resizeFileupload(product.getFile1()));
+			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename3(resizeFileupload(product.getFile3()));
+			product.setFilename4(resizeFileupload(product.getFile4()));
+			product.setFilename5(resizeFileupload(product.getFile5()));
+			product.setFilename6(resizeFileupload(product.getFile6()));
+			product.setFilename7(resizeFileupload(product.getFile7()));
+			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
 			product.setSeller_id(seller_id);
 			postService.writePost(product);
@@ -187,14 +197,14 @@ public class PostController {
 		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
-			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(fileupload(product.getFile2()));
-			product.setFilename3(fileupload(product.getFile3()));
-			product.setFilename4(fileupload(product.getFile4()));
-			product.setFilename5(fileupload(product.getFile5()));
-			product.setFilename6(fileupload(product.getFile6()));
-			product.setFilename7(fileupload(product.getFile7()));
-			product.setFilename8(fileupload(product.getFile8()));
+			product.setFilename1(resizeFileupload(product.getFile1()));
+			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename3(resizeFileupload(product.getFile3()));
+			product.setFilename4(resizeFileupload(product.getFile4()));
+			product.setFilename5(resizeFileupload(product.getFile5()));
+			product.setFilename6(resizeFileupload(product.getFile6()));
+			product.setFilename7(resizeFileupload(product.getFile7()));
+			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
 			product.setSeller_id(seller_id);
 			postService.writePost(product);
@@ -262,18 +272,29 @@ public class PostController {
 				Integer likedNum = postService.likeNum(pid, logined_user.getUser_id());
 				boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 				List<Review> reviews = reviewService.prodReviewList(params);
-				System.out.println(product.getSeller_id());
+				Integer maxReviewCnt = reviewService.maxReviewCnt(pid);
+				List<Map<String,Integer>> reviewCount = reviewService.reviewCount(pid);
 				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
-				System.out.println(sellerInfo.getAddress());
 				Map<String, Object> likeInfo = new HashMap<String, Object>();
+				
+				/*
+				 * int sumReviewCnt = 0; for (int i=0; i<reviewCount.size(); i++) { Integer t =
+				 * reviewCount.get(i).get("count"); sumReviewCnt+=t; }
+				 * System.out.println(sumReviewCnt);
+				 */
+				
+				
+				System.out.println(maxReviewCnt);
 				likeInfo.put("likeNum", likedNum);
 				likeInfo.put("isLike", isLike);
-
+				
 				mav.addObject("likeInfo", likeInfo);
 				mav.addObject("product", product);
 				mav.addObject("priceInfo", priceInfo);
 				mav.addObject("reviews", reviews);
 				mav.addObject("sellerInfo", sellerInfo);
+				mav.addObject("reviewCounts", reviewCount);
+				mav.addObject("maxReviewCnt", maxReviewCnt);
 			} else {
 				mav.setViewName("login");
 			}
@@ -285,45 +306,12 @@ public class PostController {
 		return mav;
 	}
 
-	// 테스트용 : mav - model 차이?
-	@GetMapping("/detailPage")
-	public String prodDetail(Model model, @ModelAttribute("params") Review params) {
-		Integer pid = 10;
-		params.setProduct_id(pid);
-		params.setRecordsPerPage(2);
-		try {
-			Integer logined_userid = (Integer) session.getAttribute("id");
-			Product product = postService.productDetail(pid);
-			Product priceInfo = postService.priceInfo(pid);
-			Integer likedNum = postService.likeNum(pid, logined_userid);
-			boolean isLike = postService.isLike(pid, logined_userid);
-			List<Review> reviews = reviewService.prodReviewList(params);
-
-			System.out.println(reviews);
-
-			Map<String, Object> likeInfo = new HashMap<String, Object>();
-			likeInfo.put("likeNum", likedNum);
-			likeInfo.put("isLike", isLike);
-
-			model.addAttribute("likeInfo", likeInfo);
-			model.addAttribute("product", product);
-			model.addAttribute("priceInfo", priceInfo);
-			model.addAttribute("reviews", reviews);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("err", e.getMessage());
-		}
-		return "product-detail";
-	}
-
 	@ResponseBody
 	@PostMapping("/report")
 	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid,
 			@RequestParam("reported_userid") Integer reported_userid) {
 		String result;
-		// Integer report_userid = (Integer)session.getAttribute("id");
-		Integer report_userid = ((User) session.getAttribute("loginedUser")).getUser_id(); // 추후에 바꿔줘야함
+		Integer report_userid = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			postService.reportPost(reason, pid, reported_userid, report_userid);
 			result = "신고완료";
@@ -361,8 +349,6 @@ public class PostController {
 		// a
 		String pkg = product.getPaymentPkg();
 		int price = product.getB_price();
-		System.out.println(pkg);
-		System.out.println(price);
 		if(pkg.equals("Basic")) {
 			mav.addObject("price", product.getB_price());
 			mav.addObject("additional_price", product.getB_additional_price());
