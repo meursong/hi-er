@@ -18,7 +18,7 @@
 						</h5>
 					</div>
 					<div class="homepage-search-form">
-						<form class="form-noborder">
+						<div class="form-noborder">
 							<div class="form-row">
 								<div class="col-lg-3 col-md-3 col-sm-12 form-group" style="padding-left:400px;">
 									<div class="location-dropdown">
@@ -36,7 +36,7 @@
 									</button>
 								</div>
 							</div>
-						</form>
+						</div>
 					</div>
 					<div class="popular">
 						<span class="text-body-2">Popular</span>
@@ -257,4 +257,19 @@
 					searchKeyword2 + "&category=";
 		}
 	}
+
+	$("#searchKeyword2").on("keyup",function(key){
+		const searchKeyword = $("input[id='searchKeyword2']").val();
+		if(key.keyCode==13) {
+			if(searchKeyword=="") {
+				swal("알림","검색어를 입력해주세요.");
+			}
+			else {
+				location.href =
+						'/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+						searchKeyword + "&category=";
+			}
+
+		}
+	});
 </script>
