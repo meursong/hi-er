@@ -1,5 +1,7 @@
 package com.mulcam.hier.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -118,6 +121,32 @@ public class PostController {
 		}
 		return filename;
 	}
+	
+	private String resizeFileupload(MultipartFile file) {
+		String filename = null;
+		try {
+			String path = servletContext.getRealPath("/upload/");
+			String time = Long.valueOf(new Date().getTime()).toString();
+			int width=730, height=450;
+			if (file != null && !file.isEmpty()) {
+				filename = file.getOriginalFilename() + time;
+				File destFile = new File(path + filename);
+				BufferedImage inputImage = ImageIO.read(file.getInputStream());
+				BufferedImage outputImage = new BufferedImage(width,height,inputImage.getType());
+				
+				Graphics2D graphics2D = outputImage.createGraphics();
+				graphics2D.drawImage(inputImage, 0, 0, width, height, null);
+				graphics2D.dispose();
+				String fileName = file.getOriginalFilename();
+				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);			
+				ImageIO.write(outputImage, ext, destFile);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return filename;
+	}
+	
 
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
@@ -125,13 +154,13 @@ public class PostController {
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(fileupload(product.getFile2()));
-			product.setFilename3(fileupload(product.getFile3()));
-			product.setFilename4(fileupload(product.getFile4()));
-			product.setFilename5(fileupload(product.getFile5()));
-			product.setFilename6(fileupload(product.getFile6()));
-			product.setFilename7(fileupload(product.getFile7()));
-			product.setFilename8(fileupload(product.getFile8()));
+			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename3(resizeFileupload(product.getFile3()));
+			product.setFilename4(resizeFileupload(product.getFile4()));
+			product.setFilename5(resizeFileupload(product.getFile5()));
+			product.setFilename6(resizeFileupload(product.getFile6()));
+			product.setFilename7(resizeFileupload(product.getFile7()));
+			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
 			product.setSeller_id(seller_id); 
 			postService.writePost(product);
@@ -146,14 +175,14 @@ public class PostController {
 		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
-			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(fileupload(product.getFile2()));
-			product.setFilename3(fileupload(product.getFile3()));
-			product.setFilename4(fileupload(product.getFile4()));
-			product.setFilename5(fileupload(product.getFile5()));
-			product.setFilename6(fileupload(product.getFile6()));
-			product.setFilename7(fileupload(product.getFile7()));
-			product.setFilename8(fileupload(product.getFile8()));
+			product.setFilename1(resizeFileupload(product.getFile1()));
+			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename3(resizeFileupload(product.getFile3()));
+			product.setFilename4(resizeFileupload(product.getFile4()));
+			product.setFilename5(resizeFileupload(product.getFile5()));
+			product.setFilename6(resizeFileupload(product.getFile6()));
+			product.setFilename7(resizeFileupload(product.getFile7()));
+			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
 			product.setSeller_id(seller_id);
 			postService.writePost(product);
@@ -168,14 +197,14 @@ public class PostController {
 		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
-			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(fileupload(product.getFile2()));
-			product.setFilename3(fileupload(product.getFile3()));
-			product.setFilename4(fileupload(product.getFile4()));
-			product.setFilename5(fileupload(product.getFile5()));
-			product.setFilename6(fileupload(product.getFile6()));
-			product.setFilename7(fileupload(product.getFile7()));
-			product.setFilename8(fileupload(product.getFile8()));
+			product.setFilename1(resizeFileupload(product.getFile1()));
+			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename3(resizeFileupload(product.getFile3()));
+			product.setFilename4(resizeFileupload(product.getFile4()));
+			product.setFilename5(resizeFileupload(product.getFile5()));
+			product.setFilename6(resizeFileupload(product.getFile6()));
+			product.setFilename7(resizeFileupload(product.getFile7()));
+			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
 			product.setSeller_id(seller_id);
 			postService.writePost(product);
