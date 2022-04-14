@@ -283,6 +283,7 @@ public class PostController {
 				 * System.out.println(sumReviewCnt);
 				 */
 				
+				
 				System.out.println(maxReviewCnt);
 				likeInfo.put("likeNum", likedNum);
 				likeInfo.put("isLike", isLike);
