@@ -7,8 +7,7 @@ import java.util.Date;
 
 
 public class ProductList extends Criteria {
-	
-	//게시글 이미지 필요
+
 	private int product_id;
 	private int seller_id;
 	private String category;
