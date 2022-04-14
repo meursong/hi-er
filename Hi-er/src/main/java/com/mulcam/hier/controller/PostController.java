@@ -325,10 +325,12 @@ public class PostController {
 	@ResponseBody
 	@PostMapping("/like")
 	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer like_userid = ((User) session.getAttribute("loginedUser")).getUser_id();
 			result = postService.like(pid, like_userid);
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
