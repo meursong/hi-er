@@ -12,8 +12,7 @@
 			<div class="row d-flex align-items-center justify-content-between">
 				<div class="col-lg-9 left">
 					<ul>
-						<li class="nav-overview selected"><a href="#title">메인</a>
-						</li>
+						<li class="nav-overview selected"><a href="#title">메인</a></li>
 						<li class="nav-aboutSeller"><a href="#aboutSeller">프리랜서
 								정보</a></li>
 						<li class="nav-description"><a href="#description">서비스 설명</a>
@@ -72,15 +71,7 @@
 							<span class="total-rating" th:if="${product.category}=='video'">영상편집</span>
 							<span class="total-rating" th:if="${product.category}=='it'">IT</span>
 						</div>
-						<!-- <div class="user-info d-flex">
-                <span class="user-info-rating d-flex">
-                  <div class="star-rating-s15-wrapper">
-                    <span class="star-rating-s15 rate-10"> </span>
-                  </div>
-                  <span class="total-rating-out-five">${평점}5.0 평점</span>
-                  <span class="total-rating">(${리뷰수})</span>
-                </span>
-              </div> -->
+						
 					</div>
 					<!--  이미지 -->
 					<div class="slider mt-4">
@@ -103,9 +94,8 @@
 							</a> <a th:href="@{/upload/} + ${product.filename3}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename3}"
 								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
-							</a> <a th:href="@{/upload/} + ${product.filename4}">
-								<img class="img-fluid"
-								th:src="@{/upload/} + ${product.filename4}"
+							</a> <a th:href="@{/upload/} + ${product.filename4}"> <img
+								class="img-fluid" th:src="@{/upload/} + ${product.filename4}"
 								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
 							</a> <a th:href="@{/upload/} + ${product.filename5}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename5}"
@@ -192,8 +182,7 @@
 												class="fa fa-star" aria-hidden="true"></i>
 											</span>
 										</div> <span class="total-rating-out-five"></span> <span
-										class="total-rating">(36
-											reviews)([[${sellerInfo.avg_star_point}]])</span>
+										class="total-rating">(리뷰)([[${sellerInfo.avg_star_point}]])</span>
 									</span> <a href="#">쪽지보내기(클릭시 쪽지 모달창 출력)</a>
 								</div>
 							</div>
@@ -202,8 +191,7 @@
 							<ul class="user-stats">
 								<li>From<strong th:utext="${sellerInfo.address}">${user.location}</strong></li>
 								<li><strong></strong></li>
-								<li>평균응답시간<strong>1
-										hour(쪽지 답장 정보로 표시 - 가능? - 불가능)</strong>
+								<li>평균응답시간<strong>1 hour(쪽지 답장 정보로 표시 - 가능? - 불가능)</strong>
 								</li>
 							</ul>
 							<article class="seller-desc">
@@ -293,16 +281,19 @@
 										<tr class="package-type">
 											<th>패키지</th>
 											<td>
-												<p class="price" th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원"></p> <b
-												class="type">Basic</b><b class="title">패키지 설명</b>
+												<p class="price"
+													th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원"></p>
+												<b class="type">Basic</b><b class="title">패키지 설명</b>
 											</td>
 											<td>
-												<p class="price" th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원"></p> <b
-												class="type">Standard</b><b class="title">패키지 설명</b>
+												<p class="price"
+													th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원"></p>
+												<b class="type">Standard</b><b class="title">패키지 설명</b>
 											</td>
 											<td>
-												<p class="price" th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원"></p> <b
-												class="type">Premium</b><b class="title">패키지 설명</b>
+												<p class="price"
+													th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원"></p>
+												<b class="type">Premium</b><b class="title">패키지 설명</b>
 											</td>
 										</tr>
 										<tr class="description">
@@ -316,12 +307,11 @@
 												<div class="fit-popover fit-popover-top fit-tooltip"
 													data-position="top">
 													<span class="fit-popover-content"
-														th:if="${product.category}=='design'">원본
-														이미지 제공</span> <span class="fit-popover-content"
-														th:if="${product.category}=='video'">자막삽입</span>
-													<span class="fit-popover-content"
-														th:if="${product.category}=='it'">소스코드
-														제공</span>
+														th:if="${product.category}=='design'">원본 이미지 제공</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='video'">자막삽입</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='it'">소스코드 제공</span>
 												</div>
 											</th>
 											<td
@@ -336,12 +326,11 @@
 												<div class="fit-popover fit-popover-top fit-tooltip"
 													data-position="top">
 													<span class="fit-popover-content"
-														th:if="${product.category}=='design'">상업적
-														이용 가능</span> <span class="fit-popover-content"
-														th:if="${product.category}=='video'">상업적
-														이용 가능</span> <span class="fit-popover-content"
-														th:if="${product.category}=='it'">콘텐츠
-														업로드</span>
+														th:if="${product.category}=='design'">상업적 이용 가능</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='video'">상업적 이용 가능</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='it'">콘텐츠 업로드</span>
 												</div>
 											</th>
 											<td
@@ -363,12 +352,11 @@
 												<div class="fit-popover fit-popover-top fit-tooltip"
 													data-position="top">
 													<span class="fit-popover-content"
-														th:if="${product.category}=='design'">SNS
-														키트 제공</span> <span class="fit-popover-content"
-														th:if="${product.category}=='video'">썸네일
-														제공</span> <span class="fit-popover-content"
-														th:if="${product.category}=='it'">반응형
-														웹</span>
+														th:if="${product.category}=='design'">SNS 키트 제공</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='video'">썸네일 제공</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='it'">반응형 웹</span>
 												</div>
 											</th>
 											<td
@@ -383,12 +371,11 @@
 												<div class="fit-popover fit-popover-top fit-tooltip"
 													data-position="top">
 													<span class="fit-popover-content"
-														th:if="${product.category}=='design'">시안
-														개수</span> <span class="fit-popover-content"
-														th:if="${product.category}=='video'">러닝타임(초)</span>
-													<span class="fit-popover-content"
-														th:if="${product.category}=='it'">페이지
-														수</span>
+														th:if="${product.category}=='design'">시안 개수</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='video'">러닝타임(초)</span> <span
+														class="fit-popover-content"
+														th:if="${product.category}=='it'">페이지 수</span>
 												</div>
 											</th>
 											<td th:text="${priceInfo.b_draft}"></td>
@@ -419,7 +406,8 @@
 														th:value="${priceInfo.b_price+priceInfo.b_additional_price}" />
 														<span class="radio-img"></span> <span>[[${priceInfo.b_minimum_delivery}]]일</span>
 														<p class="faster-price">
-															(+[[${#numbers.formatInteger(priceInfo.b_additional_price, 0, 'COMMA')}]] 원)</p>
+															(+[[${#numbers.formatInteger(priceInfo.b_additional_price,
+															0, 'COMMA')}]] 원)</p>
 													</label>
 												</div>
 											</td>
@@ -435,7 +423,8 @@
 														<span class="radio-img"></span> <span>[[${priceInfo.s_minimum_delivery}]]
 															일</span>
 														<p class="faster-price">
-															(+[[${#numbers.formatInteger(priceInfo.s_additional_price, 0, 'COMMA')}]] 원)</p>
+															(+[[${#numbers.formatInteger(priceInfo.s_additional_price,
+															0, 'COMMA')}]] 원)</p>
 													</label>
 												</div>
 											</td>
@@ -450,8 +439,9 @@
 														th:value="${priceInfo.p_price+priceInfo.p_additional_price}" />
 														<span class="radio-img"></span> <span>[[${priceInfo.p_minimum_delivery}]]
 															일</span>
-														<p class="faster-price" >
-															(+[[${#numbers.formatInteger(priceInfo.p_additional_price, 0, 'COMMA')}]] 원)</p>
+														<p class="faster-price">
+															(+[[${#numbers.formatInteger(priceInfo.p_additional_price,
+															0, 'COMMA')}]] 원)</p>
 													</label>
 												</div>
 											</td>
@@ -459,21 +449,23 @@
 										<tr class="select-package">
 											<th>Total</th>
 											<td>
-												<p class="price-label" id="b-price" 
-												th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원">
-													</p>
+												<p class="price-label" id="b-price"
+													th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원">
+												</p>
 												<button id="test" name="paymentPkg" value="Basic"
 													type="submit">선택하기</button>
 											</td>
 											<td>
-												<p class="price-label" id="s-price" th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원">
-													</p>
+												<p class="price-label" id="s-price"
+													th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원">
+												</p>
 												<button name="paymentPkg" value="Standard" type="submit">
 													선택하기</button>
 											</td>
 											<td>
-												<p class="price-label" id="p-price" th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원">
-													</p>
+												<p class="price-label" id="p-price"
+													th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원">
+												</p>
 												<button name="paymentPkg" value="Premium" type="submit">선택하기</button>
 											</td>
 										</tr>
@@ -552,33 +544,36 @@
 						<div id="reviews" class="review-section">
 							<div
 								class="d-flex align-items-center justify-content-between mb-4">
-								<h4 class="m-0">리뷰 (리뷰 개수)</h4>
+								<h4 class="m-0">[[${maxReviewCnt}]] 개의 평가</h4>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
 									<table class="stars-counters">
 										<tbody>
-											<tr class="">
+											<tr th:each="reviewCount: ${reviewCounts}" class="">
 												<td><span>
 														<button
-															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
+															th:text="${reviewCount.star_point} + 점">
+															</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
 														class="fit-progressbar fit-progressbar-bar star-progress-bar">
 														<div class="fit-progressbar-background">
+
 															<span class="progress-fill" style="width: 97.2973%"></span>
+
 														</div>
 													</div>
 												</td>
-												<td class="star-num">(36)</td>
+												<td class="star-num" th:text="${reviewCount.count} + 개"></td>
 											</tr>
-											<tr class="">
+											<!-- <tr class="">
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															4점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -594,7 +589,7 @@
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															3점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -610,7 +605,7 @@
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															2점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -626,7 +621,7 @@
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															5 Stars</button>
+															1점</button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -637,7 +632,7 @@
 													</div>
 												</td>
 												<td class="star-num">(0)</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 								</div>
@@ -664,7 +659,75 @@
 					</div>
 				</div>
 				<!-- 가격정보(거래신청) 우측 사이드 내브바 -->
+				
 				<div class="col-lg-4 right">
+					<form action="/post/payment" method="post" class="sticky">
+								<!-- 결제페이지로 넘길 정보들  -->
+								<input type="hidden" name="title" th:value="${product.title}">
+								<input type="hidden" name="product_id"
+									th:value="${product.product_id}"> <input type="hidden"
+									name="filename1" th:value="${product.filename1}"> <input
+									type="hidden" name="filename2" th:value="${product.filename2}">
+								<input type="hidden" name="category"
+									th:value="${product.category}"> <input type="hidden"
+									name="seller_id" th:value="${product.seller_id}"> <input
+									type="hidden" name="nickname" th:value="${sellerInfo.nickname}">
+								<input type="hidden" name="name" th:value="${sellerInfo.name}">
+								<input type="hidden" name="email" th:value="${sellerInfo.email}">
+								<input type="hidden" name="b_price"
+									th:value="${priceInfo.b_price}"> <input type="hidden"
+									name="s_price" th:value="${priceInfo.s_price}"> <input
+									type="hidden" name="p_price" th:value="${priceInfo.p_price}">
+								<input type="hidden" name="b_pkg_description"
+									th:value="${priceInfo.b_pkg_description}"> <input
+									type="hidden" name="s_pkg_description"
+									th:value="${priceInfo.s_pkg_description}"> <input
+									type="hidden" name="p_pkg_description"
+									th:value="${priceInfo.p_pkg_description}"> <input
+									type="hidden" name="b_original_image"
+									th:value="${priceInfo.b_original_image}"> <input
+									type="hidden" name="s_original_image"
+									th:value="${priceInfo.s_original_image}"> <input
+									type="hidden" name="p_original_image"
+									th:value="${priceInfo.p_original_image}"> <input
+									type="hidden" name="b_commercial"
+									th:value="${priceInfo.b_commercial}"> <input
+									type="hidden" name="s_commercial"
+									th:value="${priceInfo.s_commercial}"> <input
+									type="hidden" name="p_commercial"
+									th:value="${priceInfo.p_commercial}"> <input
+									type="hidden" name="b_sns_Kit"
+									th:value="${priceInfo.b_sns_Kit}"> <input type="hidden"
+									name="s_sns_Kit" th:value="${priceInfo.s_sns_Kit}"> <input
+									type="hidden" name="p_sns_Kit"
+									th:value="${priceInfo.p_sns_Kit}"> <input type="hidden"
+									name="b_draft" th:value="${priceInfo.b_draft}"> <input
+									type="hidden" name="s_draft" th:value="${priceInfo.s_draft}">
+								<input type="hidden" name="p_draft"
+									th:value="${priceInfo.p_draft}"> <input type="hidden"
+									name="b_revision" th:value="${priceInfo.b_revision}"> <input
+									type="hidden" name="s_revision"
+									th:value="${priceInfo.s_revision}"> <input
+									type="hidden" name="p_revision"
+									th:value="${priceInfo.p_revision}"> <input
+									type="hidden" name="b_default_delivery"
+									th:value="${priceInfo.b_default_delivery}"> <input
+									type="hidden" name="s_default_delivery"
+									th:value="${priceInfo.s_default_delivery}"> <input
+									type="hidden" name="p_default_delivery"
+									th:value="${priceInfo.p_default_delivery}"> <input
+									type="hidden" name="b_minimum_delivery"
+									th:value="${priceInfo.b_minimum_delivery}"> <input
+									type="hidden" name="s_minimum_delivery"
+									th:value="${priceInfo.s_minimum_delivery}"> <input
+									type="hidden" name="p_minimum_delivery"
+									th:value="${priceInfo.p_minimum_delivery}"> <input
+									type="hidden" name="b_additional_price"
+									th:value="${priceInfo.b_additional_price}"> <input
+									type="hidden" name="s_additional_price"
+									th:value="${priceInfo.s_additional_price}"> <input
+									type="hidden" name="p_additional_price"
+									th:value="${priceInfo.p_additional_price}">
 					<div class="sticky">
 						<ul class="nav nav-tabs">
 							<li><a class="active" data-toggle="tab" href="#basic">Basic</a>
@@ -683,17 +746,16 @@
 								</div>
 								<article>
 									<div class="d-flex">
-										<b class="delivery"><i
-											class="fa fa-clock-o" aria-hidden="true"></i>
-											[[${priceInfo.b_default_delivery}]] 작업일</b> <b
-											class="delivery ml-3"><i
-											class="fa fa-refresh" aria-hidden="true"></i> 수정
-											[[${priceInfo.b_revision}]] 회</b>
+										<b class="delivery"><i class="fa fa-clock-o"
+											aria-hidden="true"></i> [[${priceInfo.b_default_delivery}]]
+											작업일</b> <b class="delivery ml-3"><i class="fa fa-refresh"
+											aria-hidden="true"></i> 수정 [[${priceInfo.b_revision}]] 회</b>
 									</div>
 									<ul class="features">
-										<li
+										<li  th:if="${product.category}=='design'"
 											th:attr="class=${priceInfo.b_original_image == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>원본 이미지 제공
+											<i class="fa fa-check" aria-hidden="true">
+											</i>원본 이미지 제공
 										</li>
 										<li
 											th:attr="class=${priceInfo.b_commercial == 'true' ? 'feature included' : 'feature'}">
@@ -707,23 +769,22 @@
 											aria-hidden="true"></i>시안 개수 : [[${priceInfo.b_draft}]]</li>
 									</ul>
 								</article>
-								<button>계속하기 (결제페이지로 이동)</button>
+								<button  name="paymentPkg" value="Basic" type="submit" >계속하기 (결제페이지로 이동)</button>
 							</div>
 							<div id="standard" class="tab-pane fade">
 								<div class="header">
 									<h3>
-										<b class="title">스탠다드</b><span class="price" th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원"></span>
+										<b class="title">스탠다드</b><span class="price"
+											th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원"></span>
 									</h3>
 									<p>[[${priceInfo.s_pkg_description}]]</p>
 								</div>
 								<article>
 									<div class="d-flex">
-										<b class="delivery"><i
-											class="fa fa-clock-o" aria-hidden="true"></i>
-											[[${priceInfo.s_default_delivery}]] 작업일</b><b
-											class="delivery ml-3"><i
-											class="fa fa-refresh" aria-hidden="true"></i> 수정
-											[[${priceInfo.s_revision}]] 회</b>
+										<b class="delivery"><i class="fa fa-clock-o"
+											aria-hidden="true"></i> [[${priceInfo.s_default_delivery}]]
+											작업일</b><b class="delivery ml-3"><i class="fa fa-refresh"
+											aria-hidden="true"></i> 수정 [[${priceInfo.s_revision}]] 회</b>
 									</div>
 									<ul class="features">
 										<li
@@ -742,23 +803,22 @@
 											aria-hidden="true"></i>시안 개수 : [[${priceInfo.s_draft}]]</li>
 									</ul>
 								</article>
-								<button>계속하기 (결제페이지로 이동)</button>
+								<button name="paymentPkg" value="Standard" type="submit" >계속하기 (결제페이지로 이동)</button>
 							</div>
 							<div id="Premium" class="tab-pane fade">
 								<div class="header">
 									<h3>
-										<b class="title">프리미엄</b><span class="price" th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원"></span>
+										<b class="title">프리미엄</b><span class="price"
+											th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원"></span>
 									</h3>
 									<p>[[${priceInfo.p_pkg_description}]]</p>
 								</div>
 								<article>
 									<div class="d-flex">
-										<b class="delivery"><i
-											class="fa fa-clock-o" aria-hidden="true"></i>
-											[[${priceInfo.p_default_delivery}]] 작업일</b><b
-											class="delivery ml-3"><i
-											class="fa fa-refresh" aria-hidden="true"></i> 수정
-											[[${priceInfo.p_revision}]] 회</b>
+										<b class="delivery"><i class="fa fa-clock-o"
+											aria-hidden="true"></i> [[${priceInfo.p_default_delivery}]]
+											작업일</b><b class="delivery ml-3"><i class="fa fa-refresh"
+											aria-hidden="true"></i> 수정 [[${priceInfo.p_revision}]] 회</b>
 									</div>
 									<ul class="features">
 										<li
@@ -777,14 +837,14 @@
 											aria-hidden="true"></i>시안 개수 : [[${priceInfo.p_draft}]]</li>
 									</ul>
 								</article>
-								<button>계속하기 (결제페이지로 이동)</button>
+								<button  name="paymentPkg" value="Premium" type="submit" >계속하기 (결제페이지로 이동)</button>
 							</div>
 						</div>
 						<div class="contact-seller-wrapper">
-							<a class="fit-button" href="#">판매자에게 쪽지
-								보내기(쪽지 모달창 팝업)</a>
+							<a class="fit-button" href="#">판매자에게 쪽지 보내기(쪽지 모달창 팝업)</a>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -804,31 +864,35 @@
 					<div class="report-modal-body">
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="reportRadios"
-								id="reportRadio1" value="reason1" checked /> <label
+								id="reportRadio1" value="카테고리와 맞지 않는
+								게시물" checked /> <label
 								class="form-check-label" for="reportRadio1"> 카테고리와 맞지 않는
 								게시물 </label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="reportRadios"
-								id="reportRadio2" value="reason2" /> <label
+								id="reportRadio2" value="타 사이트 홍보성
+								게시물" /> <label
 								class="form-check-label" for="reportRadio2"> 타 사이트 홍보성
 								게시물 </label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="reportRadios"
-								id="reportRadio3" value="reason3" /> <label
+								id="reportRadio3" value="음란성/청소년 유해
+								게시물" /> <label
 								class="form-check-label" for="reportRadio3"> 음란성/청소년 유해
 								게시물 </label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="reportRadios"
-								id="reportRadio4" value="reason4" /> <label
+								id="reportRadio4" value="저작권 침해 게시물" /> <label
 								class="form-check-label" for="reportRadio4"> 저작권 침해 게시물
 							</label>
 						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="reportRadios"
-								id="reportRadio5" value="reason5" /> <label
+								id="reportRadio5" value="비방/비하/욕설
+								게시물" /> <label
 								class="form-check-label" for="reportRadio5"> 비방/비하/욕설
 								게시물 </label>
 						</div>
@@ -847,6 +911,13 @@
 </html>
 
 <script>
+	function AddComma(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		return num.toString().replace(regexp, ',');
+	}
+
+	var nData ;
+
   $("[name='b_delivery']").change(function (e) {
     let result;
     e.preventDefault();
@@ -854,9 +925,10 @@
     for (let radio of radioArr) {
       if (radio.checked) {
         result = radio.value;
+        nData = AddComma(result);
       }
     }
-    $("#b-price").text(result + "원");
+    $("#b-price").text(nData + "원");
   });
 
   $("[name='s_delivery']").change(function (e) {
@@ -866,9 +938,10 @@
     for (let radio of radioArr) {
       if (radio.checked) {
         result = radio.value;
+        nData = AddComma(result);
       }
     }
-    $("#s-price").text(result + "원");
+    $("#s-price").text(nData + "원");
   });
 
   $("[name='p_delivery']").change(function (e) {
@@ -878,9 +951,10 @@
     for (let radio of radioArr) {
       if (radio.checked) {
         result = radio.value;
+        nData = AddComma(result);
       }
     }
-    $("#p-price").text(result + "원");
+    $("#p-price").text(nData + "원");
   });
 
   $("#reportBtn").click(function (e) {
@@ -895,7 +969,7 @@
     e.preventDefault();
     let reason = $("input[name='reportRadios']:checked").val();
     let pid = `[[${product.product_id}]]`;
-    let reported_userid = 10;
+    let reported_userid = `[[${product.seller_id}]]`;
     $.ajax({
       type: "POST",
       url: "/post/report",

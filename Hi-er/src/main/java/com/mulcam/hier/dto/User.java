@@ -5,8 +5,46 @@ import java.sql.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 public class User {
-	int user_id, type;
-	String email, password, job, nickname, name, profile_image, interest;
+	int user_id, type,product_id,seller_id,f_id;
+	public int getF_id() {
+		return f_id;
+	}
+
+	public void setF_id(int f_id) {
+		this.f_id = f_id;
+	}
+	float avg_star_point;
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
+
+	public int getSeller_id() {
+		return seller_id;
+	}
+
+	public void setSeller_id(int seller_id) {
+		this.seller_id = seller_id;
+	}
+
+	public float getAvg_star_point() {
+		return avg_star_point;
+	}
+
+	public void setAvg_star_point(float avg_star_point) {
+		this.avg_star_point = avg_star_point;
+	}
+	String email, password, job, nickname, name, profile_image, interest, introduction;
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
 	Date createdAt, updatedAt; 
 	
 	@Override

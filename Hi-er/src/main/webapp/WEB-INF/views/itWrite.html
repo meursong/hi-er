@@ -24,6 +24,9 @@
 	width: 90%;
 	text-align: left;
 }
+.fileTable tr td {
+	padding:8px;
+}
 
 </style>
 </head>
@@ -46,10 +49,10 @@
 			</div>
 			<div class="form-group" style="display: flex; justify-content: center; padding-top: 20px;">
 				
-				<table>
+				<table class="fileTable">
 					<tr>
 						<td><img id="rep1" name="img1"
-							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
+							th:src="@{/images/ImageUploadThumbnail.png}" class="imgUpload"
 							width="200px" height="200px"></img> <input type="file" id="file1"
 							name="file1" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep2" name="img2"

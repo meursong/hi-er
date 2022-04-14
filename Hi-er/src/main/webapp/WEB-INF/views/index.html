@@ -1,20 +1,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{common/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{common/layout}">
 <section layout:fragment="contents">
 	<section class="py-5 homepage-search-block position-relative">
 		<div class="container">
 			<div class="row py-lg-5">
-				<div class="col-lg-7"> 
+				<div class="col-lg-7">
 					<div class="homepage-search-title">
 						<h1 class="mb-3 text-shadow text-gray-900 font-weight-bold">
-							프리랜서 마켓 No.1 Hi-er에서 
+							프리랜서 마켓 No.1 Hi-er에서
 							<br>
 							원하는 전문가를 찾아보세요!
 						</h1>
 						<h5 class="mb-5 text-shadow text-gray-800 font-weight-normal">
-							수백만 명의 사람들이 Hi-er를 사용하여 아이디어를 현실로 만듭니다.						
+							수백만 명의 사람들이 Hi-er를 사용하여 아이디어를 현실로 만듭니다.
 						</h5>
 					</div>
 					<div class="homepage-search-form">
@@ -22,7 +21,7 @@
 							<div class="form-row">
 								<div class="col-lg-3 col-md-3 col-sm-12 form-group" style="padding-left:400px;">
 									<div class="location-dropdown">
-										<i class="icofont-location-arrow"/></i>
+										<i class="icofont-location-arrow" /></i>
 									</div>
 								</div>
 								<div class="col-lg-7 col-md-7 col-sm-12 form-group">
@@ -31,7 +30,8 @@
 								</div>
 								<div class="col-lg-2 col-md-2 col-sm-12 form-group">
 									<button type="button"
-										class="btn btn-success btn-block btn-lg btn-gradient shadow-sm" th:onclick="search2()">
+										class="btn btn-success btn-block btn-lg btn-gradient shadow-sm"
+										th:onclick="search2()">
 										<i class="fa fa-search"></i>
 									</button>
 								</div>
@@ -41,10 +41,18 @@
 					<div class="popular">
 						<span class="text-body-2">Popular</span>
 						<ul>
-							<li><a th:href="@{/product/category/1}" class="text-body-2">로고 브랜딩</a></li>
-							<li><a th:href="@{shop}" class="text-body-2">쇼핑몰 제작</a></li>
-							<li><a th:href="@{video}" class="text-body-2">영상 촬영 편집</a></li>
-							<li><a th:href="@{phot}" class="text-body-2">사진 촬영</a></li>
+							<li><a class="text-body-2"
+									th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='로고',category='')}">로고
+									브랜딩</a></li>
+							<li><a class="text-body-2"
+									th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='쇼핑몰',category='')}">쇼핑몰
+									제작</a></li>
+							<li><a class="text-body-2"
+									th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='영상',category='')}">영상
+									촬영 편집</a></li>
+							<li><a class="text-body-2"
+									th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='사진',category='')}">사진
+									촬영</a></li>
 						</ul>
 					</div>
 				</div>
@@ -60,34 +68,43 @@
 	<!--       최고 판매 유저 리스트  -->
 	<div class="freelance-projects bg-white py-5">
 		<div class="container view_slider recommended">
-			<h3>TOP 전문가 랭킹<svg style="padding-left:5px; width:23px; height: 23px; padding-bottom: 2px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M223.7 130.8L149.1 7.77C147.1 2.949 141.9 0 136.3 0H16.03c-12.95 0-20.53 14.58-13.1 25.18l111.3 158.9C143.9 156.4 181.7 137.3 223.7 130.8zM256 160c-97.25 0-176 78.75-176 176S158.8 512 256 512s176-78.75 176-176S353.3 160 256 160zM348.5 317.3l-37.88 37l8.875 52.25c1.625 9.25-8.25 16.5-16.63 12l-46.88-24.62L209.1 418.5c-8.375 4.5-18.25-2.75-16.63-12l8.875-52.25l-37.88-37C156.6 310.6 160.5 299 169.9 297.6l52.38-7.625L245.7 242.5c2-4.25 6.125-6.375 10.25-6.375S264.2 238.3 266.2 242.5l23.5 47.5l52.38 7.625C351.6 299 355.4 310.6 348.5 317.3zM495.1 0H375.7c-5.621 0-10.83 2.949-13.72 7.77l-73.76 122.1c42 6.5 79.88 25.62 109.5 53.38l111.3-158.9C516.5 14.58 508.9 0 495.1 0z"/></svg>
-			</h3><div class="row freelance-slider">
-				<div class="col" th:each="user: ${bestProduct}">
+			<h3>TOP 전문가 랭킹<svg style="padding-left:5px; width:23px; height: 23px; padding-bottom: 2px;"
+					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+					<path
+						d="M223.7 130.8L149.1 7.77C147.1 2.949 141.9 0 136.3 0H16.03c-12.95 0-20.53 14.58-13.1 25.18l111.3 158.9C143.9 156.4 181.7 137.3 223.7 130.8zM256 160c-97.25 0-176 78.75-176 176S158.8 512 256 512s176-78.75 176-176S353.3 160 256 160zM348.5 317.3l-37.88 37l8.875 52.25c1.625 9.25-8.25 16.5-16.63 12l-46.88-24.62L209.1 418.5c-8.375 4.5-18.25-2.75-16.63-12l8.875-52.25l-37.88-37C156.6 310.6 160.5 299 169.9 297.6l52.38-7.625L245.7 242.5c2-4.25 6.125-6.375 10.25-6.375S264.2 238.3 266.2 242.5l23.5 47.5l52.38 7.625C351.6 299 355.4 310.6 348.5 317.3zM495.1 0H375.7c-5.621 0-10.83 2.949-13.72 7.77l-73.76 122.1c42 6.5 79.88 25.62 109.5 53.38l111.3-158.9C516.5 14.58 508.9 0 495.1 0z" />
+				</svg>
+			</h3>
+			<div class="row freelance-slider">
+				<div class="col" th:each="user: ${bestUser}">
 					<div class="freelancer">
-						<img src="images/senatopcustudio.jpg">
+					<a style="font-size:15px; font-weight: 500; color: black;" th:href="@{/freelancerInfo/{id}(id=${user.seller_id})}">
+						<img class="img-fluid" th:src="@{/upload/} + ${user.profile_image}" onerror="this.src='/images/user/default.jpg'">
+					</a>
 						<div class="freelancer-footer">
-							<img src="images/user/default.png">
 							<div>
-							<div style="display: flex;">
-							<div>
-							<h5>
-								[[${user.nickname}]]
-							</h5>
-							</div> 
-							<div style="padding-left:20px;">
-								
-							</div>
-							</div> 
 								<div>
-								<h5>
-								평점:[[${user.avg_star_point}]]
-								</h5>
+									<div style="padding-left: 13px;">
+										<h5>
+											<svg xmlns="http://www.w3.org/2000/svg" style="width: 15px;" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M223.7 130.8L149.1 7.77C147.1 2.949 141.9 0 136.3 0H16.03c-12.95 0-20.53 14.58-13.1 25.18l111.3 158.9C143.9 156.4 181.7 137.3 223.7 130.8zM256 160c-97.25 0-176 78.75-176 176S158.8 512 256 512s176-78.75 176-176S353.3 160 256 160zM348.5 317.3l-37.88 37l8.875 52.25c1.625 9.25-8.25 16.5-16.63 12l-46.88-24.62L209.1 418.5c-8.375 4.5-18.25-2.75-16.63-12l8.875-52.25l-37.88-37C156.6 310.6 160.5 299 169.9 297.6l52.38-7.625L245.7 242.5c2-4.25 6.125-6.375 10.25-6.375S264.2 238.3 266.2 242.5l23.5 47.5l52.38 7.625C351.6 299 355.4 310.6 348.5 317.3zM495.1 0H375.7c-5.621 0-10.83 2.949-13.72 7.77l-73.76 122.1c42 6.5 79.88 25.62 109.5 53.38l111.3-158.9C516.5 14.58 508.9 0 495.1 0z"/></svg>
+											  [[${user.nickname}]]
+
+										</h5>
+									</div>
 								</div>
-								<p style="padding-top:10px;"></p>
+								<div class="right-items">
+								<svg	xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"
+														width="15" height="15" style="padding-bottom:3px; color:2cdd9b;">
+														<path fill="currentColor"
+															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
+														</path>
+													</svg>
+									<span>평점: [[${user.avg_star_point}]]</span>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>			
+				</div>
 			</div>
 		</div>
 	</div>
@@ -98,41 +115,53 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-			<h3>최고 평점 게시물 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="22" height="22" style="padding-bottom: 3px;">
-                              <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                              </path>
-                             </svg></h3>
+						<h3>최고 평점 게시물 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="22"
+								height="22" style="padding-bottom: 3px;">
+								<path fill="currentColor"
+									d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
+								</path>
+							</svg></h3>
 						<div class="view recent-slider recommended-slider">
 							<div class="col" th:each="product: ${bestProduct}">
-								<a th:href="@{product_detail}"> <img class="img-fluid"
-									src="images/list/v1.png" />
+								<a th:href="@{/post/detail/{pid}(pid = ${product.product_id})}"> <img class="img-fluid" th:src="@{/upload/} + ${product.filename1}" onerror="this.src='/images/상품준비중.jpg'">
 								</a>
 								<div class="inner-slider">
 									<div class="inner-wrapper">
 										<div class="d-flex align-items-center">
-											<span class="seller-image"> <img class="img-fluid"
-												th:src="@{images/user/default.png}" alt='' />
-											</span> <span class="seller-name"> <a th:href="@{판매자 프로필 상세}">[[${product.title}]]</a> <span class="level hint--top level-one-seller">
-													Level 1 Seller </span>
+											<span class="seller-image"> 						
+											<img class="img-fluid" th:src="@{/upload/} + ${product.profile_image}" onerror="this.src='/images/user/default.jpg'">
+											</span> <span class="seller-name" > <a
+													th:href="@{판매자 프로필 상세}">[[${product.title}]]</a> <span
+													class="level hint--top level-one-seller">
+													</span>
 											</span>
 										</div>
 										<h3>[[${product.content}]]</h3>
+
 										<div class="content-info">
 											<div class="rating-wrapper">
 												<span class="gig-rating text-body-2"> <svg
 														xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"
 														width="15" height="15">
-                                             <path fill="currentColor"
+														<path fill="currentColor"
 															d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z">
-                                             </path>
-                                          </svg>[[${product.avg_star_point}]]  <span>([[${product.review_count}]])</span>
+														</path>
+													</svg>[[${product.avg_star_point}]]
+													<span>([[${product.review_count}]])</span>
 												</span>
+												<span style="display: none;">[[${product.product_id}]]</span>
 											</div>
 										</div>
 										<div class="footer">
-											<i class="fa fa-heart" aria-hidden="true"></i>
+											<button style="border: none; background: none;" class="likeClass"
+												th:id="like+${product.product_id}" th:if="${session.loginedUser}">
+												
+												<i th:id="heart+${product.product_id}" class="fa fa-heart heart" aria-hidden="true" th:style="${isLikeList[productStat.index] == true ? 'color:rgba(31,208,182,1)' : ''}"></i>
+											</button>
 											<div class="price">
-												<a th:href="@{판매자 상세페이지}"> Starting At <span>&nbsp [[${#numbers.formatInteger(product.b_price, 0, 'COMMA')}]]</span>
+												<a th:href="@{판매자 상세페이지}"> Starting At <span>&nbsp
+														[[${#numbers.formatInteger(product.b_price, 0,
+														'COMMA')}]]</span>
 												</a>
 											</div>
 										</div>
@@ -153,40 +182,45 @@
 		<div class="container">
 			<h2 style="font-size: 25px;">Hi-er에서 가장 인기있어요!</h2>
 			<div class="row service-slider">
-				<div class="col">
-				<a th:href="@{/product/category/1}">
-					<div class="service">
-						<img src="images/로고브랜딩.jpg">
-					</div>
-				</a>
-				</div>
-				<div class="col">
-			 	<a th:href="@{/product/category/3}">
-					<div class="service">
-						<img src="images/웹.jpg">
-					</div>
-			 	</a>
-				</div>
-				<div class="col">
-					<a th:href="@{/product/category/3}">
-					<div class="service">
-						<img src="images/쇼핑몰.jpg">
-					</div>
+				<div class="col" style="cursor: pointer;">
+					<a
+						th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='로고',category='')}">
+						<div class="service">
+							<img src="images/로고브랜딩.jpg">
+						</div>
 					</a>
 				</div>
-				<div class="col">
-				<a th:href="@{/product/category/2}">
-					<div class="service">
-						<img src="images/동영상.jpg">
-					</div>
-				</a>
+				<div class="col" style="cursor: pointer;">
+					<a
+						th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='웹',category='')}">
+						<div class="service">
+							<img src="images/웹.jpg">
+						</div>
+					</a>
 				</div>
-				<div class="col">
-				<a th:href="@{/product/category/1}">
-					<div class="service">
-						<img src="images/앱 디자인.jpg">
-					</div>
-				</a>
+				<div class="col" style="cursor: pointer;">
+					<a
+						th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='쇼핑몰',category='')}">
+						<div class="service">
+							<img src="images/쇼핑몰.jpg">
+						</div>
+					</a>
+				</div>
+				<div class="col" style="cursor: pointer;">
+					<a
+						th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='동영상',category='')}">
+						<div class="service">
+							<img src="images/동영상.jpg">
+						</div>
+					</a>
+				</div>
+				<div class="col" style="cursor: pointer;">
+					<a
+						th:href="@{/search(sort='product_id',currentPageNo=1,recordsPerPage=12,pageSize=5,keyword='앱 디자인',category='')}">
+						<div class="service">
+							<img src="images/앱 디자인.jpg">
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -196,11 +230,11 @@
 	<div class="guide-wrapper py-5">
 		<div class="container">
 			<h2 style="text-align: center; font-size:33px; font-weight: 800; color: black;">
-				<img src="images/logo.png" style="width: 200px; padding-bottom:15px;"/>100% 활용하는 법
+				<img src="images/logo.png" style="width: 200px; padding-bottom:15px;" />100% 활용하는 법
 			</h2>
 			<div class="row" style="padding-top:10px;">
 				<div class="col-md-4">
-					<a  class="guide" target='_blank'> <img src="images/메뉴얼.jpg">
+					<a class="guide" target='_blank'> <img src="images/메뉴얼.jpg">
 						<div class="content" style="padding-left:3px;">
 							<h6>Hi-er 전문가 가이드</h6>
 							<p>전문가 인증부터 정산까지 크몽 전문가 등록의 모든 것</p>
@@ -208,16 +242,16 @@
 					</a>
 				</div>
 				<div class="col-md-4">
-					<a  class="guide" target='_blank'> <img height="233px;" src="images/업무.jpg">
+					<a class="guide" target='_blank'> <img height="233px;" src="images/업무.jpg">
 						<div class="content" style="padding-left:3px;">
 							<h6>마켓? 엔터프라이즈?</h6>
-							<p >내 프로젝트에 더 맞느 서비스를 쉽게 고르는 방법</p>
+							<p>내 프로젝트에 더 맞느 서비스를 쉽게 고르는 방법</p>
 						</div>
 					</a>
-					
+
 				</div>
 				<div class="col-md-4">
-					<a   class="guide" target='_blank'> <img height="233px;" src="images/전문가소개.png">
+					<a class="guide" target='_blank'> <img height="233px;" src="images/전문가소개.png">
 						<div class="content" style="padding-left:3px;">
 							<h6>4월 신규 전문가 소개</h6>
 							<p>카테고리 매니저가 추천하는 라이징 전문가</p>
@@ -235,41 +269,62 @@
 				<h2>Hi-er 전문가로 등록하고, <br> 수익을 창출해보세요! </h2>
 				<p>Hi-er에서는 누구나 전문가가 될 수 있습니다. <br>당신의 전문성을 필요로하는 사람, Hi-er에 다 모여있어요.</p>
 				<div th:if="${session.loginedUser != null}">
-				<a th:if="${session.loginedUser.type != 2}" th:href="@{freelancerForm}" class="c-btn c-fill-color-btn">전문가 등록하기</a>
+					<a th:if="${session.loginedUser.type != 2}" th:href="@{/freelancerForm}"
+						class="c-btn c-fill-color-btn">전문가 등록하기</a>
+				</div>
+				<div th:unless="${session.loginedUser != null}">
+					<a th:href="@{/login}" class="c-btn c-fill-color-btn">로그인 하로 가기</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- get started -->
-	
+
 </section>
+
 </html>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 	function search2() {
 		const searchKeyword2 = $("input[id='searchKeyword2']").val();
-		if(searchKeyword2=="") {
-			swal("알림","검색어를 입력해주세요.");
+		if (searchKeyword2 == "") {
+			swal("알림", "검색어를 입력해주세요.");
 		}
 		else {
 			location.href =
-					'/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
-					searchKeyword2 + "&category=";
+				'/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+				searchKeyword2 + "&category=";
 		}
 	}
 
-	$("#searchKeyword2").on("keyup",function(key){
+	$("#searchKeyword2").on("keyup", function (key) {
 		const searchKeyword = $("input[id='searchKeyword2']").val();
-		if(key.keyCode==13) {
-			if(searchKeyword=="") {
-				swal("알림","검색어를 입력해주세요.");
+		if (key.keyCode == 13) {
+			if (searchKeyword == "") {
+				swal("알림", "검색어를 입력해주세요.");
 			}
 			else {
 				location.href =
-						'/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
-						searchKeyword + "&category=";
+					'/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+					searchKeyword + "&category=";
 			}
 
 		}
 	});
+	
+	$('.likeClass').on('click', function (e) {
+		let pid = e.currentTarget.id.slice(4);
+		$.ajax({
+			type: "POST",
+			url: "/post/like",
+			data: {pid: pid},
+			success: function (likeInfo) {
+				if ($('#heart'+pid).css('color') == 'rgb(178, 178, 178)') {
+					$('#heart'+pid).css('color', 'rgba(31,208,182,1)')
+				} else {
+					$('#heart'+pid).css('color', 'rgb(178, 178, 178)')
+				}
+			}
+		})
+	})
 </script>
