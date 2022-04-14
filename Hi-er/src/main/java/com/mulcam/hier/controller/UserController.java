@@ -41,6 +41,10 @@ public class UserController {
 		}
 		
 	}
+	@GetMapping("/message")
+	public String message(Model model) throws Exception {
+			return "/messages";
+	}
 
 	@PostMapping("freelancerForm")
 	public String joinFreelancer(FreelancerForm form) throws Exception {
@@ -91,14 +95,14 @@ public class UserController {
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("login");
 		if ((User) session.getAttribute("loginedUser") != null) {
-			mav.setViewName("index");
+			mav.setViewName("redirect:/index");
 		}
 		return mav;
 	}
 
 	@PostMapping("/login") 
 	public ModelAndView login(@RequestParam("email") String email, @RequestParam("password") String password) {
-		ModelAndView mav = new ModelAndView("index");
+		ModelAndView mav = new ModelAndView("redirect:/index");
 		try {
 			User loginedUser = us.login(email, encryptService.encrypt(password));
 			session.setAttribute("loginedUser", loginedUser);
@@ -139,7 +143,7 @@ public class UserController {
 
 	@GetMapping("/logout")
 	public ModelAndView logout() {
-		ModelAndView mav = new ModelAndView("index");
+		ModelAndView mav = new ModelAndView("redirect:/index");
 		session.invalidate();
 //		 session.removeAttribute("loginedUser");
 

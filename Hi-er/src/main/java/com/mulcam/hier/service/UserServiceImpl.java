@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public FreelancerUser sellerInfo(int seller_id) throws Exception {
-		FreelancerUser seller_info = ud.sellet_seller(seller_id);
+		FreelancerUser seller_info = ud.sellet_seller_info(seller_id);
 		return seller_info;
 	}
 }
