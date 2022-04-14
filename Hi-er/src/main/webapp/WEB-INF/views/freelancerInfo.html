@@ -182,9 +182,10 @@
             success: function(data) {
                 swal(data)
                 if(data=="메세지 전송 성공!!") {
-                    $('#exampleModal').modal('hide')
-                    $('#title').val()=="";
-                    $('#content').val()=="";
+                    $('#exampleModal').modal('hide');
+                    shown.bs.modal
+                    // title==null;
+                    // content==null;
                 }
             },
             error: function (request, status, error) {
@@ -193,6 +194,10 @@
         })
 
     }
+    $('.modal').on('hidden.bs.modal', function (e) {
+        console.log('modal close');
+        $(this).find('form')[0].reset()
+    });
 
     window.onpopstate = function (event) {
         $("#rv").load(location.href + " #rv");
