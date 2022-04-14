@@ -561,7 +561,9 @@
 													<div
 														class="fit-progressbar fit-progressbar-bar star-progress-bar">
 														<div class="fit-progressbar-background">
-															<span class="progress-fill"></span>
+
+															<span class="progress-fill" style="width: 97.2973%"></span>
+
 														</div>
 													</div>
 												</td>
@@ -898,7 +900,7 @@
     e.preventDefault();
     let reason = $("input[name='reportRadios']:checked").val();
     let pid = `[[${product.product_id}]]`;
-    let reported_userid = 10;
+    let reported_userid = `[[${product.seller_id}]]`;
     $.ajax({
       type: "POST",
       url: "/post/report",
