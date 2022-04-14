@@ -24,13 +24,16 @@
 	width: 90%;
 	text-align: left;
 }
+.fileTable tr td {
+	padding:8px;
+}
 </style>
 </head>
 
 <section layout:fragment="contents">
 	<div style="margin:50px">
 	<div class="container">
-		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기- 영상편집</h2>
+		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기 - 영상편집</h2>
 		<form action="/post/videoWrite" method="post" enctype="multipart/form-data" id="form" name="board_write" >
 			<div class="form-group">
 				<label for="title">글 제목</label>
@@ -44,15 +47,20 @@
                      </div>
 			</div>
 			<div class="form-group"  style="display: flex; justify-content: center; padding-top: 20px;">
-				<label for="title">비디오 업로드</label>
-				<table>
+				<table class="fileTable">
+				<!-- 	<tr>
+						<td><h5>↓비디오 업로드</h5></td>
+						<td><h5>↓썸네일</h5></td>
+						<td></td>
+						<td></td>
+					</tr> -->
 					<tr>
 						<td><video id="rep1" name="img1"
-							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
+							th:src="@{/images/videoUploadDefault.mp4}" class="imgUpload"
 							width="200px" height="200px"></video> <input type="file" id="file1"
 							name="file1" accept="video/*" style="display: none;" class="file"></td>
 						<td><img id="rep2" name="img2"
-							th:src="@{/images/imageUploadDefault.png}" class="imgUpload"
+							th:src="@{/images/ImageUploadThumbnail.png}" class="imgUpload"
 							width="200px" height="200px"></img><input type="file" id="file2"
 							name="file2" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep3" name="img3"

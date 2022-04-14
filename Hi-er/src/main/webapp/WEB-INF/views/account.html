@@ -55,7 +55,7 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a th:if=${session.loginedUser.type}==0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 								<a th:if=${session.loginedUser.type}==2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
 									프리내정보수정 </a>	
@@ -155,9 +155,9 @@
 											<th>상품제목</th>
 											<th>판매자</th>
 											<th>구매수량</th>
-											<th>총가격</th>
+											<th>총 가격</th>
 											<th>상태</th>
-											<th>리뷰달기</th>
+											<th>리뷰 달기</th>
 										</tr>
 
 									</thead>
@@ -268,9 +268,11 @@
 											<td th:text="${likepost.createdAt}"></td>
 											<!-- <td th:text="${likepost.nickname}"></td> -->
 											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
-											<td class="selller" th:id="${likepost.liked_userid}" th:text="${likepost.nickname}" style="cursor:pointer"></td>
-								
-											<td><a class="navbar-brand"><img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt=""></a></td>
+											<td th:text="${likepost.nickname}"></td>
+											<td><a class="navbar-brand" th:id="${likepost.like_id}">
+											<!--<img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt="">-->
+											<i class="fa fa-heart heart" th:id="${likepost.like_id}" style="cursor: pointer; color:#2cdd9b;" ></i>
+											</a></td>
 											
 											
 										</tr>
@@ -292,9 +294,9 @@
 									<thead>
 										<tr>
 											<th>시간</th>
-											<th>보낸사람닉네임</th>
-											<th>관련포스트제목</th>
-											<th>받은사람닉넹미</th>
+											<th>보낸 사람 닉네임</th>
+											<th>상품명</th>
+											<th>받은 사람 닉네임</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -363,6 +365,7 @@
 			</div>
 		</div>
 	</div>
+	  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(function() {
@@ -422,12 +425,10 @@
 					},
 					success : function(data, textStatus) {
 						if (data == 'true') {
-							alert('좋아요 삭제 성공');
-							location.reload();
+							swal("알림","검색어를 입력해주세요.");							location.reload();
 
 						} else {
-							alert('좋아요 삭제 실패');
-
+							swal("검색어를 입력해주세요.");
 						}
 					},
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.User;
 
 public interface MypageService {
 	List<Map<String,Object>> history2(int user_id)throws Exception;

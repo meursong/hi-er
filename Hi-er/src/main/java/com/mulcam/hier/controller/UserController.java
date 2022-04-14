@@ -2,8 +2,8 @@ package com.mulcam.hier.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.mulcam.hier.dto.FreelancerForm;
-import com.mulcam.hier.dto.FreelancerUser;
+import com.mulcam.hier.dto.*;
+import com.mulcam.hier.service.EncryptService;
 import com.mulcam.hier.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mulcam.hier.dto.Review;
-import com.mulcam.hier.dto.User;
 import com.mulcam.hier.service.UserService;
 
 import java.util.List;
@@ -24,6 +22,9 @@ public class UserController {
 
 	@Autowired
 	ReviewService reviewService;
+	
+	@Autowired
+	EncryptService encryptService;
 	
 	@Autowired
 	HttpSession session;
@@ -40,6 +41,10 @@ public class UserController {
 		}
 		
 	}
+	@GetMapping("/message")
+	public String message(Model model) throws Exception {
+			return "/messages";
+	}
 
 	@PostMapping("freelancerForm")
 	public String joinFreelancer(FreelancerForm form) throws Exception {
@@ -48,6 +53,7 @@ public class UserController {
 			FreelancerForm freelancer = new FreelancerForm(user_id, form.getAddress(), form.getAddress2(), form.getIntroduction());
 			us.insert_info(freelancer);
 			us.update_type(user_id);
+			((User) session.getAttribute("loginedUser")).setType(2);
 			return "redirect:/";
 		} else {
 			return "login";
@@ -62,7 +68,7 @@ public class UserController {
 		FreelancerUser freelancer = us.freelancerInfo(id);
 		params.setSeller_id(id);
 
-		// params.setRecordsPerPage(4);
+		 params.setRecordsPerPage(4);
 		List<Review> reviews = reviewService.reviewList(params);
 
 		String address[] = freelancer.getAddress().split(" ");
@@ -72,26 +78,37 @@ public class UserController {
 		
 		return "freelancerInfo";
 	}
+
+	@PostMapping("/freelancerInfo/{id}")
+	public String ReviewLisSort(@RequestParam String value, @ModelAttribute("params") Review params,
+								Model model, @PathVariable int id) throws Exception {
+		params.setSeller_id(id);
+		params.setSort(value);
+		params.setRecordsPerPage(4);
+				List<Review> sortReview = reviewService.reviewList(params);
+				model.addAttribute("reviews", sortReview);
+
+		return "/freelancerInfo :: #rv";
+	}
 	
 	@GetMapping("/login")
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("login");
 		if ((User) session.getAttribute("loginedUser") != null) {
-			mav.setViewName("index");
+			mav.setViewName("redirect:/index");
 		}
 		return mav;
 	}
 
 	@PostMapping("/login") 
 	public ModelAndView login(@RequestParam("email") String email, @RequestParam("password") String password) {
-		ModelAndView mav = new ModelAndView("index");
+		ModelAndView mav = new ModelAndView("redirect:/index");
 		try {
-			User loginedUser = us.login(email, password);
+			User loginedUser = us.login(email, encryptService.encrypt(password));
 			session.setAttribute("loginedUser", loginedUser);
-			if (loginedUser == null) {
-				mav.setViewName("login");
-			}
 		} catch (Exception e) {
+			mav.setViewName("login");
+			mav.addObject("LoginFailedMsg", e.getMessage());
 			e.printStackTrace();
 		}
 		return mav;
@@ -112,6 +129,9 @@ public class UserController {
 		System.out.println(user.toString());
 		ModelAndView mav = new ModelAndView("login");
 		try {
+			String openPassword = user.getPassword();
+			String closePassword = encryptService.encrypt(openPassword);
+			user.setPassword(closePassword);
 			us.signup(user);
 		} catch (Exception e) {
 			mav.setViewName("signup");
@@ -123,7 +143,7 @@ public class UserController {
 
 	@GetMapping("/logout")
 	public ModelAndView logout() {
-		ModelAndView mav = new ModelAndView("index");
+		ModelAndView mav = new ModelAndView("redirect:/index");
 		session.invalidate();
 //		 session.removeAttribute("loginedUser");
 

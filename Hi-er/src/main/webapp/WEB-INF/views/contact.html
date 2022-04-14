@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+  <section layout:fragment="contents">
+  <section class="section-padding bg-dark py-5 inner-header">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12 text-center">
+                  <h1 class="mt-0 mb-3 text-white">Contact Us</h1>
+                  <div class="breadcrumbs">
+                     <p class="mb-0 text-white"><a class="text-white" th:href="@{/}">Home</a>  /  <span class="text-success">Contact Us</span></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section class="py-5 bg-white">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-4 col-md-4">
+                  <h3 class="mt-1 mb-4">찾아오는 길</h3>
+                  <h6 class="text-dark"><i class="mdi mdi-home-map-marker"></i> 주소  :</h6>
+                  <p>서울특별시 강남구 언주로 508 서울상록빌딩</p>
+                  <h6 class="text-dark"><i class="mdi mdi-phone"></i> Phone :</h6>
+                  <p>+82 12345-67890, (+82) 123 456 7890</p>
+                  <h6 class="text-dark"><i class="mdi mdi-deskphone"></i> 모바일 :</h6>
+                  <p>(+82) 02 123 4567, +82 02-123-4567</p>
+                  <h6 class="text-dark"><i class="mdi mdi-email"></i> 이메일 :</h6>
+                  <p>mulcam@gmail.com</p>
+                  <h6 class="text-dark"><i class="mdi mdi-link"></i> 웹 사이트 :</h6>
+                  <p>www.hi-er.com</p>
+                  <div class="footer-social mb-4"><span>Follow : </span>
+                     <a href="#"><i class="mdi mdi-facebook"></i></a>
+                     <a href="#"><i class="mdi mdi-twitter"></i></a>
+                     <a href="#"><i class="mdi mdi-instagram"></i></a>
+                     <a href="#"><i class="mdi mdi-google"></i></a>
+                  </div>
+               </div>
+               <div class="col-lg-8 col-md-8">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="map">
+                           <iframe
+  							width="100%"
+  							height="450px"
+ 							 style="border:0"
+  							loading="lazy"
+  							allowfullscreen
+  							referrerpolicy="no-referrer-when-downgrade"		
+  							src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA_PLPYxec679ld5NjeoqrxK9u5vEamZy4
+    						&q=서울상록빌딩&region=KR&language=ko">
+							</iframe>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- End Contact Us -->
+      <!-- Contact Me -->
+      <section class="py-5">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12 col-md-12 section-title text-left mb-4">
+                  <h2>Contact Us</h2>
+               </div>
+               <div class="col-lg-12 col-md-12">
+                  <div class="row">
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                        <div class="controls">
+                           <label>Your Name <span class="text-danger">*</span></label>
+                           <input type="text" id="userName" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                        <div class="controls">
+                           <label>Email Address <span class="text-danger">*</span></label>
+                           <input type="email" id="email" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                     <div class="controls">
+                           <label>Phone <span class="text-danger">*</span></label>
+                           <input type="text" id="phone" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                     </div>
+                  </div>
+                  <div class="control-group form-group">
+                     <div class="controls">
+                        <label>Message <span class="text-danger">*</span></label>
+                        <textarea rows="10" cols="100" class="form-control" id="message"></textarea>
+                     </div>
+                  </div>
+                  <button type="button"  th:onclick="sendEmail()" class="btn btn-success">문의 하기</button>
+                     <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+     function sendEmail(){
+      emailjs.init("hJRZ0fnVlYqYWlicl");
+		const templateParam = {
+			name : $("input[id='userName']").val(),
+			phone : $("input[id='phone']").val(),
+			email : $("input[id='email']").val(),
+			message : $("textarea[id='message']").val(),
+		}	
+			if(templateParam.name === ""){
+				swal("알림","이름을 입력해주세요.");
+				$("textarea[id='name']").focus();
+			}else if(templateParam.email === ""){
+				swal("알림","이메일을 입력해주세요.");
+				$("textarea[id='email']").focus();
+			}else if(templateParam.phone === ""){
+				swal("알림","번호를 입력해주세요.");
+				$("textarea[id='phone']").focus();
+			}else if(templateParam.message === ""){
+				swal("알림","문의 내용을 입력해주세요.");
+				$("textarea[id='message']").focus();
+			}else {
+				emailjs.send('hi-erCustomerService','template_tcpni3l',templateParam,'hJRZ0fnVlYqYWlicl').then(function(response){
+					console.log("Success!!!");
+					swal("알림","문의내용 접수 완료")
+					location.href="/Contact";
+				},function(error){
+					console.log('Failed...',error);
+				})
+			}
+}
+	</script>
+            </div>
+            </div>
+         </div>
+      </section>
+  </section>
+      <!-- End Contact Me -->
+      <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Contact form JavaScript -->
+      <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+      <script src="js/jqBootstrapValidation.js"></script>
+      <script src="js/contact_me.js"></script>
+      <!-- Slick -->
+      <script src="vendor/slick-master/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+      <!-- lightgallery -->
+      <script src="vendor/lightgallery-master/dist/js/lightgallery-all.min.js"></script>
+      <!-- select2 Js -->
+      <script src="vendor/select2/js/select2.min.js"></script>
+       <script src="js/custom.js"></script>
+      <!-- Custom -->
+   </body>
+</html>

@@ -2,9 +2,29 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}">
-
 <section layout:fragment="contents">
+    <head>
+        <style>
+            .modal {
+                text-align: center;
+            }
 
+            @media screen and (min-width: 768px) {
+                .modal:before {
+                    display: inline-block;
+                    vertical-align: middle;
+                    content: " ";
+                    height: 100%;
+                }
+            }
+
+            .modal-dialog {
+                display: inline-block;
+                text-align: left;
+                vertical-align: middle;
+            }
+        </style>
+    </head>
     <div class="main-page second py-5">
         <div class="container">
             <div class="row">
@@ -36,9 +56,11 @@
                                 </div>
                             </div>
                             <div class="buttons-wrapper">
-                                <a href="#" class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">쪽지보내기</a>
-
+                                <button type="button" data-toggle="modal" data-target="#exampleModal"
+                                        class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">쪽지보내기
+                                </button>
                             </div>
+                            <div th:replace="fragments/message :: message_modal"></div>
                             <div class="user-stats-desc">
                                 <ul class="user-stats">
                                     <li class="location">지역<strong
@@ -75,10 +97,25 @@
 
             </div>
             <div id="review">
-                <div th:replace="fragments/review :: review"></div>
+                <div class="review-section">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h4 class="m-0">
+                            리뷰<small><span class="star-rating-s15"></span></small>
+                        </h4>
+                        <select id="sort" th:onchange="sort()"
+                                class="custom-select custom-select-sm border-0 shadow-sm ml-2">
+                            <option name="op" value="review_id">최신순</option>
+                            <option name="op" value="star_point">평점순</option>
 
-                <div class="footer-pagination text-center">
-                    <nav th:replace="fragments/pagination :: pagination"></nav>
+                        </select>
+                    </div>
+                </div>
+                <div id="rv">
+                    <div th:replace="fragments/review :: review"></div>
+
+                    <div class="footer-pagination text-center">
+                        <nav th:replace="fragments/pagination :: pagination"></nav>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,12 +127,79 @@
 <script>
     function movePage(uri, queryString) {
         history.pushState({}, null, queryString);
-       $("#review").load(uri + queryString + " #review");
+        $("#rv").load(uri + queryString + " #rv");
         // location.href = uri + queryString;
     }
-    window.onpopstate = function(event) {
-        $("#review").load(location.href + " #review");
+
+    function sort() {
+
+        const value = $('#sort').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/freelancerInfo/[[${freelancer.f_id}]]",
+            data: {
+                "value": value
+            },
+
+            success: function (data) {
+                history.pushState({}, null, "?sort=" + value + "&currentPageNo=1&recordsPerPage=4&pageSize=5");
+            },
+
+        }).done(function (fragment) {
+
+            $('#rv').replaceWith(fragment);
+
+        });
+        console.log(value);
+        /*  $("form[name='filter']").submit(); */
+    }
+
+    function send() {
+        const title = $('#title').val();
+        const content = $('#content').val();
+
+        if(title=="") {
+            swal("제목을 입력해주세요.");
+            return;
+        }
+        if(content=="") {
+            swal("메세지를 입력해주세요.");
+            return;
+        }
+
+        const messageForm = {
+            recv_user_id: [[${freelancer.f_id}]],
+            title: $("#title").val(),
+            content: $("#content").val(),
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/send",
+            cache: false,
+            data: messageForm,
+            success: function(data) {
+                swal(data)
+                if(data=="메세지 전송 성공!!") {
+                    $('#exampleModal').modal('hide');
+                    shown.bs.modal
+                    // title==null;
+                    // content==null;
+                }
+            },
+            error: function (request, status, error) {
+                console.log(err);
+            }
+        })
+
+    }
+    $('.modal').on('hidden.bs.modal', function (e) {
+        console.log('modal close');
+        $(this).find('form')[0].reset()
+    });
+
+    window.onpopstate = function (event) {
+        $("#rv").load(location.href + " #rv");
     };
-
-
 </script>

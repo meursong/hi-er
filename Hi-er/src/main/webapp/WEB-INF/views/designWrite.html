@@ -24,6 +24,9 @@
 	width: 90%;
 	text-align: left;
 }
+.fileTable tr td {
+	padding:8px;
+}
 
 </style>
 </head>
@@ -31,7 +34,7 @@
 <section layout:fragment="contents">
 	<div style="margin:50px">
 	<div class="container">
-		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기- 디자인</h2>
+		<h2 style="text-align: center; padding-top:60px; font-weight: 400; font-size: 25px;">상품등록 글쓰기 - 디자인</h2>
 		<form action="/post/designWrite" method="post" enctype="multipart/form-data" id="form" name="board_write" >
 			<div class="form-group" style="text-align: center;">
 				<label for="title" style="padding-top:15px;" ></label>
@@ -46,10 +49,10 @@
 			</div>
 			<div class="form-group" style="display: flex; justify-content: center; padding-top: 20px;">
 				
-				<table>
+				<table class='fileTable'>
 					<tr>
 						<td><img id="rep1" name="img1"
-							th:src="@{/images/imageUpladDefault.png}" class="imgUpload"
+							th:src="@{/images/ImageUploadThumbnail.png}" class="imgUpload"
 							width="200px" height="200px"></img> <input type="file" id="file1"
 							name="file1" accept="image/*" style="display: none;" class="file"></td>
 						<td><img id="rep2" name="img2"

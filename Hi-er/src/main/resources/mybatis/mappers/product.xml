@@ -3,27 +3,36 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.hier.dao.ProductDAO">
 
-	<!-- <select id="selectUser" resultType="User" parameterType="String">
-		<![CDATA[
-			select * from user where nickname = #{nickname};
-		]]>
-	</select>
-
-	<select id="getBestUserFive" resultType="User">
-		<![CDATA[
-			select * from user order by 인기 desc limit 5;
-		]]>
-	</select>
-
-	<select id="getList" resultType="SelectP">
-		<![CDATA[
-			select product from product where category like = #{productName};
-		]]>
-	</select>
-	 -->
+		
+	
 	<select id="getBestProducts" resultType="Product">
 		<![CDATA[
-		select * from product order by work_available desc limit 5;
+        select p.product_id,
+			   p.seller_id,
+               u.nickname,
+               u.job,
+               p.title,
+               pi.b_price,
+               p.filename1,
+               avg(r.star_point)  as avg_star_point,
+               count(r.review_id) as review_count,
+               p.createdAt,
+               u.profile_image,
+               p.content,
+               pi.p_pkg_description
+        from product p
+                 left join user u on u.user_id = p.seller_id
+                 left join review r on p.product_id = r.product_id
+				 left join price_info pi on p.product_id = pi.product_price_id
+		group by p.product_id,pi.b_price,p_pkg_description
+        order by avg_star_point desc limit 5
+   		]]>
+	</select>
+	
+	
+	<select id="getProducts" resultType="Product">
+		<![CDATA[
+		select * from product;
 		]]>
 	</select>
 	

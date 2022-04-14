@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="message_modal" class="modal fade messageModal" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">쪽지
+                보내기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+            </div>
+            <form id="message" name="message" class="modal-body">
+                <input type="text" class="form-control" name="title" , id="title"
+                       placeholder="제목" aria-label="Enter your name"
+                       required="" aria-describedby="nameLabel"
+                       data-msg="Please enter your name." data-error-class="u-has-error"
+                       data-success-class="u-has-success" style="width: 350px; margin-bottom: 10px;">
+                <textarea class="form-control" rows="10" name="content" id="content"
+                          placeholder="내용"></textarea>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기
+                </button>
+                <button type="button" th:onclick="send()" class="btn"
+                        style="background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);">보내기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<html/>

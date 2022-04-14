@@ -25,6 +25,9 @@ public class FreelancerUser extends User {
 		this.address = address;
 		this.introduction = introduction;
 	}
+	public FreelancerUser(int i, Object object, Object object2, String intro) {
+		// TODO Auto-generated constructor stub
+	}
 	public FreelancerUser() {
 		// TODO Auto-generated constructor stub
 	}

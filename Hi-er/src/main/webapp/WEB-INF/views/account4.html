@@ -35,8 +35,10 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
+								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
+									프리내정보수정 </a>	
 							</div>
 						</div>
 
@@ -144,16 +146,15 @@
 												id="fileAttachmentBtn" name="file-attachment" type="file"
 												class="d-none">
 
-
 											</label>
-											<div>dddddddddddddddddddddd</div>
-
 										</form>
+										<div style="padding-top: 10px;">
 										<button data-toggle="tooltip" data-placement="top"
 											data-original-title="Delete" type="submit"
 											class="btn btn-danger">
 											<i class="mdi mdi-delete"></i> Delete
 										</button>
+										</div>
 									</div>
 								</div>
 								<div class="col-6 p-3">

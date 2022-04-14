@@ -9,7 +9,8 @@
         from review r
                  left join user u on u.user_id = r.review_wid
         where r.seller_id = #{seller_id}
-        order by ${sort} desc limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+        order by ${sort} desc
+        limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>
 	</select>
 

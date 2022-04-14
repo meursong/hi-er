@@ -4,11 +4,11 @@
 	layout:decorate="~{common/layout}">
 <section layout:fragment="contents">
 	<!-- Inner Header -->
-	<section class="py-5">
+	<section class="py-5"  style="padding-top: 2rem!important; padding-bottom: 2rem!important;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<img th:src="@{/images/dh/productposter.png}">
+					<img th:src="@{/images/홈배너.jpg}" width="100%">
 				</div>
 			</div>
 		</div>
@@ -94,7 +94,7 @@
 			<div class="container">
 				<div
 					class="sorting-div d-flex align-items-center justify-content-between">
-					<p class="mb-2">[[${productList.size()}]]</p>
+					<p class="mb-2"></p>
 					
 				</div>
 				<h3 >전체</h3>
@@ -103,7 +103,7 @@
 				<div class="row">
 					<div th:each="productList : ${productList}" class="col-md-3">
 						<a th:href="@{/post/detail/{pid}(pid = ${productList.product_id})}"> <img class="img-fluid"
-							th:src="@{/upload/} + ${productList.filename1}" onerror="this.src='/images/list/v1.png'"/>
+							th:src="@{/upload/} + ${productList.filename1}" onerror="this.src='/images/list/v1.png'" style="object-fit: fill"/>
 						</a>
 						<div class="inner-slider">
 							<div class="inner-wrapper">
@@ -116,7 +116,7 @@
 										class="level hint--top level-one-seller"> 직업 </span>
 									</span>
 								</div>
-								<h3 th:text="${productList.title}">제목</h3>
+								<a th:href="@{/post/detail/{pid}(pid = ${productList.product_id})}"><h3 th:text="${productList.title}" style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bolder">제목</h3></a>
 								<div class="content-info">
 									<div class="rating-wrapper">
 										<span class="gig-rating text-body-2"> <svg
@@ -135,7 +135,7 @@
 									<!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
 									<span th:text="${productList.createdAt}"></span>
 									<div class="price">
-										Basic <span th:text="'₩'+${productList.b_price}">
+										Basic <span th:text="'₩'+${#numbers.formatInteger(productList.b_price, 0 , 'COMMA')}">
 											₩비용</span>
 
 									</div>
@@ -146,11 +146,9 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="footer-pagination text-center">
 			<nav th:replace="fragments/pagination :: pagination"></nav>
 		</div>
-
 	</div>
 </section>
 
@@ -169,7 +167,7 @@
 			success : function(data) {
 				history.pushState({}, null, "?sort="+value+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category=[[${params.category}]]");
 
-				console.log("[[${params.sort}]]")},
+				},
 
 		}).done(function(fragment) {
 
@@ -185,31 +183,38 @@
 		const value = $(this).val();
 		$.ajax({
 			type : "POST",
-			url : "/search/category",
 			data : {
 				"value" : value
 			},
 
 			success : function(data) {
-				history.pushState({}, null, "?sort="+"[[${params.sort}]]"+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+value);
+				const sch= location.search;
+				const params = new URLSearchParams(sch);
+				const sort = params.get("sort");
+				console.log(sort);
+				history.pushState({}, null, "?sort="+sort+"&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=[[${params.keyword}]]&category="+value);
 
-				console.log(data);
-				console.log("[[${params.sort}]]");
-				console.log(value);
+				// console.log(data);
+
+				// console.log(value);
 			},
 
 
 		}).done(function(fragment) {
 
-			$('#productList').load(location.href+ " #productList");
+			$('#productList').load(location.href + " #productList");
 
 
 		});
 	})
 
 	function movePage(uri, queryString) {
-		history.pushState({}, null, queryString);
-		$("#productList").load(uri + queryString + " #productList");
+		const sch= location.search;
+		const params = new URLSearchParams(sch);
+		const category = params.get("category");
+		console.log(category);
+		history.pushState({}, null, queryString+category);
+		$("#productList").load(uri + queryString + category + " #productList");
 	}
 	window.onpopstate = function(event) {
 		$("#productList").load(location.href + " #productList");

@@ -3,19 +3,19 @@ package com.mulcam.hier.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mulcam.hier.dto.FreelancerForm;
-import com.mulcam.hier.dto.FreelancerUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.UserDAO;
+import com.mulcam.hier.dto.FreelancerForm;
+import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.User;
 
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
 	UserDAO ud;
-	 
+	
 	@Override
 	public User selectEmail(int user_id) throws Exception {
 		User user = ud.selectUserEmail(user_id);
@@ -29,6 +29,9 @@ public class UserServiceImpl implements UserService{
 		param.put("email", email);
 		param.put("password",password);
 		User user = ud.login(param);
+		if (user == null) {
+			throw new Exception("이메일 또는 비밀번호를 확인해주세요.");
+		}
 		user.setPassword("안가르쳐주지");
 		return user;
 	}
@@ -96,7 +99,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public FreelancerUser sellerInfo(int seller_id) throws Exception {
-		FreelancerUser seller_info = ud.sellet_seller(seller_id);
+		FreelancerUser seller_info = ud.sellet_seller_info(seller_id);
 		return seller_info;
 	}
 }

@@ -1,11 +1,13 @@
 package com.mulcam.hier.dto;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.mulcam.hier.others.Time;
+import com.mulcam.hier.others.Criteria;
+
+import java.util.Date;
 
 
 public class ProductList extends Criteria {
-	
-	//게시글 이미지 필요
+
 	private int product_id;
 	private int seller_id;
 	private String category;
@@ -95,8 +97,8 @@ public class ProductList extends Criteria {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = Time.calculateTime(createdAt);
 	}
 
 	public String getFilename1() {

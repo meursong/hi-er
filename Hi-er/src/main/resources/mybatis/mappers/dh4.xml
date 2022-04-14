@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.hier.dao.MessagesDAO">
+
+	<insert id="send_message" parameterType="Messages">
+		<![CDATA[
+		insert into messages (send_user_id, recv_user_id, title, content) values (#{send_user_id}, #{recv_user_id}, #{title}, #{content});
+		]]>
+	</insert>
+
+</mapper>

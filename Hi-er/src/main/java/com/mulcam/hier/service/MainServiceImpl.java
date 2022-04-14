@@ -18,9 +18,9 @@ public class MainServiceImpl implements MainService{
 	UserDAO userDAO;
 	
 	@Override
-	public List<User> getBestUserFive() throws Exception {
-		List<User> userList = userDAO.getBestUserFive();
-		return userList;
+	public List<User> getBestUser() throws Exception {
+		List<User> bestUser = userDAO.getBestUser();
+		return bestUser;
 	}
 	
 	@Autowired
@@ -29,6 +29,21 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public List<Product> getBestProducts() throws Exception{
 		List<Product> bestProducts = productDAO.getBestProducts();
+//		if (bestProducts.size() < 5) {
+//			List<Product> addedProducts = productDAO.getProducts();
+//			for (Product b : bestProducts) {
+//				for (Product a : addedProducts) {
+//					if(bestProducts.size() == 5) {
+//						break;
+//					} else {
+//						if (b.getProduct_id() != a.getProduct_id()) {
+//							bestProducts.add(a);
+//						}
+//					}
+//				}
+//				break;
+//			}	
+//		}
 		return bestProducts;
 		
 	}
@@ -41,3 +56,4 @@ public class MainServiceImpl implements MainService{
 	
 
 }
+

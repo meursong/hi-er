@@ -1,5 +1,8 @@
 package com.mulcam.hier.dto;
 
+import com.mulcam.hier.others.Criteria;
+import com.mulcam.hier.others.Time;
+
 import java.sql.Date;
 
 public class Review extends Criteria {
@@ -9,9 +12,12 @@ public class Review extends Criteria {
 	private int seller_id;
 	private String content;
 	private int star_point;
-	private Date createdAt;
+	private String createdAt;
 	private String nickname;
 
+	private int count;
+	
+	
 	public int getReview_wid() {
 		return review_wid;
 	}
@@ -59,11 +65,11 @@ public class Review extends Criteria {
 	public void setStar_point(int star_point) {
 		this.star_point = star_point;
 	}
-	public Date getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
 	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+		this.createdAt = Time.calculateTime(createdAt);
 	}
 	public String getNickname() {
 		return nickname;
@@ -72,4 +78,14 @@ public class Review extends Criteria {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
 }

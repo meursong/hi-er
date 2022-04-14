@@ -24,12 +24,10 @@ public class MypageController {
 
 	@Autowired
 	MypageService mypageService;
-
 	@Autowired
 	HttpSession session;
 
-	// 마이페이지 들어오면 처음 불려오는것들 찾아옴
-	@GetMapping("mypage") // 마이페이지 들어오면
+	@GetMapping("mypage")
 	public ModelAndView mypage() {
 		ModelAndView mav = new ModelAndView("account");
 		try {
