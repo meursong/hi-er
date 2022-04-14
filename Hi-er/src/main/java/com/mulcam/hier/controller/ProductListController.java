@@ -54,16 +54,6 @@ public class ProductListController {
         return "productListSearch";
     }
 
-/*    @GetMapping("/search/category")
-    public String searchPage1(@ModelAttribute("params") ProductList params, Model model, @RequestParam(value="category", required = false) String category)
-            throws Exception {
-        params.setCategory(category);
-
-        List<ProductList> selectProductDate = productListService.selectProductTotal(params);
-        model.addAttribute("productList", selectProductDate);
-        return "productListSearch";
-    }*/
-
 
     @PostMapping("/product/category/{id}")
     public String productLisSort(@PathVariable("id") String id, @RequestParam String value, @ModelAttribute("params") ProductList params,
@@ -91,18 +81,23 @@ public class ProductListController {
     @PostMapping("/search")
     public String productLisSort(@RequestParam String value, @ModelAttribute("params") ProductList params,
                                     Model model) throws Exception {
-        params.setSort(value);
-        List<ProductList> sortProduct = productListService.selectProductTotal(params);
-        model.addAttribute("productList", sortProduct);
-        return "/productListSearch :: #productList";
-    }
+        switch (value) {
+            case "product_id":
+            case "avg_star_point":
+            case "review_count":
+                params.setSort(value);
+                List<ProductList> sortProduct1 = productListService.selectProductTotal(params);
+                model.addAttribute("productList", sortProduct1);
+                break;
+            case "design":
+            case "video":
+            case "it":
+                params.setCategory(value);
+                List<ProductList> sortProduct2 = productListService.selectProductTotal(params);
+                model.addAttribute("productList", sortProduct2);
+                break;
+        }
 
-    @PostMapping("/search/category")
-    public String productLisCategory(@RequestParam String value, @ModelAttribute("params") ProductList params,
-                                    Model model) throws Exception {
-        params.setCategory(value);
-        List<ProductList> sortProduct = productListService.selectProductTotal(params);
-        model.addAttribute("productList", sortProduct);
         return "/productListSearch :: #productList";
     }
 
@@ -114,6 +109,5 @@ public class ProductListController {
         model.addAttribute("productList", sortProduct);
         return "/productListSearch :: #productList";
     }*/
-
 
 }
