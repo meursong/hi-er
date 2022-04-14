@@ -1,4 +1,4 @@
-package com.mulcam.hier.dto;
+package com.mulcam.hier.others;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;

@@ -1,4 +1,4 @@
-package com.mulcam.hier;
+package com.mulcam.hier.others;
 
 import java.util.Date;
 public class Time {

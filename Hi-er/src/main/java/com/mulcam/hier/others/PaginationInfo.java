@@ -1,4 +1,4 @@
-package com.mulcam.hier.dto;
+package com.mulcam.hier.others;
 
 
 public class PaginationInfo {
