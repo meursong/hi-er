@@ -36,20 +36,21 @@
                      <div class="text-center mb-4">
                         <a th:href="@{/}"><img th:src="@{images/titlelogo.png}" alt=""></a>
                         <h5 class="font-weight-bold mt-3">로그인</h5>
+                        <input type="hidden" id="LoginFailedMsg" th:value="${LoginFailedMsg }">
                      </div>
                      <form method="post" th:action="@{/login}">
                         <div class="form-group">
                            <label class="mb-1">이메일</label>
                            <div class="position-relative icon-form-control">
                               <i class="mdi mdi-account position-absolute"></i>
-                              <input type="email" name="email" class="form-control">
+                              <input type="email" name="email" class="form-control" required>
                            </div>
                         </div>
                         <div class="form-group">
                            <label class="mb-1">비밀번호</label>
                            <div class="position-relative icon-form-control">
                               <i class="mdi mdi-key-variant position-absolute"></i>
-                              <input type="password" name="password" class="form-control">
+                              <input type="password" name="password" class="form-control" required>
                            </div>
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
@@ -78,6 +79,14 @@
             </div>
          </div>
       </div>
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script>
+      	let LoginFailedMsg = $('#LoginFailedMsg').val();
+      	if (LoginFailedMsg != "") {
+      		alert(LoginFailedMsg);
+      	}
+      	
+      </script>
       
    </body>
 </html>
