@@ -19,4 +19,6 @@ public interface MypageService {
 	boolean reviewWrite(String content, int star_point,int order_id,int user_id);
 	
 	boolean heartremove(int like_id);
+	List<Map<String, Object>> report5() throws Exception;
+	List<Map<String,Object>> sortBoardCount(String id) throws Exception;;
 }

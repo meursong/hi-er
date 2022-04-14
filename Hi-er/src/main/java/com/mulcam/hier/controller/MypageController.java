@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +52,63 @@ public class MypageController {
 		}
 		return mav;
 	}
+	
 
+
+	@GetMapping("admin") // 마이페이지 들어오면
+	public ModelAndView admin() {
+		ModelAndView mav = new ModelAndView("admin");
+		try {
+			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();// 세션에서 유저의 아이디를 가져옴
+			System.out.println(user_id);
+			Map<String,Object> statistics1=mypageService.count(user_id);
+			List<Map<String, Object>> report = mypageService.report5();// 유저의 아이디로 거래내역을 가져옴
+	
+			mav.addObject("statistics", statistics1);// 가져온 ord를 orders로 프론트로 내려보낼거임
+			mav.addObject("reports",report);
+		
+			mav.addObject("page", "0");// 페이지0으로 들어갈거임 마이페이지 홈
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	
+	
+	@PostMapping("sortBoardCount")
+	public String sortBoardCount(@RequestParam String id,Model model) {//아이디 소트보드카운트/소트 어쩌고...
+		
+		try {
+			if("sortBoardCount".equals(id)) {
+				System.out.println("들어오모옴옴오모들어오모옴옴오모들어오모옴옴오모들어오모옴옴오모들어오모옴옴오모");
+				List<Map<String, Object>> sortBoardCount1=mypageService.sortBoardCount(id);
+				System.out.println(sortBoardCount1);
+				model.addAttribute("sortBoardCounts",sortBoardCount1);
+				
+			}
+			else if("sortPriceTotal".equals(id)) {
+				List<Map<String, Object>> sortBoardCount1=mypageService.sortBoardCount(id);
+				System.out.println(sortBoardCount1);
+				model.addAttribute("sortBoardCounts",sortBoardCount1);
+			}
+			else if("sortreported".equals(id)) {
+				List<Map<String, Object>> sortBoardCount1=mypageService.sortBoardCount(id);
+				System.out.println(sortBoardCount1);
+				model.addAttribute("sortBoardCounts",sortBoardCount1);
+			}
+			else {//sortliked
+				List<Map<String, Object>> sortBoardCount1=mypageService.sortBoardCount(id);
+				System.out.println(sortBoardCount1);
+				model.addAttribute("sortBoardCounts",sortBoardCount1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "/admin :: #kkk";
+	
+	}
+	
 	// 마이페이지에서 자세히 눌렀을때 페이지 이동/값들을 가져옴
 	@GetMapping("mypage/{num}/{page2}") // 넘이 1이면 거래내역자세히 2면 찜한목록자세히 3이면 쪽지내역 자세히 page2는 자세히 안에서 페이지임
 	public ModelAndView mypage1(@PathVariable String num, @PathVariable String page2) {
@@ -238,6 +295,14 @@ public class MypageController {
 				e.printStackTrace();
 			}
 			return String.valueOf(like);
+		}
+		
+		//유저 삭제
+		@ResponseBody
+		@PostMapping("userdelete")
+		public String userdelete(@RequestParam(value = "id") int like_id) {
+			System.out.println("kkkkkkkkkkkk");
+			return null;
 		}
 		
 		@ResponseBody

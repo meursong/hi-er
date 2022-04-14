@@ -207,9 +207,15 @@ public class MypageServiceImpl implements MypageService {
 		//판매 건수
 		int sellOrder=mypageDAO.sellCount(user_id);
 		//구매 총가격
-		int buySumOrder=mypageDAO.buySum(user_id);
+		Integer buySumOrder=mypageDAO.buySum(user_id);
+		if(buySumOrder==null) {
+			buySumOrder=0;
+		}
 		//판매 총가격
-		int sellSumOrder=mypageDAO.sellSum(user_id);
+		Integer sellSumOrder=mypageDAO.sellSum(user_id);
+		if(sellSumOrder==null) {
+			sellSumOrder=0;
+		}
 		//누른 좋아요 수
 		int clickLike=mypageDAO.countBoard2(user_id);
 		//눌린 좋아요 수
@@ -234,6 +240,40 @@ public class MypageServiceImpl implements MypageService {
 		//listMapInsert.add(map);
 		return map;
 	}
+
+	@Override
+	public List<Map<String, Object>> report5() throws Exception {
+		List<Map<String, Object>> report=mypageDAO.report5();
+		
+		
+		return report;
+	}
+
+	@Override
+	public List<Map<String, Object>> sortBoardCount(String id) throws Exception {
+		
+		
+		if("sortBoardCount".equals(id)) {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortBoardCount();
+			return sortBoardCount;
+		}
+		else if("sortPriceTotal".equals(id)) {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortAllPrice();
+			return sortBoardCount;
+		}
+		else if("sortreported".equals(id)) {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortReported();
+			return sortBoardCount;
+		}
+		else {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortLiked();
+			return sortBoardCount;
+		}
+		
+		
+	}
+	
+	
 	
 	
 

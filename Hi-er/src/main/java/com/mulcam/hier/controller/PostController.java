@@ -322,8 +322,7 @@ public class PostController {
 	public String reportPost(@RequestParam("reason") String reason, @RequestParam("pid") Integer pid,
 			@RequestParam("reported_userid") Integer reported_userid) {
 		String result;
-		// Integer report_userid = (Integer)session.getAttribute("id");
-		Integer report_userid = (Integer) session.getAttribute("id"); // 추후에 바꿔줘야함
+		Integer report_userid = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			postService.reportPost(reason, pid, reported_userid, report_userid);
 			result = "신고완료";
@@ -333,6 +332,7 @@ public class PostController {
 		}
 		return result;
 	}
+
 
 	@ResponseBody
 	@PostMapping("/like")
