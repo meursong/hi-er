@@ -2,8 +2,9 @@ package com.mulcam.hier.service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-import com.mulcam.hier.dto.PaginationInfo;
+import com.mulcam.hier.others.PaginationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,19 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return review;
 	}
+
+	@Override
+	public List<Map<String,Integer>> reviewCount(Integer pid) throws Exception {
+		List<Map<String,Integer>> reviewCount = reviewDAO.selectReviewCount(pid);
+		return reviewCount;
+	}
+
+	@Override
+	public Integer maxReviewCnt(Integer pid) throws Exception {
+		Integer maxReviewCnt = reviewDAO.totalReviewCount(pid);
+		return maxReviewCnt;
+	}
+
+	
 
 }

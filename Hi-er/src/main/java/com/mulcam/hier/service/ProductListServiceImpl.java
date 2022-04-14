@@ -4,11 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.hier.dao.ProductListDAO;
-import com.mulcam.hier.dto.PaginationInfo;
+import com.mulcam.hier.others.PaginationInfo;
 import com.mulcam.hier.dto.ProductList;
 
 @Service

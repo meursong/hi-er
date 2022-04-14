@@ -17,8 +17,7 @@ import com.mulcam.hier.service.MainService;
 
 @Controller
 public class MainController {
-
-
+	
 	@Autowired
 	HttpSession session;
 

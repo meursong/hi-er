@@ -28,6 +28,9 @@ public class FreelancerUser extends User {
 	public FreelancerUser(int i, Object object, Object object2, String intro) {
 		// TODO Auto-generated constructor stub
 	}
+	public FreelancerUser() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getF_id() {
 		return f_id;
 	}
