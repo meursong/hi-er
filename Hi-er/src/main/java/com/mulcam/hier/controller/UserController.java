@@ -98,10 +98,9 @@ public class UserController {
 		try {
 			User loginedUser = us.login(email, password);
 			session.setAttribute("loginedUser", loginedUser);
-			if (loginedUser == null) {
-				mav.setViewName("login");
-			}
 		} catch (Exception e) {
+			mav.setViewName("login");
+			mav.addObject("LoginFailedMsg", e.getMessage());
 			e.printStackTrace();
 		}
 		return mav;

@@ -47,9 +47,7 @@
 			<a class="navbar-brand" href="/"><img
 				th:src="@{/images/logo.png}" style="width: 100%;" alt=""></a>
 			<!-- Topbar Search -->
-			<form
-				class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search"
-				action="/search" method="GET">
+			<div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
 				<div class="input-group">
 					<input type="text" name="keyword" class="form-control bg-white small"
 						placeholder="서비스를 검색하세요" aria-label="Search"
@@ -60,7 +58,7 @@
 						</button>
 					</div>
 				</div>
-			</form>
+			</div>
 			<!-- Topbar Navbar -->
 			<ul class="navbar-nav align-items-center ml-auto">
 
@@ -260,7 +258,7 @@
 						aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">IT · 프로그래밍</a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio">
-							</li>
+							</div></li>
 				</ul>
 			</div>
 			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">
@@ -381,6 +379,22 @@
                 searchKeyword + "&category=";
         }
     }
+
+	$("#searchKeyword1").on("keyup",function(key){
+		const searchKeyword = $("input[id='searchKeyword1']").val();
+		if(key.keyCode==13) {
+			if(searchKeyword=="") {
+				swal("알림","검색어를 입력해주세요.");
+			}
+			else {
+				location.href =
+						'/search?sort=product_id&currentPageNo=1&recordsPerPage=12&pageSize=5&keyword=' +
+						searchKeyword + "&category=";
+			}
+
+		}
+	});
+
    
   </script>
 </html>
