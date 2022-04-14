@@ -267,7 +267,7 @@
 			<ul class="navbar-nav ml-auto"
 				th:unless="${session.loginedUser == null}">
 				<li class="nav-item" th:if="${session.loginedUser.type!=2	}"><a
-					class="nav-link" th:href="@{freelancerForm}"> <i
+					class="nav-link" th:href="@{/freelancerForm}"> <i
 						class="fa fa-fw fa-trophy"></i> <span>프리랜서 전환</span></a></li>
 			</ul>
 		</div>

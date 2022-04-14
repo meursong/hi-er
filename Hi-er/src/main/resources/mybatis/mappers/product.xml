@@ -17,7 +17,8 @@
                avg(r.star_point)  as avg_star_point,
                count(r.review_id) as review_count,
                p.createdAt,
-               u.profile_image
+               u.profile_image,
+               p.content
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
