@@ -3,6 +3,7 @@ package com.mulcam.hier.controller;
 import javax.servlet.http.HttpSession;
 
 import com.mulcam.hier.dto.*;
+import com.mulcam.hier.service.EncryptService;
 import com.mulcam.hier.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class UserController {
 
 	@Autowired
 	ReviewService reviewService;
+	
+	@Autowired
+	EncryptService encryptService;
 	
 	@Autowired
 	HttpSession session;
@@ -96,7 +100,7 @@ public class UserController {
 	public ModelAndView login(@RequestParam("email") String email, @RequestParam("password") String password) {
 		ModelAndView mav = new ModelAndView("index");
 		try {
-			User loginedUser = us.login(email, password);
+			User loginedUser = us.login(email, encryptService.encrypt(password));
 			session.setAttribute("loginedUser", loginedUser);
 		} catch (Exception e) {
 			mav.setViewName("login");
@@ -121,6 +125,9 @@ public class UserController {
 		System.out.println(user.toString());
 		ModelAndView mav = new ModelAndView("login");
 		try {
+			String openPassword = user.getPassword();
+			String closePassword = encryptService.encrypt(openPassword);
+			user.setPassword(closePassword);
 			us.signup(user);
 		} catch (Exception e) {
 			mav.setViewName("signup");
