@@ -41,10 +41,6 @@ public class UserController {
 		}
 		
 	}
-	@GetMapping("/message")
-	public String message(Model model) throws Exception {
-			return "/messages";
-	}
 
 	@PostMapping("freelancerForm")
 	public String joinFreelancer(FreelancerForm form) throws Exception {
