@@ -57,7 +57,7 @@
 								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 								<a th:if=${session.loginedUser.type}==2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
-									프리내정보수정 </a>	
+									내정보수정 </a>	
 							</div>
 						</div>
 
@@ -179,7 +179,7 @@
 																
 																<div class="text-right" style="padding-bottom: 10px;">
 																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
-																		href="#">리뷰 작성</a>
+																		>리뷰 작성</a>
 																</div>
 
 																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
@@ -381,7 +381,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/review",
+					url : "/review",
 					data : {
 						"order_id" : id,
 						"rating" : rating2,
@@ -414,14 +414,14 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/heartremove",
+					url : "/heartremove",
 					data : {
 						"like_id" : id,
 					},
 					success : function(data, textStatus) {
 						if (data == 'true') {
-							swal("알림","검색어를 입력해주세요.");							location.reload();
-
+							swal("알림","찜하기 취소");							
+							location.reload();
 						} else {
 							swal("검색어를 입력해주세요.");
 						}
@@ -443,7 +443,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/clicktitle",
+					url : "/clicktitle",
 					data : {
 						"id" : id,
 					},
@@ -469,7 +469,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/clickname",
+					url : "/clickname",
 					data : {
 						"id" : id,
 					},
