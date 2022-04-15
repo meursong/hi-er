@@ -383,7 +383,7 @@
             <ul class="list">
               <li><a th:href="@{/}">Main</a></li>
               <li><a href="#">introduction</a></li>
-              <li><a th:href="@{about}">About the developer</a></li>
+              <li><a th:href="@{/about}">About the developer</a></li>
             </ul>
           </div>
           <div class="footer-list">
@@ -450,6 +450,7 @@
   <script th:src="@{/vendor/select2/js/select2.min.js}"></script>
   <!-- Custom -->
   <script th:src="@{/js/custom.js}"></script>
+  <script th:src="@{/js/star.js}"></script>
   <script>
     function search1() {
         const searchKeyword = $("input[id='searchKeyword1']").val();

@@ -584,7 +584,7 @@
 						<div id="reviews" class="review-section">
 							<div
 								class="d-flex align-items-center justify-content-between mb-4">
-								<h4 class="m-0">[[${maxReviewCnt}]] 개의 평가</h4>
+								<h4 class="m-0">[[${maxReviewCntOriginal}]] 개의 평가</h4>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
@@ -601,7 +601,9 @@
 														class="fit-progressbar fit-progressbar-bar star-progress-bar">
 														<div class="fit-progressbar-background">
 
-															<span class="progress-fill" th:style="${reviewCount.count*100/maxReviewCnt < 11 ? 'width:10%' :
+															<span class="progress-fill" 
+															th:style="${reviewCount.count*100/maxReviewCnt < 1 ? 'width:0%' :
+															reviewCount.count*100/maxReviewCnt < 11 ? 'width:10%' :
 															reviewCount.count*100/maxReviewCnt < 21 ? 'width:20%' :
 															reviewCount.count*100/maxReviewCnt < 31 ? 'width:30%' :
 															reviewCount.count*100/maxReviewCnt < 41 ? 'width:40%' :

@@ -60,8 +60,7 @@
 						processData:false,
 						contentType:false,
 						success : function(res) {
-							alert(res);
-							alert("결제 성공");
+							swal("결제 성공","결제 성공");
 							location.href='/mypage';
 						},
 						error : function(XMLHttpRequest, textStatus, errorThrown) {
