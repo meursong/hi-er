@@ -4,7 +4,7 @@
 <mapper namespace="com.mulcam.hier.dao.MypageDAO">
 	<select id="queryOrders" resultType="Orders" parameterType="int">
 	<![CDATA[
-		select * from Orders where buyer_id=#{id}
+		select * from orders where buyer_id=#{id}
 		order by createdAt desc limit 5
 	]]>	
 	
@@ -13,7 +13,7 @@
 	<!-- 주문번호로 주문을 조회함 -->
 	<select id="findorder" resultType="Orders" parameterType="int">
 	<![CDATA[
-		select * from Orders where order_id=#{order_id}
+		select * from orders where order_id=#{order_id}
 		limit 1
 	]]>	
 	
