@@ -5,23 +5,39 @@
 <head>
 <style>
 .modal {
-                text-align: center;
-            }
+	text-align: center;
+}
 
-            @media screen and (min-width: 768px) {
-                .modal:before {
-                    display: inline-block;
-                    vertical-align: middle;
-                    content: " ";
-                    height: 100%;
-                }
-            }
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
 
-            .modal-dialog {
-                display: inline-block;
-                text-align: left;
-                vertical-align: middle;
-            }
+.modal-dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.sendingMSGtoSeller {
+	padding: 12px 24px;
+    border: 1px solid #95979d;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    color: #62646a;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.6s;
+    width: 100%;
+    display: inline-block;
+}
 </style>
 </head>
 
@@ -90,7 +106,7 @@
 							<span class="total-rating" th:if="${product.category}=='video'">영상편집</span>
 							<span class="total-rating" th:if="${product.category}=='it'">IT</span>
 						</div>
-						
+
 					</div>
 					<!--  이미지 -->
 					<div class="slider mt-4">
@@ -202,12 +218,12 @@
 											</span>
 										</div> <span class="total-rating-out-five"></span> <span
 										class="total-rating">(리뷰)([[${sellerInfo.avg_star_point}]])</span>
-									</span> 
-									<div class="buttons-wrapper" style="padding-top:10px">
-                                		<button type="button" data-toggle="modal" data-target="#exampleModal"
-                                        	class="c-btn c-fill-color-btn">쪽지보내기
-                                		</button>
-                           			 </div>
+									</span>
+									<div class="buttons-wrapper" style="padding-top: 10px">
+										<button type="button" data-toggle="modal"
+											data-target="#exampleModal" class="c-btn c-fill-color-btn">쪽지보내기
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -578,8 +594,7 @@
 												<td><span>
 														<button
 															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter"
-															th:text="${reviewCount.star_point} + 점">
-															</button>
+															th:text="${reviewCount.star_point} + 점"></button>
 												</span></td>
 												<td class="progress-bar-container">
 													<div
@@ -683,196 +698,194 @@
 					</div>
 				</div>
 				<!-- 가격정보(거래신청) 우측 사이드 내브바 -->
-				
+
 				<div class="col-lg-4 right">
 					<form action="/post/payment" method="post" class="sticky">
-								<!-- 결제페이지로 넘길 정보들  -->
-								<input type="hidden" name="title" th:value="${product.title}">
-								<input type="hidden" name="product_id"
-									th:value="${product.product_id}"> <input type="hidden"
-									name="filename1" th:value="${product.filename1}"> <input
-									type="hidden" name="filename2" th:value="${product.filename2}">
-								<input type="hidden" name="category"
-									th:value="${product.category}"> <input type="hidden"
-									name="seller_id" th:value="${product.seller_id}"> <input
-									type="hidden" name="nickname" th:value="${sellerInfo.nickname}">
-								<input type="hidden" name="name" th:value="${sellerInfo.name}">
-								<input type="hidden" name="email" th:value="${sellerInfo.email}">
-								<input type="hidden" name="b_price"
-									th:value="${priceInfo.b_price}"> <input type="hidden"
-									name="s_price" th:value="${priceInfo.s_price}"> <input
-									type="hidden" name="p_price" th:value="${priceInfo.p_price}">
-								<input type="hidden" name="b_pkg_description"
-									th:value="${priceInfo.b_pkg_description}"> <input
-									type="hidden" name="s_pkg_description"
-									th:value="${priceInfo.s_pkg_description}"> <input
-									type="hidden" name="p_pkg_description"
-									th:value="${priceInfo.p_pkg_description}"> <input
-									type="hidden" name="b_original_image"
-									th:value="${priceInfo.b_original_image}"> <input
-									type="hidden" name="s_original_image"
-									th:value="${priceInfo.s_original_image}"> <input
-									type="hidden" name="p_original_image"
-									th:value="${priceInfo.p_original_image}"> <input
-									type="hidden" name="b_commercial"
-									th:value="${priceInfo.b_commercial}"> <input
-									type="hidden" name="s_commercial"
-									th:value="${priceInfo.s_commercial}"> <input
-									type="hidden" name="p_commercial"
-									th:value="${priceInfo.p_commercial}"> <input
-									type="hidden" name="b_sns_Kit"
-									th:value="${priceInfo.b_sns_Kit}"> <input type="hidden"
-									name="s_sns_Kit" th:value="${priceInfo.s_sns_Kit}"> <input
-									type="hidden" name="p_sns_Kit"
-									th:value="${priceInfo.p_sns_Kit}"> <input type="hidden"
-									name="b_draft" th:value="${priceInfo.b_draft}"> <input
-									type="hidden" name="s_draft" th:value="${priceInfo.s_draft}">
-								<input type="hidden" name="p_draft"
-									th:value="${priceInfo.p_draft}"> <input type="hidden"
-									name="b_revision" th:value="${priceInfo.b_revision}"> <input
-									type="hidden" name="s_revision"
-									th:value="${priceInfo.s_revision}"> <input
-									type="hidden" name="p_revision"
-									th:value="${priceInfo.p_revision}"> <input
-									type="hidden" name="b_default_delivery"
-									th:value="${priceInfo.b_default_delivery}"> <input
-									type="hidden" name="s_default_delivery"
-									th:value="${priceInfo.s_default_delivery}"> <input
-									type="hidden" name="p_default_delivery"
-									th:value="${priceInfo.p_default_delivery}"> <input
-									type="hidden" name="b_minimum_delivery"
-									th:value="${priceInfo.b_minimum_delivery}"> <input
-									type="hidden" name="s_minimum_delivery"
-									th:value="${priceInfo.s_minimum_delivery}"> <input
-									type="hidden" name="p_minimum_delivery"
-									th:value="${priceInfo.p_minimum_delivery}"> <input
-									type="hidden" name="b_additional_price"
-									th:value="${priceInfo.b_additional_price}"> <input
-									type="hidden" name="s_additional_price"
-									th:value="${priceInfo.s_additional_price}"> <input
-									type="hidden" name="p_additional_price"
-									th:value="${priceInfo.p_additional_price}">
-					<div class="sticky">
-						<ul class="nav nav-tabs">
-							<li><a class="active" data-toggle="tab" href="#basic">Basic</a>
-							</li>
-							<li><a data-toggle="tab" href="#standard">Standard</a></li>
-							<li><a data-toggle="tab" href="#Premium">Premium</a></li>
-						</ul>
-						<div class="tab-content">
-							<div id="basic" class="tab-pane fade show active">
-								<div class="header">
-									<h3>
-										<b class="title">베이직</b><span class="price"
-											th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원"></span>
-									</h3>
-									<p>[[${priceInfo.b_pkg_description}]]</p>
-								</div>
-								<article>
-									<div class="d-flex">
-										<b class="delivery"><i class="fa fa-clock-o"
-											aria-hidden="true"></i> [[${priceInfo.b_default_delivery}]]
-											작업일</b> <b class="delivery ml-3"><i class="fa fa-refresh"
-											aria-hidden="true"></i> 수정 [[${priceInfo.b_revision}]] 회</b>
+						<!-- 결제페이지로 넘길 정보들  -->
+						<input type="hidden" name="title" th:value="${product.title}">
+						<input type="hidden" name="product_id"
+							th:value="${product.product_id}"> <input type="hidden"
+							name="filename1" th:value="${product.filename1}"> <input
+							type="hidden" name="filename2" th:value="${product.filename2}">
+						<input type="hidden" name="category"
+							th:value="${product.category}"> <input type="hidden"
+							name="seller_id" th:value="${product.seller_id}"> <input
+							type="hidden" name="nickname" th:value="${sellerInfo.nickname}">
+						<input type="hidden" name="name" th:value="${sellerInfo.name}">
+						<input type="hidden" name="email" th:value="${sellerInfo.email}">
+						<input type="hidden" name="b_price"
+							th:value="${priceInfo.b_price}"> <input type="hidden"
+							name="s_price" th:value="${priceInfo.s_price}"> <input
+							type="hidden" name="p_price" th:value="${priceInfo.p_price}">
+						<input type="hidden" name="b_pkg_description"
+							th:value="${priceInfo.b_pkg_description}"> <input
+							type="hidden" name="s_pkg_description"
+							th:value="${priceInfo.s_pkg_description}"> <input
+							type="hidden" name="p_pkg_description"
+							th:value="${priceInfo.p_pkg_description}"> <input
+							type="hidden" name="b_original_image"
+							th:value="${priceInfo.b_original_image}"> <input
+							type="hidden" name="s_original_image"
+							th:value="${priceInfo.s_original_image}"> <input
+							type="hidden" name="p_original_image"
+							th:value="${priceInfo.p_original_image}"> <input
+							type="hidden" name="b_commercial"
+							th:value="${priceInfo.b_commercial}"> <input
+							type="hidden" name="s_commercial"
+							th:value="${priceInfo.s_commercial}"> <input
+							type="hidden" name="p_commercial"
+							th:value="${priceInfo.p_commercial}"> <input
+							type="hidden" name="b_sns_Kit" th:value="${priceInfo.b_sns_Kit}">
+						<input type="hidden" name="s_sns_Kit"
+							th:value="${priceInfo.s_sns_Kit}"> <input type="hidden"
+							name="p_sns_Kit" th:value="${priceInfo.p_sns_Kit}"> <input
+							type="hidden" name="b_draft" th:value="${priceInfo.b_draft}">
+						<input type="hidden" name="s_draft"
+							th:value="${priceInfo.s_draft}"> <input type="hidden"
+							name="p_draft" th:value="${priceInfo.p_draft}"> <input
+							type="hidden" name="b_revision"
+							th:value="${priceInfo.b_revision}"> <input type="hidden"
+							name="s_revision" th:value="${priceInfo.s_revision}"> <input
+							type="hidden" name="p_revision"
+							th:value="${priceInfo.p_revision}"> <input type="hidden"
+							name="b_default_delivery"
+							th:value="${priceInfo.b_default_delivery}"> <input
+							type="hidden" name="s_default_delivery"
+							th:value="${priceInfo.s_default_delivery}"> <input
+							type="hidden" name="p_default_delivery"
+							th:value="${priceInfo.p_default_delivery}"> <input
+							type="hidden" name="b_minimum_delivery"
+							th:value="${priceInfo.b_minimum_delivery}"> <input
+							type="hidden" name="s_minimum_delivery"
+							th:value="${priceInfo.s_minimum_delivery}"> <input
+							type="hidden" name="p_minimum_delivery"
+							th:value="${priceInfo.p_minimum_delivery}"> <input
+							type="hidden" name="b_additional_price"
+							th:value="${priceInfo.b_additional_price}"> <input
+							type="hidden" name="s_additional_price"
+							th:value="${priceInfo.s_additional_price}"> <input
+							type="hidden" name="p_additional_price"
+							th:value="${priceInfo.p_additional_price}">
+						<div class="sticky">
+							<ul class="nav nav-tabs">
+								<li><a class="active" data-toggle="tab" href="#basic">Basic</a>
+								</li>
+								<li><a data-toggle="tab" href="#standard">Standard</a></li>
+								<li><a data-toggle="tab" href="#Premium">Premium</a></li>
+							</ul>
+							<div class="tab-content">
+								<div id="basic" class="tab-pane fade show active">
+									<div class="header">
+										<h3>
+											<b class="title">베이직</b><span class="price"
+												th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원"></span>
+										</h3>
+										<p>[[${priceInfo.b_pkg_description}]]</p>
 									</div>
-									<ul class="features">
-										<li  th:if="${product.category}=='design'"
-											th:attr="class=${priceInfo.b_original_image == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true">
-											</i>원본 이미지 제공
-										</li>
-										<li
-											th:attr="class=${priceInfo.b_commercial == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
-										</li>
-										<li
-											th:attr="class=${priceInfo.b_sns_Kit == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
-										</li>
-										<li class="feature included"><i class="fa fa-check"
-											aria-hidden="true"></i>시안 개수 : [[${priceInfo.b_draft}]]</li>
-									</ul>
-								</article>
-								<button  name="paymentPkg" value="Basic" type="submit" >계속하기 (결제페이지로 이동)</button>
+									<article>
+										<div class="d-flex">
+											<b class="delivery"><i class="fa fa-clock-o"
+												aria-hidden="true"></i> [[${priceInfo.b_default_delivery}]]
+												작업일</b> <b class="delivery ml-3"><i class="fa fa-refresh"
+												aria-hidden="true"></i> 수정 [[${priceInfo.b_revision}]] 회</b>
+										</div>
+										<ul class="features">
+											<li th:if="${product.category}=='design'"
+												th:attr="class=${priceInfo.b_original_image == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"> </i>원본 이미지 제공
+											</li>
+											<li
+												th:attr="class=${priceInfo.b_commercial == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
+											</li>
+											<li
+												th:attr="class=${priceInfo.b_sns_Kit == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
+											</li>
+											<li class="feature included"><i class="fa fa-check"
+												aria-hidden="true"></i>시안 개수 : [[${priceInfo.b_draft}]]</li>
+										</ul>
+									</article>
+									<button name="paymentPkg" value="Basic" type="submit">계속하기
+										(결제페이지로 이동)</button>
+								</div>
+								<div id="standard" class="tab-pane fade">
+									<div class="header">
+										<h3>
+											<b class="title">스탠다드</b><span class="price"
+												th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원"></span>
+										</h3>
+										<p>[[${priceInfo.s_pkg_description}]]</p>
+									</div>
+									<article>
+										<div class="d-flex">
+											<b class="delivery"><i class="fa fa-clock-o"
+												aria-hidden="true"></i> [[${priceInfo.s_default_delivery}]]
+												작업일</b><b class="delivery ml-3"><i class="fa fa-refresh"
+												aria-hidden="true"></i> 수정 [[${priceInfo.s_revision}]] 회</b>
+										</div>
+										<ul class="features">
+											<li
+												th:attr="class=${priceInfo.s_original_image == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>원본 이미지 제공
+											</li>
+											<li
+												th:attr="class=${priceInfo.s_commercial == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
+											</li>
+											<li
+												th:attr="class=${priceInfo.s_sns_Kit == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
+											</li>
+											<li class="feature included"><i class="fa fa-check"
+												aria-hidden="true"></i>시안 개수 : [[${priceInfo.s_draft}]]</li>
+										</ul>
+									</article>
+									<button name="paymentPkg" value="Standard" type="submit">계속하기
+										(결제페이지로 이동)</button>
+								</div>
+								<div id="Premium" class="tab-pane fade">
+									<div class="header">
+										<h3>
+											<b class="title">프리미엄</b><span class="price"
+												th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원"></span>
+										</h3>
+										<p>[[${priceInfo.p_pkg_description}]]</p>
+									</div>
+									<article>
+										<div class="d-flex">
+											<b class="delivery"><i class="fa fa-clock-o"
+												aria-hidden="true"></i> [[${priceInfo.p_default_delivery}]]
+												작업일</b><b class="delivery ml-3"><i class="fa fa-refresh"
+												aria-hidden="true"></i> 수정 [[${priceInfo.p_revision}]] 회</b>
+										</div>
+										<ul class="features">
+											<li
+												th:attr="class=${priceInfo.p_original_image == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>원본 이미지 제공
+											</li>
+											<li
+												th:attr="class=${priceInfo.p_commercial == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
+											</li>
+											<li
+												th:attr="class=${priceInfo.p_sns_Kit == 'true' ? 'feature included' : 'feature'}">
+												<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
+											</li>
+											<li class="feature included"><i class="fa fa-check"
+												aria-hidden="true"></i>시안 개수 : [[${priceInfo.p_draft}]]</li>
+										</ul>
+									</article>
+									<button name="paymentPkg" value="Premium" type="submit">계속하기
+										(결제페이지로 이동)</button>
+								</div>
 							</div>
-							<div id="standard" class="tab-pane fade">
-								<div class="header">
-									<h3>
-										<b class="title">스탠다드</b><span class="price"
-											th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원"></span>
-									</h3>
-									<p>[[${priceInfo.s_pkg_description}]]</p>
-								</div>
-								<article>
-									<div class="d-flex">
-										<b class="delivery"><i class="fa fa-clock-o"
-											aria-hidden="true"></i> [[${priceInfo.s_default_delivery}]]
-											작업일</b><b class="delivery ml-3"><i class="fa fa-refresh"
-											aria-hidden="true"></i> 수정 [[${priceInfo.s_revision}]] 회</b>
-									</div>
-									<ul class="features">
-										<li
-											th:attr="class=${priceInfo.s_original_image == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>원본 이미지 제공
-										</li>
-										<li
-											th:attr="class=${priceInfo.s_commercial == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
-										</li>
-										<li
-											th:attr="class=${priceInfo.s_sns_Kit == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
-										</li>
-										<li class="feature included"><i class="fa fa-check"
-											aria-hidden="true"></i>시안 개수 : [[${priceInfo.s_draft}]]</li>
-									</ul>
-								</article>
-								<button name="paymentPkg" value="Standard" type="submit" >계속하기 (결제페이지로 이동)</button>
-							</div>
-							<div id="Premium" class="tab-pane fade">
-								<div class="header">
-									<h3>
-										<b class="title">프리미엄</b><span class="price"
-											th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원"></span>
-									</h3>
-									<p>[[${priceInfo.p_pkg_description}]]</p>
-								</div>
-								<article>
-									<div class="d-flex">
-										<b class="delivery"><i class="fa fa-clock-o"
-											aria-hidden="true"></i> [[${priceInfo.p_default_delivery}]]
-											작업일</b><b class="delivery ml-3"><i class="fa fa-refresh"
-											aria-hidden="true"></i> 수정 [[${priceInfo.p_revision}]] 회</b>
-									</div>
-									<ul class="features">
-										<li
-											th:attr="class=${priceInfo.p_original_image == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>원본 이미지 제공
-										</li>
-										<li
-											th:attr="class=${priceInfo.p_commercial == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>상업적 이용 가능
-										</li>
-										<li
-											th:attr="class=${priceInfo.p_sns_Kit == 'true' ? 'feature included' : 'feature'}">
-											<i class="fa fa-check" aria-hidden="true"></i>SNS 키트 제공
-										</li>
-										<li class="feature included"><i class="fa fa-check"
-											aria-hidden="true"></i>시안 개수 : [[${priceInfo.p_draft}]]</li>
-									</ul>
-								</article>
-								<button  name="paymentPkg" value="Premium" type="submit" >계속하기 (결제페이지로 이동)</button>
+							<div class="contact-seller-wrapper">
+								<button type="button" data-toggle="modal"
+									data-target="#exampleModal" class="sendingMSGtoSeller">판매자에게
+									쪽지 보내기</button>
 							</div>
 						</div>
-						<div class="contact-seller-wrapper">
-							<a class="fit-button">판매자에게 쪽지 보내기(쪽지 모달창 팝업)</a>
-							<div class="buttons-wrapper">
-                                <button type="button" data-toggle="modal" data-target="#exampleModal"
-                                        class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">판매자에게 쪽지 보내기
-                                </button>
-                            </div>
-						</div>
-					</div>
 					</form>
 				</div>
 			</div>

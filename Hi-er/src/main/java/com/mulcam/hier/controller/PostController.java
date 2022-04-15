@@ -322,6 +322,7 @@ public class PostController {
 		return result;
 	}
 
+
 	@ResponseBody
 	@PostMapping("/like")
 	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
