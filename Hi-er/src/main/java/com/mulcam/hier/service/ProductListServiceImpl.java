@@ -87,22 +87,5 @@ public class ProductListServiceImpl implements ProductListService {
 		return product;
 	}
 
-	@Override
-	public List<ProductList> selectProductSearch(ProductList params) throws Exception {
-		List<ProductList> product = Collections.emptyList();
-
-		int SearchCount = productListDAO.selectSearchCount();
-
-		PaginationInfo paginationInfo = new PaginationInfo(params);
-		paginationInfo.setTotalRecordCount(SearchCount);
-
-		params.setPaginationInfo(paginationInfo);
-
-		if (SearchCount > 0) {
-			product = productListDAO.selectProductSearch(params);
-		}
-
-		return product;
-	}
 
 }
