@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,6 +61,12 @@ public class PostController {
 
 	@Autowired
 	HttpSession session;
+	
+	@Value("${upload.filepath}")
+	private String filepath;
+	
+	@Value("${upload.filepath.cloud}")
+	private boolean iscloud;	
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
@@ -112,7 +117,12 @@ public class PostController {
 	private String fileupload(MultipartFile file) {
 		String filename = null;
 		try {
-			String path = servletContext.getRealPath("/upload/");
+			String path="";
+			if(iscloud) {
+				path=filepath;
+			} else {
+				path = servletContext.getRealPath(filepath);
+			}
 			String time = Long.valueOf(new Date().getTime()).toString();
 			if (file != null && !file.isEmpty()) {
 				filename = file.getOriginalFilename() + time;
@@ -128,7 +138,12 @@ public class PostController {
 	private String resizeFileupload(MultipartFile file) {
 		String filename = null;
 		try {
-			String path = servletContext.getRealPath("/upload/");
+			String path="";
+			if(iscloud) {
+				path=filepath;
+			} else {
+				path = servletContext.getRealPath(filepath);
+			}
 			String time = Long.valueOf(new Date().getTime()).toString();
 			int width = 730, height = 450;
 			if (file != null && !file.isEmpty()) {
@@ -218,13 +233,19 @@ public class PostController {
 
 	@ResponseBody
 	@PostMapping("/uploadImage")
-	public String uploadImage(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("upload") MultipartFile file) {
+	public String uploadImage(HttpServletResponse response, @RequestParam("upload") MultipartFile file) {
 		String result = null;
 
 		// [start] 파일 저장 경로 설정
 		// 파일을 저장할 경로
-		String saveDir = request.getSession().getServletContext().getRealPath("/upload/");
+	
+		String saveDir="";
+		if(iscloud) {
+			saveDir=filepath;
+		} else {
+			saveDir = servletContext.getRealPath(filepath);
+		}
+		
 		String newFileName = null;
 
 		// 해당 폴더경로(upload)가 없을 경우 폴더 자동 생성
@@ -252,7 +273,7 @@ public class PostController {
 				file.transferTo(new File(saveDir + "/" + newFileName));
 
 				return "{\"filename\":\"" + newFileName + "\",\"uploaded\" : 1, \"url\":\""
-						+ "http://localhost:8090/upload/" + newFileName + "\" }";
+						+ "/upload/" + newFileName + "\" }";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "{ \"uploaded\" : false, \"error\": { \"message\": \"업로드 중 에러가 발생했습니다. 다시 시도해 주세요.\" } }";
