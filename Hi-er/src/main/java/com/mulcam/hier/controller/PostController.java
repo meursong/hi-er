@@ -233,33 +233,6 @@ public class PostController {
 		return "redirect:/product/category/3"; // 추후 게시판 페이지로 변경
 	}
 
-	@ResponseBody
-	@PostMapping("/upload/{filename}")
-	public void fileview(@PathVariable String filename, HttpServletResponse response) {
-		System.out.println("/upload/{filename}:"+filename);
-		String saveDir="";
-		if(iscloud) {
-			saveDir=filepath;
-		} else {
-			saveDir = servletContext.getRealPath(filepath);
-		}
-		File file = new File(saveDir+filename);
-		FileInputStream fis = null;
-		try {
-			OutputStream out = response.getOutputStream();
-			fis = new FileInputStream(file);
-			FileCopyUtils.copy(fis, out);
-			out.flush();
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(fis!=null) {
-				try {
-					fis.close();
-				} catch(Exception e) {}
-			}
-		}
-	}
 	
 	@ResponseBody
 	@PostMapping("/uploadImage")
