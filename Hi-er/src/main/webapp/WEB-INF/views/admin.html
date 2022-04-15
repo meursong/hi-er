@@ -55,7 +55,7 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+								<a th:if=${session.loginedUser.type}==0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 								<a th:if=${session.loginedUser.type}==2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
 									프리내정보수정 </a>	
@@ -125,7 +125,7 @@
 						</div>
 						<div class="p-3">
 							<button type="button" class="btn btn-outline-success pl-4 pr-4">
-								POST A JOB</button>
+								어드민ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ</button>
 						</div>
 					</div>
 				</aside>
@@ -139,7 +139,7 @@
 					class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
-							<h6 class="m-0 col-6 bold">거래내역</h6>
+							<h6 class="m-0 col-6 bold">신고내역</h6>
 							<div class="col-4"></div>
 							<button type="button" class="btn btn-light btn-sm col-2"
 								th:onclick="|location.href='@{/mypage/1/1}'|">모든정보보기</button>
@@ -154,86 +154,21 @@
 											<th>시간</th>
 											<th>상품제목</th>
 											<th>판매자</th>
-											<th>구매수량</th>
-											<th>총 가격</th>
-											<th>상태</th>
-											<th>리뷰 달기</th>
+											<th>신고내용</th>
 										</tr>
 
 									</thead>
 									<tbody class="likepost">
-										<tr th:each="order: ${orders}">
-											<td th:text="${order.createdAt}"></td>
+										<tr th:each="report: ${reports}">
+											<td th:text="${report.createdAt}"></td>
 										
 											
 											
-											<td class="titttle" th:id="${order.product_id}" th:text="${order.title}" style="cursor:pointer"></td>
-											<td class="selller" th:id="${order.seller_id}" th:text="${order.nickname2}" style="cursor:pointer"></td>
-											<td th:text="${order.order_qty}"></td>
-											<td th:text="${order.order_price}"></td>
-											<td th:text="${order.order_status}"></td>
-											<td>
-												<div class="container">
-													<div class="row" style="margin-top: 0;">
-														<div class="col-md-12">
-															<div class="well well-sm">
-																
-																<div class="text-right">
-																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
-																		href="#">리뷰 달기</a>
-																</div>
-
-																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
-																	<div class="col-md-12">
-																		<form>
-																			<input id="ratings-hidden" name="rating"
-																				type="hidden">
-																			<textarea class="form-control animated" cols="50"
-																				th:id="'new-review'+${order.order_id}" name="comment"
-																				placeholder="리뷰를 입력해주세요" rows="5"></textarea>
-
-
-																			<div name="myform" class="myform" >
-
-																				<fieldset>
-																					<legend>★★★별점★★★</legend>
-																					<input type="radio" th:class="'rating'+${order.order_id}" name="rating" value="5"
-																						th:id="'rate1'+${order.order_id}"><label th:for="'rate1'+${order.order_id}">⭐</label> <input
-																						type="radio" th:class="'rating'+${order.order_id}" name="rating" value="4" th:id="'rate2'+${order.order_id}"><label
-																						th:for="'rate2'+${order.order_id}">⭐</label> <input type="radio"
-																						th:class="'rating'+${order.order_id}" name="rating" value="3" th:id="'rate3'+${order.order_id}"><label
-																						th:for="'rate3'+${order.order_id}">⭐</label> <input type="radio"
-																						th:class="'rating'+${order.order_id}" name="rating" value="2" th:id="'rate4'+${order.order_id}"><label
-																						th:for="'rate4'+${order.order_id}">⭐</label> <input type="radio"
-																						th:class="'rating'+${order.order_id}" name="rating" value="1" th:id="'rate5'+${order.order_id}"><label
-																						th:for="'rate5'+${order.order_id}">⭐</label>
-																				</fieldset> 
-
-
-																			</div>
-
-
-
-
-																			<div class="text-right">
-
-																				<a class="btn btn-danger btn-lg close-review-box" th:href="@{#}"
-																					th:id="'close-review-box'+${order.order_id}"
-																					style="display: none; margin-right: 10px;"> <span
-																					class="glyphicon glyphicon-remove"></span>Cancel
-																				</a>
-																				<button class="btn btn-success btn-lg review" th:id="${order.order_id}" type="button">Save</button>
-																			</div>
-																		</form>
-																	</div>
-																</div>
-															</div>
-
-														</div>
-													</div>
-												</div>
-
-											</td>
+											<td class="titttle" th:id="${report.product_id}" th:text="${report.title}" style="cursor:pointer"></td>
+											<td class="selller" th:id="${report.reported_userid}" th:text="${report.nickname}" style="cursor:pointer"></td>
+											<td th:text="${report.reason}"></td>
+											
+											
 										</tr>
 									</tbody>
 
@@ -244,11 +179,23 @@
 					</div>
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
-							<h6 class="m-0 col-6 bold">찜한 게시물</h6>
-							<div class="col-4"></div>
+							<h6 class="m-0 col-3 bold">판매자 유저 관리</h6>
+							<div class="col-7"></div>
+							<div class="dropdown col-2">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+									id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">정렬
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item sort2" id="sortBoardCount">게시물순</a> <a
+										class="dropdown-item sort2" id="sortPriceTotal">판매총액순</a> <a
+										class="dropdown-item sort2" id="sortreported">당한신고순</a> <a
+										class="dropdown-item sort2" id="sortliked">눌린좋아요순</a>
+										 
+								</div>
+							</div>
 
-							<button type="button" class="btn btn-light btn-sm col-2"
-								th:onclick="|location.href='@{/mypage/2/1}'|">모든정보보기</button>
+						
 
 						</div>
 						<div class="box-body p-3">
@@ -256,26 +203,32 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>시간</th>
-											<!-- <th>찜누른닉네임</th> -->
-											<th>제목</th>
-											<th>판매자</th>
+											<th>닉네임</th>
+											
+											<th>게시물개수</th>
+											<th>판매총액</th>
+											<th>당한신고횟수</th>
+											<th>눌린좋아요횟수</th>
+											
 										</tr>
 									</thead>
-									<tbody class="likepost">
-									     
-										<tr th:each="likepost: ${likeposts}">
-											<td th:text="${likepost.createdAt}"></td>
-											<!-- <td th:text="${likepost.nickname}"></td> -->
-											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
-											<td th:text="${likepost.nickname}"></td>
-											<td><a class="navbar-brand" th:id="${likepost.like_id}">
-											<!--<img class="heart" th:id="${likepost.like_id}" th:src="@{/images/heartheart.png}" style="width:80%;cursor:pointer" alt="">-->
-											<i class="fa fa-heart heart" th:id="${likepost.like_id}" style="cursor: pointer; color:#2cdd9b;" ></i>
-											</a></td>
+									<tbody class="likepost" id="kkk">
+									
+										<tr th:each="sortBoardCount: ${sortBoardCounts}">
+										<th:block th:if="${sortBoardCount.type==2}">
+											<td th:text="${sortBoardCount.nickname}"></td>
+											<td th:text="${sortBoardCount.boardCount}"></td>
+											<td th:text="${sortBoardCount.allPrice}"></td>
+											<td th:text="${sortBoardCount.reported}"></td>
+											<td th:text="${sortBoardCount.liked}"></td>
+											<td><div class="text-right">
+											<button class="btn btn-success btn-green userdelete"  th:id="${sortBoardCount.user_id}">유저삭제</button>
+																</div></td>
 											
+										</th:block>	
 											
 										</tr>
+										
 									</tbody>
 								</table>
 							</div>
@@ -294,9 +247,9 @@
 									<thead>
 										<tr>
 											<th>시간</th>
-											<th>보낸 사람 닉네임</th>
-											<th>상품명</th>
-											<th>받은 사람 닉네임</th>
+											<th>보낸사람닉네임</th>
+											<th>관련포스트제목</th>
+											<th>받은사람닉넹미</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -365,41 +318,48 @@
 			</div>
 		</div>
 	</div>
-	  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(function() {
-			$(".review").click(function(e) {
+			$(".sort2").click(function(e) {
 				let id = e.currentTarget.id;
-				var rating1 = '.rating' + id + ':checked';
-				var rating2 = $(rating1).val();//내가 선택한 별점
-				var content = $('#new-review' + id).val();
-
 				console.log(id);
-				console.log(rating1);
-				console.log(rating2);
-				console.log(content);
-				if (rating2 === undefined) {
-					alert('별점을 입력하세요');
-				}
+				$.ajax({
+					type : "post",
+				
+				
+					url : "http://localhost:8090/sortBoardCount",
+					data : {
+						"id":id,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+					
+					},
+
+				}).done(function(fragment){
+					$('#kkk').replaceWith(fragment);
+				});
+
+			});
+			
+			
+			$(".userdelete").click(function(e) {
+				let id = e.currentTarget.id;
+				console.log("ttttttttttttttttttttttt");
+				console.log(id);
 				$.ajax({
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/review",
+				
+					url : "http://localhost:8090/userdelete",
 					data : {
-						"order_id" : id,
-						"rating" : rating2,
-						"content" : content
+						"id":id,
 					},
 					success : function(data, textStatus) {
-						if (data == 'true') {
-							alert('리뷰를 등록했습니다.');
-
-						} else {
-							alert('오류가 발생했습니다');
-
-						}
+						console.log("success");
+						console.log(data);
 					},
 
 				});
@@ -407,34 +367,7 @@
 			});
 			
 			
-			$(".heart").click(function(e) {
-				let id = e.currentTarget.id;
-		
 			
-
-				console.log(id);
-				
-				
-				$.ajax({
-					type : "post",
-					dataType : "text",
-					async : false,
-					url : "http://localhost:8090/heartremove",
-					data : {
-						"like_id" : id,
-					},
-					success : function(data, textStatus) {
-						if (data == 'true') {
-							swal("알림","검색어를 입력해주세요.");							location.reload();
-
-						} else {
-							swal("검색어를 입력해주세요.");
-						}
-					},
-
-				});
-
-			});
 			
 			$(".titttle").click(function(e) {
 				let id = e.currentTarget.id;//포스트 아이디

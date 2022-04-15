@@ -21,6 +21,11 @@ public interface MypageDAO {
 	public List<Map<String,Object>> queryLikepost(int id)throws Exception;
 	public int countBoard(int id)throws Exception;
 	public int countBoard2(int id)throws Exception;
+	public int sellCount(int id)throws Exception;
+	public Integer buySum(int user_id);
+	public Integer sellSum(int user_id);
+	public int countLiked(int user_id);
+	
 	public List<Map<String,Object>> selectBoardList(HashMap<String, Integer> map) throws Exception;
 	public List<Map<String,Object>> selectBoardList2(HashMap<String, Integer> map) throws Exception;
 	public int queryNick(String nick)throws Exception;
@@ -32,4 +37,11 @@ public interface MypageDAO {
 	public Orders findorder(int order_id);
 	public void insertreview(Review review);
 	public void deletelike(int like_id);
+	public List<Map<String,Object>> report5()throws Exception;
+	public List<Map<String,Object>> sortBoardCount()throws Exception;
+	public List<Map<String,Object>> sortAllPrice()throws Exception;
+	public List<Map<String,Object>> sortReported()throws Exception;
+	public List<Map<String,Object>> sortLiked()throws Exception;
+	
+	
 }

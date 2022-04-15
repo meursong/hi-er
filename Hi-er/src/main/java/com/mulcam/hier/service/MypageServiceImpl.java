@@ -198,6 +198,81 @@ public class MypageServiceImpl implements MypageService {
 		}
 		return false;
 	}
+
+	@Override
+	public Map<String, Object> count(int user_id) throws Exception {
+		//구매 건수
+		int buyOrder=mypageDAO.countBoard(user_id);
+		//판매 건수
+		int sellOrder=mypageDAO.sellCount(user_id);
+		//구매 총가격
+		Integer buySumOrder=mypageDAO.buySum(user_id);
+		if(buySumOrder==null) {
+			buySumOrder=0;
+		}
+		//판매 총가격
+		Integer sellSumOrder=mypageDAO.sellSum(user_id);
+		if(sellSumOrder==null) {
+			sellSumOrder=0;
+		}
+		//누른 좋아요 수
+		int clickLike=mypageDAO.countBoard2(user_id);
+		//눌린 좋아요 수
+		int clikedLike=mypageDAO.countLiked(user_id);
+		System.out.println(buyOrder+"바이오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
+		System.out.println(sellOrder+"셀오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
+		System.out.println(buySumOrder+"바이섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
+		System.out.println(sellSumOrder+"셀섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
+		System.out.println(clickLike+"클릭라이크@@@@@@@@@@@@@@@@@@@@@@@@@2");
+		System.out.println(clikedLike+"클릭라이크드드드드드드@@@@@@@@@@@@@@@@@@@@@@@@@2");
+		
+		
+		Map<String,Object>map=new HashMap<String,Object>();
+		map.put("buyOrder",buyOrder);
+		map.put("sellOrder", sellOrder);
+		map.put("buySumOrder", buySumOrder);
+		map.put("sellSumOrder", sellSumOrder);
+		map.put("clickLike", clickLike);
+		map.put("clickedLike", clikedLike);
+		System.out.println(map+"map@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		//List<Map<String, Object>> listMapInsert=new ArrayList<Map<String,Object>>();
+		//listMapInsert.add(map);
+		return map;
+	}
+
+	@Override
+	public List<Map<String, Object>> report5() throws Exception {
+		List<Map<String, Object>> report=mypageDAO.report5();
+		
+		
+		return report;
+	}
+
+	@Override
+	public List<Map<String, Object>> sortBoardCount(String id) throws Exception {
+		
+		
+		if("sortBoardCount".equals(id)) {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortBoardCount();
+			return sortBoardCount;
+		}
+		else if("sortPriceTotal".equals(id)) {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortAllPrice();
+			return sortBoardCount;
+		}
+		else if("sortreported".equals(id)) {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortReported();
+			return sortBoardCount;
+		}
+		else {
+			List<Map<String, Object>> sortBoardCount=mypageDAO.sortLiked();
+			return sortBoardCount;
+		}
+		
+		
+	}
+	
+	
 	
 	
 
