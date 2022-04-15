@@ -176,9 +176,8 @@
                     <div class="price">
                       Basic
                       <span
-                        th:text="'₩'+${#numbers.formatInteger(productList.b_price, 0, 'COMMA')}"
-                      >
-                        ₩비용</span
+                        th:text="${#numbers.formatInteger(productList.b_price, 0, 'COMMA')}+'원~'">
+                        원~</span
                       >
                     </div>
                   </div>
