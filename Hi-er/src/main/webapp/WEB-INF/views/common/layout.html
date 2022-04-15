@@ -37,6 +37,39 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+.modal {
+	text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal-dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+.sendingMSGtoSeller {
+	padding: 12px 24px;
+    border: 1px solid #95979d;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    color: #62646a;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.6s;
+    width: 100%;
+    display: inline-block;
+}
 .myform fieldset{
     display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
     border: 0; /* 필드셋 테두리 제거 */
@@ -194,16 +227,15 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						
-						th:src="@{/images/user/default.png}"
-						style="width: 21px; height: 21px;"></a>
+						th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.png'">
+						</a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
 						aria-labelledby="navbarDropdownUserImage">
 						<h6 class="dropdown-header d-flex align-items-center"
 							th:if="${session.loginedUser}">
 							<img class="dropdown-user-img"
-								th:src="@{/images/user/defualt.png}" />
+								th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.jpg'"/>
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
 									[[${session.loginedUser.name }]]</div>
@@ -315,7 +347,7 @@
 				th:unless="${session.loginedUser == null}">
 				<li class="nav-item" th:if="${session.loginedUser.type!=2	}"><a
 					class="nav-link" th:href="@{/freelancerForm}"> <i
-						class="fa fa-fw fa-trophy"></i> <span>프리랜서 전환</span></a></li>
+						class="fa fa-fw fa-trophy"></i> <span>프리랜서 등록</span></a></li>
 			</ul>
 		</div>
 	</nav>
@@ -338,8 +370,12 @@
               >
                 10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
               </p>
-              <a  class="c-btn c-fill-color-btn">1:1문의하기</a>
-            </h2>
+			<button type="button" data-toggle="modal"
+			data-target="#exampleModal" class="c-btn c-fill-color-btn">1:1문의하기
+			</button> 
+			 <div th:replace="fragments/question :: q_modal"></div>
+
+			</h2>
             <div></div>
           </div>
           <div class="footer-list">
