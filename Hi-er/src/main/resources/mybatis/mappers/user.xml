@@ -40,7 +40,7 @@
 	
 	<select id="sellet_seller_info" resultType="FreelancerUser" parameterType="int">
 		<![CDATA[
-			select * from user u left join f_info f on user_id=f_id left join review r on seller_id = user_id where u.type=2 and u.user_id=#{seller_id} group by user_id,f.address2,f.address,f.introduction,f.switchAt,r.review_id;
+			select * from user u left join f_info f on user_id=f_id left join review r on seller_id = user_id where u.type=2 and u.user_id=#{seller_id} group by user_id;
 		]]>
 	</select>
 	
@@ -74,6 +74,8 @@
 	</select>
 	 -->
 </mapper>
+
+<!--  mysql -u root -p password < setting.sql -->
 
 <!--  
 CREATE DATABASE if not exists `hier` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
@@ -153,6 +155,7 @@ INSERT INTO `user` (`user_id`,`email`,`password`,`job`,`nickname`,`profile_image
 INSERT INTO `user` (`user_id`,`email`,`password`,`job`,`nickname`,`profile_image`,`type`,`createdAt`,`updatedAt`,`name`) VALUES (3,'admin3@naver.com','aa123','앱개발자','짱짱','default.jpg',1,'2022-03-31 13:39:28','2022-03-31 13:39:28','a');
 INSERT INTO `user` (`user_id`,`email`,`password`,`job`,`nickname`,`profile_image`,`type`,`createdAt`,`updatedAt`,`name`) VALUES (4,'admin4@naver.com','aa123','개발자','아아','default.jpg',2,'2022-04-01 17:48:14','2022-04-01 17:48:14','b');
 INSERT INTO `user` (`email`,`password`,`job`,`name`,`profile_image`,`type`,`createdAt`,`updatedAt`,`interest`,`nickname`) VALUES ('yyc5343@naver.com','1234','직장인','예찬','default.jpg',0,'2022-04-08 09:28:24','2022-04-08 09:28:24',NULL,'0');
+
 
 
 
