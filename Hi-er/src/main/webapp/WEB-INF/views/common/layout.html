@@ -78,19 +78,19 @@
     display: none; /* 라디오박스 감춤 */
 }
 .myform label{
-    font-size: 2em; /* 이모지 크기 */
+    font-size: 1.5em; /* 이모지 크기 */
     color: transparent; /* 기존 이모지 컬러 제거 */
-    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+    text-shadow: 0 0 0 gray; /* 새 이모지 색상 부여 */
 }
 .myform label:hover{
-    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
+    text-shadow: 0 0 0 rgba(31,208,182,1); /* 마우스 호버 */
 }
 .myform label:hover ~ label{
-    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+    text-shadow: 0 0 0 rgba(31,208,182,1); /* 마우스 호버 뒤에오는 이모지들 */
 }
 
 .myform input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
+    text-shadow: 0 0 0 rgba(31,208,182,1); /* 마우스 클릭 체크 */
 }
 
 .myform fieldset{
@@ -227,7 +227,7 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.png'">
+						th:src="@{/images/user/default.png}" width="21px;">
 						</a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
@@ -371,7 +371,7 @@
                 10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
               </p>
 			<button type="button" data-toggle="modal"
-			data-target="#exampleModal" class="c-btn c-fill-color-btn">1:1문의하기
+			data-target="#qmodal" class="c-btn c-fill-color-btn">1:1문의하기
 			</button> 
 			 <div th:replace="fragments/question :: q_modal"></div>
 
@@ -382,8 +382,8 @@
             <h2>Hi-er</h2>
             <ul class="list">
               <li><a th:href="@{/}">Main</a></li>
-              <li><a href="#">introduction</a></li>
-              <li><a th:href="@{about}">About the developer</a></li>
+              <li><a>introduction</a></li>
+              <li><a th:href="@{/about}">About the developer</a></li>
             </ul>
           </div>
           <div class="footer-list">
@@ -450,6 +450,7 @@
   <script th:src="@{/vendor/select2/js/select2.min.js}"></script>
   <!-- Custom -->
   <script th:src="@{/js/custom.js}"></script>
+  <script th:src="@{/js/star.js}"></script>
   <script>
     function search1() {
         const searchKeyword = $("input[id='searchKeyword1']").val();

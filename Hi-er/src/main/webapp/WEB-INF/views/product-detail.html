@@ -47,7 +47,7 @@
 			<div class="row d-flex align-items-center justify-content-between">
 				<div class="col-lg-9 left">
 					<ul>
-						<li class="nav-overview selected"><a href="#title">메인</a></li>
+						<li class="nav-overview selected"><a href="#productTitle">메인</a></li>
 						<li class="nav-aboutSeller"><a href="#aboutSeller">프리랜서
 								정보</a></li>
 						<li class="nav-description"><a href="#description">서비스 설명</a>
@@ -98,7 +98,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 left">
-					<h2 id="title" th:text="${product.title}">글 제목</h2>
+					<h2 id="productTitle" th:text="${product.title}">글 제목</h2>
 					<div id="overview"
 						class="seller-overview d-flex align-items-center">
 						<div class="user-profile-image d-flex">
@@ -217,7 +217,7 @@
 												class="fa fa-star" aria-hidden="true"></i>
 											</span>
 										</div> <span class="total-rating-out-five"></span> <span
-										class="total-rating">(리뷰)([[${sellerInfo.avg_star_point}]])</span>
+										class="total-rating">사용자 만족도 : ([[${sellerInfo.avg_star_point}]])</span>
 									</span>
 									<div class="buttons-wrapper" style="padding-top: 10px">
 										<button type="button" data-toggle="modal"
@@ -584,7 +584,7 @@
 						<div id="reviews" class="review-section">
 							<div
 								class="d-flex align-items-center justify-content-between mb-4">
-								<h4 class="m-0">[[${maxReviewCnt}]] 개의 평가</h4>
+								<h4 class="m-0">[[${maxReviewCntOriginal}]] 개의 평가</h4>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
@@ -601,7 +601,9 @@
 														class="fit-progressbar fit-progressbar-bar star-progress-bar">
 														<div class="fit-progressbar-background">
 
-															<span class="progress-fill" th:style="${reviewCount.count*100/maxReviewCnt < 11 ? 'width:10%' :
+															<span class="progress-fill" 
+															th:style="${reviewCount.count*100/maxReviewCnt < 1 ? 'width:0%' :
+															reviewCount.count*100/maxReviewCnt < 11 ? 'width:10%' :
 															reviewCount.count*100/maxReviewCnt < 21 ? 'width:20%' :
 															reviewCount.count*100/maxReviewCnt < 31 ? 'width:30%' :
 															reviewCount.count*100/maxReviewCnt < 41 ? 'width:40%' :
@@ -1067,7 +1069,9 @@
         alert("ajax 통신 실패.");
       },
     });
+    
   });
+  
   
 </script>
 <script>
@@ -1079,5 +1083,50 @@ function movePage(uri, queryString) {
 window.onpopstate = function(event) {
     $("#review").load(location.href + " #review");
 };
+</script>
+<script>
+function send() {
+    const title = $('#title').val();
+    const content = $('#content').val();
+
+    if(title=="") {
+        swal("제목을 입력해주세요.");
+        return;
+    }
+    if(content=="") {
+        swal("메세지를 입력해주세요.");
+        return;
+    }
+
+    const messageForm = {
+        recv_user_id: [[${product.seller_id}]],
+        title: $("#title").val(),
+        content: $("#content").val(),
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/send",
+        cache: false,
+        data: messageForm,
+        success: function(data) {
+            swal(data)
+            if(data=="메세지 전송 성공!!") {
+                $('#exampleModal').modal('hide');
+                shown.bs.modal
+                // title==null;
+                // content==null;
+            }
+        },
+        error: function (request, status, error) {
+            console.log(err);
+        }
+    })
+
+}
+$('.modal').on('hidden.bs.modal', function (e) {
+    console.log('modal close');
+    $(this).find('form')[0].reset()
+});
 </script>
 
