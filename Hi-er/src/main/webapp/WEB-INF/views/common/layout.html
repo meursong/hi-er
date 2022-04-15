@@ -147,16 +147,14 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						
-						th:src="@{/images/user/default.png}"
-						style="width: 21px; height: 21px;"></a>
+						th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.jpg'"></a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
 						aria-labelledby="navbarDropdownUserImage">
 						<h6 class="dropdown-header d-flex align-items-center"
 							th:if="${session.loginedUser}">
 							<img class="dropdown-user-img"
-								th:src="@{/images/user/defualt.png}" />
+								th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.jpg'"/>
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
 									[[${session.loginedUser.name }]]</div>
@@ -291,7 +289,7 @@
               >
                 10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
               </p>
-              <a  class="c-btn c-fill-color-btn">1:1문의하기</a>
+              <a th:href="@{/Contact}" class="c-btn c-fill-color-btn">1:1문의하기</a>
             </h2>
             <div></div>
           </div>
