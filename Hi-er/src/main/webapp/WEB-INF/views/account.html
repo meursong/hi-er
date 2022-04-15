@@ -16,7 +16,7 @@
 					<img class="img-fluid mt-2 rounded-circle" th:src="@{/upload/} + ${session.loginedUser.profile_image}" onerror="this.src='/images/user/default.jpg'" alt="Responsive image">
 							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
 							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4"> [[${session.loginedUser.nickname }]]</h5>
 						</div>
 						<div class="d-flex">
 							<div class="col-6 border-right p-3">
@@ -177,25 +177,16 @@
 														<div class="col-md-12">
 															<div class="well well-sm">
 																
-																<div class="text-right">
+																<div class="text-right" style="padding-bottom: 10px;">
 																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
-																		href="#">리뷰 달기</a>
+																		href="#">리뷰 작성</a>
 																</div>
 
 																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
 																	<div class="col-md-12">
 																		<form>
-																			<input id="ratings-hidden" name="rating"
-																				type="hidden">
-																			<textarea class="form-control animated" cols="50"
-																				th:id="'new-review'+${order.order_id}" name="comment"
-																				placeholder="리뷰를 입력해주세요" rows="5"></textarea>
-
-
-																			<div name="myform" class="myform" >
-
+																		<div name="myform" class="myform" >
 																				<fieldset>
-																					<legend>★★★별점★★★</legend>
 																					<input type="radio" th:class="'rating'+${order.order_id}" name="rating" value="5"
 																						th:id="'rate1'+${order.order_id}"><label th:for="'rate1'+${order.order_id}">⭐</label> <input
 																						type="radio" th:class="'rating'+${order.order_id}" name="rating" value="4" th:id="'rate2'+${order.order_id}"><label
@@ -207,14 +198,19 @@
 																						th:class="'rating'+${order.order_id}" name="rating" value="1" th:id="'rate5'+${order.order_id}"><label
 																						th:for="'rate5'+${order.order_id}">⭐</label>
 																				</fieldset> 
-
-
 																			</div>
+																			<input id="ratings-hidden" name="rating"
+																				type="hidden">
+																			<textarea class="form-control animated" cols="50"
+																				th:id="'new-review'+${order.order_id}" name="comment"
+																				placeholder="리뷰를 입력해주세요." rows="5"></textarea>
+
+
+																			
 
 
 
-
-																			<div class="text-right">
+																			<div class="text-right" style="padding-top:10px;">
 
 																				<a class="btn btn-danger btn-lg close-review-box" th:href="@{#}"
 																					th:id="'close-review-box'+${order.order_id}"
@@ -394,7 +390,7 @@
 					success : function(data, textStatus) {
 						if (data == 'true') {
 							alert('리뷰를 등록했습니다.');
-
+							location.reload();
 						} else {
 							alert('오류가 발생했습니다');
 
