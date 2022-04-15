@@ -33,7 +33,7 @@
 	<select id="queryOrdersss" resultType="Map" parameterType="int">
 	<![CDATA[
 		
-		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id,o.order_qty,o.order_price,o.order_status,o.seller_id
 		from user u join user us join product p join orders o
 		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=p.seller_id and o.buyer_id=#{user_id}
 		, (SELECT @rownum:=0) TMP
@@ -42,9 +42,10 @@
 	
 	</select>
 
+	<!-- 마이페이지 들어가면 나오는 찜목록 5개 불러옴 -->
 	<select id="queryLikepost" resultType="Map" parameterType="int">
 	<![CDATA[
-		select l.createdAt, p.title,u.nickname,l.like_id,l.product_id
+		select l.createdAt, p.title,u.nickname,l.like_id,l.product_id,l.liked_userid
 		from user u join product p join likes l
 		on p.product_id=l.product_id and p.seller_id=u.user_id and l.like_userid=#{user_id}
 		order by l.createdAt desc limit 5
@@ -60,12 +61,48 @@
 	]]>	
 	</select>
 	
-	<!--총 찜 게시글 갯수 출력-->
+	<!--판매 건수 조회-->
+	<select id="sellCount" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from orders
+		where seller_id=#{user_id}
+	]]>	
+	</select>
+	
+	<!--구매 총액-->
+	<select id="buySum" resultType="int" parameterType="int">
+	<![CDATA[
+		select sum(order_price)
+		from orders
+		where buyer_id=#{user_id}
+	]]>	
+	</select>
+	
+	<!--판매 총액-->
+	<select id="sellSum" resultType="int" parameterType="int">
+	<![CDATA[
+		select sum(order_price)
+		from orders
+		where seller_id=#{user_id}
+	]]>	
+	</select>
+	
+	<!--좋아요 누른 게시글 갯수 출력-->
 	<select id="countBoard2" resultType="int" parameterType="int">
 	<![CDATA[
 		select count(*)
 		from likes
 		where like_userid=#{user_id}
+	]]>	
+	</select>
+	
+	<!--좋아요 눌린 갯수 출력-->
+	<select id="countLiked" resultType="int" parameterType="int">
+	<![CDATA[
+		select count(*)
+		from likes
+		where liked_userid=#{user_id}
 	]]>	
 	</select>
 	
@@ -135,8 +172,8 @@
 	<select id="selectBoardList" resultType="Map" parameterType="hashmap">
 	<![CDATA[
 		select *
-		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2,t.order_id,t.product_id
-				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,p.product_id
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.nickname,t.title,t.nickname2,t.order_id,t.product_id,t.order_qty,t.order_price,t.order_status,t.seller_id
+				from((select o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,p.product_id,o.order_qty,o.order_price,o.order_status,o.seller_id
 					from user u join user us join product p join orders o 
 		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=o.seller_id and o.buyer_id=#{user_id} order by o.createdAt desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    
@@ -155,16 +192,140 @@
 	<select id="selectBoardList2" resultType="Map" parameterType="int">
 	<![CDATA[
 		select *
-		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.title,t.nickname,t.like_id,t.product_id
-				from((select l.createdAt, u.nickname,p.title,l.like_id,l.product_id
+		from (select @ROWNUM:=@ROWNUM+1 as ROWNUM,t.createdAt,t.title,t.nickname,t.like_id,t.product_id,t.liked_userid
+				from((select l.createdAt, u.nickname,p.title,l.like_id,l.product_id,l.liked_userid
 					from user u join product p join likes l
 		on p.product_id=l.product_id and p.seller_id=u.user_id and l.like_userid=#{user_id} order by l.createdAt desc)t,(SELECT @rownum:=0) TMP))t
 		where ROWNUM between #{startrow} and #{startrow}+4;    
 	]]>	
 	</select>
-
+	
+	<!--신고내역 5개만 가져오기-->
+	<select id="report5" resultType="Map">
+	<![CDATA[
+		select r.createdAt, p.title,u.nickname,r.reason,r.product_id,r.reported_userid
+		from user u join product p join report r
+		on p.product_id=r.product_id and p.seller_id=u.user_id
+		order by r.createdAt desc limit 5
 		
+	]]>	
+	</select>
+	
+	<!--게시물 순으로 가져오기 많이 게시한 순서대로-->
+	<select id="sortBoardCount" resultType="Map">
+	<![CDATA[
+		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+		from 
+		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+			from user u left join product p
+			on u.user_id=p.seller_id
+			group by nickname) a 
+		join
+		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+			from user u left join report r
+			on r.reported_userid=u.user_id
+			GROUP BY NICKNAME) B 
+		join
+		(select u.nickname,count(like_id) as liked,u.type,u.user_id
+			from user u left join likes l
+			on u.user_id=l.liked_userid
+			group by nickname) c 
+		join
+		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+			from user u left join orders o
+			on u.user_id=o.seller_id
+			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
+		order by a.boardCount desc;
 		
+	]]>	
+	</select>
+	
+	<!--판매 총액 순으로 가져오기-->
+	<select id="sortAllPrice" resultType="Map">
+	<![CDATA[
+		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+		from 
+		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+			from user u left join product p
+			on u.user_id=p.seller_id
+			group by nickname) a 
+		join
+		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+			from user u left join report r
+			on r.reported_userid=u.user_id
+			group by nickname) b 
+		join
+		(select u.nickname,count(like_id) as liked,u.type,u.user_id
+			from user u left join likes l
+			on u.user_id=l.liked_userid
+			group by nickname) c 
+		join
+		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+			from user u left join orders o
+			on u.user_id=o.seller_id
+			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
+		order by d.allPrice desc;
+		
+	]]>	
+	</select>
+	
+	<!--신고 많이 당한 순서대로 가져오기-->
+	<select id="sortReported" resultType="Map">
+	<![CDATA[
+		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+		from 
+		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+			from user u left join product p
+			on u.user_id=p.seller_id
+			group by nickname) a 
+		join
+		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+			from user u left join report r
+			on r.reported_userid=u.user_id
+			group by nickname) b 
+		join
+		(select u.nickname,count(like_id) as liked,u.type,u.user_id
+			from user u left join likes l
+			on u.user_id=l.liked_userid
+			group by nickname) c 
+		join
+		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+			from user u left join orders o
+			on u.user_id=o.seller_id
+			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
+		order by b.reported desc;
+		
+	]]>	
+	</select>
+	
+	<!--좋아요 많이 받은 순서대로 가져오기-->
+	<select id="sortLiked" resultType="Map">
+	<![CDATA[
+		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+		from 
+		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+			from user u left join product p
+			on u.user_id=p.seller_id
+			group by nickname) a 
+		join
+		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+			from user u left join report r
+			on r.reported_userid=u.user_id
+			group by nickname) b 
+		join
+		(select u.nickname,count(like_id) as liked,u.type,u.user_id
+			from user u left join likes l
+			on u.user_id=l.liked_userid
+			group by nickname) c 
+		join
+		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+			from user u left join orders o
+			on u.user_id=o.seller_id
+			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
+		order by c.liked desc;
+		
+	]]>	
+	</select>
 		
 		
 </mapper>
