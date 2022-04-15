@@ -275,6 +275,7 @@ public class PostController {
 				boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 				List<Review> reviews = reviewService.prodReviewList(params);
 				Integer maxReviewCnt = reviewService.maxReviewCnt(pid);
+				Integer maxReviewCntOriginal = maxReviewCnt;
 				List<Map<String, Integer>> reviewCount = reviewService.reviewCount(pid);
 
 				List<Map<String, Integer>> fiveReviewCount = new ArrayList<>();
@@ -308,7 +309,6 @@ public class PostController {
 				 * System.out.println(sumReviewCnt);
 				 */
 
-				System.out.println(maxReviewCnt);
 				if (maxReviewCnt == 0) {
 					maxReviewCnt = 1;
 				}
@@ -322,6 +322,7 @@ public class PostController {
 				mav.addObject("sellerInfo", sellerInfo);
 				mav.addObject("reviewCounts", fiveReviewCount);
 				mav.addObject("maxReviewCnt", maxReviewCnt);
+				mav.addObject("maxReviewCntOriginal", maxReviewCntOriginal);
 			} else {
 				mav.setViewName("login");
 			}
