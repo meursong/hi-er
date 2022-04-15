@@ -70,20 +70,20 @@
                   <div class="row">
                      <div class="control-group form-group col-lg-4 col-md-4">
                         <div class="controls">
-                           <label>Your Name <span class="text-danger">*</span></label>
-                           <input type="text" id="userName" class="form-control" required>
+                           <label>이름 <span class="text-danger">*</span></label>
+                           <input type="text" id="userName" class="form-control modal-input" required>
                         </div>
                      </div>
                      <div class="control-group form-group col-lg-4 col-md-4">
                         <div class="controls">
-                           <label>Email Address <span class="text-danger">*</span></label>
-                           <input type="email" id="email" class="form-control" required>
+                           <label>이메일 <span class="text-danger">*</span></label>
+                           <input type="email" id="email" class="form-control modal-input" required>
                         </div>
                      </div>
                      <div class="control-group form-group col-lg-4 col-md-4">
                      <div class="controls">
                            <label>Phone <span class="text-danger">*</span></label>
-                           <input type="text" id="phone" class="form-control" required>
+                           <input type="text" id="phone" class="form-control modal-input" required>
                         </div>
                      </div>
                      <div class="control-group form-group col-lg-4 col-md-4">
@@ -91,8 +91,8 @@
                   </div>
                   <div class="control-group form-group">
                      <div class="controls">
-                        <label>Message <span class="text-danger">*</span></label>
-                        <textarea rows="10" cols="100" class="form-control" id="message"></textarea>
+                        <label>문의 내용 <span class="text-danger">*</span></label>
+                        <textarea rows="10" cols="100" class="form-control modal-input" id="message"></textarea>
                      </div>
                   </div>
                   <button type="button"  th:onclick="sendEmail()" class="btn btn-success">문의 하기</button>
@@ -124,7 +124,9 @@
 				emailjs.send('hi-erCustomerService','template_tcpni3l',templateParam,'hJRZ0fnVlYqYWlicl').then(function(response){
 					console.log("Success!!!");
 					swal("알림","문의내용 접수 완료")
-					location.href="/Contact";
+					$('#closeModalBtn').click();
+					$('.modal-input').val("");
+					
 				},function(error){
 					console.log('Failed...',error);
 				})
