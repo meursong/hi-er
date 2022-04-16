@@ -41,11 +41,8 @@
                                         <div th:each="msgList : ${msgList}" onclick="view(this)"
                                              th:name="${msgList.msg_id}"
                                              class="p-3 d-flex align-items-center osahan-post-header overflow-hidden list">
-                                            <div class="dropdown-list-image mr-3">
-                                                <div class="dropdown-list-image mr-3 d-flex align-items-center bg-success justify-content-center rounded-circle text-white">
-
-                                                </div>
-                                            </div>
+                                            <img class="dropdown-list-image mr-3 d-flex align-items-center bg-success justify-content-center rounded-circle text-white" th:src="@{/upload/} + ${msgList.profile_image}"
+                                                 onerror="this.src='/images/user/default.jpg'">
 
                                             <div class="font-weight-bold mr-1 overflow-hidden">
                                                 <div th:text="${msgList.send_nickname}"
@@ -77,10 +74,7 @@
                             <div id="msg_list" class="col-lg-7 col-xl-8 px-0">
                                 <div class="p-3 d-flex align-items-center  border-bottom osahan-post-header">
                                     <div class="font-weight-bold mr-1 overflow-hidden">
-                                        <div class="text-truncate">Carl Jenkins
-                                        </div>
-                                        <div class="small text-truncate overflow-hidden text-black-50">Askbootstap.com -
-                                            Become a Product Manager with super power
+                                        <div class="text-truncate">Message Box
                                         </div>
                                     </div>
                                     <span class="ml-auto">

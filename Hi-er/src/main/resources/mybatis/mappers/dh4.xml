@@ -16,7 +16,8 @@
                us.nickname as send_nickname,
                m.title,
                m.send_time,
-               m.read_chk
+               m.read_chk,
+               us.profile_image
         from messages m
                  left join user u on u.user_id = m.recv_user_id
                  left join user us on us.user_id = m.send_user_id
@@ -41,8 +42,8 @@
 
     <select id="message_view" parameterType="int" resultType="Messages">
 		<![CDATA[
-        select msg_id, send_user_id, title, content, read_chk
-        from messages
+        select msg_id, send_user_id, title, nickname, content, read_chk
+        from messages, user
         where msg_id = #{msg_id};
         ]]>
 	</select>
