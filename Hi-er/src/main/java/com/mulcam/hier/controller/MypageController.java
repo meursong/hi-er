@@ -268,10 +268,10 @@ public class MypageController {
 		return String.valueOf(review);
 	}
 
-	// 이미지 업로드 아직 미완성
+	// 프로필 사진 수정
 	@PostMapping("/profileImageUpdate")
 	public String profileImageUpdate(MultipartFile file) {
-		String page ="/";
+		
 		System.out.println("회원 이미지 수정 컨트롤러 도착");
 		String filename = null;
 		
@@ -296,12 +296,14 @@ public class MypageController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				page = "/mypage";
+				user.setProfile_image(filename);
+				session.invalidate();
+				session.setAttribute("loginedUser", user);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return page;
+		return "mypage";
 	}
 
 
