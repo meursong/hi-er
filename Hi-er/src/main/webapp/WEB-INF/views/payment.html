@@ -312,13 +312,13 @@ input.card {
 							<div class="col-2 p-0 text-center h8 border-end">
 								<p class="textmuted p-2">가격</p>
 								<span class="d-block border-bottom py-2"><span
-									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(price,0, 'COMMA')}"></span></span> <span
+									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(total_price,0, 'COMMA')}"></span></span> <span
 									class="d-block py-2 "><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 							<div class="col-2 p-0 text-center">
 								<p class="textmuted p-2">총 금액</p>
 								<span class="d-block py-2 border-bottom"><span
-									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(price,0, 'COMMA')}"></span></span> <span
+									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(total_price,0, 'COMMA')}"></span></span> <span
 									class="d-block py-2"><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 						</div>
@@ -328,7 +328,7 @@ input.card {
 							<p class="h1 fw-bold d-flex">
 								<span
 									class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>
-									[[${#numbers.formatInteger(price,0, 'COMMA')}]] 원
+									[[${#numbers.formatInteger(total_price,0, 'COMMA')}]] 원
 								<!-- <span class="textmuted">.58</span> -->
 							</p>
 							<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
@@ -345,7 +345,6 @@ input.card {
 							<input type="hidden" id="delivery_date" name="delivery_date" th:value="${default_delivery}"> 
 							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
 							<input type="hidden" id="order_qty" name="order_qty" th:value="1"> 
-							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
 							<div style="width: 100%; margin: auto;">
 								<button class="btn btn-primary d-block h8"
 									style="width: 400px; margin: auto; display: block;"

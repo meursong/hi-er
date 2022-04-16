@@ -6,17 +6,15 @@
 	<select id="getBestUser" resultType="User">
 		<![CDATA[
 		select
-			p.seller_id,
-			u.nickname,
-			avg(r.star_point)  as avg_star_point,
-			u.profile_image,
-			fi.f_id
-		from user u
-				 left join product p on u.user_id = p.seller_id
-				 left join review r on p.product_id = r.product_id
-				 left join f_info fi on p.product_id = fi.f_id
-		group by u.user_id
-		order by avg_star_point desc limit 5;
+       		   p.seller_id,
+               u.nickname,
+               avg(r.star_point)  as avg_star_point,
+               u.profile_image
+        		from product p
+                 left join user u on u.user_id = p.seller_id
+                 left join review r on p.product_id = r.product_id
+		group by u.user_id,p.seller_id
+        order by avg_star_point desc limit 5;
    		]]>
 	</select>
 	<insert id="insert_user" parameterType="User">
