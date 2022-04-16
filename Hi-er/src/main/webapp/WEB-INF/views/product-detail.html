@@ -174,9 +174,9 @@
 								<img th:if="${product.category=='it'}" class="img-fluid"
 									th:src="@{/upload/} + ${product.filename1}"
 									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
-								<video th:if="${product.category=='video'}" class="img-fluid"
-									th:src="@{/upload/} + ${product.filename2}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}"></video>		
+								<img th:if="${product.category=='video'}" class="img-fluid"
+									th:src="@{/upload/} + videoDefault.png"
+									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />		
 							</div>
 							<div class="item-slick">
 								<img th:if="${product.category=='design'}" class="img-fluid"
