@@ -3,7 +3,7 @@ package com.mulcam.hier.dto;
 import com.mulcam.hier.others.Criteria;
 import com.mulcam.hier.others.Time;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Review extends Criteria {
 	private int review_wid;
@@ -14,10 +14,18 @@ public class Review extends Criteria {
 	private int star_point;
 	private String createdAt;
 	private String nickname;
+	private String profile_image;
 
 	private int count;
-	
-	
+
+	public String getProfile_image() {
+		return profile_image;
+	}
+
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
+	}
+
 	public int getReview_wid() {
 		return review_wid;
 	}

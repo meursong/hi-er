@@ -5,6 +5,7 @@ import java.sql.Date;
 public class FreelancerUser extends User {
 	private int f_id;
 	private String address;
+	private String address2;
 	private float avg_star_point;
 	private String introduction;
 	private Date switchAt;
@@ -69,6 +70,12 @@ public class FreelancerUser extends User {
 
 	public void setAvg_star_point(float avg_star_point) {
 		this.avg_star_point = avg_star_point;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 
 	

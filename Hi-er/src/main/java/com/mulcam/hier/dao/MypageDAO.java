@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.Orders;
+import com.mulcam.hier.dto.Report;
 import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 
@@ -43,6 +44,25 @@ public interface MypageDAO {
 	public List<Map<String,Object>> sortAllPrice()throws Exception;
 	public List<Map<String,Object>> sortReported()throws Exception;
 	public List<Map<String,Object>> sortLiked()throws Exception;
+	public void userdelete(int user_id)throws Exception;
+	public void postdelete(int id)throws Exception;
+	public void zeroToOne(int id)throws Exception;
+	public void oneToTwo(int id)throws Exception;
+	public void twoToThree(int id)throws Exception;
+	public void threeToFour(int id)throws Exception;
+	public void oneToSix(int id) throws Exception;
+	public void oneToSeven(int id)throws Exception;
+	public void sevenToNine(int id)throws Exception;
+	public void oneToEight(int id)throws Exception;
+	public List<Map<String, Object>> trade()throws Exception;
+	public List<Map<String, Object>> allTrade()throws Exception;
+	public void postwarning(Map<String, Object> map) throws Exception;
+	public Map<String,Object> findreport(int id) throws Exception;
+	public List<Map<String,Object>> findWarningMsg(int user_id);
+	
+	
+	
+	
 	
 	
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html
         lang="en"
         xmlns:th="http://www.thymeleaf.org"
@@ -29,7 +29,7 @@
                     <div class="box shadow-sm rounded bg-white mb-3 osahan-chat">
                         <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">Messaging</h5>
                         <div class="row m-0">
-                            <div class="border-right col-lg-5 col-xl-4 px-0">
+                            <div id= "msgb" class="border-right col-lg-5 col-xl-4 px-0">
                                 <div class="osahan-chat-left" id="msg_box">
                                     <div class="position-relative icon-form-control p-3 border-bottom">
                                         <i class="fa fa-search position-absolute"></i>
@@ -41,11 +41,8 @@
                                         <div th:each="msgList : ${msgList}" onclick="view(this)"
                                              th:name="${msgList.msg_id}"
                                              class="p-3 d-flex align-items-center osahan-post-header overflow-hidden list">
-                                            <div class="dropdown-list-image mr-3">
-                                                <div class="dropdown-list-image mr-3 d-flex align-items-center bg-success justify-content-center rounded-circle text-white">
-
-                                                </div>
-                                            </div>
+                                            <img class="dropdown-list-image mr-3 d-flex align-items-center bg-success justify-content-center rounded-circle text-white" th:src="@{/upload/} + ${msgList.profile_image}"
+                                                 onerror="this.src='/images/user/default.jpg'">
 
                                             <div class="font-weight-bold mr-1 overflow-hidden">
                                                 <div th:text="${msgList.send_nickname}"
@@ -77,10 +74,7 @@
                             <div id="msg_list" class="col-lg-7 col-xl-8 px-0">
                                 <div class="p-3 d-flex align-items-center  border-bottom osahan-post-header">
                                     <div class="font-weight-bold mr-1 overflow-hidden">
-                                        <div class="text-truncate">Carl Jenkins
-                                        </div>
-                                        <div class="small text-truncate overflow-hidden text-black-50">Askbootstap.com -
-                                            Become a Product Manager with super power
+                                        <div class="text-truncate">Message Box
                                         </div>
                                     </div>
                                     <span class="ml-auto">
@@ -196,7 +190,7 @@
     function check() {
 
         if ($("div[name=title]").val() == null) {
-            swal("알림", "답변할 메세지를 선택해 주세요.");
+            swal("알림", "답장할 메세지를 선택해 주세요.");
             $('#exampleModal').modal('hide');
 
         }
@@ -241,22 +235,25 @@
                         "nickname": nickname
                     },
                     success: function (data) {
-                        swal("성공");
+                        swal("검색 성공!!");
 
                     },
                     error: function (request, status, error) {
                         swal("에러 발생");
 
                     }
-                }).done(function (fragment) {
+                })
+                    .done(function (fragment) {
                     $('#ms').replaceWith(fragment);
                 })
             }
         }
     });
-
     function movePage(uri, queryString) {
-        $("#ms").load(queryString + " #ms");
+        // const nickname = "${msgList.nickname}";
+        // console.log(nickname);
+        $("#ms").load(queryString + queryString + " #ms");
+
     }
 
 

@@ -5,7 +5,7 @@
 
     <select id="selectReview" resultType="Review" parameterType="Review">
 		<![CDATA[
-        select u.nickname, r.content, r.star_point, r.createdAt
+        select u.nickname, r.content, r.star_point, r.createdAt, u.profile_image
         from review r
                  left join user u on u.user_id = r.review_wid
         where r.seller_id = #{seller_id}
