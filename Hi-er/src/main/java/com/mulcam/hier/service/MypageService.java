@@ -21,5 +21,13 @@ public interface MypageService {
 	
 	boolean heartremove(int like_id);
 	List<Map<String, Object>> report5() throws Exception;
-	List<Map<String,Object>> sortBoardCount(String id) throws Exception;;
+	List<Map<String,Object>> sortBoardCount(String id) throws Exception;
+	void userdelete(int user_id) throws Exception;
+	void postdelete(int id) throws Exception;
+	
+	void updatestatus1(int id, int num)throws Exception;
+	List<Map<String, Object>> trade()throws Exception;
+	List<Map<String, Object>> allTrade()throws Exception;
+	void postwarning(int id)throws Exception;
+	List<Map<String, Object>> warningMsg(int user_id)throws Exception;
 }

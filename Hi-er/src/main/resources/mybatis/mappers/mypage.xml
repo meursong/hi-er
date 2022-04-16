@@ -4,7 +4,7 @@
 <mapper namespace="com.mulcam.hier.dao.MypageDAO">
 	<select id="queryOrders" resultType="Orders" parameterType="int">
 	<![CDATA[
-		select * from Orders where buyer_id=#{id}
+		select * from orders where buyer_id=#{id}
 		order by createdAt desc limit 5
 	]]>	
 	
@@ -13,10 +13,32 @@
 	<!-- 주문번호로 주문을 조회함 -->
 	<select id="findorder" resultType="Orders" parameterType="int">
 	<![CDATA[
-		select * from Orders where order_id=#{order_id}
+		select * from orders where order_id=#{order_id}
 		limit 1
 	]]>	
+	</select>
 	
+	
+	<!-- status가3인 orders를 조회함 -->
+	<select id="trade" resultType="Map">
+	<![CDATA[
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id,o.order_qty,o.order_price,o.order_status,o.seller_id
+		from user u join user us join product p join orders o
+		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=p.seller_id and (o.order_status=3)
+		, (SELECT @rownum:=0) TMP
+		order by o.createdAt desc
+	]]>	
+	</select>
+	
+	<!-- 모든 유저의 거래 내역을 조회함 -->
+	<select id="allTrade" resultType="Map">
+	<![CDATA[
+		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id,o.order_qty,o.order_price,o.order_status,o.seller_id
+		from user u join user us join product p join orders o
+		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=p.seller_id
+		, (SELECT @rownum:=0) TMP
+		order by o.createdAt desc
+	]]>	
 	</select>
 	
 	<!-- 리뷰를 삽입함-->
@@ -29,15 +51,15 @@
 	
 	</insert>
 
-	<!--거래관리 5개 출력-->
+	<!--나의 거래관리 출력-->
 	<select id="queryOrdersss" resultType="Map" parameterType="int">
 	<![CDATA[
 		
 		select @ROWNUM:=@ROWNUM+1 as ROWNUM,o.createdAt, u.nickname,p.title,us.nickname as nickname2,o.order_id,o.product_id,o.order_qty,o.order_price,o.order_status,o.seller_id
 		from user u join user us join product p join orders o
-		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=p.seller_id and o.buyer_id=#{user_id}
+		on p.product_id=o.product_id and u.user_id=o.buyer_id and us.user_id=p.seller_id and (o.buyer_id=#{user_id} or o.seller_id=#{user_id})
 		, (SELECT @rownum:=0) TMP
-		order by o.createdAt desc limit 5
+		order by o.createdAt desc
 	]]>	
 	
 	</select>
@@ -146,7 +168,61 @@
 	]]>	
 	</update>
 	
+	<!--스테이터스 0->1 -->
+	<update id="zeroToOne" parameterType="int">
+	<![CDATA[
+		update orders set order_status=1 where order_id=#{id}
+	]]>	
+	</update>
 	
+	<!--스테이터스 1->2 -->
+	<update id="oneToTwo" parameterType="int">
+	<![CDATA[
+		update orders set order_status=2 where order_id=#{id}
+	]]>	
+	</update>
+	
+	<!--스테이터스 2->3 -->
+	<update id="twoToThree" parameterType="int">
+	<![CDATA[
+		update orders set order_status=3 where order_id=#{id}
+	]]>	
+	</update>
+	
+	<!--스테이터스 3->4 -->
+	<update id="threeToFour" parameterType="int">
+	<![CDATA[
+		update orders set order_status=4 where order_id=#{id}
+	]]>	
+	</update>
+	
+	<!--스테이터스 1->6  -->
+	<update id="oneToSix" parameterType="int">
+	<![CDATA[
+		update orders set order_status=6 where order_id=#{id}
+	]]>	
+	</update>
+	
+	<!--스테이터스 1->7  -->
+	<update id="oneToSeven" parameterType="int">
+	<![CDATA[
+		update orders set order_status=7 where order_id=#{id}
+	]]>	
+	</update>
+	
+	<!--스테이터스 7->9  -->
+	<update id="sevenToNine" parameterType="int">
+	<![CDATA[
+		update orders set order_status=9 where order_id=#{id}
+	]]>	
+	</update>
+	
+	<!--스테이터스 1->8  -->
+	<update id="oneToEight" parameterType="int">
+	<![CDATA[
+		update orders set order_status=8 where order_id=#{id}
+	]]>	
+	</update>
 	
 	<!--패스워드 파인드-->
 	<select id="passfind" resultType="boolean" parameterType="user">
@@ -154,6 +230,25 @@
 		select count(*)
 		from user
 		where user_id=#{user_id} and password=#{password}
+	]]>	
+	</select>
+	
+	<!--관리자로부터 받은 메세지 파인드-->
+	<select id="findWarningMsg" resultType="Map" parameterType="int">
+	<![CDATA[
+		select *
+		from messages
+		where recv_user_id=#{user_id}
+	]]>	
+	</select>
+	
+	<!--리포트 파인드-->
+	<select id="findreport" resultType="Map" parameterType="int">
+	<![CDATA[
+		select r.reason,r.product_id,r.reported_userid,r.report_userid,r.createdAt,p.title
+		from report r join product p 
+		on r.product_id=p.product_id
+		where report_id=#{id}
 	]]>	
 	</select>
 	
@@ -180,13 +275,36 @@
 	]]>	
 	</select>
 	
+	<!-- 하트를 눌러서 좋아요를 삭제 -->
 	<delete id="deletelike" parameterType="int">
 	<![CDATA[
 		delete from likes where like_id=#{like_id}  
 	]]>	
 	</delete>
 	
+	<!-- 관리자 페이지에서 유저를 삭제시킴 -->
+	<delete id="userdelete" parameterType="int">
+	<![CDATA[
+		delete from user where user_id=#{user_id}  
+	]]>	
+	</delete>
 	
+	<!-- 관리자 페이지에서 포스트를 삭제시킴 -->
+	<delete id="postdelete" parameterType="int">
+	<![CDATA[
+		delete from product where product_id=#{id}  
+	]]>	
+	</delete>
+	
+	<!-- 관리자가 포스트의 주인에게 경고 메세지를 보냄 -->
+	<insert id="postwarning" parameterType="Map">
+	<![CDATA[
+		insert into messages (send_user_id,recv_user_id,title,content,read_chk)
+		values(0,#{reported_userid},#{reason},#{title},0)
+	]]>	
+	</insert>
+	
+
 	
 	<!--찜 자세히 눌렀을때 리스트 가져옴-->
 	<select id="selectBoardList2" resultType="Map" parameterType="int">
@@ -203,7 +321,7 @@
 	<!--신고내역 5개만 가져오기-->
 	<select id="report5" resultType="Map">
 	<![CDATA[
-		select r.createdAt, p.title,u.nickname,r.reason,r.product_id,r.reported_userid
+		select r.createdAt, p.title,u.nickname,r.reason,r.product_id,r.reported_userid,r.report_id
 		from user u join product p join report r
 		on p.product_id=r.product_id and p.seller_id=u.user_id
 		order by r.createdAt desc limit 5

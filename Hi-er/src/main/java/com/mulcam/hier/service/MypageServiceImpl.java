@@ -11,6 +11,7 @@ import com.mulcam.hier.dao.MypageDAO;
 import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.Orders;
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.Report;
 import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 
@@ -271,6 +272,91 @@ public class MypageServiceImpl implements MypageService {
 		
 		
 	}
+
+	@Override
+	public void userdelete(int user_id) throws Exception {
+	
+		
+			mypageDAO.userdelete(user_id);
+		
+	}
+
+	@Override
+	public void postdelete(int id) throws Exception {
+		mypageDAO.postdelete(id);
+		
+	}
+
+	@Override
+	public void updatestatus1(int id, int num) throws Exception {
+		try {
+			if (num == 1) {
+				mypageDAO.zeroToOne(id);
+			} else if (num == 2) {
+				mypageDAO.oneToTwo(id);
+			} else if (num == 3) {
+				mypageDAO.twoToThree(id);
+			} else if (num == 4) {
+				mypageDAO.threeToFour(id);
+			} else if(num==6) {
+				mypageDAO.oneToSix(id);
+			} else if(num==7) {
+				mypageDAO.oneToSeven(id);
+			} else if(num==8) {
+				mypageDAO.oneToEight(id);
+			}
+			
+			
+			
+			else if(num==9) {
+				mypageDAO.sevenToNine(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> trade() throws Exception {
+		List<Map<String, Object>> trade=mypageDAO.trade();
+		return trade;
+	}
+
+	@Override
+	public List<Map<String, Object>> allTrade() throws Exception {
+		List<Map<String, Object>> trade=mypageDAO.allTrade();
+		return trade;
+	}
+
+	@Override
+	public void postwarning(int id) throws Exception {//리포트 아이디로 리포트를 찾아서 유저에게 경고 메세지 인서트
+		User user = new User();
+		HashMap<String,Object>map=new HashMap<>();
+		//Report report1=new Report();
+		map = (HashMap<String, Object>) mypageDAO.findreport(id);
+		System.out.println(map+"#########################################$$$$$$$$$$$$$$$$$$$$$@@@@@@@@@@@@@@");
+//		map.put("reason",report.getReason());
+		mypageDAO.postwarning(map);
+		/*
+		 * report1.setReport_userid(0);
+		 * report1.setReported_userid(report.getReported_userid()); String ttt
+		 * =report.getReason()+"로 인한 경고입니다"; report1.setReason(ttt);
+		 * report1.setProduct_id(report.getProduct_id());
+		 * mypageDAO.postwarning(report1);
+		 */
+	}
+
+	@Override
+	public List<Map<String, Object>> warningMsg(int user_id) throws Exception {
+		List<Map<String, Object>> warning=mypageDAO.findWarningMsg(user_id);
+		return warning;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

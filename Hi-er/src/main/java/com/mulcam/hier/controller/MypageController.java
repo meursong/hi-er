@@ -35,16 +35,17 @@ public class MypageController {
 			System.out.println(user_id);
 			Map<String,Object> statistics1=mypageService.count(user_id);
 			
-			//List<Map<String, Object>> count = null;
-			//count.add(count1);
-			//listMapInsert.add(map);
 			List<Map<String, Object>> ord = mypageService.history2(user_id);// 유저의 아이디로 거래내역을 가져옴
+			
 			List<Map<String, Object>> likepost = mypageService.history3(user_id);// 유저의 아이디로 찜한 목록을 가져옴
-			//System.out.println(count+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			List<Map<String, Object>> warning= mypageService.warningMsg(user_id);
+			
 			mav.addObject("statistics", statistics1);// 가져온 ord를 orders로 프론트로 내려보낼거임
+			mav.addObject("warnings",warning);
 			mav.addObject("orders", ord);// 가져온 ord를 orders로 프론트로 내려보낼거임
 			mav.addObject("likeposts", likepost);
 			mav.addObject("page", "0");// 페이지0으로 들어갈거임 마이페이지 홈
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,12 +60,15 @@ public class MypageController {
 		try {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();// 세션에서 유저의 아이디를 가져옴
 			System.out.println(user_id);
-			Map<String,Object> statistics1=mypageService.count(user_id);
-			List<Map<String, Object>> report = mypageService.report5();// 유저의 아이디로 거래내역을 가져옴
+			List<Map<String, Object>> order2=mypageService.trade();
+			List<Map<String, Object>> order3=mypageService.allTrade();
+			Map<String,Object> statistics1=mypageService.count(user_id);//내정보에 보이는 짧은 통계 가져오는거
+			List<Map<String, Object>> report = mypageService.report5();//신고 5명 나오는거
 	
 			mav.addObject("statistics", statistics1);// 가져온 ord를 orders로 프론트로 내려보낼거임
 			mav.addObject("reports",report);
-		
+			mav.addObject("orders2",order2);
+			mav.addObject("orders3",order3);
 			mav.addObject("page", "0");// 페이지0으로 들어갈거임 마이페이지 홈
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -257,25 +261,28 @@ public class MypageController {
 		return String.valueOf(review);
 	}
 
-	// 이미지 업로드 아직 미완성
-	@PostMapping("imageupload")
-	public String imageupload() {
-		System.out.println("sssssssssssssssssssssssss");
-		return "account";
-	}
 
 	// 내정보수정,프리랜서정보수정
 	@GetMapping("mypage/{num}")
 	public ModelAndView memmodify(@PathVariable String num) {
 		int num1 = Integer.parseInt(num);
-		if (num1 == 4) {
-			ModelAndView mav = new ModelAndView("account4");
-			mav.addObject("page", num);
-			return mav;
-		} else if (num1 == 5) {
-			ModelAndView mav = new ModelAndView("account5");
-			mav.addObject("page", num);
-			return mav;
+		int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();// 세션에서 유저의 아이디를 가져옴
+		try {
+			if (num1 == 4) {
+				ModelAndView mav = new ModelAndView("account4");
+				Map<String, Object> statistics1 = mypageService.count(user_id);
+				mav.addObject("statistics", statistics1);// 가져온 ord를 orders로 프론트로 내려보낼거임
+				mav.addObject("page", num);
+				return mav;
+			} else if (num1 == 5) {
+				ModelAndView mav = new ModelAndView("account5");
+				Map<String, Object> statistics1 = mypageService.count(user_id);
+				mav.addObject("statistics", statistics1);// 가져온 ord를 orders로 프론트로 내려보낼거임
+				mav.addObject("page", num);
+				return mav;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 
@@ -284,11 +291,11 @@ public class MypageController {
 	// 하트 리무브
 		@ResponseBody
 		@PostMapping("heartremove")
-		public String heartremove(@RequestParam(value = "like_id") int like_id) {
+		public String heartremove(@RequestParam(value = "like_id") String like_id) {
 			boolean like = false;
-			
+			int like_id1=Integer.parseInt(like_id);
 			try {
-				like = mypageService.heartremove(like_id);
+				like = mypageService.heartremove(like_id1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -298,10 +305,48 @@ public class MypageController {
 		//유저 삭제
 		@ResponseBody
 		@PostMapping("userdelete")
-		public String userdelete(@RequestParam(value = "id") int like_id) {
-			System.out.println("kkkkkkkkkkkk");
-			return null;
+		public String userdelete(@RequestParam(value = "id") String user_id) {
+		
+			int user_id1=Integer.parseInt(user_id);
+			try {
+				mypageService.userdelete(user_id1);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			return "성공적으로 삭제";
 		}
+		
+		//게시글 삭제
+		@ResponseBody
+		@PostMapping("postdelete")
+		public String postdelete(@RequestParam(value = "id") String id) {
+			int id1=Integer.parseInt(id);
+			try {
+				mypageService.postdelete(id1);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			return "성공적으로 삭제";
+		}
+		
+		@ResponseBody
+		@PostMapping("postwarning")
+		public String postwarning(@RequestParam(value = "id") String id) {
+			int id1=Integer.parseInt(id);
+			try {
+				mypageService.postwarning(id1);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			return "성공적으로 삭제";
+		}
+		
 		
 		@ResponseBody
 		@PostMapping("clicktitle")
@@ -317,6 +362,20 @@ public class MypageController {
 
 			String value="http://localhost:8090/freelancerInfo/"+id;
 			return String.valueOf(value);
+		}
+		
+		//스테이터스 변경
+		@ResponseBody
+		@PostMapping("updatestatus")
+		public String updatestatus(@RequestParam(value = "id") String id,@RequestParam(value = "num") String num) {
+			int id1=Integer.parseInt(id);
+			int num1=Integer.parseInt(num);
+			try {
+				mypageService.updatestatus1(id1,num1);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return "성공~";
 		}
 		
 
