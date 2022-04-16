@@ -107,7 +107,7 @@
                 <img
                   class="img-fluid"
                   th:src="@{/upload/} + ${productList.filename1}"
-                  onerror="this.src='/images/list/v1.png'"
+                  onerror="this.src='/images/상품준비중.jpg'"
                   style="object-fit: fill"
                 />
               </a>
@@ -117,8 +117,8 @@
                     <span class="seller-image">
                       <img
                         class="img-fluid"
-                        th:src="@{/images/user/s3.png}"
-                        alt=""
+                        th:src="@{/upload/} + ${productList.profile_image}" onerror="this.src='@{/images/user/s3.png}'"
+                        style="object-fit: fill"
                       />
                     </span>
                     <span class="seller-name">
@@ -176,9 +176,8 @@
                     <div class="price">
                       Basic
                       <span
-                        th:text="'₩'+${#numbers.formatInteger(productList.b_price, 0, 'COMMA')}"
-                      >
-                        ₩비용</span
+                        th:text="${#numbers.formatInteger(productList.b_price, 0, 'COMMA')}+'원~'">
+                        원~</span
                       >
                     </div>
                   </div>

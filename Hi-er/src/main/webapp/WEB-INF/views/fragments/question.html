@@ -1,0 +1,88 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="q_modal" class="modal fade messageModal" id="qmodal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">문의 하기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+            </div>
+                <div class="col-lg-12 col-md-12"  style="padding-top:10px;" id= "">
+                  <div class="row">
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                        <div class="controls">
+                           <label>이름 <span class="text-danger">*</span></label>
+                           <input type="text" id="userName" class="form-control modal-input" required>
+                        </div>
+                     </div>
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                        <div class="controls">
+                           <label>이메일 <span class="text-danger">*</span></label>
+                           <input type="email" id="email" class="form-control modal-input" required>
+                        </div>
+                     </div>
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                     <div class="controls">
+                           <label>Phone <span class="text-danger">*</span></label>
+                           <input type="text" id="phone" class="form-control modal-input" required>
+                        </div>
+                     </div>
+                     <div class="control-group form-group col-lg-4 col-md-4">
+                     </div>
+                  </div>
+                  <div class="control-group form-group">
+                     <div class="controls">
+                        <label>문의 내용 <span class="text-danger">*</span></label>
+                        <textarea rows="10" cols="100" class="form-control modal-input" id="message"></textarea>
+                     </div>
+                  </div>
+                  
+            <div class="modal-footer">
+                <button type="button" id="closeModalBtn" class="btn btn-secondary" data-dismiss="modal">닫기
+                </button>
+                                  <button type="button"  th:onclick="sendEmail()" class="btn btn-success">문의 하기</button>
+
+            </div>
+            <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
+     function sendEmail(){
+      emailjs.init("hJRZ0fnVlYqYWlicl");
+		const templateParam = {
+			name : $("input[id='userName']").val(),
+			phone : $("input[id='phone']").val(),
+			email : $("input[id='email']").val(),
+			message : $("textarea[id='message']").val(),
+		}	
+			if(templateParam.name === ""){
+				swal("알림","이름을 입력해주세요.");
+				$("textarea[id='name']").focus();
+			}else if(templateParam.email === ""){
+				swal("알림","이메일을 입력해주세요.");
+				$("textarea[id='email']").focus();
+			}else if(templateParam.phone === ""){
+				swal("알림","번호를 입력해주세요.");
+				$("textarea[id='phone']").focus();
+			}else if(templateParam.message === ""){
+				swal("알림","문의 내용을 입력해주세요.");
+				$("textarea[id='message']").focus();
+			}else {
+				emailjs.send('hi-erCustomerService','template_tcpni3l',templateParam,'hJRZ0fnVlYqYWlicl').then(function(response){
+					console.log("Success!!!");
+					swal("알림","문의내용 접수 완료");
+					
+					/*닫기 작동*/
+					$('#closeModalBtn').click();
+					$('.modal-input').val("");
+					
+				},function(error){
+					console.log('Failed...',error);
+				})
+			}
+}
+	</script>
+        </div>
+    </div>
+</div>
+<html/>

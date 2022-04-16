@@ -14,6 +14,9 @@ public interface MypageService {
 	Map<String,Object> count(int user_id) throws Exception;
 	boolean nickOverlap(String nick) throws Exception;
 	void nickupdate(String nick,int user_id) throws Exception;
+	
+	void profileUpdate(String filename,int user_id) throws Exception;
+	
 	boolean passfindupdate(String pass,String pass2,int user_id) throws Exception;
 	boolean introupdate(String intro,int user_id) throws Exception;
 	boolean addressupdate(String address, String address2,int user_id);

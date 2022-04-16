@@ -220,12 +220,7 @@ public class MypageServiceImpl implements MypageService {
 		int clickLike=mypageDAO.countBoard2(user_id);
 		//눌린 좋아요 수
 		int clikedLike=mypageDAO.countLiked(user_id);
-		System.out.println(buyOrder+"바이오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(sellOrder+"셀오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(buySumOrder+"바이섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(sellSumOrder+"셀섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(clickLike+"클릭라이크@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(clikedLike+"클릭라이크드드드드드드@@@@@@@@@@@@@@@@@@@@@@@@@2");
+	
 		
 		
 		Map<String,Object>map=new HashMap<String,Object>();
@@ -235,9 +230,7 @@ public class MypageServiceImpl implements MypageService {
 		map.put("sellSumOrder", sellSumOrder);
 		map.put("clickLike", clickLike);
 		map.put("clickedLike", clikedLike);
-		System.out.println(map+"map@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		//List<Map<String, Object>> listMapInsert=new ArrayList<Map<String,Object>>();
-		//listMapInsert.add(map);
+
 		return map;
 	}
 
@@ -333,18 +326,12 @@ public class MypageServiceImpl implements MypageService {
 	public void postwarning(int id) throws Exception {//리포트 아이디로 리포트를 찾아서 유저에게 경고 메세지 인서트
 		User user = new User();
 		HashMap<String,Object>map=new HashMap<>();
-		//Report report1=new Report();
+
 		map = (HashMap<String, Object>) mypageDAO.findreport(id);
-		System.out.println(map+"#########################################$$$$$$$$$$$$$$$$$$$$$@@@@@@@@@@@@@@");
-//		map.put("reason",report.getReason());
+
+
 		mypageDAO.postwarning(map);
-		/*
-		 * report1.setReport_userid(0);
-		 * report1.setReported_userid(report.getReported_userid()); String ttt
-		 * =report.getReason()+"로 인한 경고입니다"; report1.setReason(ttt);
-		 * report1.setProduct_id(report.getProduct_id());
-		 * mypageDAO.postwarning(report1);
-		 */
+
 	}
 
 	@Override
@@ -357,6 +344,13 @@ public class MypageServiceImpl implements MypageService {
 	
 	
 	
+	public void profileUpdate(String profile_image, int user_id) throws Exception {
+		User user = new User();
+		user.setProfile_image(profile_image);
+		user.setUser_id(user_id);/// 
+		mypageDAO.profileUpdate(user);
+
+	}
 	
 	
 	

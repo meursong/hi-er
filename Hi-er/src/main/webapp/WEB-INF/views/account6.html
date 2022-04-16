@@ -13,8 +13,7 @@
 					<div
 						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
 						<div class="py-4 px-3 border-bottom">
-							<img th:src="@{/images/user/s4.png}"
-								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+							<img class="img-fluid mt-2 rounded-circle" th:src="@{/upload/} + ${session.loginedUser.profile_image}" onerror="this.src='/images/user/default.jpg'" alt="Responsive image">
 							<h5 class="font-weight-bold text-dark mb-1 mt-4">Gurdeep
 								Osahan</h5>
 							<p class="mb-0 text-muted">UI / UX Designer</p>
@@ -38,7 +37,7 @@
 								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
-									프리내정보수정 </a>	
+									내정보수정 </a>	
 							</div>
 						</div>
 
@@ -285,7 +284,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/review",
+					url : "/review",
 					data : {
 						"order_id" : id, "rating":rating2, "content":content
 					},

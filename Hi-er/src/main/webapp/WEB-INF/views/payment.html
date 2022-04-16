@@ -37,9 +37,9 @@
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : $("#seller_id").val(), //결제창에서 보여질 이름 
-				amount : 3000, //실제 결제되는 가격
-				buyer_email : 'iamport1@siot.do',
-				buyer_name : '구매자이름', 
+				amount : $("#order_price").val(), //실제 결제되는 가격
+				buyer_email : $("#buyer_email").val(),
+				buyer_name : $("#buyer_id").val(),
 				buyer_tel : '010-1234-5678',
 				buyer_addr : '서울 강남구 도곡동',
 				buyer_postcode : '123-456'
@@ -50,7 +50,6 @@
 					msg += '고유ID : ' + rsp.imp_uid;
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
 					msg += '결제 금액 : ' + rsp.paid_amount;
-					msg += '카드 승인번호 : ' + rsp.apply_num;
 					var formData = new FormData(form);
 					$.ajax({
 						type : "POST",
@@ -59,20 +58,19 @@
 						data : formData, 
 						processData:false,
 						contentType:false,
-						success : function(res) {
-							alert(res);
-							alert("결제 성공");
+						success : async (res) => {
+							await swal("success","결제 성공 :"+msg)
 							location.href='/mypage';
 						},
 						error : function(XMLHttpRequest, textStatus, errorThrown) {
 							alert("통신 실패.")
 						}
-					}); 
+					}).done(function (data, textStatus, xhr) {
+	                }); 
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
 				}
-				alert(msg);
 			});
 		} 
 	});
@@ -247,7 +245,7 @@ input.card {
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
 								<img class="img-fluid" width="600px"
-									th:src="@{/upload/} + ${product.filename2}" />
+									th:src="@{/upload/} + ${product.filename1}" />
 							</div>
 						</div>
 					</div>
@@ -340,6 +338,7 @@ input.card {
 					<div class="">
 						<form id='form' action='/order' method='post'>
 							<input type="hidden" id="buyer_id" name="buyer_id" th:value="${session.loginedUser.user_id}"> 
+							<input type="hidden" id="buyer_email" name="buyer_email" th:value="${session.loginedUser.email}"> 
 							<input type="hidden" id="seller_id" name="seller_id" th:value="${product.seller_id}"> 
 							<input type="hidden" id="product_id" name="product_id" th:value="${product.product_id}"> 
 							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
@@ -350,7 +349,7 @@ input.card {
 							<div style="width: 100%; margin: auto;">
 								<button class="btn btn-primary d-block h8"
 									style="width: 400px; margin: auto; display: block;"
-									id="iamportPayment" type="button">결제테스트</button>
+									id="iamportPayment" type="button">결제</button>
 							</div>
 						</form>
 					</div>
@@ -360,5 +359,5 @@ input.card {
 </section>
 </body>
 
-
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 </html>

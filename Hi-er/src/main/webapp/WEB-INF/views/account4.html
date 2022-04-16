@@ -13,11 +13,16 @@
 					<div
 						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
 						<div class="py-4 px-3 border-bottom">
-							<img th:src="@{/images/user/s4.png}"
-								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
-							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
+							<img class="img-fluid mt-2 rounded-circle"
+								th:src="@{/upload/} + ${session.loginedUser.profile_image}"
+								onerror="this.src='/images/user/default.jpg'"
+								alt="Responsive image">
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email
+								}]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name
+								}]]</h5>
+							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname
+								}]]</h5>
 						</div>
 					
 						<div class="d-flex">
@@ -56,10 +61,11 @@
 									로그아웃 </a>
 							</div>
 							<div class="col-6 p-3 overflow-hidden border-top">
-								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+								<a th:if=${session.loginedUser.type}!=2
+									class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
+									내정보수정 </a> <a th:unless=${session.loginedUser.type}!=2
+									class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
 									내정보수정 </a>
-								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
-									프리내정보수정 </a>	
 							</div>
 						</div>
 
@@ -70,7 +76,7 @@
 
 
 
-			
+
 
 				<!-- =============================================개인정보수정================= -->
 				<main th:if="${page}=='4'"
@@ -88,36 +94,47 @@
 
 								<div
 									class="box mb-3 rounded bg-white profile-box text-center border-right">
-									<div class="py-4 px-3">
-										<img th:src="@{/images/user/s4.png}"
-											class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+									<form method="post" enctype="multipart/form-data"
+										action="/profileImageUpdate">
+										<div class="py-4 px-3">
+											<img th:src="@{/images/user/s4.png}"
+												class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+											<input id="file" name="file"
+												accept="image/*" type="file"
+												class="file">
+										</div>
+										<div class="p-4">
 
-									</div>
-									<div class="p-4">
-										<form method="post" enctype="multipart/form-data"
-											action="/imageupload">
 											<label data-toggle="tooltip" data-placement="top"
 												data-original-title="Upload New Picture"
-												class="btn btn-info m-0" for="fileAttachmentBtn"> <i
-												class="mdi mdi-image"></i> Upload <input
-												id="fileAttachmentBtn" name="file-attachment" type="file"
-												class="d-none">
+												for="profileUpdateBtn"
+												class="btn btn-info m-0"> <i
+												class="mdi mdi-image"></i> Upload
 
 											</label>
-										</form>
-										<div style="padding-top: 10px;">
-										<button data-toggle="tooltip" data-placement="top"
-											data-original-title="Delete" type="submit"
-											class="btn btn-danger">
-											<i class="mdi mdi-delete"></i> Delete
-										</button>
+											<button data-toggle="tooltip" data-placement="top"
+													data-original-title="Delete" type="submit"
+													id="profileUpdateBtn"
+													class="btn btn-danger" style="display:none;">
+												</button>
+
+											<div style="padding-top: 10px;">
+												<button data-toggle="tooltip" data-placement="top"
+													data-original-title="Delete" type="submit"
+													class="btn btn-danger">
+													<i class="mdi mdi-delete"></i> Delete
+												</button>
+											</div>
 										</div>
-									</div>
+									</form>
 								</div>
 								<div class="col-6 p-3">
-									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
-									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
-									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email
+										}]]</h5>
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname
+										}]]</h5>
+									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name
+										}]]</h5>
 								</div>
 
 
@@ -189,14 +206,26 @@
 				<!-- ========================================================================================================== -->
 
 
-			
+
 			</div>
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(function() {
-		
+			$('.imgUpload').click(function() {
+				$(this).next().click(); /* NEXT는 다음 형제 - img와 input태그 사이 다른 태그 넣으면 안됨 */
+
+			});
+			$(".file").change(function(event) {
+				const img = $(this).prev(); /* 미리등록 */
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					img.attr("src", e.target.result); /* 이 메서드가 실행될때의 THIS는 달라지기 때문에  */
+				};
+				reader.readAsDataURL(event.target.files[0]);
+			});
+
 			//닉네임 중복확인
 			$("#validationCustom02").click(function() {
 
@@ -213,7 +242,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/nickoverlap",
+					url : "/nickoverlap",
 					data : {
 						nick : $('#validationCustom01').val()
 					},
@@ -236,7 +265,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/nickupdate",
+					url : "/nickupdate",
 					data : {
 						nick : $('#validationCustom01').val()
 					},
@@ -285,7 +314,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/passupdate",
+					url : "/passupdate",
 					data : {
 						pass : $('#validationCustom03').val(),
 						pass2 : $('#validationCustom04').val(),
@@ -303,7 +332,6 @@
 				});
 			});
 
-			
 		});
 	</script>
 

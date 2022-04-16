@@ -13,8 +13,7 @@
 					<div
 						class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
 						<div class="py-4 px-3 border-bottom">
-							<img th:src="@{/images/user/s4.png}"
-								class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+							<img class="img-fluid mt-2 rounded-circle" th:src="@{/upload/} + ${session.loginedUser.profile_image}" onerror="this.src='/images/user/default.jpg'" alt="Responsive image">
 							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
 							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.name }]]</h5>
 							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
@@ -58,7 +57,7 @@
 								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 								<a th:unless=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
-									프리내정보수정 </a>	
+									내정보수정 </a>	
 							</div>
 						</div>
 
@@ -86,22 +85,30 @@
 
 								<div
 									class="box mb-3 rounded bg-white profile-box text-center border-right">
-									<div class="py-4 px-3">
-										<img th:src="@{/images/user/s4.png}"
-											class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+									<form method="post" enctype="multipart/form-data"
+										action="/profileImageUpdate">
+										<div class="py-4 px-3">
+											<img th:src="@{/images/user/s4.png}"
+												class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+											<input id="file" name="file"
+												accept="image/*" type="file"
+												class="file">
+										</div>
+										<div class="p-4">
 
-									</div>
-									<div class="p-4">
-										<form method="post" enctype="multipart/form-data"
-											action="/imageupload">
 											<label data-toggle="tooltip" data-placement="top"
 												data-original-title="Upload New Picture"
-												class="btn btn-info m-0" for="fileAttachmentBtn"> <i
-												class="mdi mdi-image"></i> Upload <input
-												id="fileAttachmentBtn" name="file-attachment" type="file"
-												class="d-none">
+												for="profileUpdateBtn"
+												class="btn btn-info m-0"> <i
+												class="mdi mdi-image"></i> Upload
+
 											</label>
-										</form>
+											<button data-toggle="tooltip" data-placement="top"
+													data-original-title="Delete" type="submit"
+													id="profileUpdateBtn"
+													class="btn btn-danger" style="display:none;">
+												</button>
+										
 										<div style="padding-top: 10px;">
 										<button data-toggle="tooltip" data-placement="top"
 											data-original-title="Delete" type="submit"
@@ -110,6 +117,7 @@
 										</button>
 										</div>
 									</div>
+									</form>
 								</div>
 								<div class="col-6 p-3">
 									<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.email }]]</h5>
@@ -280,7 +288,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/nickoverlap",
+					url : "/nickoverlap",
 					data : {
 						nick : $('#validationCustom01').val()
 					},
@@ -303,7 +311,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/nickupdate",
+					url : "/nickupdate",
 					data : {
 						nick : $('#validationCustom01').val()
 					},
@@ -352,7 +360,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/passupdate",
+					url : "/passupdate",
 					data : {
 						pass : $('#validationCustom03').val(),
 						pass2 : $('#validationCustom04').val(),
@@ -380,7 +388,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/intromody",
+					url : "/intromody",
 					data : {
 						intro : $('#intromody2').val()
 					},
@@ -403,7 +411,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/locationmody",
+					url : "/locationmody",
 					data : {
 						address : $('#sample6_address').val(),
 						address2 : $('#sample6_detailAddress').val()

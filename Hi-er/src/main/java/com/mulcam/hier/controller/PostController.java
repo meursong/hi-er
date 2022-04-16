@@ -3,22 +3,27 @@ package com.mulcam.hier.controller;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,6 +63,12 @@ public class PostController {
 
 	@Autowired
 	HttpSession session;
+	
+	@Value("${upload.filepath}")
+	private String filepath;
+	
+	@Value("${upload.filepath.cloud}")
+	private boolean iscloud;	
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
@@ -91,7 +102,7 @@ public class PostController {
 			return "login";
 		}
 	}
-	
+
 	@GetMapping("/ITwrite")
 	public String itWrite(Model model) throws Exception {
 		System.out.println((User) session.getAttribute("loginedUser"));
@@ -105,14 +116,18 @@ public class PostController {
 		}
 	}
 
-
 	private String fileupload(MultipartFile file) {
 		String filename = null;
 		try {
-			String path = servletContext.getRealPath("/upload/");
+			String path="";
+			if(iscloud) {
+				path=filepath;
+			} else {
+				path = servletContext.getRealPath(filepath);
+			}
 			String time = Long.valueOf(new Date().getTime()).toString();
 			if (file != null && !file.isEmpty()) {
-				filename = file.getOriginalFilename() + time;
+				filename = time + file.getOriginalFilename() ;
 				File destFile = new File(path + filename);
 				file.transferTo(destFile);
 			}
@@ -121,24 +136,29 @@ public class PostController {
 		}
 		return filename;
 	}
-	
+
 	private String resizeFileupload(MultipartFile file) {
 		String filename = null;
 		try {
-			String path = servletContext.getRealPath("/upload/");
+			String path="";
+			if(iscloud) {
+				path=filepath;
+			} else {
+				path = servletContext.getRealPath(filepath);
+			}
 			String time = Long.valueOf(new Date().getTime()).toString();
-			int width=730, height=450;
+			int width = 730, height = 450;
 			if (file != null && !file.isEmpty()) {
-				filename = file.getOriginalFilename() + time;
+				filename = time + file.getOriginalFilename();
 				File destFile = new File(path + filename);
 				BufferedImage inputImage = ImageIO.read(file.getInputStream());
-				BufferedImage outputImage = new BufferedImage(width,height,inputImage.getType());
-				
+				BufferedImage outputImage = new BufferedImage(width, height, inputImage.getType());
+
 				Graphics2D graphics2D = outputImage.createGraphics();
 				graphics2D.drawImage(inputImage, 0, 0, width, height, null);
 				graphics2D.dispose();
 				String fileName = file.getOriginalFilename();
-				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);			
+				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
 				ImageIO.write(outputImage, ext, destFile);
 			}
 		} catch (IOException e) {
@@ -146,15 +166,14 @@ public class PostController {
 		}
 		return filename;
 	}
-	
 
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
 		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
-			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename1(resizeFileupload(product.getFile1()));
+			product.setFilename2(fileupload(product.getFile2()));
 			product.setFilename3(resizeFileupload(product.getFile3()));
 			product.setFilename4(resizeFileupload(product.getFile4()));
 			product.setFilename5(resizeFileupload(product.getFile5()));
@@ -162,7 +181,7 @@ public class PostController {
 			product.setFilename7(resizeFileupload(product.getFile7()));
 			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
-			product.setSeller_id(seller_id); 
+			product.setSeller_id(seller_id);
 			postService.writePost(product);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -213,16 +232,23 @@ public class PostController {
 		}
 		return "redirect:/product/category/3"; // 추후 게시판 페이지로 변경
 	}
-	
+
+	//ckeditor 이미지 업로드
 	@ResponseBody
 	@PostMapping("/uploadImage")
-	public String uploadImage(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("upload") MultipartFile file) {
+	public String uploadImage(HttpServletResponse response, @RequestParam("upload") MultipartFile file) {
 		String result = null;
 
 		// [start] 파일 저장 경로 설정
 		// 파일을 저장할 경로
-		String saveDir = request.getSession().getServletContext().getRealPath("/upload/");
+	
+		String saveDir="";
+		if(iscloud) {
+			saveDir=filepath;
+		} else {
+			saveDir = servletContext.getRealPath(filepath);
+		}
+		
 		String newFileName = null;
 
 		// 해당 폴더경로(upload)가 없을 경우 폴더 자동 생성
@@ -250,7 +276,7 @@ public class PostController {
 				file.transferTo(new File(saveDir + "/" + newFileName));
 
 				return "{\"filename\":\"" + newFileName + "\",\"uploaded\" : 1, \"url\":\""
-						+ "http://localhost:8090/upload/" + newFileName + "\" }";
+						+ "/upload/" + newFileName + "\" }";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "{ \"uploaded\" : false, \"error\": { \"message\": \"업로드 중 에러가 발생했습니다. 다시 시도해 주세요.\" } }";
@@ -273,28 +299,54 @@ public class PostController {
 				boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 				List<Review> reviews = reviewService.prodReviewList(params);
 				Integer maxReviewCnt = reviewService.maxReviewCnt(pid);
-				List<Map<String,Integer>> reviewCount = reviewService.reviewCount(pid);
+				Integer maxReviewCntOriginal = maxReviewCnt;
+				List<Map<String, Integer>> reviewCount = reviewService.reviewCount(pid);
+
+				List<Map<String, Integer>> fiveReviewCount = new ArrayList<>();
+
+				// fiveReviewCount 전부 <별점,0>으로 초기화하고
+				for (int i = 0; i < 5; i++) {
+					Map<String, Integer> nullreview = new HashMap<String, Integer>();
+					nullreview.put("star_point", i + 1);
+					nullreview.put("count", 0);
+					System.out.println(nullreview + "널리뷰카운트야");
+					fiveReviewCount.add(i, nullreview);
+				}
+				// 있는 데이터만 맞는 위치로 add
+				for (int j = 0; j < reviewCount.size(); j++) {
+					System.out.println("for문 속의 리뷰카운트 입니다" + reviewCount.get(j));
+					fiveReviewCount.set(reviewCount.get(j).get("star_point") - 1, reviewCount.get(j));
+				}
+
+				System.out.println(fiveReviewCount.size() + "개의 데이터 완성ㄹ!@");
+			
+				fiveReviewCount = fiveReviewCount.stream().sorted((o1, o2) -> o2.get("star_point").compareTo(o1.get("star_point")) ).collect(Collectors.toList());
+				System.out.println(fiveReviewCount);
+				
+				
 				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
 				Map<String, Object> likeInfo = new HashMap<String, Object>();
-				
+
 				/*
 				 * int sumReviewCnt = 0; for (int i=0; i<reviewCount.size(); i++) { Integer t =
 				 * reviewCount.get(i).get("count"); sumReviewCnt+=t; }
 				 * System.out.println(sumReviewCnt);
 				 */
-				
-				
-				System.out.println(maxReviewCnt);
+
+				if (maxReviewCnt == 0) {
+					maxReviewCnt = 1;
+				}
 				likeInfo.put("likeNum", likedNum);
 				likeInfo.put("isLike", isLike);
-				
+
 				mav.addObject("likeInfo", likeInfo);
 				mav.addObject("product", product);
 				mav.addObject("priceInfo", priceInfo);
 				mav.addObject("reviews", reviews);
 				mav.addObject("sellerInfo", sellerInfo);
-				mav.addObject("reviewCounts", reviewCount);
+				mav.addObject("reviewCounts", fiveReviewCount);
 				mav.addObject("maxReviewCnt", maxReviewCnt);
+				mav.addObject("maxReviewCntOriginal", maxReviewCntOriginal);
 			} else {
 				mav.setViewName("login");
 			}
@@ -321,7 +373,6 @@ public class PostController {
 		}
 		return result;
 	}
-
 
 	@ResponseBody
 	@PostMapping("/like")
@@ -350,7 +401,7 @@ public class PostController {
 		// a
 		String pkg = product.getPaymentPkg();
 		int price = product.getB_price();
-		if(pkg.equals("Basic")) {
+		if (pkg.equals("Basic")) {
 			mav.addObject("price", product.getB_price());
 			mav.addObject("additional_price", product.getB_additional_price());
 			mav.addObject("commercial", product.getB_commercial());
@@ -361,7 +412,7 @@ public class PostController {
 			mav.addObject("pkg_description", product.getB_pkg_description());
 			mav.addObject("revision", product.getB_revision());
 			mav.addObject("sns_Kit", product.getB_sns_Kit());
-		} else if(pkg.equals("Standard")) {
+		} else if (pkg.equals("Standard")) {
 			mav.addObject("price", product.getS_price());
 			mav.addObject("additional_price", product.getS_additional_price());
 			mav.addObject("commercial", product.getS_commercial());
@@ -372,7 +423,7 @@ public class PostController {
 			mav.addObject("pkg_description", product.getS_pkg_description());
 			mav.addObject("revision", product.getS_revision());
 			mav.addObject("sns_Kit", product.getS_sns_Kit());
-		} else if(pkg.equals("Premium")) {
+		} else if (pkg.equals("Premium")) {
 			mav.addObject("price", product.getP_price());
 			mav.addObject("additional_price", product.getP_additional_price());
 			mav.addObject("commercial", product.getP_commercial());

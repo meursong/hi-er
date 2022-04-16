@@ -12,6 +12,7 @@ public class ProductList extends Criteria {
 	private int seller_id;
 	private String category;
 	private String nickname;
+	private String profile_image;
 	private String filename1;
 	private String job;
 	private String title;
@@ -20,6 +21,13 @@ public class ProductList extends Criteria {
 	private int review_count;
 	private String createdAt;
 
+	public String getProfile_image() {
+		return profile_image;
+	}
+
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
+	}
 
 	public int getProduct_id() {
 		return product_id;
