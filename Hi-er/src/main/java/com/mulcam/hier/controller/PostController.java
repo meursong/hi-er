@@ -127,7 +127,7 @@ public class PostController {
 			}
 			String time = Long.valueOf(new Date().getTime()).toString();
 			if (file != null && !file.isEmpty()) {
-				filename = file.getOriginalFilename() + time;
+				filename = time + file.getOriginalFilename() ;
 				File destFile = new File(path + filename);
 				file.transferTo(destFile);
 			}
@@ -149,7 +149,7 @@ public class PostController {
 			String time = Long.valueOf(new Date().getTime()).toString();
 			int width = 730, height = 450;
 			if (file != null && !file.isEmpty()) {
-				filename = file.getOriginalFilename() + time;
+				filename = time + file.getOriginalFilename();
 				File destFile = new File(path + filename);
 				BufferedImage inputImage = ImageIO.read(file.getInputStream());
 				BufferedImage outputImage = new BufferedImage(width, height, inputImage.getType());
@@ -172,8 +172,8 @@ public class PostController {
 		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
-			product.setFilename1(fileupload(product.getFile1()));
-			product.setFilename2(resizeFileupload(product.getFile2()));
+			product.setFilename1(resizeFileupload(product.getFile1()));
+			product.setFilename2(fileupload(product.getFile2()));
 			product.setFilename3(resizeFileupload(product.getFile3()));
 			product.setFilename4(resizeFileupload(product.getFile4()));
 			product.setFilename5(resizeFileupload(product.getFile5()));
@@ -233,7 +233,7 @@ public class PostController {
 		return "redirect:/product/category/3"; // 추후 게시판 페이지로 변경
 	}
 
-	
+	//ckeditor 이미지 업로드
 	@ResponseBody
 	@PostMapping("/uploadImage")
 	public String uploadImage(HttpServletResponse response, @RequestParam("upload") MultipartFile file) {

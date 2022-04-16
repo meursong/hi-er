@@ -60,7 +60,6 @@ public class PaymentController {
 	@ResponseBody
 	@GetMapping("/upload/{filename}")
 	public void fileview(@PathVariable String filename, HttpServletResponse response) {
-		System.out.println("/upload/{filename}:"+filename);
 		String saveDir="";
 		if(iscloud) {
 			saveDir=filepath;

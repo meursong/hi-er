@@ -116,17 +116,37 @@
 								th:href="@{/upload/} + ${product.filename1}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename1}"
 								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
-							</a> <a th:if="${product.category=='video'}"
-								th:href="@{/upload/} + ${product.filename1}"> <video
+							</a> 
+							<a th:if="${product.category=='it'}"
+								th:href="@{/upload/} + ${product.filename1}"> <img
+								class="img-fluid" th:src="@{/upload/} + ${product.filename1}"
+								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
+							</a>
+							<a th:if="${product.category=='video'}"
+								th:href="@{/upload/} + ${product.filename2}"> <video
 									class="img-fluid" height="400px" width="650px"
-									th:src="@{/upload/} + ${product.filename1}"
+									th:src="@{/upload/} + ${product.filename2}"
 									th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}"
 									controls muted>
 								</video>
-							</a> <a th:href="@{/upload/} + ${product.filename2}"> <img
+							</a> 
+							<a th:if="${product.category=='design'}"
+								th:href="@{/upload/} + ${product.filename2}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename2}"
+								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
+							</a> 
+							<a th:if="${product.category=='it'}"
+								th:href="@{/upload/} + ${product.filename2}"> <img
+								class="img-fluid" th:src="@{/upload/} + ${product.filename2}"
+								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
+							</a>
+							<a th:if="${product.category=='video'}"
+								th:href="@{/upload/} + ${product.filename1}"> <img
+								class="img-fluid" th:src="@{/upload/} + ${product.filename1}"
 								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
-							</a> <a th:href="@{/upload/} + ${product.filename3}"> <img
+							</a>
+							
+							<a th:href="@{/upload/} + ${product.filename3}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename3}"
 								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
 							</a> <a th:href="@{/upload/} + ${product.filename4}"> <img
@@ -319,7 +339,7 @@
 									</colgroup>
 									<tbody>
 										<tr class="package-type">
-											<th>패키지</th>
+											<th><p>패키지</p></th>
 											<td>
 												<p class="price"
 													th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원"></p>
@@ -434,7 +454,7 @@
 											<td th:text="${priceInfo.p_revision}"></td>
 										</tr>
 										<tr class="delivery-time">
-											<th>작업일</th>
+											<th><p data-bs-toggle="tooltip" data-bs-placement="bottom" title="빠른 작업이 필요하">작업일</p></th>
 											<td>
 												<div class="fake-radio-wrapper">
 													<label class="fake-radio"> <input type="radio"
@@ -973,6 +993,11 @@
 	}
 
 	var nData ;
+	
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+	  return new bootstrap.Tooltip(tooltipTriggerEl)
+	})
 
   $("[name='b_delivery']").change(function (e) {
     let result;
@@ -1085,16 +1110,16 @@ window.onpopstate = function(event) {
 };
 </script>
 <script>
-function send() {
+const send = async () => {
     const title = $('#title').val();
     const content = $('#content').val();
 
     if(title=="") {
-        swal("제목을 입력해주세요.");
+        await swal("제목을 입력해주세요.");
         return;
     }
     if(content=="") {
-        swal("메세지를 입력해주세요.");
+    	await swal("메세지를 입력해주세요.");
         return;
     }
 
@@ -1128,5 +1153,6 @@ $('.modal').on('hidden.bs.modal', function (e) {
     console.log('modal close');
     $(this).find('form')[0].reset()
 });
+
 </script>
 
