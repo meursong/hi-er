@@ -418,22 +418,21 @@
 					data : {
 						"like_id" : id,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						if (data == 'true') {
-							swal("알림","찜하기 취소");							
+							
+							await swal("알림","찜하기 취소");							
 							location.reload();
 						} else {
-							swal("검색어를 입력해주세요.");
+							await swal("검색어를 입력해주세요.");
 						}
 					},
-
 				});
-
 			});
 			
 			$(".titttle").click(function(e) {
 				let id = e.currentTarget.id;//포스트 아이디
-		
+			
 			
 
 				console.log(id);
