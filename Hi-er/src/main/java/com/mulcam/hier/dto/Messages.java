@@ -2,6 +2,8 @@ package com.mulcam.hier.dto;
 
 import com.mulcam.hier.others.Criteria;
 import com.mulcam.hier.others.Time;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Date;
 
@@ -15,12 +17,15 @@ public class Messages extends Criteria {
     private String content;
     private String send_time;
     private Integer read_chk;
+    private String nickname;
+
 
     public Messages(int send_user_id, int recv_user_id, String title, String content) {
         this.send_user_id = send_user_id;
         this.recv_user_id = recv_user_id;
         this.title = title;
         this.content = content;
+
     }
 
     public Messages() {
@@ -29,6 +34,14 @@ public class Messages extends Criteria {
     public Messages(int recv_user_id) {
         this.recv_user_id=recv_user_id;
 
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Integer getMsg_id() {

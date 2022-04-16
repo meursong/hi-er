@@ -51,15 +51,16 @@ public class MessageController {
     }
 
     @GetMapping("/message")
-    public String message(Model model) throws Exception {
+    public String message(Model model, @ModelAttribute("params") Messages params) throws Exception {
         if(session.getAttribute("loginedUser")==null) {
             return "/login";
         }
 
         Integer logined_id = ((User)session.getAttribute("loginedUser")).getUser_id();
-        Messages msg = new Messages();
-        msg.setRecv_user_id(logined_id);
-        List<Messages> msgList = ms.message_list(msg);
+        params.setRecv_user_id(logined_id);
+        params.setPageSize(3);
+        params.setRecordsPerPage(5);
+        List<Messages> msgList = ms.message_list(params);
         System.out.println(msgList);
         model.addAttribute("msgList", msgList);
         System.out.println("하하");

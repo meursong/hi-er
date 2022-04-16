@@ -30,10 +30,10 @@
                         <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">Messaging</h5>
                         <div class="row m-0">
                             <div class="border-right col-lg-5 col-xl-4 px-0">
-                                <div class="osahan-chat-left">
+                                <div class="osahan-chat-left" id="msg_box">
                                     <div class="position-relative icon-form-control p-3 border-bottom">
                                         <i class="fa fa-search position-absolute"></i>
-                                        <input id="searchMsg" placeholder="Search messages" type="text" class="form-control">
+                                        <input id="searchMsg" placeholder="닉네임으로 검색하세요." type="text" class="form-control">
                                     </div>
                                     <div id="ms" class="osahan-chat-list">
 
@@ -55,8 +55,8 @@
                                             </div>
                                             <span class="ml-auto mb-auto">
                                        <div class="text-right text-muted pt-1 small msl" th:text="${msgList.send_time}">00:21PM</div>
-                                                 <div class="text-right text-muted pt-1 small msl"
-                                                      th:text="${msgList.read_chk}==0?'읽음'">00:21PM</div>
+<!--                                                 <div class="text-right text-muted pt-1 small msl"-->
+<!--                                                      th:text="${msgList.read_chk}==0?'읽음'">00:21PM</div>-->
                                     </span>
                                         </div>
                                         <div class="footer-pagination text-center">
@@ -89,8 +89,8 @@
                                 </div>
                                 <div th:each="message_view : ${message_view}" style="margin: 0 auto"
                                      class="osahan-chat-box p-3 border-top border-bottom bg-light">
-                                    <h3 th:text="${message_view.title}" name="title" style="text-align: center; border-bottom: #d4f8f2 solid">msg_list</h3>
-                                    <h5 th:text="${message_view.content}" style="text-align: center; margin-top: 20px">msg_list</h5>
+                                    <div class="card-header" th:text="${message_view.title}" name="title" style="text-align: center">msg_list</div>
+                                    <div class="card-body" th:text="${message_view.content}">msg_list</div>
                                 </div>
                                 <div class="w-100 border-top border-bottom">
 
@@ -108,58 +108,7 @@
                     </div>
                 </main>
                 <aside class="col col-xl-3 order-xl-2 col-lg-12 order-lg-2 col-12">
-                    <div class="box mb-3 shadow-sm rounded bg-white list-sidebar">
-                        <div class="box-title p-3">
-                            <h6 class="m-0">Manage my network</h6>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <a href="#">
-                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
-                                        class="mdi mdi-account mr-2 text-dark"></i> Connections <span
-                                        class="ml-auto font-weight-bold">68</span></li>
-                            </a>
-                            <a href="#">
-                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
-                                        class="mdi mdi-book mr-2 text-dark"></i> Contacts <span
-                                        class="ml-auto font-weight-bold">869</span></li>
-                            </a>
-                            <a href="#">
-                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
-                                        class="mdi mdi-account-multiple-plus mr-2 text-dark"></i> People I Follow <span
-                                        class="ml-auto font-weight-bold">156</span></li>
-                            </a>
-                            <a href="#">
-                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
-                                        class="mdi mdi-account-convert mr-2 text-dark"></i> Groups <span
-                                        class="ml-auto font-weight-bold">15</span></li>
-                            </a>
-                            <a href="#">
-                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
-                                        class="mdi mdi-clipboard mr-2 text-dark"></i> Page <span
-                                        class="ml-auto font-weight-bold">3</span></li>
-                            </a>
-                            <a href="#">
-                                <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i
-                                        class="mdi mdi-tag mr-2 text-dark"></i> Hashtag <span
-                                        class="ml-auto font-weight-bold">8</span></li>
-                            </a>
-                        </ul>
-                    </div>
-                    <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center">
-                        <div class="image-overlap-2 pt-4">
-                            <img src="images/l3.png" class="img-fluid rounded-circle shadow-sm" alt="Responsive image">
-                            <img src="images/user/s8.png" class="img-fluid rounded-circle shadow-sm"
-                                 alt="Responsive image">
-                        </div>
-                        <div class="p-3 border-bottom">
-                            <h6 class="text-dark">Gurdeep, grow your career by following <span class="font-weight-bold"> Askbootsrap</span>
-                            </h6>
-                            <p class="mb-0 text-muted">Stay up-to industry trends!</p>
-                        </div>
-                        <div class="p-3">
-                            <button type="button" class="btn btn-outline-success btn-sm pl-4 pr-4"> FOLLOW</button>
-                        </div>
-                    </div>
+
                 </aside>
             </div>
         </div>
@@ -229,7 +178,7 @@
 
     function check() {
 
-        if($("h3[name=title]").val()==null) {
+        if($("div[name=title]").val()==null) {
             swal("알림", "답변할 메세지를 선택해 주세요.");
             $('#exampleModal').modal('hide');
 
@@ -244,11 +193,14 @@
                 swal("알림","검색어를 입력해주세요.");
             }
             else {
-                // location.href =
-            }
-
+                console.log(keyword);
+                }
         }
+
     });
+    function movePage(uri, queryString) {
+        $("#ms").load(uri + queryString + " #ms");
+    }
 
 
 

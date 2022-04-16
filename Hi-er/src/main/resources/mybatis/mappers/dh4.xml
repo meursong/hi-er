@@ -20,8 +20,11 @@
         from messages m
                  left join user u on u.user_id = m.recv_user_id
                  left join user us on us.user_id = m.send_user_id
-        where m.recv_user_id = #{recv_user_id}
-        order by msg_id desc;
+        where (REPLACE(us.nickname, ' ', '') like '%${nickname}%'
+				or us.nickname like '%${nickname}%')
+				and m.recv_user_id = #{recv_user_id}
+        order by msg_id desc
+		limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>
 	</select>
 
