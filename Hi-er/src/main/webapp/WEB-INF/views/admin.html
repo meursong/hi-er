@@ -561,9 +561,9 @@
 					data : {
 						"id" : id,"num":4,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","계좌 입금을 완료했습니다");
+						await swal("알림","계좌 입금을 완료했습니다");
 						location.reload();
 					},
 
