@@ -400,7 +400,7 @@ public class MypageController {
 		@ResponseBody
 		@PostMapping("clicktitle")
 		public String clicktitle(@RequestParam(value = "id") String id) {
-			String value="http://localhost:8090/post/detail/"+id;
+			String value="/post/detail/"+id;
 			return String.valueOf(value);
 		}
 		
