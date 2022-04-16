@@ -189,6 +189,7 @@ public class MypageController {
 		}
 
 	}
+	
 
 	// 패스워드 업데이트
 	@ResponseBody
@@ -196,7 +197,7 @@ public class MypageController {
 	public String passupdate(@RequestParam(value = "pass") String pass, @RequestParam(value = "pass2") String pass2) {
 		System.out.println("여기 패스워드 업데이트");
 		User user = (User) session.getAttribute("loginedUser");
-
+		
 		try {
 
 			if (true == mypageService.passfindupdate(pass, pass2, user.getUser_id())) {
@@ -269,9 +270,13 @@ public class MypageController {
 
 	// 이미지 업로드 아직 미완성
 	@PostMapping("/profileImageUpdate")
-	public void profileImageUpdate(MultipartFile file) {
+	public String profileImageUpdate(MultipartFile file) {
+		String page ="/";
 		System.out.println("회원 이미지 수정 컨트롤러 도착");
 		String filename = null;
+		
+		User user = (User) session.getAttribute("loginedUser");
+		
 		try {
 			String path = "";
 			if (iscloud) {
@@ -286,12 +291,19 @@ public class MypageController {
 				File destFile = new File(path + filename);
 				System.out.println(destFile);
 				file.transferTo(destFile);
+				try {
+					mypageService.profileUpdate(filename, user.getUser_id());					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				page = "/mypage";
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		return page;
 	}
+
 
 	// 내정보수정,프리랜서정보수정
 	@GetMapping("mypage/{num}")

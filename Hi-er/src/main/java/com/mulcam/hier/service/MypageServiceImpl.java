@@ -271,6 +271,15 @@ public class MypageServiceImpl implements MypageService {
 		
 		
 	}
+
+	@Override
+	public void profileUpdate(String profile_image, int user_id) throws Exception {
+		User user = new User();
+		user.setProfile_image(profile_image);
+		user.setUser_id(user_id);/// 
+		mypageDAO.profileUpdate(user);
+
+	}
 	
 	
 	
