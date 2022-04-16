@@ -21,37 +21,46 @@
                  left join user u on u.user_id = m.recv_user_id
                  left join user us on us.user_id = m.send_user_id
         where (REPLACE(us.nickname, ' ', '') like '%${nickname}%'
-				or us.nickname like '%${nickname}%')
-				and m.recv_user_id = #{recv_user_id}
+            or us.nickname like '%${nickname}%')
+          and m.recv_user_id = #{recv_user_id}
         order by msg_id desc
-		limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
+        limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>
 	</select>
 
     <select id="message_count" parameterType="Messages" resultType="Integer">
 		<![CDATA[
         select count(*)
-        from messages
-        where recv_user_id = #{recv_user_id};
+        from messages m,
+             user us
+        where (REPLACE(us.nickname, ' ', '') like '%${nickname}%'
+            or us.nickname like '%${nickname}%')
+          and m.recv_user_id = #{recv_user_id};
         ]]>
 	</select>
 
-	<select id="message_view" parameterType="int" resultType="Messages">
+    <select id="message_view" parameterType="int" resultType="Messages">
 		<![CDATA[
-		select msg_id, send_user_id, title, content, read_chk from messages where msg_id=#{msg_id};
-		]]>
+        select msg_id, send_user_id, title, content, read_chk
+        from messages
+        where msg_id = #{msg_id};
+        ]]>
 	</select>
 
-	<update id="read_chk" parameterType="int">
+    <update id="read_chk" parameterType="int">
 		<![CDATA[
-		update messages set read_chk=0 where msg_id=#{msg_id};
-		]]>
+        update messages
+        set read_chk=0
+        where msg_id = #{msg_id};
+        ]]>
 	</update>
 
-	<delete id="delete_message" parameterType="int">
+    <delete id="delete_message" parameterType="int">
 		<![CDATA[
-		delete from messages where msg_id=#{msg_id};
-		]]>
+        delete
+        from messages
+        where msg_id = #{msg_id};
+        ]]>
 	</delete>
 
 </mapper>

@@ -26,13 +26,13 @@ public class MessageController {
     public String sendMessage(@RequestParam Map<String, Object> data) throws Exception {
         Messages msg = new Messages();
         String result = "메세지 전송 성공!!";
-        if(session.getAttribute("loginedUser") ==null) {
-            result="로그인 후 이용해 주세요.";
+        if (session.getAttribute("loginedUser") == null) {
+            result = "로그인 후 이용해 주세요.";
             return result;
         }
         Integer recv_user_id = null;
-        if(data.get("recv_user_id").toString() == "") {
-            recv_user_id = (Integer)session.getAttribute("send_user_id");
+        if (data.get("recv_user_id").toString() == "") {
+            recv_user_id = (Integer) session.getAttribute("send_user_id");
         } else {
             recv_user_id = Integer.valueOf(data.get("recv_user_id").toString());
         }
@@ -52,18 +52,16 @@ public class MessageController {
 
     @GetMapping("/message")
     public String message(Model model, @ModelAttribute("params") Messages params) throws Exception {
-        if(session.getAttribute("loginedUser")==null) {
+        if (session.getAttribute("loginedUser") == null) {
             return "/login";
         }
 
-        Integer logined_id = ((User)session.getAttribute("loginedUser")).getUser_id();
+        Integer logined_id = ((User) session.getAttribute("loginedUser")).getUser_id();
         params.setRecv_user_id(logined_id);
-        params.setPageSize(3);
         params.setRecordsPerPage(5);
+        params.setPageSize(3);
         List<Messages> msgList = ms.message_list(params);
-        System.out.println(msgList);
         model.addAttribute("msgList", msgList);
-        System.out.println("하하");
 
         return "/messages";
     }
@@ -90,4 +88,21 @@ public class MessageController {
 
     }
 
+    @PostMapping("/message/search")
+    public String searchNickname(Model model, @ModelAttribute("params") Messages params, @RequestParam String nickname) throws Exception {
+        if (session.getAttribute("loginedUser") == null) {
+            return "/login";
+        }
+
+        Integer logined_id = ((User) session.getAttribute("loginedUser")).getUser_id();
+        params.setRecv_user_id(logined_id);
+        params.setPageSize(3);
+        params.setRecordsPerPage(5);
+        params.setNickname(nickname);
+        List<Messages> msgList = ms.message_list(params);
+        model.addAttribute("msgList", msgList);
+
+
+        return "/messages :: #ms";
+    }
 }

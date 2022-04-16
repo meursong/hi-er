@@ -30,7 +30,7 @@ public class MessagesServiceImpl implements MessagesService {
     public List<Messages> message_list(Messages params) throws Exception {
         List<Messages> msg_list= Collections.emptyList();
 
-        int count = md.message_count(params);
+        Integer count = md.message_count(params);
 
         PaginationInfo paginationInfo = new PaginationInfo(params);
         paginationInfo.setTotalRecordCount(count);

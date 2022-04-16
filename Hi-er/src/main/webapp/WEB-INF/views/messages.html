@@ -38,7 +38,7 @@
                                     </div>
                                     <div id="ms" class="osahan-chat-list">
 
-                                        <div style="width: 100%" th:each="msgList : ${msgList}" onclick="view(this)"
+                                        <div th:each="msgList : ${msgList}" onclick="view(this)"
                                              th:name="${msgList.msg_id}"
                                              class="p-3 d-flex align-items-center osahan-post-header overflow-hidden list">
                                             <div class="dropdown-list-image mr-3">
@@ -177,6 +177,7 @@
                 swal(data);
                 if (data == "메세지 전송 성공!!") {
                     $('#exampleModal').modal('hide');
+                    show.bs.modal
                 }
             },
             error: function (request, status, error) {
@@ -188,7 +189,8 @@
 
     $('.modal').on('hidden.bs.modal', function (e) {
         console.log('modal close');
-        $(this).find('form')[0].reset()
+        $(this).find('#message')[0].reset();
+
     });
 
     function check() {
@@ -225,21 +227,36 @@
         })
     }
 
-    $("#searchMsg").on("keyup", function (key) {
-        const keyword = $("input[id='searchMsg']").val();
+    $("#searchMsg").keyup(function (key) {
+        const nickname = $("input[id='searchMsg']").val();
         if (key.keyCode == 13) {
-            if (keyword == "") {
+            if (nickname == "") {
                 swal("알림", "검색할 닉네임을 입력해주세요.");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/message/search",
+                    cache: false,
+                    data: {
+                        "nickname": nickname
+                    },
+                    success: function (data) {
+                        swal("성공");
+
+                    },
+                    error: function (request, status, error) {
+                        swal("에러 발생");
+
+                    }
+                }).done(function (fragment) {
+                    $('#ms').replaceWith(fragment);
+                })
             }
-                $("#ms").load("/message?nickname=" + keyword + " #ms");
-
         }
-
     });
 
-    const searchMsg = $("input[id='searchMsg']").val();
     function movePage(uri, queryString) {
-        $("#msg_box").load(uri + queryString +"&nickname=" + searchMsg  + " #msg_box");
+        $("#ms").load(queryString + " #ms");
     }
 
 
