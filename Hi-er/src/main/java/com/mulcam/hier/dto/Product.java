@@ -110,6 +110,35 @@ public class Product {
 	int b_price;
 	int s_price;
 	int p_price;
+	
+	// 총 가격
+	int b_total_price;
+	int s_total_price;
+	int p_total_price;
+
+	public int getB_total_price() {
+		return b_total_price;
+	}
+
+	public void setB_total_price(int b_total_price) {
+		this.b_total_price = b_total_price;
+	}
+
+	public int getS_total_price() {
+		return s_total_price;
+	}
+
+	public void setS_total_price(int s_total_price) {
+		this.s_total_price = s_total_price;
+	}
+
+	public int getP_total_price() {
+		return p_total_price;
+	}
+
+	public void setP_total_price(int p_total_price) {
+		this.p_total_price = p_total_price;
+	}
 
 	// 수정 및 재진행
 	String revisionPolicy;

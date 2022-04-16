@@ -241,7 +241,7 @@
 									</span>
 									<div class="buttons-wrapper" style="padding-top: 10px">
 										<button type="button" data-toggle="modal"
-											data-target="#exampleModal" class="c-btn c-fill-color-btn">쪽지보내기
+											data-target="#exampleModal" class="c-btn c-fill-color-btn">문의하기
 										</button>
 									</div>
 								</div>
@@ -454,7 +454,7 @@
 											<td th:text="${priceInfo.p_revision}"></td>
 										</tr>
 										<tr class="delivery-time">
-											<th><p data-bs-toggle="tooltip" data-bs-placement="bottom" title="빠른 작업이 필요하">작업일</p></th>
+											<th><p data-bs-toggle="tooltip" data-bs-placement="bottom" title="빠른 작업이 필요하시다면 &nbsp;'단축 작업일 서비스'를 이용해 보세요!  *추가 요금 발생 가능" >작업일</p></th>
 											<td>
 												<div class="fake-radio-wrapper">
 													<label class="fake-radio"> <input type="radio"
@@ -512,6 +512,7 @@
 												<p class="price-label" id="b-price"
 													th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원">
 												</p>
+												<input type="hidden" name="b_total_price" id="b-total-price" th:value="${priceInfo.b_price}">
 												<button id="test" name="paymentPkg" value="Basic"
 													type="submit">선택하기</button>
 											</td>
@@ -519,6 +520,7 @@
 												<p class="price-label" id="s-price"
 													th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원">
 												</p>
+												<input type="hidden" name="s_total_price" id="s-total-price" th:value="${priceInfo.s_price}">
 												<button name="paymentPkg" value="Standard" type="submit">
 													선택하기</button>
 											</td>
@@ -526,6 +528,7 @@
 												<p class="price-label" id="p-price"
 													th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원">
 												</p>
+												<input type="hidden" name="p_total_price" id="p-total-price" th:value="${priceInfo.p_price}">
 												<button name="paymentPkg" value="Premium" type="submit">선택하기</button>
 											</td>
 										</tr>
@@ -838,8 +841,8 @@
 												aria-hidden="true"></i>시안 개수 : [[${priceInfo.b_draft}]]</li>
 										</ul>
 									</article>
-									<button name="paymentPkg" value="Basic" type="submit">계속하기
-										(결제페이지로 이동)</button>
+									<button name="paymentPkg" value="Basic" type="submit">결제하기
+										</button>
 								</div>
 								<div id="standard" class="tab-pane fade">
 									<div class="header">
@@ -873,8 +876,7 @@
 												aria-hidden="true"></i>시안 개수 : [[${priceInfo.s_draft}]]</li>
 										</ul>
 									</article>
-									<button name="paymentPkg" value="Standard" type="submit">계속하기
-										(결제페이지로 이동)</button>
+									<button name="paymentPkg" value="Standard" type="submit">결제하기</button>
 								</div>
 								<div id="Premium" class="tab-pane fade">
 									<div class="header">
@@ -908,14 +910,13 @@
 												aria-hidden="true"></i>시안 개수 : [[${priceInfo.p_draft}]]</li>
 										</ul>
 									</article>
-									<button name="paymentPkg" value="Premium" type="submit">계속하기
-										(결제페이지로 이동)</button>
+									<button name="paymentPkg" value="Premium" type="submit">결제하기</button>
 								</div>
 							</div>
 							<div class="contact-seller-wrapper">
 								<button type="button" data-toggle="modal"
-									data-target="#exampleModal" class="sendingMSGtoSeller">판매자에게
-									쪽지 보내기</button>
+									data-target="#exampleModal" class="sendingMSGtoSeller">프리랜서에게
+									문의 하기</button>
 							</div>
 						</div>
 					</form>
@@ -1036,6 +1037,9 @@
       }
     }
     $("#p-price").text(nData + "원");
+    //let p = document.getElementById("p-total-price");
+    p.setAttribute("value", nData);
+    //console.log(p.val());
   });
 
   $("#reportBtn").click(function (e) {

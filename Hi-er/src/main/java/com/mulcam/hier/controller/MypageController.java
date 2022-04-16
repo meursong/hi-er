@@ -303,7 +303,7 @@ public class MypageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "mypage";
+		return "redirect:/";
 	}
 
 

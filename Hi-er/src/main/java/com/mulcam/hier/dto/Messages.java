@@ -123,5 +123,6 @@ public class Messages extends Criteria {
     public void setContent(String content) {
         this.content = content;
     }
+    
 }
 

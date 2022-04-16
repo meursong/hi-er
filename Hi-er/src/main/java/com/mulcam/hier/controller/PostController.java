@@ -412,6 +412,7 @@ public class PostController {
 			mav.addObject("pkg_description", product.getB_pkg_description());
 			mav.addObject("revision", product.getB_revision());
 			mav.addObject("sns_Kit", product.getB_sns_Kit());
+			mav.addObject("total_price", product.getB_total_price());
 		} else if (pkg.equals("Standard")) {
 			mav.addObject("price", product.getS_price());
 			mav.addObject("additional_price", product.getS_additional_price());
@@ -423,6 +424,7 @@ public class PostController {
 			mav.addObject("pkg_description", product.getS_pkg_description());
 			mav.addObject("revision", product.getS_revision());
 			mav.addObject("sns_Kit", product.getS_sns_Kit());
+			mav.addObject("total_price", product.getS_total_price());
 		} else if (pkg.equals("Premium")) {
 			mav.addObject("price", product.getP_price());
 			mav.addObject("additional_price", product.getP_additional_price());
@@ -434,6 +436,7 @@ public class PostController {
 			mav.addObject("pkg_description", product.getP_pkg_description());
 			mav.addObject("revision", product.getP_revision());
 			mav.addObject("sns_Kit", product.getP_sns_Kit());
+			mav.addObject("total_price", product.getP_total_price());
 		}
 		return mav; // 결제페이지로 이동
 	}
