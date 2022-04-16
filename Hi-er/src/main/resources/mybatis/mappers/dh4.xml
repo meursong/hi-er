@@ -38,7 +38,7 @@
 
 	<select id="message_view" parameterType="int" resultType="Messages">
 		<![CDATA[
-		select send_user_id, title, content, read_chk from messages where msg_id=#{msg_id};
+		select msg_id, send_user_id, title, content, read_chk from messages where msg_id=#{msg_id};
 		]]>
 	</select>
 
@@ -47,5 +47,11 @@
 		update messages set read_chk=0 where msg_id=#{msg_id};
 		]]>
 	</update>
+
+	<delete id="delete_message" parameterType="int">
+		<![CDATA[
+		delete from messages where msg_id=#{msg_id};
+		]]>
+	</delete>
 
 </mapper>

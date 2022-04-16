@@ -22,6 +22,11 @@ public class MessagesServiceImpl implements MessagesService {
     }
 
     @Override
+    public void delete_message(Messages msg) throws Exception {
+        md.delete_message(msg);
+    }
+
+    @Override
     public List<Messages> message_list(Messages params) throws Exception {
         List<Messages> msg_list= Collections.emptyList();
 

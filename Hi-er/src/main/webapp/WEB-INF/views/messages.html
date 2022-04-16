@@ -18,14 +18,14 @@
             margin: 3px 0;
         }
     </style>
-    =
+
 </head>
 <section layout:fragment="contents">
     <div class="py-5">
         <div class="container">
             <div class="row">
                 <!-- Main Content -->
-                <main class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+                <main id="main_box" class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
                     <div class="box shadow-sm rounded bg-white mb-3 osahan-chat">
                         <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">Messaging</h5>
                         <div class="row m-0">
@@ -33,11 +33,12 @@
                                 <div class="osahan-chat-left" id="msg_box">
                                     <div class="position-relative icon-form-control p-3 border-bottom">
                                         <i class="fa fa-search position-absolute"></i>
-                                        <input id="searchMsg" placeholder="닉네임으로 검색하세요." type="text" class="form-control">
+                                        <input id="searchMsg" placeholder="닉네임으로 검색하세요." type="text"
+                                               class="form-control">
                                     </div>
                                     <div id="ms" class="osahan-chat-list">
 
-                                        <div  style="width: 100%" th:each="msgList : ${msgList}" onclick="view(this)"
+                                        <div style="width: 100%" th:each="msgList : ${msgList}" onclick="view(this)"
                                              th:name="${msgList.msg_id}"
                                              class="p-3 d-flex align-items-center osahan-post-header overflow-hidden list">
                                             <div class="dropdown-list-image mr-3">
@@ -45,23 +46,31 @@
 
                                                 </div>
                                             </div>
+
                                             <div class="font-weight-bold mr-1 overflow-hidden">
-                                                <div th:text="${msgList.send_nickname}" class="text-truncate">Stacie
+                                                <div th:text="${msgList.send_nickname}"
+                                                     class="text-truncate overflow-hidden">Stacie
                                                     Hall
                                                 </div>
                                                 <div th:text="${msgList.title}"
                                                      class="small text-truncate overflow-hidden text-black-50">
                                                 </div>
                                             </div>
-                                            <span class="ml-auto mb-auto">
-                                       <div class="text-right text-muted pt-1 small msl" th:text="${msgList.send_time}">00:21PM</div>
-<!--                                                 <div class="text-right text-muted pt-1 small msl"-->
-<!--                                                      th:text="${msgList.read_chk}==0?'읽음'">00:21PM</div>-->
-                                    </span>
+
+                                            <div class="ml-auto mb-auto">
+                                                <div class="text-right text-muted pt-1 small msl"
+                                                     th:text="${msgList.send_time}">00:21PM
+                                                </div>
+                                                <div class="text-right text-muted pt-1 small msl"
+                                                     th:text="${msgList.read_chk}==0?'읽음'">00:21PM
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        <div class="footer-pagination text-center">
-                                            <nav th:replace="fragments/pagination :: pagination"></nav>
-                                        </div>
+
+                                    </div>
+                                    <div class="footer-pagination text-center">
+                                        <nav th:replace="fragments/pagination :: pagination"></nav>
                                     </div>
                                 </div>
                             </div>
@@ -81,15 +90,19 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                       <button class="dropdown-item" type="button"><i class="mdi mdi-trash"></i> Delete</button>
+                                       <button class="dropdown-item" type="button" th:onclick="del()"><i
+                                               class="mdi mdi-trash"></i> Delete</button>
                                        <button class="dropdown-item" type="button"><i class="mdi mdi-x-circle"></i> Turn Off</button>
                                     </div>
                                  </div>
                               </span>
                                 </div>
-                                <div th:each="message_view : ${message_view}" style="margin: 0 auto"
+                                <div id="test11" th:each="message_view : ${message_view}" style="margin: 0 auto"
                                      class="osahan-chat-box p-3 border-top border-bottom bg-light">
-                                    <div class="card-header" th:text="${message_view.title}" name="title" style="text-align: center">msg_list</div>
+                                    <div class="card-header" th:text="${message_view.title}" name="title"
+                                         th:id="${message_view.msg_id}"
+                                         style="text-align: center">msg_list
+                                    </div>
                                     <div class="card-body" th:text="${message_view.content}">msg_list</div>
                                 </div>
                                 <div class="w-100 border-top border-bottom">
@@ -97,7 +110,9 @@
                                 </div>
                                 <div class="p-3 d-flex align-items-center">
                                     <span class="ml-auto">
-                              <button style="margin: 38px 207px" th:onclick="check()" type="button" class="btn btn-success btn-sm rounded" data-toggle="modal" data-target="#exampleModal">
+                              <button style="margin: 38px 207px" th:onclick="check()" type="button"
+                                      class="btn btn-success btn-sm rounded" data-toggle="modal"
+                                      data-target="#exampleModal">
                               <i class="mdi mdi-send"></i> 답장 보내기
                               </button>
                               </span>
@@ -119,15 +134,14 @@
 <script>
     function view(e) {
         const msg_id = $(e).attr('name');
-        console.log(msg_id);
-        console.log("/" + msg_id);
 
         $.ajax({
             type: "POST",
             url: "/message/" + msg_id,
             success: function (data) {
+                console.log(msg_id);
                 console.log("성공");
-                $("#ms").load(location.href + " #ms");
+                // $("#msg_list").load(location.href + " #msg_list");
 
             }
         }).done(function (fragment) {
@@ -139,12 +153,12 @@
         const title = $('#title').val();
         const content = $('#content').val();
 
-        if(title=="") {
-            swal("제목을 입력해주세요.");
+        if (title == "") {
+            swal("알림", "제목을 입력해주세요.");
             return;
         }
-        if(content=="") {
-            swal("메세지를 입력해주세요.");
+        if (content == "") {
+            swal("알림", "메세지를 입력해주세요.");
             return;
         }
 
@@ -159,18 +173,19 @@
             url: "/send",
             cache: false,
             data: messageForm,
-            success: function(data) {
-                swal(data)
-                if(data=="메세지 전송 성공!!") {
+            success: function (data) {
+                swal(data);
+                if (data == "메세지 전송 성공!!") {
                     $('#exampleModal').modal('hide');
                 }
             },
             error: function (request, status, error) {
-                console.log(err);
+                swal("에러 발생")
             }
         })
 
     }
+
     $('.modal').on('hidden.bs.modal', function (e) {
         console.log('modal close');
         $(this).find('form')[0].reset()
@@ -178,7 +193,7 @@
 
     function check() {
 
-        if($("div[name=title]").val()==null) {
+        if ($("div[name=title]").val() == null) {
             swal("알림", "답변할 메세지를 선택해 주세요.");
             $('#exampleModal').modal('hide');
 
@@ -186,22 +201,40 @@
         // swal($("h3[name=title]").val());
     }
 
-    $("#searchMsg").on("keyup",function(key){
-        const keyword = $("input[id='searchMsg']").val();
-        if(key.keyCode==13) {
-            if(keyword=="") {
-                swal("알림","검색어를 입력해주세요.");
+    function del() {
+        const msg_id = $("div[name=title]").attr('id');
+        console.log(msg_id);
+        $.ajax({
+            type: "POST",
+            url: "/message/delete/" + msg_id,
+            cache: false,
+            success: function (data) {
+                swal(data);
+                $("#ms").load(location.href + " #ms");
+                $("#test11").load(location.href + " #test11");
+            },
+            error: function (request, status, error) {
+                swal("에러 발생");
+
             }
-            else {
+        })
+    }
+
+    $("#searchMsg").on("keyup", function (key) {
+        const keyword = $("input[id='searchMsg']").val();
+        if (key.keyCode == 13) {
+            if (keyword == "") {
+                swal("알림", "검색할 닉네임을 입력해주세요.");
+            } else {
                 console.log(keyword);
-                }
+            }
         }
 
     });
-    function movePage(uri, queryString) {
-        $("#ms").load(uri + queryString + " #ms");
-    }
 
+    function movePage(uri, queryString) {
+        $("#msg_box").load(uri + queryString + " #msg_box");
+    }
 
 
 </script>

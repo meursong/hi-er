@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface MessagesDAO {
     public void send_message(Messages msg) throws Exception;
+
+    public void delete_message(Messages msg) throws Exception;
+
     public List<Messages> message_list(Messages msg) throws Exception;
 
     public List<Messages> message_view(Integer msg) throws Exception;

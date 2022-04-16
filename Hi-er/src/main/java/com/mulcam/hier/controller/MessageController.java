@@ -21,8 +21,8 @@ public class MessageController {
     @Autowired
     HttpSession session;
 
-    @PostMapping("/send")
     @ResponseBody
+    @PostMapping("/send")
     public String sendMessage(@RequestParam Map<String, Object> data) throws Exception {
         Messages msg = new Messages();
         String result = "메세지 전송 성공!!";
@@ -77,6 +77,16 @@ public class MessageController {
         session.setAttribute("send_user_id", send_user_id);
         System.out.println(message_view.get(0).getSend_user_id());
         return "/messages :: #msg_list";
+
+    }
+
+    @ResponseBody
+    @PostMapping("/message/delete/{msg_id}")
+    public String messageDelete(@PathVariable("msg_id") Integer msg_id, @ModelAttribute("params") Messages params) throws Exception {
+        String message = "메세지 삭제 성공!!";
+        params.setMsg_id(msg_id);
+        ms.delete_message(params);
+        return message;
 
     }
 
