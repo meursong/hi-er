@@ -96,9 +96,9 @@ public class MessageController {
 
         Integer logined_id = ((User) session.getAttribute("loginedUser")).getUser_id();
         params.setRecv_user_id(logined_id);
+        params.setNickname(nickname);
         params.setPageSize(3);
         params.setRecordsPerPage(5);
-        params.setNickname(nickname);
         List<Messages> msgList = ms.message_list(params);
         model.addAttribute("msgList", msgList);
 
