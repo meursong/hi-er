@@ -2,8 +2,6 @@ package com.mulcam.hier.dto;
 
 import com.mulcam.hier.others.Criteria;
 import com.mulcam.hier.others.Time;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Date;
 

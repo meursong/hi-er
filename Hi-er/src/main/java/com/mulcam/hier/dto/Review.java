@@ -3,7 +3,7 @@ package com.mulcam.hier.dto;
 import com.mulcam.hier.others.Criteria;
 import com.mulcam.hier.others.Time;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Review extends Criteria {
 	private int review_wid;
