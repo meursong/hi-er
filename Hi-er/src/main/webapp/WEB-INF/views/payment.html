@@ -37,7 +37,7 @@
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : $("#seller_id").val(), //결제창에서 보여질 이름 
-				amount : 3000, //실제 결제되는 가격
+				amount : $("#order_price").val(), //실제 결제되는 가격
 				buyer_email : $("#buyer_email").val(),
 				buyer_name : $("#buyer_id").val(),
 				buyer_tel : '010-1234-5678',
@@ -46,11 +46,10 @@
 			}, function(rsp) {
 				console.log(rsp);
 				if (rsp.success) {
-					/* var msg = '결제가 완료되었습니다.';
+					var msg = '결제가 완료되었습니다.';
 					msg += '고유ID : ' + rsp.imp_uid;
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
 					msg += '결제 금액 : ' + rsp.paid_amount;
-					msg += '카드 승인번호 : ' + rsp.apply_num; */
 					var formData = new FormData(form);
 					$.ajax({
 						type : "POST",
@@ -59,15 +58,14 @@
 						data : formData, 
 						processData:false,
 						contentType:false,
-						success : function(res) {
-							alert("결제 성공")
-							
+						success : async (res) => {
+							await swal("success","결제 성공 :"+msg)
+							location.href='/mypage';
 						},
 						error : function(XMLHttpRequest, textStatus, errorThrown) {
 							alert("통신 실패.")
 						}
 					}).done(function (data, textStatus, xhr) {
-						location.href='/mypage';
 	                }); 
 				} else {
 					var msg = '결제에 실패하였습니다.';
@@ -247,7 +245,7 @@ input.card {
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
 								<img class="img-fluid" width="600px"
-									th:src="@{/upload/} + ${product.filename2}" />
+									th:src="@{/upload/} + ${product.filename1}" />
 							</div>
 						</div>
 					</div>
@@ -351,7 +349,7 @@ input.card {
 							<div style="width: 100%; margin: auto;">
 								<button class="btn btn-primary d-block h8"
 									style="width: 400px; margin: auto; display: block;"
-									id="iamportPayment" type="button">결제테스트</button>
+									id="iamportPayment" type="button">결제</button>
 							</div>
 						</form>
 					</div>

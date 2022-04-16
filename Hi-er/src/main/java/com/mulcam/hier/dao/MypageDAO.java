@@ -30,6 +30,7 @@ public interface MypageDAO {
 	public List<Map<String,Object>> selectBoardList2(HashMap<String, Integer> map) throws Exception;
 	public int queryNick(String nick)throws Exception;
 	public void nickupdate(User user)throws Exception;
+	public void profileUpdate(User user)throws Exception;
 	public boolean passfind(User user)throws Exception;
 	public boolean passupdate(User user)throws Exception;
 	public boolean introupdate(FreelancerUser freelancerUser);

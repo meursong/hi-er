@@ -122,6 +122,13 @@
 	]]>	
 	</update>
 	
+	<!--프로필사진 업데이트-->
+	<update id="profileUpdate" parameterType="user">
+	<![CDATA[
+		update user set profile_image=#{profile_image} where user_id=#{user_id}
+	]]>	
+	</update>
+	
 	<select id="selectNickname" resultType="String" parameterType="int">
 	<![CDATA[
 		select nickname
