@@ -307,7 +307,7 @@ public class MypageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "mypage";
+		return "index";
 	}
 
 
@@ -404,16 +404,25 @@ public class MypageController {
 			return String.valueOf(value);
 		}
 		
+		/*
+		 * @ResponseBody
+		 * 
+		 * @PostMapping("clickname") public String clickname(@RequestParam(value = "id")
+		 * String id) {
+		 * 
+		 * 
+		 * try { like = mypageService.heartremove(like_id); } catch (Exception e) {
+		 * e.printStackTrace(); }
+		 */
+		
 		@ResponseBody
 		@PostMapping("clickname")
 		public String clickname(@RequestParam(value = "id") String id) {
-	
 
-		try {
-			like = mypageService.heartremove(like_id);
-		} catch (Exception e) {
-			e.printStackTrace();
+			String value = "/freelancerInfo/" + id;
+			return String.valueOf(value);
 		}
+
 		
 		//스테이터스 변경
 		@ResponseBody
