@@ -32,8 +32,9 @@
     <select id="message_count" parameterType="Messages" resultType="Integer">
 		<![CDATA[
         select count(*)
-        from messages m,
-             user us
+        from messages m
+				 left join user u on u.user_id = m.recv_user_id
+				 left join user us on us.user_id = m.send_user_id
         where (REPLACE(us.nickname, ' ', '') like '%${nickname}%'
             or us.nickname like '%${nickname}%')
           and m.recv_user_id = #{recv_user_id};
@@ -43,7 +44,8 @@
     <select id="message_view" parameterType="int" resultType="Messages">
 		<![CDATA[
         select msg_id, send_user_id, title, nickname, content, read_chk
-        from messages, user
+        from messages
+        left join user u on u.user_id = messages.recv_user_id
         where msg_id = #{msg_id};
         ]]>
 	</select>
