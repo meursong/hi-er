@@ -134,14 +134,14 @@
 <script>
     function view(e) {
         const msg_id = $(e).attr('name');
-
+        const page = $(".active").children('.page-link').text();
         $.ajax({
             type: "POST",
             url: "/message/" + msg_id,
             success: function (data) {
                 console.log(msg_id);
                 console.log("성공");
-                // $("#msg_list").load(location.href + " #msg_list");
+                $("#ms").load("?currentPageNo=" + page + " #ms");
 
             }
         }).done(function (fragment) {
