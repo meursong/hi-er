@@ -11,6 +11,7 @@ import com.mulcam.hier.dao.MypageDAO;
 import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.Orders;
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.Report;
 import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 
@@ -219,12 +220,7 @@ public class MypageServiceImpl implements MypageService {
 		int clickLike=mypageDAO.countBoard2(user_id);
 		//눌린 좋아요 수
 		int clikedLike=mypageDAO.countLiked(user_id);
-		System.out.println(buyOrder+"바이오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(sellOrder+"셀오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(buySumOrder+"바이섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(sellSumOrder+"셀섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(clickLike+"클릭라이크@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(clikedLike+"클릭라이크드드드드드드@@@@@@@@@@@@@@@@@@@@@@@@@2");
+	
 		
 		
 		Map<String,Object>map=new HashMap<String,Object>();
@@ -234,9 +230,7 @@ public class MypageServiceImpl implements MypageService {
 		map.put("sellSumOrder", sellSumOrder);
 		map.put("clickLike", clickLike);
 		map.put("clickedLike", clikedLike);
-		System.out.println(map+"map@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		//List<Map<String, Object>> listMapInsert=new ArrayList<Map<String,Object>>();
-		//listMapInsert.add(map);
+
 		return map;
 	}
 
@@ -273,6 +267,83 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
+	public void userdelete(int user_id) throws Exception {
+	
+		
+			mypageDAO.userdelete(user_id);
+		
+	}
+
+	@Override
+	public void postdelete(int id) throws Exception {
+		mypageDAO.postdelete(id);
+		
+	}
+
+	@Override
+	public void updatestatus1(int id, int num) throws Exception {
+		try {
+			if (num == 1) {
+				mypageDAO.zeroToOne(id);
+			} else if (num == 2) {
+				mypageDAO.oneToTwo(id);
+			} else if (num == 3) {
+				mypageDAO.twoToThree(id);
+			} else if (num == 4) {
+				mypageDAO.threeToFour(id);
+			} else if(num==6) {
+				mypageDAO.oneToSix(id);
+			} else if(num==7) {
+				mypageDAO.oneToSeven(id);
+			} else if(num==8) {
+				mypageDAO.oneToEight(id);
+			}
+			
+			
+			
+			else if(num==9) {
+				mypageDAO.sevenToNine(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> trade() throws Exception {
+		List<Map<String, Object>> trade=mypageDAO.trade();
+		return trade;
+	}
+
+	@Override
+	public List<Map<String, Object>> allTrade() throws Exception {
+		List<Map<String, Object>> trade=mypageDAO.allTrade();
+		return trade;
+	}
+
+	@Override
+	public void postwarning(int id) throws Exception {//리포트 아이디로 리포트를 찾아서 유저에게 경고 메세지 인서트
+		User user = new User();
+		HashMap<String,Object>map=new HashMap<>();
+
+		map = (HashMap<String, Object>) mypageDAO.findreport(id);
+
+
+		mypageDAO.postwarning(map);
+
+	}
+
+	@Override
+	public List<Map<String, Object>> warningMsg(int user_id) throws Exception {
+		List<Map<String, Object>> warning=mypageDAO.findWarningMsg(user_id);
+		return warning;
+	}
+	
+	
+	
+	
+	
 	public void profileUpdate(String profile_image, int user_id) throws Exception {
 		User user = new User();
 		user.setProfile_image(profile_image);

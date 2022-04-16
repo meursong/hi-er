@@ -20,7 +20,7 @@
 							<h5 class="font-weight-bold text-dark mb-1 mt-4">[[${session.loginedUser.nickname }]]</h5>
 						</div>
 						<div class="d-flex">
-							<div class="col-6 border-right p-3">
+							<!-- <div class="col-6 border-right p-3">
 								<h6 class="font-weight-bold text-dark mb-1">[[${statistics.buyOrder}]]건</h6>
 								<p class="mb-0 text-black-50 small">구매 건수</p>
 							</div>
@@ -48,13 +48,13 @@
 								<h6 class="font-weight-bold text-dark mb-1">[[${statistics.clickedLike}]]번</h6>
 								<p class="mb-0 text-black-50 small">눌린 좋아요</p>
 							</div>
-						</div>
+						</div> -->
 						<div class="d-flex">
-							<div class="col-6 p-3 overflow-hidden border-top border-right">
+							<div class="col-12 p-3 overflow-hidden border-top border-right">
 								<a class="font-weight-bold p-2 d-block" th:href="@{/logout}">
 									로그아웃 </a>
 							</div>
-							<div class="col-6 p-3 overflow-hidden border-top">
+							<!-- <div class="col-6 p-3 overflow-hidden border-top">
 								<a th:if=${session.loginedUser.type}==0 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 								<a th:if=${session.loginedUser.type}==2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
@@ -63,7 +63,7 @@
 						</div>
 
 					</div>
-					<div class="box shadow-sm  rounded bg-white mb-3">
+					<!-- <div class="box shadow-sm  rounded bg-white mb-3">
 						<div class="box-title border-bottom p-3">
 							<h6 class="m-0">Skills & Endorsements</h6>
 						</div>
@@ -114,8 +114,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div
+					</div> -->
+					<!-- <div
 						class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
 						<img th:src="@{/images/job1.png}" class="img-fluid"
 							alt="Responsive image">
@@ -125,9 +125,9 @@
 						</div>
 						<div class="p-3">
 							<button type="button" class="btn btn-outline-success pl-4 pr-4">
-								어드민ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ</button>
+								</button>
 						</div>
-					</div>
+					</div> -->
 				</aside>
 
 
@@ -137,6 +137,134 @@
 
 				<main th:if="${page}=='0'"
 					class="col col-xl-9 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6 bold">모든 거래 상황</h6>
+							
+						</div>
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>날짜</th>
+											<th>상품제목</th>
+											<th>구매자</th>
+											<th>판매자</th>
+											<th>구매수량</th>
+											<th>총 가격</th>
+											<th>상태</th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tbody class="likepost">
+										<tr th:each="order: ${orders3}">
+										
+											
+												<td
+													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
+												<td class="titttle" th:id="${order.product_id}"
+													th:text="${order.title}" style="cursor: pointer"></td>
+												<td th:text="${order.nickname}"></td>
+												<td class="selller" th:id="${order.seller_id}" th:text="${order.nickname2}" style="cursor: pointer"></td>
+												<td th:text="${order.order_qty}"></td>
+												<td th:text="${order.order_price}"></td>
+
+												<th:blcok th:if=${order.order_status}==0>
+												<td>구매신청/수락대기</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==1>
+												<td>작업중</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==2>
+												<td>구매자가 결과물 확인중</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==3>
+												<td>관리자 입금 대기</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==4>
+												<td>거래완료</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==6>
+												<td>판매자의 거래 거절 인한 취소</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==7>
+												<td>구매자의 거래 취소 요청</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==8>
+												<td>거래완료</td>
+												</th:blcok>
+												<th:blcok th:if=${order.order_status}==9>
+												<td>거래 취소 완료</td>
+												</th:blcok>
+												
+								
+
+											</th:block>
+										
+											
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="box shadow-sm rounded bg-white mb-3">
+						<div class="d-flex box-title border-bottom p-3">
+							<h6 class="m-0 col-6 bold">거래 입금 관리</h6>
+							
+						</div>
+						<div class="box-body p-3">
+							<div>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>날짜</th>
+											<th>상품제목</th>
+											<th>구매자</th>
+											<th>판매자</th>
+											<th>구매수량</th>
+											<th>총 가격</th>
+											<th>상태</th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tbody class="likepost">
+										<tr th:each="order: ${orders2}">
+										<!-- 판매자쪽 부분 -->
+											
+												<td
+													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
+												<td class="titttle" th:id="${order.product_id}"
+													th:text="${order.title}" style="cursor: pointer"></td>
+												<td th:text="${order.nickname}"></td>
+												<td th:text="${order.nickname2}"></td>
+												<td th:text="${order.order_qty}"></td>
+												<td th:text="${order.order_price}"></td>
+
+												<td>거래완료</td>
+												
+												
+												<th:blcok th:if=${order.order_status}==3>
+												<td><a class="btn btn-success btn-green deposit"
+													th:id="'deposit'+${order.order_id}">입금완료</a></td>
+												</th:blcok>
+
+											</th:block>
+										
+											
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
 							<h6 class="m-0 col-6 bold">신고내역</h6>
@@ -151,7 +279,7 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>시간</th>
+											<th>날짜</th>
 											<th>상품제목</th>
 											<th>판매자</th>
 											<th>신고내용</th>
@@ -160,15 +288,20 @@
 									</thead>
 									<tbody class="likepost">
 										<tr th:each="report: ${reports}">
-											<td th:text="${report.createdAt}"></td>
 										
+											<td th:text="${#temporals.format(report.createdAt,'yyyy-MM-dd')}"></td>
 											
 											
 											<td class="titttle" th:id="${report.product_id}" th:text="${report.title}" style="cursor:pointer"></td>
 											<td class="selller" th:id="${report.reported_userid}" th:text="${report.nickname}" style="cursor:pointer"></td>
 											<td th:text="${report.reason}"></td>
-											
-											
+											<td><div class="text-right">
+											<button class="btn btn-success btn-green postdelete"  th:id="'post'+${report.product_id}">게시글삭제</button>
+																</div></td>
+											<td><div class="text-right">
+											<button class="btn btn-success btn-green warning"  th:id="'warning'+${report.report_id}">경고</button>
+																</div></td>		
+										
 										</tr>
 									</tbody>
 
@@ -222,13 +355,12 @@
 											<td th:text="${sortBoardCount.reported}"></td>
 											<td th:text="${sortBoardCount.liked}"></td>
 											<td><div class="text-right">
-											<button class="btn btn-success btn-green userdelete"  th:id="${sortBoardCount.user_id}">유저삭제</button>
+											<button class="btn btn-success btn-green userdelete"  th:id="${sortBoardCount.user_id}" onclick=userdelete(this)>유저삭제</button>
 																</div></td>
 											
 										</th:block>	
 											
 										</tr>
-										
 									</tbody>
 								</table>
 							</div>
@@ -246,7 +378,7 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>시간</th>
+											<th>날짜</th>
 											<th>보낸사람닉네임</th>
 											<th>관련포스트제목</th>
 											<th>받은사람닉넹미</th>
@@ -266,7 +398,7 @@
 						</div>
 					</div>
 
-					<div class="box shadow-sm rounded bg-white mb-3">
+					<!-- <div class="box shadow-sm rounded bg-white mb-3">
 						<div class="box-title border-bottom p-3">
 							<h6 class="m-0">Education</h6>
 						</div>
@@ -304,7 +436,7 @@
 								places. Information for applicants to consider when applying for
 								local positions.</p>
 						</div>
-					</div>
+					</div> -->
 				</main>
 
 				
@@ -320,7 +452,30 @@
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
+	function userdelete(e) {
+		let id = e.id;
+		//let id = e.currentTarget.id;
+		$.ajax({
+			type : "post",
+			dataType : "text",
+			async : false,
+		
+			url : "http://localhost:8090/userdelete",
+			data : {
+				"id":id,
+			},
+			success : function(data, textStatus) {
+				alert(data);
+				/* location.reload();
+				location.replace(data); */
+			},
+
+		});
+	};
+	
+	
 		$(function() {
+			
 			$(".sort2").click(function(e) {
 				let id = e.currentTarget.id;
 				console.log(id);
@@ -343,23 +498,24 @@
 
 			});
 			
+
+			$(".postdelete").click(function(e) {
 			
-			$(".userdelete").click(function(e) {
-				let id = e.currentTarget.id;
-				console.log("ttttttttttttttttttttttt");
-				console.log(id);
+				
+				 let id = e.currentTarget.id.slice(4);
+				 console.log(id);
 				$.ajax({
 					type : "post",
 					dataType : "text",
 					async : false,
-				
-					url : "http://localhost:8090/userdelete",
+					url : "http://localhost:8090/postdelete",
 					data : {
-						"id":id,
+						"id" : id,
 					},
 					success : function(data, textStatus) {
-						console.log("success");
-						console.log(data);
+							console.log("success");
+							location.reload();
+							
 					},
 
 				});
@@ -367,7 +523,53 @@
 			});
 			
 			
+			$(".warning").click(function(e) {
+				
+				
+				 let id = e.currentTarget.id.slice(7);
+				 console.log(id);
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/postwarning",
+					data : {
+						"id" : id,
+					},
+					success : function(data, textStatus) {
+							console.log("success");
+							alert("경고 메세지를 보냈습니다.");
+							location.reload();
+							
+					},
+
+				});
+
+			});
 			
+			$(".deposit").click(function(e) {
+				 let id = e.currentTarget.id.slice(7);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "http://localhost:8090/updatestatus",
+					data : {
+						"id" : id,"num":4,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+						swal("알림","계좌 입금을 완료했습니다");
+						location.reload();
+					},
+
+				});
+
+			});
 			
 			$(".titttle").click(function(e) {
 				let id = e.currentTarget.id;//포스트 아이디
