@@ -45,8 +45,8 @@
                                                  onerror="this.src='/images/user/default.jpg'">
 
                                             <div class="font-weight-bold mr-1 overflow-hidden">
-                                                <div th:text="${msgList.send_nickname}"
-                                                     class="text-truncate overflow-hidden">Stacie
+                                                <div th:text="${msgList.send_nickname=='관리자' ? '신고알림':msgList.send_nickname}"
+                                                     class="text-truncate overflow-hidden" th:style="${msgList.send_nickname=='관리자'?'color: red': ''}">Stacie
                                                     Hall
                                                 </div>
                                                 <div th:text="${msgList.title}"
@@ -181,11 +181,7 @@
 
     }
 
-    $('.modal').on('hidden.bs.modal', function (e) {
-        console.log('modal close');
-        $(this).find('#message')[0].reset();
 
-    });
 
     function check() {
 
@@ -256,5 +252,9 @@
 
     }
 
+    $('.modal').on('hidden.bs.modal', function (e) {
+        console.log('modal close');
+        $(this).find('form')[0].reset();
+    });
 
 </script>
