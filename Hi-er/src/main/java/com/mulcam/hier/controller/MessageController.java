@@ -73,7 +73,6 @@ public class MessageController {
         Integer send_user_id = message_view.get(0).getSend_user_id();
         model.addAttribute("message_view", message_view);
         session.setAttribute("send_user_id", send_user_id);
-        System.out.println(message_view.get(0).getSend_user_id());
         return "/messages :: #msg_list";
 
     }
@@ -93,14 +92,20 @@ public class MessageController {
         if (session.getAttribute("loginedUser") == null) {
             return "/login";
         }
-
         Integer logined_id = ((User) session.getAttribute("loginedUser")).getUser_id();
         params.setRecv_user_id(logined_id);
+        params.setNickname(nickname);
+//        String nick = params.getNickname();
+//        System.out.println(nick);
         params.setPageSize(3);
         params.setRecordsPerPage(5);
-        params.setNickname(nickname);
         List<Messages> msgList = ms.message_list(params);
+        System.out.println(msgList);
         model.addAttribute("msgList", msgList);
+        Object test =model.getAttribute("msgList");
+        System.out.println(test);
+
+//        model.addAttribute("nick", nick);
 
 
         return "/messages :: #ms";

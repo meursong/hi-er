@@ -69,6 +69,7 @@
                u.nickname,
                u.job,
                p.title,
+			   pi.b_price,
 			   u.profile_image,
 			   pi.product_price_id,
 			   p.filename1,
@@ -80,7 +81,7 @@
                  left join review r on p.product_id = r.product_id
 				 left join price_info pi on p.product_id = pi.product_price_id
         where p.category = 'video'
-        group by p.product_id
+		group by p.product_id,b_price
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>
@@ -94,6 +95,7 @@
                u.nickname,
                u.job,
                p.title,
+			   pi.b_price,
 			   u.profile_image,
                pi.product_price_id,
 			   p.filename1,
@@ -105,7 +107,7 @@
                  left join review r on p.product_id = r.product_id
 				 left join price_info pi on p.product_id = pi.product_price_id
         where p.category = 'it'
-        group by p.product_id
+		group by p.product_id,b_price
         order by ${sort} desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>

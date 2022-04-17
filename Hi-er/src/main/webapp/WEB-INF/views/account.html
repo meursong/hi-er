@@ -156,8 +156,8 @@
 										<tr>
 											<th>날짜</th>
 											<th>상품제목</th>
-											<th>판매자/구매자</th>
-											<th>수량</th>
+											<th>닉네임</th>
+											<th>구매수량</th>
 											<th>총 가격</th>
 											<th>상태</th>
 											<th></th>
@@ -517,9 +517,9 @@
 					data : {
 						"id" : id,"num":1,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","거래를 수락하였습니다");
+						await swal("알림","거래를 수락하였습니다");
 						location.reload();
 					},
 
@@ -541,9 +541,9 @@
 					data : {
 						"id" : id,"num":6,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","거래를 거절했습니다");
+						await swal("알림","거래를 거절했습니다");
 						location.reload();
 					},
 
@@ -561,13 +561,13 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":2,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","작업을 완료하였습니다");
+						await swal("알림","작업을 완료하였습니다");
 						location.reload();
 					},
 
@@ -589,9 +589,9 @@
 					data : {
 						"id" : id,"num":3,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","작업물 확인을 완료했습니다");
+						await swal("알림","작업물 확인을 완료했습니다");
 						location.reload();
 					},
 
@@ -613,9 +613,9 @@
 					data : {
 						"id" : id,"num":7,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","작업물 확인을 완료했습니다");
+						await swal("알림","작업물 확인을 완료했습니다");
 						location.reload();
 					},
 
@@ -637,9 +637,9 @@
 					data : {
 						"id" : id,"num":9,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","거래 취소를 수락했습니다");
+						await swal("알림","거래 취소를 수락했습니다");
 						location.reload();
 					},
 
@@ -661,9 +661,9 @@
 					data : {
 						"id" : id,"num":1,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","거래를 취소했습니다");
+						await swal("알림","거래를 취소를 거부했습니다.");
 						location.reload();
 					},
 
@@ -685,9 +685,9 @@
 					data : {
 						"id" : id,"num":8,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","거래 취소를 거부했습니다.");
+						await swal("알림","거래 취소를 거부했습니다.");
 						location.reload();
 					},
 

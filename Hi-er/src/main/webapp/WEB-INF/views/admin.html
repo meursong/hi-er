@@ -463,7 +463,7 @@
 			dataType : "text",
 			async : false,
 		
-			url : "http://localhost:8090/userdelete",
+			url : "/userdelete",
 			data : {
 				"id":id,
 			},
@@ -486,7 +486,7 @@
 					type : "post",
 				
 				
-					url : "http://localhost:8090/sortBoardCount",
+					url : "/sortBoardCount",
 					data : {
 						"id":id,
 					},
@@ -511,7 +511,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/postdelete",
+					url : "/postdelete",
 					data : {
 						"id" : id,
 					},
@@ -535,7 +535,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/postwarning",
+					url : "/postwarning",
 					data : {
 						"id" : id,
 					},
@@ -560,13 +560,13 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":4,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						console.log("success");
-						swal("알림","계좌 입금을 완료했습니다");
+						await swal("알림","계좌 입금을 완료했습니다");
 						location.reload();
 					},
 
@@ -586,7 +586,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/clicktitle",
+					url : "/clicktitle",
 					data : {
 						"id" : id,
 					},
@@ -612,7 +612,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/clickname",
+					url : "/clickname",
 					data : {
 						"id" : id,
 					},

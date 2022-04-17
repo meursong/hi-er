@@ -125,7 +125,7 @@
 		<div class="container">
 			<!-- Sidebar Toggle (Topbar) -->
 			<a class="navbar-brand" href="/"><img
-				th:src="@{/images/logo.png}" style="width: 100%;" alt=""></a>
+				th:src="@{/images/logo.png}" alt=""></a>
 			<!-- Topbar Search -->
 			<div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
 				<div class="input-group">
@@ -354,6 +354,26 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio">
 							</div></li>
+
+					<ul class="navbar-nav">
+						<div style="color:#b9b9b9; font-weight:600; padding-top:12px; margin-left: 103px">정보</div>
+
+						<li class="nav-item dropdown">
+							<a class="nav-link " th:href="@{/about}"
+							   id="navbarDropdownPortfolio"
+							   aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">서비스 소개</a>
+							<div class="dropdown-menu"
+								 aria-labelledby="navbarDropdownPortfolio">
+							</div></li>
+
+						<li class="nav-item dropdown">
+							<a class="nav-link " th:href="@{/Contact}"
+							   id="navbarDropdownPortfolio"
+							   aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">고객센터</a>
+							<div class="dropdown-menu"
+								 aria-labelledby="navbarDropdownPortfolio">
+							</div></li>
+
 				</ul>
 			</div>
 			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">

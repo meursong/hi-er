@@ -115,97 +115,109 @@
 							<a th:if="${product.category=='design'}"
 								th:href="@{/upload/} + ${product.filename1}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename1}"
-								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a> 
 							<a th:if="${product.category=='it'}"
 								th:href="@{/upload/} + ${product.filename1}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename1}"
-								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a>
 							<a th:if="${product.category=='video'}"
 								th:href="@{/upload/} + ${product.filename2}"> <video
 									class="img-fluid" height="400px" width="650px"
 									th:src="@{/upload/} + ${product.filename2}"
-									th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}"
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}"
 									controls muted>
 								</video>
 							</a> 
 							<a th:if="${product.category=='design'}"
 								th:href="@{/upload/} + ${product.filename2}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename2}"
-								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a> 
 							<a th:if="${product.category=='it'}"
 								th:href="@{/upload/} + ${product.filename2}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename2}"
-								th:onerror="@{this.onerror=null; this.th:src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a>
 							<a th:if="${product.category=='video'}"
 								th:href="@{/upload/} + ${product.filename1}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename1}"
-								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a>
 							
 							<a th:href="@{/upload/} + ${product.filename3}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename3}"
-								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a> <a th:href="@{/upload/} + ${product.filename4}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename4}"
-								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a> <a th:href="@{/upload/} + ${product.filename5}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename5}"
-								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a> <a th:href="@{/upload/} + ${product.filename6}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename6}"
-								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a> <a th:href="@{/upload/} + ${product.filename7}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename7}"
-								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a> <a th:href="@{/upload/} + ${product.filename8}"> <img
 								class="img-fluid" th:src="@{/upload/} + ${product.filename8}"
-								th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+								th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</a>
 						</div>
 						<div class="slider-nav slick-slider-single">
-							<div class="item-slick">
-								<img class="img-fluid"
+							<div class="item-slick" >
+								<img th:if="${product.category=='design'}" class="img-fluid"
 									th:src="@{/upload/} + ${product.filename1}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
+								<img th:if="${product.category=='it'}" class="img-fluid"
+									th:src="@{/upload/} + ${product.filename1}"
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
+								<img th:if="${product.category=='video'}" class="img-fluid"
+									th:src="@{/upload/} + videoDefault.png"
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />		
 							</div>
 							<div class="item-slick">
-								<img class="img-fluid"
+								<img th:if="${product.category=='design'}" class="img-fluid"
 									th:src="@{/upload/} + ${product.filename2}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
+								<img th:if="${product.category=='it'}" class="img-fluid"
+									th:src="@{/upload/} + ${product.filename2}"
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
+								<img th:if="${product.category=='video'}" class="img-fluid"
+									th:src="@{/upload/} + ${product.filename1}"
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</div>
 							<div class="item-slick">
 								<img class="img-fluid"
 									th:src="@{/upload/} + ${product.filename3}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</div>
 							<div class="item-slick">
 								<img class="img-fluid"
 									th:src="@{/upload/} + ${product.filename4}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</div>
 							<div class="item-slick">
 								<img class="img-fluid"
 									th:src="@{/upload/} + ${product.filename5}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</div>
 							<div class="item-slick">
 								<img class="img-fluid"
 									th:src="@{/upload/} + ${product.filename6}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</div>
 							<div class="item-slick">
 								<img class="img-fluid"
 									th:src="@{/upload/} + ${product.filename7}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</div>
 							<div class="item-slick">
 								<img class="img-fluid"
 									th:src="@{/upload/} + ${product.filename8}"
-									th:onerror="@{this.onerror=null; this.src='/images/logo.png';}" />
+									th:onerror="@{this.onerror=null; this.src='/images/preparing.jpg';}" />
 							</div>
 						</div>
 					</div>
@@ -213,7 +225,7 @@
 					<div class="profile-card">
 						<div class="user-profile-image d-flex">
 							<label class="profile-pict" for="profile_image"> <img
-								th:src="@{/images/user/s2.png}"
+								th:src="@{/upload/} + ${sellerInfo.profile_image}" 
 								class="profile-pict-img img-fluid"
 								alt="프리랜서 사진-(클릭시 판매자정보 페이지로 이동)" />
 							</label>
@@ -241,7 +253,7 @@
 									</span>
 									<div class="buttons-wrapper" style="padding-top: 10px">
 										<button type="button" data-toggle="modal"
-											data-target="#exampleModal" class="c-btn c-fill-color-btn">쪽지보내기
+											data-target="#exampleModal" class="c-btn c-fill-color-btn">문의하기
 										</button>
 									</div>
 								</div>
@@ -249,10 +261,11 @@
 						</div>
 						<div id="description" class="stats-desc">
 							<ul class="user-stats">
-								<li>From<strong th:utext="${sellerInfo.address}">${user.location}</strong></li>
+								<!-- <li>From<strong th:utext="${sellerInfo.address}">${user.location}</strong></li>
 								<li><strong></strong></li>
 								<li>평균응답시간<strong>1 hour(쪽지 답장 정보로 표시 - 가능? - 불가능)</strong>
-								</li>
+								</li> -->
+								<li><h3>서비스 설명</h3></li>
 							</ul>
 							<article class="seller-desc">
 								<div class="inner" th:utext="${product.content}"></div>
@@ -454,7 +467,7 @@
 											<td th:text="${priceInfo.p_revision}"></td>
 										</tr>
 										<tr class="delivery-time">
-											<th><p data-bs-toggle="tooltip" data-bs-placement="bottom" title="빠른 작업이 필요하">작업일</p></th>
+											<th><p data-bs-toggle="tooltip" data-bs-placement="bottom" title="빠른 작업이 필요하시다면 &nbsp;'단축 작업일 서비스'를 이용해 보세요!  *추가 요금 발생 가능" >작업일</p></th>
 											<td>
 												<div class="fake-radio-wrapper">
 													<label class="fake-radio"> <input type="radio"
@@ -512,6 +525,7 @@
 												<p class="price-label" id="b-price"
 													th:text="${#numbers.formatInteger(priceInfo.b_price, 0, 'COMMA')}+원">
 												</p>
+												<input type="hidden" name="b_total_price" id="b-total-price" th:value="${priceInfo.b_price}">
 												<button id="test" name="paymentPkg" value="Basic"
 													type="submit">선택하기</button>
 											</td>
@@ -519,6 +533,7 @@
 												<p class="price-label" id="s-price"
 													th:text="${#numbers.formatInteger(priceInfo.s_price, 0, 'COMMA')}+원">
 												</p>
+												<input type="hidden" name="s_total_price" id="s-total-price" th:value="${priceInfo.s_price}">
 												<button name="paymentPkg" value="Standard" type="submit">
 													선택하기</button>
 											</td>
@@ -526,6 +541,7 @@
 												<p class="price-label" id="p-price"
 													th:text="${#numbers.formatInteger(priceInfo.p_price, 0, 'COMMA')}+원">
 												</p>
+												<input type="hidden" name="p_total_price" id="p-total-price" th:value="${priceInfo.p_price}">
 												<button name="paymentPkg" value="Premium" type="submit">선택하기</button>
 											</td>
 										</tr>
@@ -640,70 +656,6 @@
 												</td>
 												<td class="star-num" th:text="${reviewCount.count} + 개"></td>
 											</tr>
-											<!-- <tr class="">
-												<td><span>
-														<button
-															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															4점</button>
-												</span></td>
-												<td class="progress-bar-container">
-													<div
-														class="fit-progressbar fit-progressbar-bar star-progress-bar">
-														<div class="fit-progressbar-background">
-															<span class="progress-fill" style="width: 2.2973%"></span>
-														</div>
-													</div>
-												</td>
-												<td class="star-num">(2)</td>
-											</tr>
-											<tr class="">
-												<td><span>
-														<button
-															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															3점</button>
-												</span></td>
-												<td class="progress-bar-container">
-													<div
-														class="fit-progressbar fit-progressbar-bar star-progress-bar">
-														<div class="fit-progressbar-background">
-															<span class="progress-fill" style="width: 0"></span>
-														</div>
-													</div>
-												</td>
-												<td class="star-num">(0)</td>
-											</tr>
-											<tr class="">
-												<td><span>
-														<button
-															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															2점</button>
-												</span></td>
-												<td class="progress-bar-container">
-													<div
-														class="fit-progressbar fit-progressbar-bar star-progress-bar">
-														<div class="fit-progressbar-background">
-															<span class="progress-fill" style="width: 0"></span>
-														</div>
-													</div>
-												</td>
-												<td class="star-num">(0)</td>
-											</tr>
-											<tr class="">
-												<td><span>
-														<button
-															class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">
-															1점</button>
-												</span></td>
-												<td class="progress-bar-container">
-													<div
-														class="fit-progressbar fit-progressbar-bar star-progress-bar">
-														<div class="fit-progressbar-background">
-															<span class="progress-fill" style="width: 0"></span>
-														</div>
-													</div>
-												</td>
-												<td class="star-num">(0)</td>
-											</tr> -->
 										</tbody>
 									</table>
 								</div>
@@ -717,16 +669,7 @@
 								<nav th:replace="fragments/pagination :: pagination"></nav>
 							</div>
 						</div>
-						<!-- 태그(보류) -->
-						<!-- <div class="tags">
-                <h3>Related tags</h3>
-                <ul class="d-flex">
-                  <li><a href="#">Mobile Ui</a></li>
-                  <li><a href="#">UI/UX</a></li>
-                  <li><a href="#">Prototype</a></li>
-                  <li><a href="#">Wireframes</a></li>
-                </ul>
-              </div> -->
+						
 					</div>
 				</div>
 				<!-- 가격정보(거래신청) 우측 사이드 내브바 -->
@@ -838,8 +781,8 @@
 												aria-hidden="true"></i>시안 개수 : [[${priceInfo.b_draft}]]</li>
 										</ul>
 									</article>
-									<button name="paymentPkg" value="Basic" type="submit">계속하기
-										(결제페이지로 이동)</button>
+									<button name="paymentPkg" value="Basic" type="submit">결제하기
+										</button>
 								</div>
 								<div id="standard" class="tab-pane fade">
 									<div class="header">
@@ -873,8 +816,7 @@
 												aria-hidden="true"></i>시안 개수 : [[${priceInfo.s_draft}]]</li>
 										</ul>
 									</article>
-									<button name="paymentPkg" value="Standard" type="submit">계속하기
-										(결제페이지로 이동)</button>
+									<button name="paymentPkg" value="Standard" type="submit">결제하기</button>
 								</div>
 								<div id="Premium" class="tab-pane fade">
 									<div class="header">
@@ -908,14 +850,13 @@
 												aria-hidden="true"></i>시안 개수 : [[${priceInfo.p_draft}]]</li>
 										</ul>
 									</article>
-									<button name="paymentPkg" value="Premium" type="submit">계속하기
-										(결제페이지로 이동)</button>
+									<button name="paymentPkg" value="Premium" type="submit">결제하기</button>
 								</div>
 							</div>
 							<div class="contact-seller-wrapper">
 								<button type="button" data-toggle="modal"
-									data-target="#exampleModal" class="sendingMSGtoSeller">판매자에게
-									쪽지 보내기</button>
+									data-target="#exampleModal" class="sendingMSGtoSeller">프리랜서에게
+									문의 하기</button>
 							</div>
 						</div>
 					</form>
@@ -1036,6 +977,9 @@
       }
     }
     $("#p-price").text(nData + "원");
+    //let p = document.getElementById("p-total-price");
+    p.setAttribute("value", nData);
+    //console.log(p.val());
   });
 
   $("#reportBtn").click(function (e) {

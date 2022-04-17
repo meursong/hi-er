@@ -232,12 +232,12 @@ input.card {
 						<div class="box-right">
 							<div class="d-flex pb-2">
 								<p class="fw-bold h1">[[${product.title}]]</p>
-								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
+								<span class="textmuted h4"></span>
 							</div> 
 							<div class="bg-blue p-2">
-								<p class="h6 textmuted">제품 한줄 소개</p>
-								<P class="h5" th:text="${pkg_description}"></p>
-								<p class="h7">판매자 : [[${freelancerUser.nickname}]]</p>
+								<p class="h5 textmuted">[[${product.paymentPkg}]]</p>
+								<P class="h6" th:text="${pkg_description}"></p>
+								<p class="h6">판매자 : [[${freelancerUser.nickname}]]</p>
 							</div>
 						</div>
 					</div>
@@ -345,7 +345,6 @@ input.card {
 							<input type="hidden" id="delivery_date" name="delivery_date" th:value="${default_delivery}"> 
 							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
 							<input type="hidden" id="order_qty" name="order_qty" th:value="1"> 
-							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
 							<div style="width: 100%; margin: auto;">
 								<button class="btn btn-primary d-block h8"
 									style="width: 400px; margin: auto; display: block;"

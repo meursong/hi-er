@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html
         lang="en"
         xmlns:th="http://www.thymeleaf.org"
@@ -27,9 +27,9 @@
                 <!-- Main Content -->
                 <main id="main_box" class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
                     <div class="box shadow-sm rounded bg-white mb-3 osahan-chat">
-                        <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">Messaging</h5>
+                        <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">쪽지함</h5>
                         <div class="row m-0">
-                            <div class="border-right col-lg-5 col-xl-4 px-0">
+                            <div id= "msgb" class="border-right col-lg-5 col-xl-4 px-0">
                                 <div class="osahan-chat-left" id="msg_box">
                                     <div class="position-relative icon-form-control p-3 border-bottom">
                                         <i class="fa fa-search position-absolute"></i>
@@ -45,8 +45,8 @@
                                                  onerror="this.src='/images/user/default.jpg'">
 
                                             <div class="font-weight-bold mr-1 overflow-hidden">
-                                                <div th:text="${msgList.send_nickname}"
-                                                     class="text-truncate overflow-hidden">Stacie
+                                                <div th:text="${msgList.send_nickname=='관리자' ? '신고알림':msgList.send_nickname}"
+                                                     class="text-truncate overflow-hidden" th:style="${msgList.send_nickname=='관리자'?'color: red': ''}">Stacie
                                                     Hall
                                                 </div>
                                                 <div th:text="${msgList.title}"
@@ -72,9 +72,9 @@
                                 </div>
                             </div>
                             <div id="msg_list" class="col-lg-7 col-xl-8 px-0">
-                                <div class="p-3 d-flex align-items-center  border-bottom osahan-post-header">
+                                <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
                                     <div class="font-weight-bold mr-1 overflow-hidden">
-                                        <div class="text-truncate">Message Box
+                                        <div class="text-truncate">
                                         </div>
                                     </div>
                                     <span class="ml-auto">
@@ -85,8 +85,8 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                        <button class="dropdown-item" type="button" th:onclick="del()"><i
-                                               class="mdi mdi-trash"></i> Delete</button>
-                                       <button class="dropdown-item" type="button"><i class="mdi mdi-x-circle"></i> Turn Off</button>
+                                               class="mdi mdi-trash"></i> 쪽지 삭제</button>
+                                       <!-- <button class="dropdown-item" type="button"><i class="mdi mdi-x-circle"></i> Turn Off</button> -->
                                     </div>
                                  </div>
                               </span>
@@ -98,6 +98,7 @@
                                          style="text-align: center">msg_list
                                     </div>
                                     <div class="card-body" th:text="${message_view.content}">msg_list</div>
+                                    <div th:replace="fragments/message :: message_modal"></div>
                                 </div>
                                 <div class="w-100 border-top border-bottom">
 
@@ -110,7 +111,6 @@
                               <i class="mdi mdi-send"></i> 답장 보내기
                               </button>
                               </span>
-                                    <div th:replace="fragments/message :: message_modal"></div>
                                 </div>
                             </div>
                         </div>
@@ -168,33 +168,27 @@
             cache: false,
             data: messageForm,
             success: function (data) {
-                swal(data);
-                if (data == "메세지 전송 성공!!") {
+                swal("알림", data);
                     $('#exampleModal').modal('hide');
-                    show.bs.modal
-                }
+                    $('#test11').load(location.href+' #test11');
             },
             error: function (request, status, error) {
-                swal("에러 발생")
+                swal("알림", "에러 발생")
             }
         })
 
     }
 
-    $('.modal').on('hidden.bs.modal', function (e) {
-        console.log('modal close');
-        $(this).find('#message')[0].reset();
 
-    });
 
     function check() {
 
         if ($("div[name=title]").val() == null) {
-            swal("알림", "답변할 메세지를 선택해 주세요.");
+            swal("알림", "답장할 메세지를 선택해 주세요.");
             $('#exampleModal').modal('hide');
 
         }
-        // swal($("h3[name=title]").val());
+
     }
 
     function del() {
@@ -207,12 +201,12 @@
             url: "/message/delete/" + msg_id,
             cache: false,
             success: function (data) {
-                swal(data);
+                swal("알림", data);
                 $("#ms").load("?currentPageNo=" + page + " #ms");
                 $("#test11").load(location.href + " #test11");
             },
             error: function (request, status, error) {
-                swal("에러 발생");
+                swal("알림", "에러 발생");
 
             }
         }).done(function () {
@@ -226,7 +220,8 @@
         if (key.keyCode == 13) {
             if (nickname == "") {
                 swal("알림", "검색할 닉네임을 입력해주세요.");
-            } else {
+            }
+            else {
                 $.ajax({
                     type: "POST",
                     url: "/message/search",
@@ -235,23 +230,30 @@
                         "nickname": nickname
                     },
                     success: function (data) {
-                        swal("성공");
+                        swal("알림", "검색 완료!!");
 
                     },
                     error: function (request, status, error) {
-                        swal("에러 발생");
+                        swal("알림", "삭제할 메세지를 선택해주세요.");
 
                     }
-                }).done(function (fragment) {
+                })
+                    .done(function (fragment) {
                     $('#ms').replaceWith(fragment);
                 })
             }
         }
     });
-
     function movePage(uri, queryString) {
-        $("#ms").load(queryString + " #ms");
+        // var nick = [[${params.nickname}]]
+        // console.log(nick);
+        $("#ms").load(queryString + "&nickname=" +  " #ms");
+
     }
 
+    $('.modal').on('hidden.bs.modal', function (e) {
+        console.log('modal close');
+        $(this).find('form')[0].reset();
+    });
 
 </script>

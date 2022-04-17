@@ -252,8 +252,7 @@
 	<![CDATA[
 		select *
 		from messages
-		where recv_user_id=#{user_id} and send_user_id=0;
-	
+		where recv_user_id=#{user_id} and send_user_id=0
 	]]>	
 	</select>
 	

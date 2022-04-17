@@ -117,19 +117,24 @@
                     <div th:each="productList : ${productList}" class="col-md-3">
                         <a th:href="@{/post/detail/{pid}(pid = ${productList.product_id})}"> <img class="img-fluid"
                                                                                                   th:src="@{/upload/} + ${productList.filename1}"
-                                                                                                  onerror="this.src='/images/list/v1.png'"
+                                                                                                  onerror="this.src='/images/상품준비중.jpg'"
                                                                                                   style="object-fit: fill"/>
                         </a>
                         <div class="inner-slider">
                             <div class="inner-wrapper">
                                 <div class="d-flex align-items-center">
 									<span class="seller-image">
-                                        <img class="img-fluid"
-                                             th:src="@{/upload/} + ${productList.filename1}"
-                                             onerror="this.src='/images/상품준비중.jpg'"/>
+
+                                            <img class="img-fluid"
+                                             th:src="@{/upload/} + ${productList.profile_image}"
+                                             onerror="this.src='@{/images/user/default.png}'"
+                                                 style="object-fit: fill"/>
+
 									</span> <span class="seller-name"> <a
                                         th:text="${productList.nickname}"
-                                        th:href="@{/freelancerInfo/{id}(id = ${productList.seller_id})}">닉네임</a> <span
+                                        th:href="@{/freelancerInfo/{id}(id = ${productList.seller_id})}">
+                                    닉네임</a>
+                                    <span
                                         th:text="${productList.job}"
                                         class="level hint--top level-one-seller"> 직업 </span>
 									</span>

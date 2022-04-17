@@ -131,12 +131,13 @@
 											<span class="seller-image"> 						
 											<img class="img-fluid" th:src="@{/upload/} + ${product.profile_image}" onerror="this.src='/images/user/default.jpg'">
 											</span> <span class="seller-name" > <a
-													th:href="@{판매자 프로필 상세}">[[${product.title}]]</a> <span
+												th:href="@{/freelancerInfo/{id}(id = ${product.seller_id})}">[[${product.nickname}]]</a> <span
 													class="level hint--top level-one-seller">
 													</span>
 											</span>
 										</div>
-										<h3>[[${product.p_pkg_description}]]</h3>
+										<a th:href="@{/post/detail/{pid}(pid = ${product.product_id})}"><h3
+											style="white-space:nowrap; overflow: hidden; text-overflow: ellipsis;">[[${product.title}]]</h3></a>
 
 										<div class="content-info">
 											<div class="rating-wrapper">
@@ -159,9 +160,9 @@
 												<i th:id="heart+${product.product_id}" class="fa fa-heart heart" aria-hidden="true" th:style="${isLikeList[productStat.index] == true ? 'color:rgba(31,208,182,1)' : ''}"></i>
 											</button>
 											<div class="price">
-												<a th:href="@{판매자 상세페이지}"> Starting At <span>&nbsp
+												<a th:href="@{/post/detail/{pid}(pid = ${product.product_id})}"> Basic <span>&nbsp
 														[[${#numbers.formatInteger(product.b_price, 0,
-														'COMMA')}]]</span>
+														'COMMA')}]] 원~</span>
 												</a>
 											</div>
 										</div>
