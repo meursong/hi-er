@@ -231,6 +231,13 @@
 	]]>	
 	</update>
 	
+	<!--스테이터스 1->8  -->
+	<update id="fourToFive" parameterType="int">
+	<![CDATA[
+		update orders set order_status=5 where order_id=#{id}
+	]]>	
+	</update>
+	
 	<!--패스워드 파인드-->
 	<select id="passfind" resultType="boolean" parameterType="user">
 	<![CDATA[
@@ -331,7 +338,7 @@
 		select r.createdAt, p.title,u.nickname,r.reason,r.product_id,r.reported_userid,r.report_id
 		from user u join product p join report r
 		on p.product_id=r.product_id and p.seller_id=u.user_id
-		order by r.createdAt desc limit 5
+		order by r.createdAt desc
 		
 	]]>	
 	</select>
