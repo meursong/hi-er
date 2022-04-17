@@ -98,6 +98,7 @@
                                          style="text-align: center">msg_list
                                     </div>
                                     <div class="card-body" th:text="${message_view.content}">msg_list</div>
+                                    <div th:replace="fragments/message :: message_modal"></div>
                                 </div>
                                 <div class="w-100 border-top border-bottom">
 
@@ -110,7 +111,6 @@
                               <i class="mdi mdi-send"></i> 답장 보내기
                               </button>
                               </span>
-                                    <div th:replace="fragments/message :: message_modal"></div>
                                 </div>
                             </div>
                         </div>
@@ -168,14 +168,12 @@
             cache: false,
             data: messageForm,
             success: function (data) {
-                swal(data);
-                if (data == "메세지 전송 성공!!") {
+                swal("알림", data);
                     $('#exampleModal').modal('hide');
-                    show.bs.modal
-                }
+                    $('#test11').load(location.href+' #test11');
             },
             error: function (request, status, error) {
-                swal("에러 발생")
+                swal("알림", "에러 발생")
             }
         })
 
@@ -190,7 +188,7 @@
             $('#exampleModal').modal('hide');
 
         }
-        // swal($("h3[name=title]").val());
+
     }
 
     function del() {
@@ -203,12 +201,12 @@
             url: "/message/delete/" + msg_id,
             cache: false,
             success: function (data) {
-                swal(data);
+                swal("알림", data);
                 $("#ms").load("?currentPageNo=" + page + " #ms");
                 $("#test11").load(location.href + " #test11");
             },
             error: function (request, status, error) {
-                swal("에러 발생");
+                swal("알림", "에러 발생");
 
             }
         }).done(function () {
@@ -222,7 +220,8 @@
         if (key.keyCode == 13) {
             if (nickname == "") {
                 swal("알림", "검색할 닉네임을 입력해주세요.");
-            } else {
+            }
+            else {
                 $.ajax({
                     type: "POST",
                     url: "/message/search",
@@ -231,11 +230,11 @@
                         "nickname": nickname
                     },
                     success: function (data) {
-                        swal("검색 성공!!");
+                        swal("알림", "검색 완료!!");
 
                     },
                     error: function (request, status, error) {
-                        swal("에러 발생");
+                        swal("알림", "삭제할 메세지를 선택해주세요.");
 
                     }
                 })
@@ -246,9 +245,9 @@
         }
     });
     function movePage(uri, queryString) {
-        // const nickname = "${msgList.nickname}";
-        // console.log(nickname);
-        $("#ms").load(queryString + queryString + " #ms");
+        // var nick = [[${params.nickname}]]
+        // console.log(nick);
+        $("#ms").load(uri + queryString);
 
     }
 
