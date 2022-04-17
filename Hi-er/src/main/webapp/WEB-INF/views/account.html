@@ -148,6 +148,10 @@
 						<div class="box-body p-3">
 							<div>
 								<table class="table table-striped">
+								
+
+
+
 									<thead>
 										<tr>
 											<th>날짜</th>
@@ -168,7 +172,8 @@
 												<td
 													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
 												<td class="titttle" th:id="${order.product_id}"
-													th:text="${order.title}" style="cursor: pointer"></td>
+													th:text="${order.title}" style="cursor: pointer;width:130px;
+													overflow: auto;" ></td>
 												<td th:text="${order.nickname}"></td>
 												<td th:text="${order.order_qty}"></td>
 												<td th:text="${order.order_price}"></td>
@@ -199,12 +204,16 @@
 													<td>거래완료(입금완료)</td>
 													
 												</th:block>
+												<th:block th:if=${order.order_status}==5>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
 												<th:block th:if=${order.order_status}==6>
 													<td>거래취소(신청 거부)</td>
 													
 												</th:block>
 												
-												</th:block>
+												
 												<th:block th:if=${order.order_status}==7>
 													<td>구매자가 거래 취소 요청했습니다</td>
 													<td><a class="btn btn-success btn-green ok1"  th:id="'ok1'+${order.order_id}"
@@ -218,9 +227,8 @@
 													<td>거래취소 요청</td>
 													
 												</th:block>
-												
 												<th:block th:if=${order.order_status}==9>
-													<td>거래취소 완료</td>
+													<td>거래취소</td>
 													
 												</th:block>
 											</th:block>
@@ -230,7 +238,8 @@
 												<td
 													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
 												<td class="titttle" th:id="${order.product_id}"
-													th:text="${order.title}" style="cursor: pointer"></td>
+													th:text="${order.title}" style="cursor: pointer;width:130px;
+													overflow: auto;"></td>
 												<td class="selller" th:id="${order.seller_id}"
 													th:text="${order.nickname2}" style="cursor: pointer"></td>
 												<td th:text="${order.order_qty}"></td>
@@ -242,7 +251,8 @@
 												<th:block th:if=${order.order_status}==1>
 													<td>작업중</td>
 													<td><a class="btn btn-success btn-green cancel"  th:id="'cancel'+${order.order_id}"
-																		>작업물 확인 완료</a></td>
+																		>구매자 거래 취소</a></td>
+													
 												</th:block>
 												<th:block th:if=${order.order_status}==2>
 													<td>작업완료(확인 대기) </td>
@@ -257,24 +267,33 @@
 													<td>거래완료(입금완료)</td>
 													
 												</th:block>
+												<th:block th:if=${order.order_status}==5>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
 												<th:block th:if=${order.order_status}==6>
 													<td>거래 취소(판매자 수락 거절)</td>
 													
 												</th:block>
 												
-												</th:block>
+												
 												<th:block th:if=${order.order_status}==7>
 													<td>거래 취소 요청</td>
 													
 												</th:block>
 												
-												<th:block th:if=${order.order_status}==8>
+												<th:block th:if=${order.order_status}==8 >
 													<td>판매자가 거래 취소 요청</td>
+												<td><a class="btn btn-success btn-green ok5"  th:id="'deny1'+${order.order_id}"
+																		>거래취소 확인</a></td>		
+												
+												<td><a class="btn btn-success btn-green deny5"  th:id="'deny1'+${order.order_id}"
+																		>거래취소 거부</a></td>		
 													
 												</th:block>
 												
-												<th:block th:if=${order.order_status}==8>
-													<td>거래취소 완료</td>
+												<th:block th:if=${order.order_status}==9>
+													<td>거래취소</td>
 													
 												</th:block>
 											
@@ -285,8 +304,8 @@
 															<div class="well well-sm">
 																
 																<div class="text-right" style="padding-bottom: 10px;">
-																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
-																		>리뷰 작성</a>
+																	<button class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
+																		>리뷰 작성</button>
 																</div>
 
 																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
@@ -393,9 +412,7 @@
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
 							<h6 class="m-0 col-6 bold">관리자로부터 받은 메세지</h6>
-							<!-- <div class="col-4"></div>
-							<button type="button" class="btn btn-light btn-sm col-2"
-								th:onclick="|location.href='@{/mypage/3}'|">모든정보보기</button> -->
+							
 						</div>
 						<div class="box-body p-3">
 							<div>
@@ -409,11 +426,12 @@
 											
 										</tr>
 									</thead>
-									<tbody>
+									<tbody class="likepost">
 										<tr th:each="warning: ${warnings}">
-											<td th:text="${warning.send_time}"></td>
+											<td th:text="${#temporals.format(warning.send_time,'yyyy-MM-dd')}"></td>
+											<!-- <td th:text="${warning.send_time}"></td> -->
 											<td>관리자</td>
-											<td th:text="${warning.title}"></td>
+											<td th:text="${warning.title}" style="color: red;"></td>
 											<td th:text="${warning.content}"></td>
 										</tr>
 									</tbody>
@@ -451,7 +469,7 @@
 				var rating1 = '.rating' + id + ':checked';
 				var rating2 = $(rating1).val();//내가 선택한 별점
 				var content = $('#new-review' + id).val();
-
+				
 				console.log(id);
 				console.log(rating1);
 				console.log(rating2);
@@ -645,7 +663,7 @@
 					},
 					success : async (data, textStatus) => {
 						console.log("success");
-						await swal("알림","거래 취소를 거부했습니다.");
+						await swal("알림","거래를 취소를 거부했습니다.");
 						location.reload();
 					},
 
@@ -670,6 +688,54 @@
 					success : async (data, textStatus) => {
 						console.log("success");
 						await swal("알림","거래 취소를 거부했습니다.");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".ok5").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":9,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+						swal("알림","거래 취소 요구를 승락했습니다.");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".deny5").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":1,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+						swal("알림","거래 취소를 거부했습니다");
 						location.reload();
 					},
 
