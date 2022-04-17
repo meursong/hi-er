@@ -9,13 +9,11 @@
        		   p.seller_id,
                u.nickname,
                avg(r.star_point)  as avg_star_point,
-               u.profile_image,
-			   	fi.f_id
+               u.profile_image
         		from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
-				 left join f_info fi on p.product_id = fi.f_id
-		group by u.user_id,p.seller_id,fi.f_id
+		group by u.user_id,p.seller_id
         order by avg_star_point desc limit 5;
    		]]>
 	</select>
@@ -40,7 +38,9 @@
 	
 	<select id="sellet_seller_info" resultType="FreelancerUser" parameterType="int">
 		<![CDATA[
-			select * from user u left join f_info f on user_id=f_id left join review r on seller_id = user_id where u.type=2 and u.user_id=#{seller_id} group by user_id,f.address2,f.address,f.introduction,f.switchAt,r.review_id;
+			select u.nickname,(select avg(star_point) from review where seller_id=2) as avg_star_point,f.address,u.name,u.email,u.profile_image 
+	from user u left join f_info f on user_id=f_id
+				where u.type=2 and u.user_id=#{seller_id};
 		]]>
 	</select>
 	

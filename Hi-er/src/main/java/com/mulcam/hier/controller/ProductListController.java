@@ -48,7 +48,6 @@ public class ProductListController {
     @GetMapping("/search")
     public String searchPage(@ModelAttribute("params") ProductList params, Model model)
             throws Exception {
-//        params.setCategory(category);
         List<ProductList> selectProductDate = productListService.selectProductTotal(params);
         model.addAttribute("productList", selectProductDate);
         return "productListSearch";
@@ -101,13 +100,5 @@ public class ProductListController {
         return "/productListSearch :: #productList";
     }
 
-/*    @PostMapping("/search/category")
-    public String productLisCategory(@RequestParam String value, @ModelAttribute("params") ProductList params,
-                                    Model model) throws Exception {
-        params.setCategory(value);
-        List<ProductList> sortProduct = productListService.selectProductTotal(params);
-        model.addAttribute("productList", sortProduct);
-        return "/productListSearch :: #productList";
-    }*/
 
 }

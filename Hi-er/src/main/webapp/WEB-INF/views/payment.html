@@ -37,7 +37,7 @@
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : $("#seller_id").val(), //결제창에서 보여질 이름 
-				amount : 3000, //실제 결제되는 가격
+				amount : $("#total_price").val(), //실제 결제되는 가격
 				buyer_email : $("#buyer_email").val(),
 				buyer_name : $("#buyer_id").val(),
 				buyer_tel : '010-1234-5678',
@@ -46,11 +46,10 @@
 			}, function(rsp) {
 				console.log(rsp);
 				if (rsp.success) {
-					/* var msg = '결제가 완료되었습니다.';
+					var msg = '결제가 완료되었습니다.';
 					msg += '고유ID : ' + rsp.imp_uid;
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
 					msg += '결제 금액 : ' + rsp.paid_amount;
-					msg += '카드 승인번호 : ' + rsp.apply_num; */
 					var formData = new FormData(form);
 					$.ajax({
 						type : "POST",
@@ -59,15 +58,14 @@
 						data : formData, 
 						processData:false,
 						contentType:false,
-						success : function(res) {
-							alert("결제 성공")
-							
+						success : async (res) => {
+							await swal("success","결제 성공 :"+msg)
+							location.href='/mypage';
 						},
 						error : function(XMLHttpRequest, textStatus, errorThrown) {
 							alert("통신 실패.")
 						}
 					}).done(function (data, textStatus, xhr) {
-						location.href='/mypage';
 	                }); 
 				} else {
 					var msg = '결제에 실패하였습니다.';
@@ -234,12 +232,12 @@ input.card {
 						<div class="box-right">
 							<div class="d-flex pb-2">
 								<p class="fw-bold h1">[[${product.title}]]</p>
-								<span class="textmuted h4">/[[${product.paymentPkg}]]</span>
+								<span class="textmuted h4"></span>
 							</div> 
 							<div class="bg-blue p-2">
-								<p class="h6 textmuted">제품 한줄 소개</p>
-								<P class="h5" th:text="${pkg_description}"></p>
-								<p class="h7">판매자 : [[${freelancerUser.nickname}]]</p>
+								<p class="h5 textmuted">[[${product.paymentPkg}]]</p>
+								<P class="h6" th:text="${pkg_description}"></p>
+								<p class="h6">판매자 : [[${freelancerUser.nickname}]]</p>
 							</div>
 						</div>
 					</div>
@@ -247,7 +245,7 @@ input.card {
 						<div class="row box-right">
 							<div class="col-md-8 ps-0 ">
 								<img class="img-fluid" width="600px"
-									th:src="@{/upload/} + ${product.filename2}" />
+									th:src="@{/upload/} + ${product.filename1}" />
 							</div>
 						</div>
 					</div>
@@ -314,13 +312,13 @@ input.card {
 							<div class="col-2 p-0 text-center h8 border-end">
 								<p class="textmuted p-2">가격</p>
 								<span class="d-block border-bottom py-2"><span
-									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(price,0, 'COMMA')}"></span></span> <span
+									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(total_price,0, 'COMMA')}"></span></span> <span
 									class="d-block py-2 "><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 							<div class="col-2 p-0 text-center">
 								<p class="textmuted p-2">총 금액</p>
 								<span class="d-block py-2 border-bottom"><span
-									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(price,0, 'COMMA')}"></span></span> <span
+									class="fas fa-dollar-sign" th:text="${#numbers.formatInteger(total_price,0, 'COMMA')}"></span></span> <span
 									class="d-block py-2"><span class="fas fa-dollar-sign"></span>0</span>
 							</div>
 						</div>
@@ -330,7 +328,7 @@ input.card {
 							<p class="h1 fw-bold d-flex">
 								<span
 									class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>
-									[[${#numbers.formatInteger(price,0, 'COMMA')}]] 원
+									[[${#numbers.formatInteger(total_price,0, 'COMMA')}]] 원
 								<!-- <span class="textmuted">.58</span> -->
 							</p>
 							<p class="ms-3 px-2 bg-green">부가세(VAT)포함</p>
@@ -346,12 +344,13 @@ input.card {
 							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
 							<input type="hidden" id="delivery_date" name="delivery_date" th:value="${default_delivery}"> 
 							<input type="hidden" id="order_pkg" name="order_pkg" th:value="${product.paymentPkg}"> 
+							<input type="hidden" id="order_price" name="order_price" th:value="${total_price}"> 
+							<input type="hidden" id="total_price" name="total_price" th:value="${total_price}"> 
 							<input type="hidden" id="order_qty" name="order_qty" th:value="1"> 
-							<input type="hidden" id="order_price" name="order_price" th:value="${price}"> 
 							<div style="width: 100%; margin: auto;">
 								<button class="btn btn-primary d-block h8"
 									style="width: 400px; margin: auto; display: block;"
-									id="iamportPayment" type="button">결제테스트</button>
+									id="iamportPayment" type="button">결제</button>
 							</div>
 						</form>
 					</div>

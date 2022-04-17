@@ -11,6 +11,7 @@ import com.mulcam.hier.dao.MypageDAO;
 import com.mulcam.hier.dto.FreelancerUser;
 import com.mulcam.hier.dto.Orders;
 import com.mulcam.hier.dto.Paging;
+import com.mulcam.hier.dto.Report;
 import com.mulcam.hier.dto.Review;
 import com.mulcam.hier.dto.User;
 
@@ -21,21 +22,20 @@ public class MypageServiceImpl implements MypageService {
 	MypageDAO mypageDAO;
 	@Override
 	public List<Map<String, Object>> history2(int user_id) throws Exception {
-		System.out.println("서비스임플 안이다다다다다다");
-		// 아이디로 찾아서 orderdto에 넣음
+		
+		
 		List<Map<String, Object>> ord = mypageDAO.queryOrdersss(user_id);
-		System.out.println("ord찍기 바로전");
-		System.out.println(ord);
+		
 
 		return ord;
 	}
 
 	@Override
 	public List<Map<String, Object>> history3(int user_id) throws Exception {
-		System.out.println("서비스임플 안이다다다다다다");
-		// 아이디로 찾아서 orderdto에 넣음
+		
+		
 		List<Map<String, Object>> likepost = mypageDAO.queryLikepost(user_id);
-		System.out.println("ord찍기 바로전");
+		
 
 		return likepost;
 	}
@@ -45,12 +45,8 @@ public class MypageServiceImpl implements MypageService {
 		HashMap<String,Integer>map=new HashMap<>();
 		int listCount = mypageDAO.countBoard(user_id);
 
-		// 내가 가진 게시글 수가 100개라면 반환된 값이 100임 ->listCount=100
-		// 총페이지수 올림처리
 		int lastPage = (int) Math.ceil((double) listCount / 5);
-		System.out.println(lastPage+"라스트페이지@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		// 가정한 리스트카운트가 100이라면 100을 10으로 나누고 더블로 캐스팅 해서 올림을 함
-		// 그리고 인트형으로 바꿈 결과적으로 maxPage=10이됨
+		
 
 		int startPage = (((int) ((double) page / 5 + 0.9)) - 1) * 5 + 1;
 		// 현재 페이지에 보여줄 시작 페이지수(1,11,21)
@@ -179,6 +175,7 @@ public class MypageServiceImpl implements MypageService {
 		review.setStar_point(star_point);
 		try {
 			mypageDAO.insertreview(review);
+			mypageDAO.fourToFive(order_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;// 에러뜨면 펄스 반환
@@ -219,12 +216,7 @@ public class MypageServiceImpl implements MypageService {
 		int clickLike=mypageDAO.countBoard2(user_id);
 		//눌린 좋아요 수
 		int clikedLike=mypageDAO.countLiked(user_id);
-		System.out.println(buyOrder+"바이오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(sellOrder+"셀오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(buySumOrder+"바이섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(sellSumOrder+"셀섬오더@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(clickLike+"클릭라이크@@@@@@@@@@@@@@@@@@@@@@@@@2");
-		System.out.println(clikedLike+"클릭라이크드드드드드드@@@@@@@@@@@@@@@@@@@@@@@@@2");
+	
 		
 		
 		Map<String,Object>map=new HashMap<String,Object>();
@@ -234,9 +226,7 @@ public class MypageServiceImpl implements MypageService {
 		map.put("sellSumOrder", sellSumOrder);
 		map.put("clickLike", clickLike);
 		map.put("clickedLike", clikedLike);
-		System.out.println(map+"map@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		//List<Map<String, Object>> listMapInsert=new ArrayList<Map<String,Object>>();
-		//listMapInsert.add(map);
+
 		return map;
 	}
 
@@ -270,6 +260,92 @@ public class MypageServiceImpl implements MypageService {
 		}
 		
 		
+	}
+
+	@Override
+	public void userdelete(int user_id) throws Exception {
+	
+		
+			mypageDAO.userdelete(user_id);
+		
+	}
+
+	@Override
+	public void postdelete(int id) throws Exception {
+		mypageDAO.postdelete(id);
+		
+	}
+
+	@Override
+	public void updatestatus1(int id, int num) throws Exception {
+		try {
+			if (num == 1) {
+				mypageDAO.zeroToOne(id);
+			} else if (num == 2) {
+				mypageDAO.oneToTwo(id);
+			} else if (num == 3) {
+				mypageDAO.twoToThree(id);
+			} else if (num == 4) {
+				mypageDAO.threeToFour(id);
+			} else if(num==6) {
+				mypageDAO.oneToSix(id);
+			} else if(num==7) {
+				mypageDAO.oneToSeven(id);
+			} else if(num==8) {
+				mypageDAO.oneToEight(id);
+			}
+			
+			
+			
+			else if(num==9) {
+				mypageDAO.sevenToNine(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> trade() throws Exception {
+		List<Map<String, Object>> trade=mypageDAO.trade();
+		return trade;
+	}
+
+	@Override
+	public List<Map<String, Object>> allTrade() throws Exception {
+		List<Map<String, Object>> trade=mypageDAO.allTrade();
+		return trade;
+	}
+
+	@Override
+	public void postwarning(int id) throws Exception {//리포트 아이디로 리포트를 찾아서 유저에게 경고 메세지 인서트
+		User user = new User();
+		HashMap<String,Object>map=new HashMap<>();
+
+		map = (HashMap<String, Object>) mypageDAO.findreport(id);
+
+
+		mypageDAO.postwarning(map);
+
+	}
+
+	@Override
+	public List<Map<String, Object>> warningMsg(int user_id) throws Exception {
+		List<Map<String, Object>> warning=mypageDAO.findWarningMsg(user_id);
+		return warning;
+	}
+	
+	
+	
+	
+	
+	public void profileUpdate(String profile_image, int user_id) throws Exception {
+		User user = new User();
+		user.setProfile_image(profile_image);
+		user.setUser_id(user_id);/// 
+		mypageDAO.profileUpdate(user);
+
 	}
 	
 	

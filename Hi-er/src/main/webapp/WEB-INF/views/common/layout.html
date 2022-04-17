@@ -100,8 +100,8 @@
 }
 .likepost{
 	font-weight:bold;
-	
 	vertical-align: center;
+		
 }
 .bold{
 	font-weight:bold;
@@ -141,6 +141,7 @@
 			</div>
 			<!-- Topbar Navbar -->
 			<ul class="navbar-nav align-items-center ml-auto">
+			
 
 				<li
 					class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications"
@@ -238,7 +239,7 @@
 								th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.jpg'"/>
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
-									[[${session.loginedUser.name }]]</div>
+									[[${session.loginedUser.nickname }]]</div>
 								<div class="dropdown-user-details-email">
 									[[${session.loginedUser.email }]]</div>
 							</div>
@@ -249,7 +250,7 @@
 						<div class="dropdown-divider"></div>
 
 						<a class="dropdown-item" th:href="@{/mypage}"
-							th:if="${session.loginedUser}">
+							th:if="${session.loginedUser} and ${session.loginedUser.type}!=3">
 							<div class="dropdown-item-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 									viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -260,7 +261,22 @@
 										d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                   </svg>
 							</div> [[${session.loginedUser.name }]]님의 계정 정보
-						</a> <a class="dropdown-item" th:href="@{/logout}"
+						</a>
+						<a class="dropdown-item" th:href="@{/admin}"
+							th:if="${session.loginedUser} and ${session.loginedUser.type}==3">
+							<div class="dropdown-item-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+									viewBox="0 0 24 24" fill="none" stroke="currentColor"
+									stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+									class="feather feather-settings">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+										d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+							</div> [[${session.loginedUser.name }]]님의 계정 정보
+						</a>
+						
+						 <a class="dropdown-item" th:href="@{/logout}"
 							th:if="${session.loginedUser}">
 							<div class="dropdown-item-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -338,6 +354,26 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownPortfolio">
 							</div></li>
+
+					<ul class="navbar-nav">
+						<div style="color:#b9b9b9; font-weight:600; padding-top:12px; margin-left: 103px">정보</div>
+
+						<li class="nav-item dropdown">
+							<a class="nav-link " th:href="@{/about}"
+							   id="navbarDropdownPortfolio"
+							   aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">서비스 소개</a>
+							<div class="dropdown-menu"
+								 aria-labelledby="navbarDropdownPortfolio">
+							</div></li>
+
+						<li class="nav-item dropdown">
+							<a class="nav-link " th:href="@{/Contact}"
+							   id="navbarDropdownPortfolio"
+							   aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight: 600;">고객센터</a>
+							<div class="dropdown-menu"
+								 aria-labelledby="navbarDropdownPortfolio">
+							</div></li>
+
 				</ul>
 			</div>
 			<ul class="navbar-nav ml-auto" th:if="${session.loginedUser == null}">

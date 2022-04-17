@@ -1,7 +1,7 @@
 package com.mulcam.hier.dto;
 
 public class Report {
-
+	int report_id;
 	int product_id; //신고당한 게시물
 	String reason; //신고사유
 	int reported_userid; //신고당한 유저(유저가 작성한 게시물이 일정 횟수 이상 누적 시 회원 제재 )
@@ -29,6 +29,12 @@ public class Report {
 	}
 	public void setReport_userid(int report_userid) {
 		this.report_userid = report_userid;
+	}
+	public int getReport_id() {
+		return report_id;
+	}
+	public void setReport_id(int report_id) {
+		this.report_id = report_id;
 	}
 	
 	//******신고한 시간 추가 필요

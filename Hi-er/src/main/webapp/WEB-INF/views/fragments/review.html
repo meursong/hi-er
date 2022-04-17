@@ -7,7 +7,7 @@
             <div class="left">
               <span>
                 <img
-                  th:src="@{/images/user/s6.png}"
+                        th:src="@{/upload/} + ${review.profile_image}" onerror="this.src='@{/images/user/default.jpg}'"
                   class="profile-pict-img img-fluid"
                   alt=""
                 />

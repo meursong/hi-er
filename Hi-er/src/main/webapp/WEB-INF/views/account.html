@@ -57,12 +57,12 @@
 								<a th:if=${session.loginedUser.type}!=2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/4}">
 									내정보수정 </a>
 								<a th:if=${session.loginedUser.type}==2 class="font-weight-bold p-2 d-block" th:href="@{/mypage/5}">
-									프리내정보수정 </a>	
+									내정보수정 </a>	
 							</div>
 						</div>
 
 					</div>
-					<div class="box shadow-sm  rounded bg-white mb-3">
+					<!-- <div class="box shadow-sm  rounded bg-white mb-3">
 						<div class="box-title border-bottom p-3">
 							<h6 class="m-0">Skills & Endorsements</h6>
 						</div>
@@ -126,7 +126,7 @@
 							<button type="button" class="btn btn-outline-success pl-4 pr-4">
 								POST A JOB</button>
 						</div>
-					</div>
+					</div> -->
 				</aside>
 
 
@@ -140,52 +140,186 @@
 						<div class="d-flex box-title border-bottom p-3">
 							<h6 class="m-0 col-6 bold">거래내역</h6>
 							<div class="col-4"></div>
-							<button type="button" class="btn btn-light btn-sm col-2"
+							<!-- <button type="button" class="btn btn-light btn-sm col-2"
 								th:onclick="|location.href='@{/mypage/1/1}'|">모든정보보기</button>
-
+ -->
 						</div>
 
 						<div class="box-body p-3">
 							<div>
 								<table class="table table-striped">
+								
+
+
+
 									<thead>
 										<tr>
-											<th>시간</th>
+											<th>날짜</th>
 											<th>상품제목</th>
-											<th>판매자</th>
+											<th>닉네임</th>
 											<th>구매수량</th>
 											<th>총 가격</th>
 											<th>상태</th>
-											<th>리뷰 달기</th>
+											<th></th>
 										</tr>
 
 									</thead>
 									<tbody class="likepost">
 										<tr th:each="order: ${orders}">
-											<td th:text="${order.createdAt}"></td>
-										
+										<!-- 판매자쪽 부분 -->
+											<th:block
+												th:if=${session.loginedUser.user_id}==${order.seller_id}>
+												<td
+													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
+												<td class="titttle" th:id="${order.product_id}"
+													th:text="${order.title}" style="cursor: pointer;width:130px;
+													overflow: auto;" ></td>
+												<td th:text="${order.nickname}"></td>
+												<td th:text="${order.order_qty}"></td>
+												<td th:text="${order.order_price}"></td>
+												
+												<th:block th:if=${order.order_status}==0>
+													<td>수락대기</td>
+													<td><a class="btn btn-success btn-green ok"  th:id="'ok'+${order.order_id}"
+																		>수락</a></td>
+													<td><a class="btn btn-success btn-green deny"  th:id="'deny'+${order.order_id}"
+																		>거절</a></td>					
+												</th:block>
+												<th:block th:if=${order.order_status}==1>
+													<td>작업중</td>
+													<td><a class="btn btn-success btn-green finish"  th:id="'finish'+${order.order_id}"
+																		>작업완료</a></td>
+													<td><a class="btn btn-success btn-green deny3"  th:id="'deny3'+${order.order_id}"
+																		>거래 취소</a></td>					
+												</th:block>
+												<th:block th:if=${order.order_status}==2>
+													<td>작업완료(구매자 확인 대기)</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==3>
+													<td>거래완료(구매자 확인 완료/입금 대기)</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==4>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==5>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==6>
+													<td>거래취소(신청 거부)</td>
+													
+												</th:block>
+												
+												
+												<th:block th:if=${order.order_status}==7>
+													<td>구매자가 거래 취소 요청했습니다</td>
+													<td><a class="btn btn-success btn-green ok1"  th:id="'ok1'+${order.order_id}"
+																		>거래취소 수락</a></td>
+													<td><a class="btn btn-success btn-green deny1"  th:id="'deny1'+${order.order_id}"
+																		>거래취소 거부</a></td>					
+													
+												</th:block>
+												
+												<th:block th:if=${order.order_status}==8>
+													<td>거래취소 요청</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==9>
+													<td>거래취소</td>
+													
+												</th:block>
+											</th:block>
+											<!-- 구매자쪽 부분 -->
+											<th:block
+												th:if=${session.loginedUser.user_id}!=${order.seller_id}>
+												<td
+													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
+												<td class="titttle" th:id="${order.product_id}"
+													th:text="${order.title}" style="cursor: pointer;width:130px;
+													overflow: auto;"></td>
+												<td class="selller" th:id="${order.seller_id}"
+													th:text="${order.nickname2}" style="cursor: pointer"></td>
+												<td th:text="${order.order_qty}"></td>
+												<td th:text="${order.order_price}"></td>
+												<th:block th:if=${order.order_status}==0>
+													<td>구매신청</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==1>
+													<td>작업중</td>
+													<td><a class="btn btn-success btn-green cancel"  th:id="'cancel'+${order.order_id}"
+																		>구매자 거래 취소</a></td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==2>
+													<td>작업완료(확인 대기) </td>
+													<td><a class="btn btn-success btn-green confirm"  th:id="'confirm'+${order.order_id}"
+																		>작업물 확인 완료</a></td>
+												</th:block>
+												<th:block th:if=${order.order_status}==3>
+													<td>거래완료(구매자 확인 완료/입금 대기)</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==4>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==5>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
+												<th:block th:if=${order.order_status}==6>
+													<td>거래 취소(판매자 수락 거절)</td>
+													
+												</th:block>
+												
+												
+												<th:block th:if=${order.order_status}==7>
+													<td>거래 취소 요청</td>
+													
+												</th:block>
+												
+												<th:block th:if=${order.order_status}==8 >
+													<td>판매자가 거래 취소 요청</td>
+												<td><a class="btn btn-success btn-green ok5"  th:id="'deny1'+${order.order_id}"
+																		>거래취소 확인</a></td>		
+												
+												<td><a class="btn btn-success btn-green deny5"  th:id="'deny1'+${order.order_id}"
+																		>거래취소 거부</a></td>		
+													
+												</th:block>
+												
+												<th:block th:if=${order.order_status}==9>
+													<td>거래취소</td>
+													
+												</th:block>
 											
-											
-											<td class="titttle" th:id="${order.product_id}" th:text="${order.title}" style="cursor:pointer"></td>
-											<td class="selller" th:id="${order.seller_id}" th:text="${order.nickname2}" style="cursor:pointer"></td>
-											<td th:text="${order.order_qty}"></td>
-											<td th:text="${order.order_price}"></td>
-											<td th:text="${order.order_status}"></td>
-											<td>
+											<td th:if=${order.order_status}==4>
 												<div class="container">
 													<div class="row" style="margin-top: 0;">
 														<div class="col-md-12">
 															<div class="well well-sm">
 																
 																<div class="text-right" style="padding-bottom: 10px;">
-																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
-																		href="#">리뷰 작성</a>
+																	<button class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
+																		>리뷰 작성</button>
 																</div>
 
 																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
 																	<div class="col-md-12">
 																		<form>
-																		<div name="myform" class="myform" >
+																			<input id="ratings-hidden" name="rating"
+																				type="hidden">
+																			<textarea class="form-control animated" cols="50"
+																				th:id="'new-review'+${order.order_id}" name="comment"
+																				placeholder="리뷰를 입력해주세요" rows="5"></textarea>
+
+
+																			<div name="myform" class="myform" >
+																							
 																				<fieldset>
 																					<input type="radio" th:class="'rating'+${order.order_id}" name="rating" value="5"
 																						th:id="'rate1'+${order.order_id}"><label th:for="'rate1'+${order.order_id}">⭐</label> <input
@@ -199,11 +333,7 @@
 																						th:for="'rate5'+${order.order_id}">⭐</label>
 																				</fieldset> 
 																			</div>
-																			<input id="ratings-hidden" name="rating"
-																				type="hidden">
-																			<textarea class="form-control animated" cols="50"
-																				th:id="'new-review'+${order.order_id}" name="comment"
-																				placeholder="리뷰를 입력해주세요." rows="5"></textarea>
+																			
 
 
 																			
@@ -229,6 +359,7 @@
 												</div>
 
 											</td>
+											</th:block>
 										</tr>
 									</tbody>
 
@@ -251,7 +382,7 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>시간</th>
+											<th>날짜</th>
 											<!-- <th>찜누른닉네임</th> -->
 											<th>제목</th>
 											<th>판매자</th>
@@ -260,7 +391,8 @@
 									<tbody class="likepost">
 									     
 										<tr th:each="likepost: ${likeposts}">
-											<td th:text="${likepost.createdAt}"></td>
+											<td th:text="${#temporals.format(likepost.createdAt,'yyyy-MM-dd')}"></td>
+										
 											<!-- <td th:text="${likepost.nickname}"></td> -->
 											<td class="titttle" th:id="${likepost.product_id}" th:text="${likepost.title}" style="cursor:pointer"></td>
 											<td th:text="${likepost.nickname}"></td>
@@ -276,30 +408,31 @@
 							</div>
 						</div>
 					</div>
+					<th:block th:if=${session.loginedUser.type}==2>
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
-							<h6 class="m-0 col-6 bold">쪽지</h6>
-							<div class="col-4"></div>
-							<button type="button" class="btn btn-light btn-sm col-2"
-								th:onclick="|location.href='@{/mypage/3}'|">모든정보보기</button>
+							<h6 class="m-0 col-6 bold">관리자로부터 받은 메세지</h6>
+							
 						</div>
 						<div class="box-body p-3">
 							<div>
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>시간</th>
-											<th>보낸 사람 닉네임</th>
-											<th>상품명</th>
-											<th>받은 사람 닉네임</th>
+											<th>날짜</th>
+											<th>보낸 사람</th>
+											<th>내용</th>
+											<th>게시물 제목</th>
+											
 										</tr>
 									</thead>
-									<tbody>
-										<tr th:each="order: ${orders}">
-											<td th:text="${order.createdAt}"></td>
-											<td th:text="${order.nickname}"></td>
-											<td th:text="${order.title}"></td>
-											<td th:text="${order.nickname2}"></td>
+									<tbody class="likepost">
+										<tr th:each="warning: ${warnings}">
+											<td th:text="${#temporals.format(warning.send_time,'yyyy-MM-dd')}"></td>
+											<!-- <td th:text="${warning.send_time}"></td> -->
+											<td>관리자</td>
+											<td th:text="${warning.title}" style="color: red;"></td>
+											<td th:text="${warning.content}"></td>
 										</tr>
 									</tbody>
 
@@ -307,46 +440,9 @@
 							</div>
 						</div>
 					</div>
+					</th:block>
 
-					<div class="box shadow-sm rounded bg-white mb-3">
-						<div class="box-title border-bottom p-3">
-							<h6 class="m-0">Education</h6>
-						</div>
-						<div class="box-body p-3 border-bottom">
-							<div class="d-flex align-items-top job-item-header pb-2">
-								<div class="mr-2">
-									<h6 class="font-weight-bold text-dark mb-0">Stanford
-										University</h6>
-									<div class="text-truncate text-primary">Master’s
-										programmes</div>
-									<div class="small text-gray-500">Oct 2020 - Present (4
-										year 7 month)</div>
-								</div>
-								<img class="img-fluid ml-auto mb-auto"
-									th:src="@{/images/e1.png}" alt="">
-							</div>
-							<p class="mb-0">Find the most qualified people in the most
-								unexpected places. Information for applicants to consider when
-								applying for local positions.</p>
-						</div>
-						<div class="box-body p-3">
-							<div class="d-flex align-items-top job-item-header pb-2">
-								<div class="mr-2">
-									<h6 class="font-weight-bold text-dark mb-0">Harvard
-										University</h6>
-									<div class="text-truncate text-primary">Maths and science
-										education</div>
-									<div class="small text-gray-500">Oct 2020 - Present (4
-										year 7 month)</div>
-								</div>
-								<img class="img-fluid ml-auto mb-auto"
-									th:src="@{/images/e2.png}" alt="">
-							</div>
-							<p class="mb-0">Wualified people in the most unexpected
-								places. Information for applicants to consider when applying for
-								local positions.</p>
-						</div>
-					</div>
+					
 				</main>
 
 				
@@ -364,12 +460,16 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(function() {
+			
+					 
+						 
+			
 			$(".review").click(function(e) {
 				let id = e.currentTarget.id;
 				var rating1 = '.rating' + id + ':checked';
 				var rating2 = $(rating1).val();//내가 선택한 별점
 				var content = $('#new-review' + id).val();
-
+				
 				console.log(id);
 				console.log(rating1);
 				console.log(rating2);
@@ -381,7 +481,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/review",
+					url : "/review",
 					data : {
 						"order_id" : id,
 						"rating" : rating2,
@@ -402,6 +502,249 @@
 			});
 			
 			
+			
+			$(".ok").click(function(e) {
+				 let id = e.currentTarget.id.slice(2);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":1,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","거래를 수락하였습니다");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".deny").click(function(e) {
+				 let id = e.currentTarget.id.slice(4);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":6,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","거래를 거절했습니다");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".finish").click(function(e) {
+				 let id = e.currentTarget.id.slice(6);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":2,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","작업을 완료하였습니다");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".confirm").click(function(e) {
+				 let id = e.currentTarget.id.slice(7);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":3,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","작업물 확인을 완료했습니다");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".cancel").click(function(e) {
+				 let id = e.currentTarget.id.slice(6);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":7,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","작업물 확인을 완료했습니다");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".ok1").click(function(e) {
+				 let id = e.currentTarget.id.slice(3);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":9,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","거래 취소를 수락했습니다");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".deny1").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":1,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","거래를 취소를 거부했습니다.");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".deny3").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":8,
+					},
+					success : async (data, textStatus) => {
+						console.log("success");
+						await swal("알림","거래 취소를 거부했습니다.");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".ok5").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":9,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+						swal("알림","거래 취소 요구를 승락했습니다.");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".deny5").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":1,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+						swal("알림","거래 취소를 거부했습니다");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			
+			
 			$(".heart").click(function(e) {
 				let id = e.currentTarget.id;
 		
@@ -414,26 +757,25 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/heartremove",
+					url : "/heartremove",
 					data : {
 						"like_id" : id,
 					},
-					success : function(data, textStatus) {
+					success : async (data, textStatus) => {
 						if (data == 'true') {
-							swal("알림","검색어를 입력해주세요.");							location.reload();
-
+							
+							await swal("알림","찜하기 취소");							
+							location.reload();
 						} else {
-							swal("검색어를 입력해주세요.");
+							await swal("검색어를 입력해주세요.");
 						}
 					},
-
 				});
-
 			});
 			
 			$(".titttle").click(function(e) {
 				let id = e.currentTarget.id;//포스트 아이디
-		
+			
 			
 
 				console.log(id);
@@ -443,7 +785,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/clicktitle",
+					url : "/clicktitle",
 					data : {
 						"id" : id,
 					},
@@ -469,7 +811,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/clickname",
+					url : "/clickname",
 					data : {
 						"id" : id,
 					},

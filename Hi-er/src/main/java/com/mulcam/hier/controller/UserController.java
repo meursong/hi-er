@@ -41,10 +41,6 @@ public class UserController {
 		}
 		
 	}
-	@GetMapping("/message")
-	public String message(Model model) throws Exception {
-			return "/messages";
-	}
 
 	@PostMapping("freelancerForm")
 	public String joinFreelancer(FreelancerForm form) throws Exception {
@@ -126,7 +122,6 @@ public class UserController {
 
 	@PostMapping("/signup")
 	public ModelAndView join(User user) {
-		System.out.println(user.toString());
 		ModelAndView mav = new ModelAndView("login");
 		try {
 			String openPassword = user.getPassword();
@@ -175,4 +170,5 @@ public class UserController {
 		return result;
 	}
 
+	
 }
