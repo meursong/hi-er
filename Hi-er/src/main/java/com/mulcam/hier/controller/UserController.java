@@ -122,7 +122,6 @@ public class UserController {
 
 	@PostMapping("/signup")
 	public ModelAndView join(User user) {
-		System.out.println(user.toString());
 		ModelAndView mav = new ModelAndView("login");
 		try {
 			String openPassword = user.getPassword();

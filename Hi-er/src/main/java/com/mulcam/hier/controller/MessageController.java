@@ -73,7 +73,6 @@ public class MessageController {
         Integer send_user_id = message_view.get(0).getSend_user_id();
         model.addAttribute("message_view", message_view);
         session.setAttribute("send_user_id", send_user_id);
-        System.out.println(message_view.get(0).getSend_user_id());
         return "/messages :: #msg_list";
 
     }
