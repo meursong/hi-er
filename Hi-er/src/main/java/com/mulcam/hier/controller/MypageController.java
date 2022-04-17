@@ -48,7 +48,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView("account");
 		try {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();// 세션에서 유저의 아이디를 가져옴
-			System.out.println(user_id);
+			
 			Map<String,Object> statistics1=mypageService.count(user_id);
 			
 			List<Map<String, Object>> ord = mypageService.history2(user_id);// 유저의 아이디로 거래내역을 가져옴
@@ -73,7 +73,7 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView("admin");
 		try {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();// 세션에서 유저의 아이디를 가져옴
-			System.out.println(user_id);
+			
 			List<Map<String, Object>> order2=mypageService.trade();
 			List<Map<String, Object>> order3=mypageService.allTrade();
 			Map<String,Object> statistics1=mypageService.count(user_id);//내정보에 보이는 짧은 통계 가져오는거
@@ -95,22 +95,22 @@ public class MypageController {
 
 		try {
 			if ("sortBoardCount".equals(id)) {
-				System.out.println("들어오모옴옴오모들어오모옴옴오모들어오모옴옴오모들어오모옴옴오모들어오모옴옴오모");
+				
 				List<Map<String, Object>> sortBoardCount1 = mypageService.sortBoardCount(id);
-				System.out.println(sortBoardCount1);
+				
 				model.addAttribute("sortBoardCounts", sortBoardCount1);
 
 			} else if ("sortPriceTotal".equals(id)) {
 				List<Map<String, Object>> sortBoardCount1 = mypageService.sortBoardCount(id);
-				System.out.println(sortBoardCount1);
+				
 				model.addAttribute("sortBoardCounts", sortBoardCount1);
 			} else if ("sortreported".equals(id)) {
 				List<Map<String, Object>> sortBoardCount1 = mypageService.sortBoardCount(id);
-				System.out.println(sortBoardCount1);
+				
 				model.addAttribute("sortBoardCounts", sortBoardCount1);
 			} else {// sortliked
 				List<Map<String, Object>> sortBoardCount1 = mypageService.sortBoardCount(id);
-				System.out.println(sortBoardCount1);
+				
 				model.addAttribute("sortBoardCounts", sortBoardCount1);
 			}
 		} catch (Exception e) {
@@ -130,7 +130,7 @@ public class MypageController {
 
 //				
 				Paging pageInfo = new Paging();
-				System.out.println(pageInfo);
+				
 				int page = Integer.parseInt(page2);// 페이지2는 스트링으로 들어왔기 때문에 인티저로 바꿔줌
 				List<Map<String, Object>> ord = mypageService.getBoardList(page, pageInfo, user_id);// 페이지에 맞는 5개의 결과값을
 																									// 가져옴
@@ -175,13 +175,13 @@ public class MypageController {
 	@ResponseBody
 	@PostMapping("nickupdate")
 	public String nickupdate(@RequestParam(value = "nick") String nick) {
-		System.out.println("여기 닉네임업데이트");
+		
 
 		User user = (User) session.getAttribute("loginedUser");
 		// boolean nickupdate=false;
 
 		try {
-			System.out.println("트라이 안");
+			
 			mypageService.nickupdate(nick, user.getUser_id());
 			user.setNickname(nick);
 			session.invalidate();
@@ -199,7 +199,7 @@ public class MypageController {
 	@ResponseBody
 	@PostMapping("passupdate")
 	public String passupdate(@RequestParam(value = "pass") String pass, @RequestParam(value = "pass2") String pass2) {
-		System.out.println("여기 패스워드 업데이트");
+		
 		User user = (User) session.getAttribute("loginedUser");
 		
 		try {
@@ -219,7 +219,7 @@ public class MypageController {
 	@ResponseBody
 	@PostMapping("intromody")
 	public String intromody(@RequestParam(value = "intro") String intro) {
-		System.out.println("여기가 인트로 안임");
+		
 		User user = (User) session.getAttribute("loginedUser");
 
 		try {
@@ -244,7 +244,7 @@ public class MypageController {
 	public String locationmody(@RequestParam(value = "address") String address,
 			@RequestParam(value = "address2") String address2) {
 		int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
-		System.out.println("여기가 로케이션모디 안임");
+		
 		try {
 			if (true == mypageService.addressupdate(address, address2, user_id)) {
 				return String.valueOf(true);
@@ -276,7 +276,6 @@ public class MypageController {
 	@PostMapping("/profileImageUpdate")
 	public String profileImageUpdate(MultipartFile file) {
 		
-		System.out.println("회원 이미지 수정 컨트롤러 도착");
 		String filename = null;
 		
 		User user = (User) session.getAttribute("loginedUser");
@@ -290,10 +289,8 @@ public class MypageController {
 			}
 			String time = Long.valueOf(new Date().getTime()).toString();
 			if (file != null && !file.isEmpty()) {
-				System.out.println(file.getOriginalFilename());
 				filename = time + file.getOriginalFilename();
 				File destFile = new File(path + filename);
-				System.out.println(destFile);
 				file.transferTo(destFile);
 				try {
 					mypageService.profileUpdate(filename, user.getUser_id());					

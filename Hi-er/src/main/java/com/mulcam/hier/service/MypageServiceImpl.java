@@ -22,21 +22,20 @@ public class MypageServiceImpl implements MypageService {
 	MypageDAO mypageDAO;
 	@Override
 	public List<Map<String, Object>> history2(int user_id) throws Exception {
-		System.out.println("서비스임플 안이다다다다다다");
-		// 아이디로 찾아서 orderdto에 넣음
+		
+		
 		List<Map<String, Object>> ord = mypageDAO.queryOrdersss(user_id);
-		System.out.println("ord찍기 바로전");
-		System.out.println(ord);
+		
 
 		return ord;
 	}
 
 	@Override
 	public List<Map<String, Object>> history3(int user_id) throws Exception {
-		System.out.println("서비스임플 안이다다다다다다");
-		// 아이디로 찾아서 orderdto에 넣음
+		
+		
 		List<Map<String, Object>> likepost = mypageDAO.queryLikepost(user_id);
-		System.out.println("ord찍기 바로전");
+		
 
 		return likepost;
 	}
@@ -46,12 +45,8 @@ public class MypageServiceImpl implements MypageService {
 		HashMap<String,Integer>map=new HashMap<>();
 		int listCount = mypageDAO.countBoard(user_id);
 
-		// 내가 가진 게시글 수가 100개라면 반환된 값이 100임 ->listCount=100
-		// 총페이지수 올림처리
 		int lastPage = (int) Math.ceil((double) listCount / 5);
-		System.out.println(lastPage+"라스트페이지@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		// 가정한 리스트카운트가 100이라면 100을 10으로 나누고 더블로 캐스팅 해서 올림을 함
-		// 그리고 인트형으로 바꿈 결과적으로 maxPage=10이됨
+		
 
 		int startPage = (((int) ((double) page / 5 + 0.9)) - 1) * 5 + 1;
 		// 현재 페이지에 보여줄 시작 페이지수(1,11,21)

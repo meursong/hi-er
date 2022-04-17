@@ -42,7 +42,6 @@ public class MainController {
 		try {
 			List<User> bestUser = mainService.getBestUser();
 			List<Product> bestProduct = mainService.getBestProducts();
-			System.out.println(bestProduct);
 			mav.addObject("bestProduct", bestProduct);
 			mav.addObject("bestUser", bestUser);
 			User user = (User) session.getAttribute("loginedUser");
@@ -55,7 +54,6 @@ public class MainController {
 					isLikeList.add(isLike);
 				}
 			}
-			System.out.println(isLikeList.size());
 			mav.addObject("isLikeList", isLikeList);
 			
 			
