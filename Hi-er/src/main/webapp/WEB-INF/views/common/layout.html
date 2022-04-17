@@ -236,7 +236,7 @@
 						<h6 class="dropdown-header d-flex align-items-center"
 							th:if="${session.loginedUser}">
 							<img class="dropdown-user-img"
-								th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.jpg'"/>
+								th:src="@{/upload/} + ${session.loginedUser.profile_image}" onerror="this.src='/images/user/default.jpg'"/>
 							<div class="dropdown-user-details">
 								<div class="dropdown-user-details-name">
 									[[${session.loginedUser.name }]]</div>
