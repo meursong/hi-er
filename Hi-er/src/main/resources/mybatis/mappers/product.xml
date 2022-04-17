@@ -18,8 +18,7 @@
                count(r.review_id) as review_count,
                p.createdAt,
                u.profile_image,
-               p.content,
-               pi.p_pkg_description
+               p.content
         from product p
                  left join user u on u.user_id = p.seller_id
                  left join review r on p.product_id = r.product_id
