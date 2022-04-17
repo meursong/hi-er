@@ -38,9 +38,9 @@
 	
 	<select id="sellet_seller_info" resultType="FreelancerUser" parameterType="int">
 		<![CDATA[
-			select u.nickname,(select avg(star_point) from review where seller_id=2) as avg_star_point,f.address,u.name,u.email 
+			select u.nickname,(select avg(star_point) from review where seller_id=2) as avg_star_point,f.address,u.name,u.email,u.profile_image 
 	from user u left join f_info f on user_id=f_id
-				where u.type=2 and u.user_id=2 ;
+				where u.type=2 and u.user_id=#{seller_id};
 		]]>
 	</select>
 	

@@ -282,7 +282,7 @@ public class PostController {
 	public ModelAndView detail(@PathVariable("pid") Integer pid, @ModelAttribute("params") Review params) {
 		ModelAndView mav = new ModelAndView("product-detail");
 		params.setProduct_id(pid);
-		params.setRecordsPerPage(2);
+		params.setRecordsPerPage(3);
 		try {
 			User logined_user = (User) session.getAttribute("loginedUser");
 			if (logined_user != null) {
@@ -315,6 +315,7 @@ public class PostController {
 				
 				
 				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
+				System.out.println(sellerInfo.getSeller_id() + ": 셀러아이디인덴이러민라ㅓㅁㄴㄻ넏라ㅣㅁㄴ더");
 				Map<String, Object> likeInfo = new HashMap<String, Object>();
 
 				
