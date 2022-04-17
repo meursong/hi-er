@@ -72,14 +72,12 @@ public class PostController {
 
 	@GetMapping("/detail")
 	public ModelAndView productDetailPage() {
-		System.out.println("게시물상세보기요청");
 		ModelAndView mav = new ModelAndView("product-detail");
 		return mav;
 	}
 
 	@GetMapping("/designWrite")
 	public String designWrite(Model model) throws Exception {
-		System.out.println((User) session.getAttribute("loginedUser"));
 		if ((User) session.getAttribute("loginedUser") != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 			User email = us.selectEmail(user_id);
@@ -92,7 +90,6 @@ public class PostController {
 
 	@GetMapping("/videoWrite")
 	public String videoWrite(Model model) throws Exception {
-		System.out.println((User) session.getAttribute("loginedUser"));
 		if ((User) session.getAttribute("loginedUser") != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 			User email = us.selectEmail(user_id);
@@ -105,7 +102,6 @@ public class PostController {
 
 	@GetMapping("/ITwrite")
 	public String itWrite(Model model) throws Exception {
-		System.out.println((User) session.getAttribute("loginedUser"));
 		if ((User) session.getAttribute("loginedUser") != null) {
 			int user_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 			User email = us.selectEmail(user_id);
@@ -169,7 +165,6 @@ public class PostController {
 
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
-		System.out.println("영상편집 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			product.setFilename1(resizeFileupload(product.getFile1()));
@@ -191,7 +186,6 @@ public class PostController {
 
 	@PostMapping("/designWrite")
 	public String write(@ModelAttribute Product product) {
-		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			product.setFilename1(resizeFileupload(product.getFile1()));
@@ -213,7 +207,6 @@ public class PostController {
 
 	@PostMapping("/itWrite")
 	public String itWrite(@ModelAttribute Product product) {
-		System.out.println("디자인 글쓰기 경로!!!!!!!!!!");
 		int seller_id = ((User) session.getAttribute("loginedUser")).getUser_id();
 		try {
 			product.setFilename1(resizeFileupload(product.getFile1()));
@@ -309,29 +302,22 @@ public class PostController {
 					Map<String, Integer> nullreview = new HashMap<String, Integer>();
 					nullreview.put("star_point", i + 1);
 					nullreview.put("count", 0);
-					System.out.println(nullreview + "널리뷰카운트야");
 					fiveReviewCount.add(i, nullreview);
 				}
 				// 있는 데이터만 맞는 위치로 add
 				for (int j = 0; j < reviewCount.size(); j++) {
-					System.out.println("for문 속의 리뷰카운트 입니다" + reviewCount.get(j));
 					fiveReviewCount.set(reviewCount.get(j).get("star_point") - 1, reviewCount.get(j));
 				}
 
-				System.out.println(fiveReviewCount.size() + "개의 데이터 완성ㄹ!@");
 			
 				fiveReviewCount = fiveReviewCount.stream().sorted((o1, o2) -> o2.get("star_point").compareTo(o1.get("star_point")) ).collect(Collectors.toList());
-				System.out.println(fiveReviewCount);
+				
 				
 				
 				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
 				Map<String, Object> likeInfo = new HashMap<String, Object>();
 
-				/*
-				 * int sumReviewCnt = 0; for (int i=0; i<reviewCount.size(); i++) { Integer t =
-				 * reviewCount.get(i).get("count"); sumReviewCnt+=t; }
-				 * System.out.println(sumReviewCnt);
-				 */
+				
 
 				if (maxReviewCnt == 0) {
 					maxReviewCnt = 1;
@@ -377,12 +363,12 @@ public class PostController {
 	@ResponseBody
 	@PostMapping("/like")
 	public Map<String, Object> like(@RequestParam("pid") Integer pid) {
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer like_userid = ((User) session.getAttribute("loginedUser")).getUser_id();
 			result = postService.like(pid, like_userid);
-			System.out.println(result);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -393,8 +379,6 @@ public class PostController {
 	@PostMapping("/payment")
 	public ModelAndView pay(@ModelAttribute Product product, @ModelAttribute FreelancerUser freelancerUser) { // mav로
 		ModelAndView mav = new ModelAndView("payment");
-		System.out.println(product.getPaymentPkg());
-		System.out.println(product.getB_price());
 		//
 		// abc가 b면 >> model 에다가 b를 통째로 넣어요...
 		// abc가 s면 >> model 에다가 s를 통째로 넣어요...
