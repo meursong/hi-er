@@ -18,7 +18,7 @@
 	</select>
 	<select id="selectReviewCount" resultType="Map" parameterType="Integer">
 		<![CDATA[
-		select star_point, count(*) as count from review where product_id=#{product_id} group by star_point;
+		select star_point, count(*) as count from review where product_id=#{product_id} group by star_point order by star_point;
 		]]>
 	</select>
 	<select id="totalReviewCount" resultType="Integer" parameterType="Integer">

@@ -125,7 +125,7 @@
 		<div class="container">
 			<!-- Sidebar Toggle (Topbar) -->
 			<a class="navbar-brand" href="/"><img
-				th:src="@{/images/logo.png}" style="width: 100%;" alt=""></a>
+				th:src="@{/images/logo.png}" alt=""></a>
 			<!-- Topbar Search -->
 			<div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
 				<div class="input-group">
@@ -227,7 +227,7 @@
 					id="navbarDropdownUserImage" href="javascript:void(0);"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><img class="img-fluid"
-						th:src="@{/upload/} + ${profile_image}" onerror="this.src='/images/user/default.png'">
+						th:src="@{/images/user/default.png}" width="21px;">
 						</a>
 					<div
 						class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
@@ -347,7 +347,7 @@
 				th:unless="${session.loginedUser == null}">
 				<li class="nav-item" th:if="${session.loginedUser.type!=2	}"><a
 					class="nav-link" th:href="@{/freelancerForm}"> <i
-						class="fa fa-fw fa-trophy"></i> <span>프리랜서 전환</span></a></li>
+						class="fa fa-fw fa-trophy"></i> <span>프리랜서 등록</span></a></li>
 			</ul>
 		</div>
 	</nav>
@@ -371,12 +371,11 @@
                 10:30~18:00(점심시간 13:00~14:00) <br />주말,공휴일 휴무
               </p>
 			<button type="button" data-toggle="modal"
-			data-target="#exampleModal" class="c-btn c-fill-color-btn">1:1문의하기
+			data-target="#qmodal" class="c-btn c-fill-color-btn">1:1문의하기
 			</button> 
-			 <div th:replace="fragments/question :: q_modal"></div>
+			 <div th:replace="fragments/question :: q_modal"></div>-->
 
 			</h2>
-            <div></div>
           </div>
           <div class="footer-list">
             <h2>Hi-er</h2>
@@ -451,7 +450,6 @@
   <!-- Custom -->
   <script th:src="@{/js/custom.js}"></script>
   <script th:src="@{/js/star.js}"></script>
-
   <script>
     function search1() {
         const searchKeyword = $("input[id='searchKeyword1']").val();

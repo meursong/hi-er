@@ -4,11 +4,15 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -91,7 +95,7 @@ public class PostController {
 			return "login";
 		}
 	}
-	
+
 	@GetMapping("/ITwrite")
 	public String itWrite(Model model) throws Exception {
 		System.out.println((User) session.getAttribute("loginedUser"));
@@ -104,7 +108,6 @@ public class PostController {
 			return "login";
 		}
 	}
-
 
 	private String fileupload(MultipartFile file) {
 		String filename = null;
@@ -121,24 +124,24 @@ public class PostController {
 		}
 		return filename;
 	}
-	
+
 	private String resizeFileupload(MultipartFile file) {
 		String filename = null;
 		try {
 			String path = servletContext.getRealPath("/upload/");
 			String time = Long.valueOf(new Date().getTime()).toString();
-			int width=730, height=450;
+			int width = 730, height = 450;
 			if (file != null && !file.isEmpty()) {
 				filename = file.getOriginalFilename() + time;
 				File destFile = new File(path + filename);
 				BufferedImage inputImage = ImageIO.read(file.getInputStream());
-				BufferedImage outputImage = new BufferedImage(width,height,inputImage.getType());
-				
+				BufferedImage outputImage = new BufferedImage(width, height, inputImage.getType());
+
 				Graphics2D graphics2D = outputImage.createGraphics();
 				graphics2D.drawImage(inputImage, 0, 0, width, height, null);
 				graphics2D.dispose();
 				String fileName = file.getOriginalFilename();
-				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);			
+				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
 				ImageIO.write(outputImage, ext, destFile);
 			}
 		} catch (IOException e) {
@@ -146,7 +149,6 @@ public class PostController {
 		}
 		return filename;
 	}
-	
 
 	@PostMapping("/videoWrite")
 	public String videoWrite(@ModelAttribute Product product) {
@@ -162,7 +164,7 @@ public class PostController {
 			product.setFilename7(resizeFileupload(product.getFile7()));
 			product.setFilename8(resizeFileupload(product.getFile8()));
 			product.setIs_available(0); // 0:거래가능 1:거래중지
-			product.setSeller_id(seller_id); 
+			product.setSeller_id(seller_id);
 			postService.writePost(product);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -213,7 +215,7 @@ public class PostController {
 		}
 		return "redirect:/product/category/3"; // 추후 게시판 페이지로 변경
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/uploadImage")
 	public String uploadImage(HttpServletRequest request, HttpServletResponse response,
@@ -273,28 +275,54 @@ public class PostController {
 				boolean isLike = postService.isLike(pid, logined_user.getUser_id());
 				List<Review> reviews = reviewService.prodReviewList(params);
 				Integer maxReviewCnt = reviewService.maxReviewCnt(pid);
-				List<Map<String,Integer>> reviewCount = reviewService.reviewCount(pid);
+				Integer maxReviewCntOriginal = maxReviewCnt;
+				List<Map<String, Integer>> reviewCount = reviewService.reviewCount(pid);
+
+				List<Map<String, Integer>> fiveReviewCount = new ArrayList<>();
+
+				// fiveReviewCount 전부 <별점,0>으로 초기화하고
+				for (int i = 0; i < 5; i++) {
+					Map<String, Integer> nullreview = new HashMap<String, Integer>();
+					nullreview.put("star_point", i + 1);
+					nullreview.put("count", 0);
+					System.out.println(nullreview + "널리뷰카운트야");
+					fiveReviewCount.add(i, nullreview);
+				}
+				// 있는 데이터만 맞는 위치로 add
+				for (int j = 0; j < reviewCount.size(); j++) {
+					System.out.println("for문 속의 리뷰카운트 입니다" + reviewCount.get(j));
+					fiveReviewCount.set(reviewCount.get(j).get("star_point") - 1, reviewCount.get(j));
+				}
+
+				System.out.println(fiveReviewCount.size() + "개의 데이터 완성ㄹ!@");
+			
+				fiveReviewCount = fiveReviewCount.stream().sorted((o1, o2) -> o2.get("star_point").compareTo(o1.get("star_point")) ).collect(Collectors.toList());
+				System.out.println(fiveReviewCount);
+				
+				
 				FreelancerUser sellerInfo = userService.sellerInfo(product.getSeller_id());
 				Map<String, Object> likeInfo = new HashMap<String, Object>();
-				
+
 				/*
 				 * int sumReviewCnt = 0; for (int i=0; i<reviewCount.size(); i++) { Integer t =
 				 * reviewCount.get(i).get("count"); sumReviewCnt+=t; }
 				 * System.out.println(sumReviewCnt);
 				 */
-				
-				
-				System.out.println(maxReviewCnt);
+
+				if (maxReviewCnt == 0) {
+					maxReviewCnt = 1;
+				}
 				likeInfo.put("likeNum", likedNum);
 				likeInfo.put("isLike", isLike);
-				
+
 				mav.addObject("likeInfo", likeInfo);
 				mav.addObject("product", product);
 				mav.addObject("priceInfo", priceInfo);
 				mav.addObject("reviews", reviews);
 				mav.addObject("sellerInfo", sellerInfo);
-				mav.addObject("reviewCounts", reviewCount);
+				mav.addObject("reviewCounts", fiveReviewCount);
 				mav.addObject("maxReviewCnt", maxReviewCnt);
+				mav.addObject("maxReviewCntOriginal", maxReviewCntOriginal);
 			} else {
 				mav.setViewName("login");
 			}
@@ -321,7 +349,6 @@ public class PostController {
 		}
 		return result;
 	}
-
 
 	@ResponseBody
 	@PostMapping("/like")
@@ -350,7 +377,7 @@ public class PostController {
 		// a
 		String pkg = product.getPaymentPkg();
 		int price = product.getB_price();
-		if(pkg.equals("Basic")) {
+		if (pkg.equals("Basic")) {
 			mav.addObject("price", product.getB_price());
 			mav.addObject("additional_price", product.getB_additional_price());
 			mav.addObject("commercial", product.getB_commercial());
@@ -361,7 +388,7 @@ public class PostController {
 			mav.addObject("pkg_description", product.getB_pkg_description());
 			mav.addObject("revision", product.getB_revision());
 			mav.addObject("sns_Kit", product.getB_sns_Kit());
-		} else if(pkg.equals("Standard")) {
+		} else if (pkg.equals("Standard")) {
 			mav.addObject("price", product.getS_price());
 			mav.addObject("additional_price", product.getS_additional_price());
 			mav.addObject("commercial", product.getS_commercial());
@@ -372,7 +399,7 @@ public class PostController {
 			mav.addObject("pkg_description", product.getS_pkg_description());
 			mav.addObject("revision", product.getS_revision());
 			mav.addObject("sns_Kit", product.getS_sns_Kit());
-		} else if(pkg.equals("Premium")) {
+		} else if (pkg.equals("Premium")) {
 			mav.addObject("price", product.getP_price());
 			mav.addObject("additional_price", product.getP_additional_price());
 			mav.addObject("commercial", product.getP_commercial());
