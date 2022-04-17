@@ -253,6 +253,7 @@
 		select *
 		from messages
 		where recv_user_id=#{user_id} and send_user_id=0;
+	
 	]]>	
 	</select>
 	
@@ -338,7 +339,7 @@
 		select r.createdAt, p.title,u.nickname,r.reason,r.product_id,r.reported_userid,r.report_id
 		from user u join product p join report r
 		on p.product_id=r.product_id and p.seller_id=u.user_id
-		order by r.createdAt desc limit 5
+		order by r.createdAt desc
 		
 	]]>	
 	</select>

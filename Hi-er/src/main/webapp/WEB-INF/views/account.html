@@ -148,12 +148,16 @@
 						<div class="box-body p-3">
 							<div>
 								<table class="table table-striped">
+								
+
+
+
 									<thead>
 										<tr>
 											<th>날짜</th>
 											<th>상품제목</th>
 											<th>판매자/구매자</th>
-											<th>구매수량</th>
+											<th>수량</th>
 											<th>총 가격</th>
 											<th>상태</th>
 											<th></th>
@@ -168,7 +172,8 @@
 												<td
 													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
 												<td class="titttle" th:id="${order.product_id}"
-													th:text="${order.title}" style="cursor: pointer"></td>
+													th:text="${order.title}" style="cursor: pointer;width:130px;
+													overflow: auto;" ></td>
 												<td th:text="${order.nickname}"></td>
 												<td th:text="${order.order_qty}"></td>
 												<td th:text="${order.order_price}"></td>
@@ -208,7 +213,7 @@
 													
 												</th:block>
 												
-												</th:block>
+												
 												<th:block th:if=${order.order_status}==7>
 													<td>구매자가 거래 취소 요청했습니다</td>
 													<td><a class="btn btn-success btn-green ok1"  th:id="'ok1'+${order.order_id}"
@@ -222,9 +227,8 @@
 													<td>거래취소 요청</td>
 													
 												</th:block>
-												
 												<th:block th:if=${order.order_status}==9>
-													<td>거래취소 완료</td>
+													<td>거래취소</td>
 													
 												</th:block>
 											</th:block>
@@ -234,7 +238,8 @@
 												<td
 													th:text="${#temporals.format(order.createdAt,'yyyy-MM-dd')}"></td>
 												<td class="titttle" th:id="${order.product_id}"
-													th:text="${order.title}" style="cursor: pointer"></td>
+													th:text="${order.title}" style="cursor: pointer;width:130px;
+													overflow: auto;"></td>
 												<td class="selller" th:id="${order.seller_id}"
 													th:text="${order.nickname2}" style="cursor: pointer"></td>
 												<td th:text="${order.order_qty}"></td>
@@ -246,7 +251,8 @@
 												<th:block th:if=${order.order_status}==1>
 													<td>작업중</td>
 													<td><a class="btn btn-success btn-green cancel"  th:id="'cancel'+${order.order_id}"
-																		>작업물 확인 완료</a></td>
+																		>구매자 거래 취소</a></td>
+													
 												</th:block>
 												<th:block th:if=${order.order_status}==2>
 													<td>작업완료(확인 대기) </td>
@@ -270,19 +276,24 @@
 													
 												</th:block>
 												
-												</th:block>
+												
 												<th:block th:if=${order.order_status}==7>
 													<td>거래 취소 요청</td>
 													
 												</th:block>
 												
-												<th:block th:if=${order.order_status}==8>
+												<th:block th:if=${order.order_status}==8 >
 													<td>판매자가 거래 취소 요청</td>
+												<td><a class="btn btn-success btn-green ok5"  th:id="'deny1'+${order.order_id}"
+																		>거래취소 확인</a></td>		
+												
+												<td><a class="btn btn-success btn-green deny5"  th:id="'deny1'+${order.order_id}"
+																		>거래취소 거부</a></td>		
 													
 												</th:block>
 												
-												<th:block th:if=${order.order_status}==8>
-													<td>거래취소 완료</td>
+												<th:block th:if=${order.order_status}==9>
+													<td>거래취소</td>
 													
 												</th:block>
 											
@@ -502,7 +513,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":1,
 					},
@@ -526,7 +537,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":6,
 					},
@@ -574,7 +585,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":3,
 					},
@@ -598,7 +609,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":7,
 					},
@@ -622,7 +633,7 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":9,
 					},
@@ -646,13 +657,13 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":1,
 					},
 					success : function(data, textStatus) {
 						console.log("success");
-						swal("알림","거래 취소를 거부했습니다.");
+						swal("알림","거래를 취소했습니다");
 						location.reload();
 					},
 
@@ -670,13 +681,61 @@
 					type : "post",
 					dataType : "text",
 					async : false,
-					url : "http://localhost:8090/updatestatus",
+					url : "/updatestatus",
 					data : {
 						"id" : id,"num":8,
 					},
 					success : function(data, textStatus) {
 						console.log("success");
 						swal("알림","거래 취소를 거부했습니다.");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".ok5").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":9,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+						swal("알림","거래 취소 요구를 승락했습니다.");
+						location.reload();
+					},
+
+				});
+
+			});
+			
+			$(".deny5").click(function(e) {
+				 let id = e.currentTarget.id.slice(5);
+				 console.log(id);
+				 console.log(id);
+				
+				
+				$.ajax({
+					type : "post",
+					dataType : "text",
+					async : false,
+					url : "/updatestatus",
+					data : {
+						"id" : id,"num":1,
+					},
+					success : function(data, textStatus) {
+						console.log("success");
+						swal("알림","거래 취소를 거부했습니다");
 						location.reload();
 					},
 
