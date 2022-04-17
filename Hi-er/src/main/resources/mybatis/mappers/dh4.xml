@@ -14,6 +14,7 @@
 		<![CDATA[
         select m.msg_id,
                us.nickname as send_nickname,
+               u.nickname as recv_nickname,
                m.title,
                m.send_time,
                m.read_chk,
@@ -23,11 +24,13 @@
                  left join user us on us.user_id = m.send_user_id
         where (REPLACE(us.nickname, ' ', '') like '%${nickname}%'
             or us.nickname like '%${nickname}%')
-          and m.recv_user_id = #{recv_user_id}
+          and m.recv_user_id = #{recv_user_id} or send_user_id = #{recv_user_id}
         order by msg_id desc
         limit #{paginationInfo.firstRecordIndex}, #{recordsPerPage};
         ]]>
 	</select>
+
+
 
     <select id="message_count" parameterType="Messages" resultType="Integer">
 		<![CDATA[
