@@ -180,6 +180,7 @@ public class MypageServiceImpl implements MypageService {
 		review.setStar_point(star_point);
 		try {
 			mypageDAO.insertreview(review);
+			mypageDAO.fourToFive(order_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;// 에러뜨면 펄스 반환

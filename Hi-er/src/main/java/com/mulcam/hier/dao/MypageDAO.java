@@ -53,6 +53,7 @@ public interface MypageDAO {
 	public void oneToSix(int id) throws Exception;
 	public void oneToSeven(int id)throws Exception;
 	public void sevenToNine(int id)throws Exception;
+	public void fourToFive(int id)throws Exception;
 	public void oneToEight(int id)throws Exception;
 	public List<Map<String, Object>> trade()throws Exception;
 	public List<Map<String, Object>> allTrade()throws Exception;

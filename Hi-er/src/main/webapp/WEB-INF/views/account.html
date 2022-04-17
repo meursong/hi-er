@@ -199,6 +199,10 @@
 													<td>거래완료(입금완료)</td>
 													
 												</th:block>
+												<th:block th:if=${order.order_status}==5>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
 												<th:block th:if=${order.order_status}==6>
 													<td>거래취소(신청 거부)</td>
 													
@@ -257,6 +261,10 @@
 													<td>거래완료(입금완료)</td>
 													
 												</th:block>
+												<th:block th:if=${order.order_status}==5>
+													<td>거래완료(입금완료)</td>
+													
+												</th:block>
 												<th:block th:if=${order.order_status}==6>
 													<td>거래 취소(판매자 수락 거절)</td>
 													
@@ -285,8 +293,8 @@
 															<div class="well well-sm">
 																
 																<div class="text-right" style="padding-bottom: 10px;">
-																	<a class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
-																		>리뷰 작성</a>
+																	<button class="btn btn-success btn-green open-review-box"  th:id="'open-review-box'+${order.order_id}"
+																		>리뷰 작성</button>
 																</div>
 
 																<div class="row" th:id="'post-review-box'+${order.order_id}" style="display: none;">
@@ -393,9 +401,7 @@
 					<div class="box shadow-sm rounded bg-white mb-3">
 						<div class="d-flex box-title border-bottom p-3">
 							<h6 class="m-0 col-6 bold">관리자로부터 받은 메세지</h6>
-							<!-- <div class="col-4"></div>
-							<button type="button" class="btn btn-light btn-sm col-2"
-								th:onclick="|location.href='@{/mypage/3}'|">모든정보보기</button> -->
+							
 						</div>
 						<div class="box-body p-3">
 							<div>
@@ -409,11 +415,12 @@
 											
 										</tr>
 									</thead>
-									<tbody>
+									<tbody class="likepost">
 										<tr th:each="warning: ${warnings}">
-											<td th:text="${warning.send_time}"></td>
+											<td th:text="${#temporals.format(warning.send_time,'yyyy-MM-dd')}"></td>
+											<!-- <td th:text="${warning.send_time}"></td> -->
 											<td>관리자</td>
-											<td th:text="${warning.title}"></td>
+											<td th:text="${warning.title}" style="color: red;"></td>
 											<td th:text="${warning.content}"></td>
 										</tr>
 									</tbody>
@@ -451,7 +458,7 @@
 				var rating1 = '.rating' + id + ':checked';
 				var rating2 = $(rating1).val();//내가 선택한 별점
 				var content = $('#new-review' + id).val();
-
+				
 				console.log(id);
 				console.log(rating1);
 				console.log(rating2);
