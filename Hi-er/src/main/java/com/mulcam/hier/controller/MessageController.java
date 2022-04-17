@@ -92,14 +92,20 @@ public class MessageController {
         if (session.getAttribute("loginedUser") == null) {
             return "/login";
         }
-
         Integer logined_id = ((User) session.getAttribute("loginedUser")).getUser_id();
         params.setRecv_user_id(logined_id);
         params.setNickname(nickname);
+//        String nick = params.getNickname();
+//        System.out.println(nick);
         params.setPageSize(3);
         params.setRecordsPerPage(5);
         List<Messages> msgList = ms.message_list(params);
+        System.out.println(msgList);
         model.addAttribute("msgList", msgList);
+        Object test =model.getAttribute("msgList");
+        System.out.println(test);
+
+//        model.addAttribute("nick", nick);
 
 
         return "/messages :: #ms";

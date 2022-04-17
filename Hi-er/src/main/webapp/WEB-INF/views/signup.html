@@ -50,6 +50,7 @@
 									<i class="mdi mdi-account position-absolute"></i> <input
 										type="text" id="name" name="name" class="form-control" required>
 								</div>
+								<div id="checkname"></div>
 							</div>
 
 							<div class="form-group">
@@ -177,8 +178,18 @@
 	*/
 	</script>
 	<script>
-		
-		
+
+		$('#name').focusout(function(){
+			let name = $('#name').val();
+			if(name =='') {
+				$("#checkname").html('이름을 입력해주세요');
+				$("#checkname").css('color','red');
+				return
+			}
+			$("#checkname").html('이름이 입력되었습니다');
+			$("#checkname").css('color','green');
+
+		})
 	
 	
 	$('#password').focusout(function(){
@@ -208,6 +219,7 @@
 	$('#password2').focusout(function(){
 		let password1 = $('#password').val();
 		let password2 = $('#password2').val();
+
 		if (password1 != password2) {
 			$("#checkpassword").html('두 비밀번호가 틀립니다.');
 			$("#checkpassword").css('color','red');
@@ -220,6 +232,9 @@
 			$('#signUpBtn').attr('disabled', false);
 		}
 	})
+
+
+
 	$('#email').focusout(function(){
 		let useremail = $('#email').val();
 		
@@ -229,6 +244,13 @@
 			data : {"useremail": useremail},
 			dataType : 'json',
 			success : function(result){
+
+				if(useremail =='') {
+					$("#checkemail").html('이메일을 입력해주세요');
+					$("#checkemail").css('color','red');
+					return
+				}
+
 				if(result){
 					$("#checkemail").html('사용할 수 있는 이메일입니다.');
 					$("#checkemail").css('color','green');
@@ -257,6 +279,13 @@
 			data : {"usernickname": usernickname},
 			dataType : 'json',
 			success : function(result){
+
+					if(usernickname =='') {
+						$("#checknickname").html('닉네임을 입력해주세요');
+						$("#checknickname").css('color','red');
+						return
+					}
+
 				if(result){
 					$("#checknickname").html('사용할 수 있는 닉네임입니다.');
 					$("#checknickname").css('color','green');
