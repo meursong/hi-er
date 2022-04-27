@@ -344,120 +344,120 @@
 	</select>
 	
 	<!--게시물 순으로 가져오기 많이 게시한 순서대로-->
-	<select id="sortBoardCount" resultType="Map">
-	<![CDATA[
-		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
-		from 
-		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
-			from user u left join product p
-			on u.user_id=p.seller_id
-			group by nickname) a 
-		join
-		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
-			from user u left join report r
-			on r.reported_userid=u.user_id
-			GROUP BY NICKNAME) B 
-		join
-		(select u.nickname,count(like_id) as liked,u.type,u.user_id
-			from user u left join likes l
-			on u.user_id=l.liked_userid
-			group by nickname) c 
-		join
-		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
-			from user u left join orders o
-			on u.user_id=o.seller_id
-			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
-		order by a.boardCount desc;
-		
-	]]>	
-	</select>
-	
-	<!--판매 총액 순으로 가져오기-->
-	<select id="sortAllPrice" resultType="Map">
-	<![CDATA[
-		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
-		from 
-		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
-			from user u left join product p
-			on u.user_id=p.seller_id
-			group by nickname) a 
-		join
-		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
-			from user u left join report r
-			on r.reported_userid=u.user_id
-			group by nickname) b 
-		join
-		(select u.nickname,count(like_id) as liked,u.type,u.user_id
-			from user u left join likes l
-			on u.user_id=l.liked_userid
-			group by nickname) c 
-		join
-		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
-			from user u left join orders o
-			on u.user_id=o.seller_id
-			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
-		order by d.allPrice desc;
-		
-	]]>	
-	</select>
-	
-	<!--신고 많이 당한 순서대로 가져오기-->
-	<select id="sortReported" resultType="Map">
-	<![CDATA[
-		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
-		from 
-		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
-			from user u left join product p
-			on u.user_id=p.seller_id
-			group by nickname) a 
-		join
-		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
-			from user u left join report r
-			on r.reported_userid=u.user_id
-			group by nickname) b 
-		join
-		(select u.nickname,count(like_id) as liked,u.type,u.user_id
-			from user u left join likes l
-			on u.user_id=l.liked_userid
-			group by nickname) c 
-		join
-		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
-			from user u left join orders o
-			on u.user_id=o.seller_id
-			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
-		order by b.reported desc;
-		
-	]]>	
-	</select>
-	
-	<!--좋아요 많이 받은 순서대로 가져오기-->
-	<select id="sortLiked" resultType="Map">
-	<![CDATA[
-		select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
-		from 
-		(select u.nickname,count(product_id) as boardCount,u.type,u.user_id
-			from user u left join product p
-			on u.user_id=p.seller_id
-			group by nickname) a 
-		join
-		(select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
-			from user u left join report r
-			on r.reported_userid=u.user_id
-			group by nickname) b 
-		join
-		(select u.nickname,count(like_id) as liked,u.type,u.user_id
-			from user u left join likes l
-			on u.user_id=l.liked_userid
-			group by nickname) c 
-		join
-		(select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
-			from user u left join orders o
-			on u.user_id=o.seller_id
-			group by nickname) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
-		order by c.liked desc;
-		
-	]]>	
-	</select>
+   <select id="sortBoardCount" resultType="Map">
+   <![CDATA[
+      select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+      from 
+      (select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+         from user u left join product p
+         on u.user_id=p.seller_id
+         group by nickname,u.type,u.user_id) a 
+      join
+      (select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+         from user u left join report r
+         on r.reported_userid=u.user_id
+         GROUP BY NICKNAME,u.type,u.user_id) b 
+      join
+      (select u.nickname,count(like_id) as liked,u.type,u.user_id
+         from user u left join likes l
+         on u.user_id=l.liked_userid
+         group by nickname,u.type,u.user_id) c 
+      join
+      (select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+         from user u left join orders o
+         on u.user_id=o.seller_id
+         group by nickname,u.type,u.user_id) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
+      order by a.boardCount desc;
+      
+   ]]>   
+   </select>
+   
+   <!--판매 총액 순으로 가져오기-->
+   <select id="sortAllPrice" resultType="Map">
+   <![CDATA[
+      select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+      from 
+      (select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+         from user u left join product p
+         on u.user_id=p.seller_id
+         group by nickname,u.type,u.user_id) a 
+      join
+      (select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+         from user u left join report r
+         on r.reported_userid=u.user_id
+         group by nickname,u.type,u.user_id) b 
+      join
+      (select u.nickname,count(like_id) as liked,u.type,u.user_id
+         from user u left join likes l
+         on u.user_id=l.liked_userid
+         group by nickname,u.type,u.user_id) c 
+      join
+      (select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+         from user u left join orders o
+         on u.user_id=o.seller_id
+         group by nickname,u.type,u.user_id) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname  
+      order by d.allPrice desc;
+      
+   ]]>   
+   </select>
+   
+   <!--신고 많이 당한 순서대로 가져오기-->
+   <select id="sortReported" resultType="Map">
+   <![CDATA[
+      select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+      from 
+      (select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+         from user u left join product p
+         on u.user_id=p.seller_id
+         group by nickname,u.type,u.user_id) a 
+      join
+      (select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+         from user u left join report r
+         on r.reported_userid=u.user_id
+         group by nickname,u.type,u.user_id) b 
+      join
+      (select u.nickname,count(like_id) as liked,u.type,u.user_id
+         from user u left join likes l
+         on u.user_id=l.liked_userid
+         group by nickname,u.type,u.user_id) c 
+      join
+      (select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+         from user u left join orders o
+         on u.user_id=o.seller_id
+         group by nickname,u.type,u.user_id) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname
+      order by b.reported desc;
+      
+   ]]>   
+   </select>
+   
+   <!--좋아요 많이 받은 순서대로 가져오기-->
+   <select id="sortLiked" resultType="Map">
+   <![CDATA[
+      select a.nickname,ifnull(a.boardCount,0) as boardCount,ifnull(b.reported,0) as reported,ifnull(c.liked,0) as liked,ifnull(d.allPrice,0) as allPrice,a.type,a.user_id
+      from 
+      (select u.nickname,count(product_id) as boardCount,u.type,u.user_id
+         from user u left join product p
+         on u.user_id=p.seller_id
+         group by nickname,u.type,u.user_id) a 
+      join
+      (select u.nickname,count(r.report_userid) as reported,u.type,u.user_id
+         from user u left join report r
+         on r.reported_userid=u.user_id
+         group by nickname,u.type,u.user_id) b 
+      join
+      (select u.nickname,count(like_id) as liked,u.type,u.user_id
+         from user u left join likes l
+         on u.user_id=l.liked_userid
+         group by nickname,u.type,u.user_id) c 
+      join
+      (select u.nickname,sum(order_price) as allPrice,u.type,u.user_id
+         from user u left join orders o
+         on u.user_id=o.seller_id
+         group by nickname,u.type,u.user_id) d on a.nickname=b.nickname and b.nickname=c.nickname and c.nickname=d.nickname 
+      order by c.liked desc;
+      
+   ]]>   
+   </select>
 		
 		
 </mapper>
