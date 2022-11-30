@@ -165,7 +165,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-신동혁[팀장] - https://github.com/Hyeok-Shine<br>
+신동혁[팀장] - https://github.com/yeok-Shine<br>
 김기덕 - https://github.com/rlarlejrwl56<br>
 백종훈 - https://github.com/hoon901<br>
 송성욱 - https://github.com/meursong<br>
